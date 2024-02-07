@@ -1,0 +1,70 @@
+
+.qqml2 {
+  height: 300px;
+  width: 100%;
+  margin-bottom: 300px;
+}
+
+.qqml2 .category{
+  display: flex;
+  justify-content: space-around;
+  font-size: 50px;
+  line-height: 100px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.qqml2 .category div{
+  border: 1px solid black;
+  border-radius: 30px;
+  width: 100px;
+  height: 100px;
+  box-shadow: 0px 0px 10px 1px #212129;
+}
+
+.qqml2 .row{
+  width: 100%;
+}
+
+.qqml2 .qq1{
+  /* border: 1px solid red; */
+  /* width: 30%; */
+}
+
+.qqml2 p {
+  font-family: helvetica;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.qqml2 p span{
+  font-size: 2em;
+}
+
+.qqml2 .post-it-note {
+  padding: 2em;
+  background: #ffd707;
+  position: relative;
+  height: 100%;
+}
+
+.qqml2 .post-it-note:after {
+  content: "";
+  position: absolute;
+  bottom: -2em;
+  left: 0;
+  right: 2em;
+  border-width: 1em;
+  border-style: solid;
+  border-color: #ffd707;
+}
+
+.qqml2 .post-it-note:before {
+  content: "";
+  position: absolute;
+  bottom: -2em;
+  right: 0;
+  border-width: 2em 2em 0 0;
+  border-style: solid;
+  border-color: #d3b100 transparent;
+}

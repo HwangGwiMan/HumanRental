@@ -1,0 +1,16 @@
+.qqs2 .info{
+  font-size: 50px;
+  text-align: center;
+}
+
+.qqs2 .qq1{
+  border: 2px solid black;
+  border-radius: 40px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 10px 1px #212129;
+}
+
+.qqs2 img{
+  width: 100%;
+}
