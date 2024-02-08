@@ -25,43 +25,45 @@
 	    <script src="<c:url value="/resources/js/join.js" />"></script>
 	</head>
 	<body>
-	    
-	    <nav class="qqnav container">
-	        <div class="row d-flex align-items-center justify-content-between">
-	            <div class="col-5 d-flex align-items-center qq1">
-	                <h4>휴먼렌탈</h4>
-	                <ul class="nav">
-	                    <li class="nav-item"><a class="nav-link" href="<c:url value="/give"/>">재능기부</a></li> 
-	                    <li class="nav-item"><a class="nav-link" href="#">멘티구함</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#">멘토구함</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
-	                </ul>
-	            </div>
-	            <div class="col-4">
-	                <form class="form-inline d-flex" action="#">
-	                    <input class="form-control mr-2" type="text" placeholder="어떤 멘토를 찾으세요?">
-	                    <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-	                </form>
-	            </div>
-	            <div class="col-3">
-	                <ul class="nav justify-content-end">
-	                    <li class="nav-item"><a class="nav-link" href="<c:url value="/login"/>">로그인</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#">찜목록</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#">멘토신청</a></li>
-	                    <li class="nav-item qq2"><a class="nav-link" href="#"><i class="fa-regular fa-bell"></i></a></li>
-	                </ul>
-	            </div>
-	        </div>
-	    </nav>
-	    <c:if test="${ error != null }">
-	    	<p>${ error }
-	    </c:if>
-	    <form:form modelAttribute="member" method="post" id="joinForm">
-	    	아이디 : <form:input path="memberId" name="username" id="memberId" required="true"/> <a onclick="javascript:idDuplicateCheck()">중복 확인</a>
-	    	비밀번호 : <form:input path="memberPw" name="password" id="memberPw" required="true"/>
-	    	<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
-	    	<a onclick="javascript:formSubmit()">제출</a>
-	    </form:form>
-	    
+	    <jsp:include page="nav.jsp" />
+   	    <div class="container vh-100 justify-content-center text-center d-flex flex-column align-items-center">
+			<div class="row">
+			    <form:form modelAttribute="member" method="post" id="joinForm" class="row justify-content-center">
+   			    	<div class="row justify-content-center">
+			    		<div class="col-1 p-2 align-self-center">아이디</div>
+			    		<div class="col-3 p-2"><form:input path="memberId" name="username" id="memberId" class="form-control"/></div>
+			    		<div class="col-1 p-1 align-self-center"><a onclick="javascript:idDuplicateCheck()" class="btn">중복 확인</a></div>
+		    		</div>
+	 			    <div class="row justify-content-center">
+			    		<div class="col-1 p-2 align-self-center">비밀번호</div>
+			    		<div class="col-4 p-2"><form:input path="memberPw" name="password" id="memberPw" class="form-control"/></div>
+			    	</div>
+			    	<div class="row justify-content-center">
+			    		<div class="col-1 p-2 align-self-center">이름</div>
+			    		<div class="col-4 p-2"><form:input path="name" class="form-control"/></div>
+			    	</div>
+			    	<div class="row justify-content-center">
+			    		<div class="col-1 p-2 align-self-center">나이</div>
+			    		<div class="col-4 p-2"><form:input path="age" class="form-control"/></div>
+			    	</div>
+			    	<div class="row justify-content-center">
+			    		<div class="col-1 p-2 align-self-center">성별</div>
+			    		<div class="col-4 p-2"><form:input path="gender" class="form-control"/></div>
+			    	</div>
+			    	<div class="row justify-content-center">
+			    		<div class="col-1 p-2 align-self-center">전화번호</div>
+			    		<div class="col-4 p-2"><form:input path="phone" class="form-control"/></div>
+			    	</div>
+			    	<div class="row justify-content-center">
+			    		<div class="col-1 p-2 align-self-center">주소</div>
+			    		<div class="col-4 p-2"><form:input path="address" class="form-control"/></div>
+			    	</div>
+					<div class="col">
+				    	<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
+				    	<a onclick="javascript:formSubmit()" class="btn">제출</a>
+			    	</div>
+			    </form:form>
+		    </div>
+	    </div>
 	</body>
 </html>

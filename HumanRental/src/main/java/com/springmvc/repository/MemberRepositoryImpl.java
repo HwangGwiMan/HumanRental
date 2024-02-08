@@ -15,6 +15,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public MemberRepositoryImpl() {
 		super();
 		this.members = new HashMap<String, String>();
+		members.put("admin", "admin");
 	}
 
 	@Override

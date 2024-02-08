@@ -5,10 +5,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.Member;
 import com.springmvc.service.MemberService;
@@ -26,18 +26,22 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String Login(@ModelAttribute Member member,
-						HttpServletRequest request,
-						Model model) {
+	public String Login(@RequestParam("memberId") String memberId,
+						@RequestParam("memberPw") String memberPw,
+						HttpServletRequest request) {
+		
+		Member member = new Member();
+		member.setMemberId(memberId);
+		member.setMemberPw(memberPw);
+		
+		System.out.println(member.getMemberId());
+		
 		if(memberService.Login(member)) {
 			HttpSession session = request.getSession();
-			
-			session.setAttribute("id", session.getId());
-			
-			return "redirect:/main";
+			session.setAttribute("id", member.getMemberId());
+			return "true";
 		} else {
-			model.addAttribute("error", "아이디 비밀번호 확인 부탁드립니다.");
-			return "Login";
+			return "false";
 		}
 	}
 }
