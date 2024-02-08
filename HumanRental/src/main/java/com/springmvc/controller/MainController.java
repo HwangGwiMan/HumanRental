@@ -14,7 +14,8 @@ public class MainController {
 	// 메인 페이지 호출
 	@GetMapping("/main")
 	public String requestHome() {
-		return "Main";
+		System.out.println("aa");
+		return "main";
 	}
 
 	// 알림 호출
