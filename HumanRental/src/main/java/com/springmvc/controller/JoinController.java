@@ -15,7 +15,7 @@ import com.springmvc.domain.Member;
 import com.springmvc.service.MemberService;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping()
 public class JoinController {
 	
 	@Autowired
@@ -28,18 +28,17 @@ public class JoinController {
 	
 	@PostMapping("/join")
 	public String joinMethod(@ModelAttribute Member member) {
-		memberService.join(member);
-		return "redirect:/main";
+		boolean isPass = memberService.join(member);
+		return "redirect:/login?check=" + isPass;
 	}
 	
 	@GetMapping(value = "/join/idCheck", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String idCheck(@RequestParam("memberId") String userName,
-						  HttpServletResponse response) {
-
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("utf-8");
-		
-		return memberService.idCheck(userName);
+	public String idCheck(@RequestParam("memberId") String userName) {
+		if(memberService.idCheck(userName)) {
+			return "true";
+		} else {
+			return "false";
+		}
 	}
 }

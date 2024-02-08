@@ -56,11 +56,11 @@
 	    <c:if test="${ error != null }">
 	    	<p>${ error }
 	    </c:if>
-	    <form:form modelAttribute="member" method="post">
-	    	아이디 : <form:input path="memberId" name="username" id="memberId" /> <a onclick="javascript:idDuplicateCheck()">중복 확인</a>
-	    	비밀번호 : <form:input path="memberPw" name="password" id="memberPw" />
+	    <form:form modelAttribute="member" method="post" id="joinForm">
+	    	아이디 : <form:input path="memberId" name="username" id="memberId" required="true"/> <a onclick="javascript:idDuplicateCheck()">중복 확인</a>
+	    	비밀번호 : <form:input path="memberPw" name="password" id="memberPw" required="true"/>
 	    	<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
-	    	<input type="submit">
+	    	<a onclick="javascript:formSubmit()">제출</a>
 	    </form:form>
 	    
 	</body>

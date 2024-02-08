@@ -56,7 +56,7 @@
 	    	<input type="submit">
 	    	<a href="#">카카오 로그인</a>
 	    	<a href="#">네이버 로그인</a>
-	    	<a href="<c:url value="/login/join" />">회원 가입</a> 
+	    	<a href="<c:url value="/join" />">회원 가입</a> 
 	    </form:form>
 	    
 	</body>

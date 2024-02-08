@@ -12,18 +12,21 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberRepository memberRepository;
 	
+	
+	
 	@Override
 	public boolean Login(Member member) {
 		return memberRepository.Login(member);
 	}
 
 	@Override
-	public void join(Member member) {
+	public boolean join(Member member) {
+		return memberRepository.join(member);
 	}
 
 	
 	@Override
-	public String idCheck(String memberId) {
+	public boolean idCheck(String memberId) {
 		return memberRepository.idCheck(memberId); 
 	}
 }
