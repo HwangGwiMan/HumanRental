@@ -31,13 +31,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 
 	@Override
-	public boolean join(Member member) {
-		if(isIdCheck) {
-			members.put(member.getMemberId(), member.getMemberPw());
-			return true;
-		} else {
-			return false;
-		}
+	public void join(Member member) {
+		members.put(member.getMemberId(), member.getMemberPw());
 	}
 
 	@Override

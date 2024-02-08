@@ -1,5 +1,8 @@
 package com.springmvc.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +26,14 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String Login(@ModelAttribute Member member, Model model) {
+	public String Login(@ModelAttribute Member member,
+						HttpServletRequest request,
+						Model model) {
 		if(memberService.Login(member)) {
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("id", session.getId());
+			
 			return "redirect:/main";
 		} else {
 			model.addAttribute("error", "아이디 비밀번호 확인 부탁드립니다.");

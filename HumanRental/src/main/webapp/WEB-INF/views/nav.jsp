@@ -32,7 +32,11 @@
 			</div>
 			<div class="col-3">
 				<ul class="nav justify-content-end">
-					<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
+					<% if(request.getSession().getAttribute("id") != null) { %>
+					<li class="nav-item"><a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a></li>
+					<% } else {	%>
+					<li class="nav-item"><a class="nav-link" href="<c:url value="/login"/>">로그인</a></li>
+					<% } %>
 					<li class="nav-item"><a class="nav-link" href="#">MY</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">찜목록</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">멘토신청</a></li>

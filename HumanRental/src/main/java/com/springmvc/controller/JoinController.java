@@ -1,7 +1,5 @@
 package com.springmvc.controller;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +13,7 @@ import com.springmvc.domain.Member;
 import com.springmvc.service.MemberService;
 
 @Controller
-@RequestMapping()
+@RequestMapping
 public class JoinController {
 	
 	@Autowired
@@ -28,8 +26,8 @@ public class JoinController {
 	
 	@PostMapping("/join")
 	public String joinMethod(@ModelAttribute Member member) {
-		boolean isPass = memberService.join(member);
-		return "redirect:/login?check=" + isPass;
+		memberService.join(member);
+		return "redirect:/login";
 	}
 	
 	@GetMapping(value = "/join/idCheck", produces = "application/json; charset=UTF-8")
