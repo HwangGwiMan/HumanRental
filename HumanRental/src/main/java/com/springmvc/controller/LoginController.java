@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.domain.Member;
 import com.springmvc.service.MemberService;
@@ -25,7 +26,8 @@ public class LoginController {
 		return "Login";
 	}
 	
-	@PostMapping("/login")
+	@GetMapping("/loginReq")
+	@ResponseBody
 	public String Login(@RequestParam("memberId") String memberId,
 						@RequestParam("memberPw") String memberPw,
 						HttpServletRequest request) {
@@ -33,8 +35,6 @@ public class LoginController {
 		Member member = new Member();
 		member.setMemberId(memberId);
 		member.setMemberPw(memberPw);
-		
-		System.out.println(member.getMemberId());
 		
 		if(memberService.Login(member)) {
 			HttpSession session = request.getSession();
