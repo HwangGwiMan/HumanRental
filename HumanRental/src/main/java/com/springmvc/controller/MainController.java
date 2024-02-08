@@ -3,19 +3,15 @@ package com.springmvc.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.springmvc.domain.Member;
 
 @Controller
 public class MainController {
 	
 	// 메인 페이지 호출
 	@GetMapping("/main")
-	public String requestHome() {
-		System.out.println("aa");
-		return "main";
+	public String requestHome1(Model model) {
+		return "Main";
 	}
 
 	// 알림 호출
@@ -55,13 +51,13 @@ public class MainController {
 	}
 	
 	// 멘티 구함 페이지 호출
-	@GetMapping("/findMenti")
+	@GetMapping("/findMentee")
 	public String requestSell(Model model) {
 		return "sell";
 	}
 	
 	// 멘토 구함 페이지 호출
-	@GetMapping("/findMento")
+	@GetMapping("/findMentor")
 	public String requestTrade(Model model) {
 		return "trade";
 	}

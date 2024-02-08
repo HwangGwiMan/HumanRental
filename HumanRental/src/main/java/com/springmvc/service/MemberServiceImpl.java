@@ -20,8 +20,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean join(Member member) {
-		return memberRepository.join(member);
+	public void join(Member member) {
+		memberRepository.join(member);
 	}
 
 	

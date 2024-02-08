@@ -35,8 +35,6 @@ function formSubmit() {
 	var ipValue = document.getElementById("memberId").value;
 	var pwValue = document.getElementById("memberPw").value;
 	
-	console.log(ipValue);
-	
 	if(ipValue == "" || pwValue == "") {
 		alert("아이디 혹은 비밀번호를 확인해주세요.");
 		return;

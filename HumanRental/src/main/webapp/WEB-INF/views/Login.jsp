@@ -16,48 +16,39 @@
 	    <link rel="stylesheet" href="<c:url value="/resources/css/style_section2.css"/>">
 	    <link rel="stylesheet" href="<c:url value="/resources/css/style_section3.css"/>">
 	    <link rel="stylesheet" href="<c:url value="/resources/css/style_footer.css"/>">
+		
+		
+		<!-- jquery -->		
+	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		
+		
+		<!-- js -->	    
+   	    <script src="<c:url value="/resources/js/login.js" />"></script>
 	</head>
 	<body>
-	    
-	    <nav class="qqnav container">
-	        <div class="row d-flex align-items-center justify-content-between">
-	            <div class="col-5 d-flex align-items-center qq1">
-	                <h4>휴먼렌탈</h4>
-	                <ul class="nav">
-	                    <li class="nav-item"><a class="nav-link" href="<c:url value="/give"/>">재능기부</a></li> 
-	                    <li class="nav-item"><a class="nav-link" href="#">멘티구함</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#">멘토구함</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
-	                </ul>
-	            </div>
-	            <div class="col-4">
-	                <form class="form-inline d-flex" action="#">
-	                    <input class="form-control mr-2" type="text" placeholder="어떤 멘토를 찾으세요?">
-	                    <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-	                </form>
-	            </div>
-	            <div class="col-3">
-	                <ul class="nav justify-content-end">
-	                    <li class="nav-item"><a class="nav-link" href="<c:url value="/login"/>">로그인</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#">찜목록</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#">멘토신청</a></li>
-	                    <li class="nav-item qq2"><a class="nav-link" href="#"><i class="fa-regular fa-bell"></i></a></li>
-	                </ul>
-	            </div>
-	        </div>
-	    </nav>
-	    <c:if test="${ error != null }">
-	    	<p>${ error }
-	    </c:if>
-	    <form:form modelAttribute="member" method="post">
-	    	아이디 : <form:input path="memberId" name="username" />
-	    	비밀번호 : <form:input path="memberPw" name="password" />
-	    	<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
-	    	<input type="submit">
-	    	<a href="#">카카오 로그인</a>
-	    	<a href="#">네이버 로그인</a>
-	    	<a href="<c:url value="/join" />">회원 가입</a> 
-	    </form:form>
-	    
+	    <jsp:include page="nav.jsp" />
+	    <div class="container vh-100 justify-content-center text-center d-flex flex-column align-items-center">
+		    <div class="row">
+			    <form:form modelAttribute="member" method="post" class="row justify-content-center">
+			    	<div class="row justify-content-center">
+			    		<div class="col-2 p-3 align-self-center">아이디</div>
+			    		<div class="col-3 p-3 "><form:input path="memberId" name="username" id="memberId" class="form-control"/></div>
+		    		</div>
+			    	<div class="row justify-content-center">
+			    		<div class="col-2 p-3 align-self-center">비밀번호</div>
+			    		<div class="col-3 p-3"><form:input path="memberPw" name="password" pw="memberPw" class="form-control"/></div>
+			    	</div>
+			    	<div class="row">
+			    		<div><input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }"></div>
+				    	<div class="col p-3"><a onclick="loginCheck()" class="btn">로그인</a> </div>
+			    	</div>
+			    	<div class="col">
+			    		<div class="row p-3"><a href="#">카카오 로그인</a></div>
+				    	<div class="row p-3"><a href="#">네이버 로그인</a></div>
+				    	<div class="row p-3"><a href="<c:url value="/join" />">회원 가입</a></div>
+			    	</div> 
+			    </form:form>
+		    </div>
+	    </div>
 	</body>
 </html>

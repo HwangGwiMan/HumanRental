@@ -31,12 +31,16 @@
 				</form>
 			</div>
 			<div class="col-3">
-				<ul class="nav justify-content-end qq2">
-					<li class="nav-item qq2"><a class="nav-link" href="#">로그인</a></li>
-					<li class="nav-item qq2"><a class="nav-link" href="#">MY</a></li>
-					<li class="nav-item qq2"><a class="nav-link" href="#">찜목록</a></li>
-					<li class="nav-item qq2"><a class="nav-link" href="#">멘토신청</a></li>
-					<li class="nav-item qq2"><a class="nav-link" href="#"><i class="fa-regular fa-bell"></i></a></li>
+				<ul class="nav justify-content-end">
+					<% if(request.getSession().getAttribute("id") != null) { %>
+					<li class="nav-item"><a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a></li>
+					<% } else {	%>
+					<li class="nav-item"><a class="nav-link" href="<c:url value="/login"/>">로그인</a></li>
+					<% } %>
+					<li class="nav-item"><a class="nav-link" href="#">MY</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">찜목록</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">멘토신청</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"><i class="fa-regular fa-bell"></i></a></li>
 				</ul>
 			</div>
 		</div>
