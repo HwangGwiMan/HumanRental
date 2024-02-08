@@ -8,15 +8,20 @@
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <title>Document</title>
+	    
+	    <!-- css -->
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 	    <script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
-	
 	    <link rel="stylesheet" href="<c:url value="/resources/css/style_nav.css"/>"> 
 	    <link rel="stylesheet" href="<c:url value="/resources/css/style_section1.css"/>">
 	    <link rel="stylesheet" href="<c:url value="/resources/css/style_section2.css"/>">
 	    <link rel="stylesheet" href="<c:url value="/resources/css/style_section3.css"/>">
 	    <link rel="stylesheet" href="<c:url value="/resources/css/style_footer.css"/>">
 	    
+	    <!-- jquery -->
+	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    
+	    <!-- js -->
 	    <script src="<c:url value="/resources/js/join.js" />"></script>
 	</head>
 	<body>
@@ -52,8 +57,8 @@
 	    	<p>${ error }
 	    </c:if>
 	    <form:form modelAttribute="member" method="post">
-	    	아이디 : <form:input path="memberId" name="username" /> <a onclick="javascript:idDuplicateCheck()">중복 확인</a>
-	    	비밀번호 : <form:input path="memberPw" name="password" />
+	    	아이디 : <form:input path="memberId" name="username" id="memberId" /> <a onclick="javascript:idDuplicateCheck()">중복 확인</a>
+	    	비밀번호 : <form:input path="memberPw" name="password" id="memberPw" />
 	    	<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
 	    	<input type="submit">
 	    </form:form>

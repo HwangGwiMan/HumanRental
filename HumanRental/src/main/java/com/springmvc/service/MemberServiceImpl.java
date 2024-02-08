@@ -18,8 +18,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String join(Member member) {
-		return memberRepository.join(member);
+	public void join(Member member) {
 	}
 
+	
+	@Override
+	public String idCheck(String memberId) {
+		return memberRepository.idCheck(memberId); 
+	}
 }

@@ -30,13 +30,16 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 
 	@Override
-	public String join(Member member) {
-		if(members.containsKey(member.getMemberId())) {
+	public void join(Member member) {
+	}
+
+	@Override
+	public String idCheck(String memberId) {
+		if(members.containsKey(memberId)) {
 			return "이미 존재하는 아이디입니다"; 
 		} else {
-			members.put(member.getMemberId(), member.getMemberPw());
-			
 			return "사용 가능한 아이디 입니다";
 		}
 	}
 }
+
