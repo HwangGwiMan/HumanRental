@@ -107,3 +107,9 @@
   color: #fff;
   transition: 300ms;
 }
+
+.qqml .category div:hover {
+  background: #212129;
+  color: #fff;
+  /* transition: 300ms; */
+}
