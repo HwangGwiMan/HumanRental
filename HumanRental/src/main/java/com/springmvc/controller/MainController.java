@@ -11,7 +11,6 @@ public class MainController {
 	// 메인 페이지 호출
 	@GetMapping("/main")
 	public String requestHome1(Model model) {
-		System.out.println("test");
 		return "Main";
 	}
 
