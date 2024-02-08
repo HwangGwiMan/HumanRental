@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+<<<<<<< HEAD
+=======
+import org.springframework.web.bind.annotation.ResponseBody;
+>>>>>>> branch 'main' of https://github.com/HwangGwiMan/HumanRental.git
 
 import com.springmvc.domain.Member;
 import com.springmvc.service.MemberService;
