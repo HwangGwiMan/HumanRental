@@ -1,4 +1,6 @@
-package com.spring.controller;
+package com.springmvc.controller;
+
+import javax.servlet.ServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value="/main")
 public class MainController {
+	
+	@GetMapping
+	public String a(Model model) {
+		return "main";
+	}
+	
+	@GetMapping("/mentee")
+	public String b(Model model) {
+		return "menteelist";
+	}
 
+	@GetMapping("/mentor")
+	public String c(Model model) {
+		return "mentorlist";
+	}
+	
 	@GetMapping("/alarm")
 	public String requestAlarm(Model model) {
 
