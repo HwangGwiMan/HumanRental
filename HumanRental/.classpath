@@ -50,6 +50,12 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
+=======
+	<classpathentry kind="lib" path="C:/Users/UserK/Downloads/gson-2.8.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/UserK/Downloads/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/UserK/Downloads/json-20220320.jar"/>
+>>>>>>> branch 'main' of https://github.com/HwangGwiMan/HumanRental.git
 	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
 		<attributes>
 			<attribute name="optional" value="true"/>
