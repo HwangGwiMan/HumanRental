@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,13 +31,11 @@ public class LoginController {
 						@RequestParam("memberPw") String memberPw,
 						HttpServletRequest request) {
 		
-		Member member = new Member();
-		member.setMemberId(memberId);
-		member.setMemberPw(memberPw);
+		Member loginMember = memberService.Login(memberId, memberPw); 
 		
-		if(memberService.Login(member)) {
+		if(loginMember != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("id", member.getMemberId());
+			session.setAttribute("id", loginMember);
 			return "true";
 		} else {
 			return "false";
