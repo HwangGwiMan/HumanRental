@@ -44,10 +44,10 @@ public class MainController {
 	}
 	
 	// 마이 페이지 호출
-	@GetMapping("/mypage")
-	public String requestMypage(Model model) {
-		return "mypage";
-	}
+//	@GetMapping("/mypage")
+//	public String requestMypage(Model model) {
+//		return "mypage";
+//	}
 	
 	// 멘티 구함 페이지 호출
 	@GetMapping("/findMentee")
