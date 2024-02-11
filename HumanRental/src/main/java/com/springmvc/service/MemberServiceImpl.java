@@ -15,8 +15,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	@Override
-	public boolean Login(Member member) {
-		return memberRepository.Login(member);
+	public Member Login(String memberId, String memberPw) {
+		return memberRepository.Login(memberId, memberPw);
 	}
 
 	@Override
