@@ -35,7 +35,7 @@ public class LoginController {
 		
 		if(loginMember != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("id", loginMember);
+			session.setAttribute("user", memberId);
 			return "true";
 		} else {
 			return "false";

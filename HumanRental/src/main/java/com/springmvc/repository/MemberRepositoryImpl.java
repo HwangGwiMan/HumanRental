@@ -82,5 +82,19 @@ public class MemberRepositoryImpl implements MemberRepository {
 //		}
 //	}
 	}
+
+	@Override
+	public Member getMember(String memberId) {
+		String SQL = "SELECT * FROM member WHERE memberId = ?";
+		
+		List<Member> member;
+		
+		try {
+			member = template.query(SQL, new BeanPropertyRowMapper<Member>(Member.class), memberId);
+			return member.get(0);
+		} catch(EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 }
 

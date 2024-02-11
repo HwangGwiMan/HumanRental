@@ -24,9 +24,14 @@ public class MemberServiceImpl implements MemberService {
 		memberRepository.join(member);
 	}
 
-	
 	@Override
 	public boolean idCheck(String memberId) {
 		return memberRepository.idCheck(memberId); 
 	}
+
+	@Override
+	public Member getMember(String memberId) {
+		return memberRepository.getMember(memberId);
+	}
+	
 }
