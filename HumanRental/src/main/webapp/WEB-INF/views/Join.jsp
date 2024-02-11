@@ -7,7 +7,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <title>Document</title>
+	    <title>로그인 페이지</title>
 	    
 	    <!-- css -->
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -28,7 +28,7 @@
 	    <jsp:include page="nav.jsp" />
    	    <div class="container vh-100 justify-content-center text-center d-flex flex-column align-items-center">
 			<div class="row">
-			    <form:form modelAttribute="member" method="post" id="joinForm" class="row justify-content-center">
+			    <form:form modelAttribute="member" method="post" id="joinForm" class="row justify-content-center" >
    			    	<div class="row justify-content-center">
 			    		<div class="col-1 p-2 align-self-center">아이디</div>
 			    		<div class="col-3 p-2"><form:input path="memberId" name="username" id="memberId" class="form-control"/></div>
@@ -41,6 +41,10 @@
 			    	<div class="row justify-content-center">
 			    		<div class="col-1 p-2 align-self-center">이름</div>
 			    		<div class="col-4 p-2"><form:input path="name" class="form-control"/></div>
+			    	</div>
+					<div class="row justify-content-center">
+			    		<div class="col-1 p-2 align-self-center">닉네임</div>
+			    		<div class="col-4 p-2"><form:input path="nickName" class="form-control"/></div>
 			    	</div>
 			    	<div class="row justify-content-center">
 			    		<div class="col-1 p-2 align-self-center">나이</div>
