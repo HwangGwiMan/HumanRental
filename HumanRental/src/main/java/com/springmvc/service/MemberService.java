@@ -6,4 +6,5 @@ public interface MemberService {
 	public Member Login(String memberId, String memberPw);
 	public void join(Member member);
 	boolean idCheck(String memberId);
+	public Member getMember(String memberId);
 }
