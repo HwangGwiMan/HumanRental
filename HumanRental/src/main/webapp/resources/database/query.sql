@@ -12,8 +12,9 @@ name varchar(20) not null,
 age int not null,
 gender varchar(10) not null,
 phone int not null,
-address varchar(100) not null
-
+address varchar(100) not null,
+nickname varchar(20) not null,
+profileImage varchar(20)
 );
 
 

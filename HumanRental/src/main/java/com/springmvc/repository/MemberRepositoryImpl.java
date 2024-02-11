@@ -45,9 +45,9 @@ public class MemberRepositoryImpl implements MemberRepository {
 	// 회원 가입
 	@Override
 	public void join(Member member) {
-		String SQL = "INSERT INTO member VALUES(?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO member VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		
-		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress());
+		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName());
 	}
 	
 	// 아이디 중복 확인

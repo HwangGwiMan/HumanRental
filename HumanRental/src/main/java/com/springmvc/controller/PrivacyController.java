@@ -25,6 +25,12 @@ public class PrivacyController {
 		if(session.getAttribute("user") != null) {
 			String memberId = (String) session.getAttribute("user");
 			Member member = memberService.getMember(memberId);
+			System.out.println(member.getProfileImage());
+			
+			if(member.getProfileImage() == null) {
+				model.addAttribute("image", "default.png");
+			}
+			
 			model.addAttribute("member", member);
 		}
 		

@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>마이페이지</title>
+		<title>마이 페이지</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 		<script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
 	</head>
@@ -35,7 +35,13 @@
 					</ul>
 				</div>
 				<div class="col">
-					test2
+					<div class="row">
+						<div class="col-4">
+							<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ image }" />"></div>
+							<div class="row">파일 업로드</div>
+						</div>
+						<div class="col">test2</div>
+					</div>
 				</div>
 			</div>
 		</div>
