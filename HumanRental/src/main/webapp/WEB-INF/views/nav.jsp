@@ -13,7 +13,7 @@
 	<nav class="qqnav container">
 		<div class="row d-flex align-items-center justify-content-between">
 			<div class="col-5 d-flex align-items-center qq1">
-				<h4>휴먼렌탈</h4>
+				<a href="<c:url value="/main"/>"><h4>휴먼렌탈</h4></a>
 				<ul class="nav">
 					<li class="nav-item"><a class="nav-link" href="#">재능기부</a></li>
 					<li class="nav-item"><a class="nav-link" href="<c:url value="/menteelist"/>">멘티구함</a></li>
