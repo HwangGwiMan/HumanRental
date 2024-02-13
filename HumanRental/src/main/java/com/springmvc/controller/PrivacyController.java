@@ -49,20 +49,24 @@ public class PrivacyController {
 			} else if(mode.equals("userCheck")) {
 				
 			}
-			
+			return "MyPage";
+		} else {
+			return "redirect:/main";
 		}
 		
-		return "MyPage";
+		
 	}
 	
 	
 	@PostMapping("/myInfo")
-	public String postMethodName(@RequestParam("mode") String mode) {
-		
-		
-		return "MyPage";
+	public String postMethodName(@RequestParam("mode") String mode,
+								 Member member,
+								 Model model) {
+		if(memberService.Login(member.getMemberId(), member.getMemberPw()) != null) {
+			model.addAttribute("mode", mode);
+			return "redirect:/myInfo";
+		} else {
+			return "MyPage"; 
+		}
 	}
-	
-	
-	
 }

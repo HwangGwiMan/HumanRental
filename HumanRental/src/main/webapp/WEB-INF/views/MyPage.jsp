@@ -16,26 +16,26 @@
 		<div class="container">
 			<div class="row pt-5 align-items-center">
 				<div class="col-2 pt-5">
-					<ul class="row justify-content-center">
-						<li><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
-						<li><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
-						<li class="btn">프로필 수정
+					<ul class="navbar-nav row justify-content-center">
+						<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
+						<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
+						<li class="nav-item">프로필 수정
 							<ul>
-								<li><a href="#" class="btn">멘토 프로필 수정</a></li>
-								<li><a href="#" class="btn">멘티 프로필 수정</a></li>
+								<li class="dropdown-item"><a href="#" class="btn">멘토 프로필 수정</a></li>
+								<li class="dropdown-item"><a href="#" class="btn">멘티 프로필 수정</a></li>
+							</ul>
+						<li>
+						<li>예약 목록
+							<ul>
+								<li class="nav-item"><a href="#" class="btn">삽니다 예약 목록</a></li>
+								<li class="nav-item"><a href="#" class="btn">팝니다 예약 목록</a></li>
 							</ul>
 						</li>
-						<li class="btn">예약 목록
-							<ul>
-								<li><a href="#" class="btn">삽니다 예약 목록</a></li>
-								<li><a href="#" class="btn">팝니다 예약 목록</a></li>
-							</ul>
-						</li>
-						<li><a href="#" class="btn">일정 정보</a></li>
-						<li><a href="#" class="btn">회원 탈퇴</a></li>
+						<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
+						<li class="nav-item"><a href="#" class="btn">회원 탈퇴</a></li>
 					</ul>
 				</div>
-				<div class="col pt-5 ">
+				<div class="col">
 					<div class="row justify-content-center">
 						<c:choose>
 							<c:when test="${ mode == 'myPage' }">
@@ -75,11 +75,11 @@
 									<div class="row justify-content-center">아이디 비밀번호 확인</div>
 									<div class="row justify-content-center">
 										<div class="col-4">아이디 :</div> 
-										<div class="col"><input></div>
+										<div class="col"><input type="text" name="memberId"></div>
 									</div> 
 									<div class="row justify-content-center">
 										<div class="col-4">비밀번호 :</div>
-										<div class="col"><input></div>
+										<div class="col"><input type="password" name="memberPw"></div>
 									</div>
 									<input type="submit" value="확인">
 								</form>
