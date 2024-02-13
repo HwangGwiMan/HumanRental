@@ -1,0 +1,96 @@
+.detail{
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+    margin-top: 30px;
+}
+
+.detail .top{
+    
+}
+
+.detail .top .left{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.detail .top .img{
+    /* border: 1px solid black; */
+    background-image: url();
+    background-color: black;
+    background-size: cover;
+    width: 400px;
+    height: 400px;
+    color: white;
+}
+
+.top .info{
+    margin-top: 30px;
+}
+
+.top .qq{
+    display: flex;
+    justify-content: space-between;
+}
+
+h4 span{
+    position: relative;
+    top: -3px;
+}
+
+.qq div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 25%;
+    height: 50px;
+    font-size: 25px;
+}
+
+.qq .box1{
+    position: relative;
+    left: 40px;
+}
+
+
+.bot{
+    /* border: 1px solid green; */
+    height: 200px;
+    margin: 50px auto 0;
+}
+
+.bot .box1{
+    height: 70px;
+    /* border: 1px solid black; */
+    background-color: lightgray;
+    padding: 10px 20px;
+}
+
+.bot .box2{
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+
+.bot .card-info{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin: auto;
+}
+
+.bot .card-info .date{
+    margin: auto 0;
+}
+
+span{
+    color: yellow;
+    text-shadow: -1px 0px orange, 0px 1px orange, 1px 0px orange, 0px -1px orange;
+}
+
+.line{
+    height: 1px;
+    background-color: black;
+    margin: 20px 0;
+}
