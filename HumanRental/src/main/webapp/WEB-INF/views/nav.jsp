@@ -17,7 +17,7 @@
 				<ul class="nav">
 					<li class="nav-item"><a class="nav-link" href="#">재능기부</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">멘티구함</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">멘토구함</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value="/mentorlist"/>">멘토구함</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
 				</ul>
 			</div>
