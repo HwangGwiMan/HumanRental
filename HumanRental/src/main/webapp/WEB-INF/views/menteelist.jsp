@@ -33,7 +33,7 @@
                         <br><br>
                         <p class="information">매주 토요일 오후 4시 <br> 기타 알려주실분~</p>
                         <br>
-                        <a href="#" target="_blank" class="follow">신청하기</a>
+                        <a href="/HumanRental/menteeDetail" target="_blank" class="follow">신청하기</a>
                     </div>
                 </div>
             </div>
