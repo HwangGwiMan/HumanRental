@@ -32,23 +32,18 @@ public class PrivacyController {
 		if(session.getAttribute("user") != null) {
 			String memberId = (String) session.getAttribute("user");
 			Member member = memberService.getMember(memberId);
+			
+			if(member.getProfileImage().equals("")) {
+				member.setProfileImage("default.png");
+			}
+			
 			model.addAttribute("member", member);
 			model.addAttribute("mode", mode);
 			
-			
-			if(mode.equals("myPage")) {
-				if(member.getProfileImage() == null) {
-					model.addAttribute("image", "default.png");
-				}
-				
-			} else if(mode.equals("myPageEdit")) {
-				if(member.getProfileImage() == null) {
-					model.addAttribute("image", "default.png");
-				}
-				
-			} else if(mode.equals("userCheck")) {
-				
+			if(member.getProfileImage() == null) {
+				model.addAttribute("image", "default.png");
 			}
+			
 			return "MyPage";
 		} else {
 			return "redirect:/main";
@@ -57,17 +52,48 @@ public class PrivacyController {
 		
 	}
 	
-	
+	// 2차 로그인 확인
 	@PostMapping("/myInfo")
-	public String postMethodName(@RequestParam("mode") String mode,
-								 Member member,
-								 Model model) {
-		Member targetMember = memberService.Login(member.getMemberId(), member.getMemberPw());
-		if((targetMember.getMemberId().equals(member.getMemberId())) && (targetMember.getMemberPw().equals(member.getMemberPw()))) {
-			model.addAttribute("mode", mode);
-			return "redirect:/myInfo";
+	public String userCheck(HttpServletRequest request, 
+							Member member,
+							Model model) {
+		HttpSession session = request.getSession();
+		String memberId = (String) session.getAttribute("user");
+		Member sessionMember = memberService.getMember(memberId);
+		
+		if(sessionMember != null) {
+			if((sessionMember.getMemberId().equals(member.getMemberId())) && (sessionMember.getMemberPw().equals(member.getMemberPw()))) {
+				model.addAttribute("mode", "myPageEdit");
+				return "redirect:/myInfo";
+			} else {
+				model.addAttribute("mode", "myPage");
+				return "redirect:/myInfo"; 
+			}
 		} else {
-			return "MyPage"; 
+			model.addAttribute("mode", "myPage");
+			return "redirect:/myInfo"; 
 		}
+	}
+	
+	// 회원 정보 수정
+	@PostMapping("/myPageEdit")
+	public String myPageEdit(HttpServletRequest request,
+							 Member member, 
+							 Model model) {
+		if(member.getProfileImage().equals(" ")) {
+			member.setProfileImage("default.png");
+		}
+		
+		System.out.println(member.getProfileImage());
+		
+		HttpSession session = request.getSession();
+		String memberId = (String) session.getAttribute("user");
+		
+		memberService.updateMember(member, memberId);
+		
+		session.setAttribute("user", member.getMemberId());
+		
+		model.addAttribute("mode", "myPage");
+		return "redirect:/myInfo";
 	}
 }

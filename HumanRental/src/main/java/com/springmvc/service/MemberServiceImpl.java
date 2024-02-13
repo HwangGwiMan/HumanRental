@@ -33,5 +33,11 @@ public class MemberServiceImpl implements MemberService {
 	public Member getMember(String memberId) {
 		return memberRepository.getMember(memberId);
 	}
+
+	@Override
+	public void updateMember(Member member, String memberId) {
+		memberRepository.updateMember(member, memberId);
+		
+	}
 	
 }

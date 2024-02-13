@@ -7,4 +7,5 @@ public interface MemberRepository {
 	public void join(Member member);
 	public boolean idCheck(String memberId);
 	public Member getMember(String memberId);
+	public void updateMember(Member member, String memberId);
 }
