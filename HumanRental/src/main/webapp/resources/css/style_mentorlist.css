@@ -1,76 +1,82 @@
-
 @import url("https://fonts.googleapis.com/css?family=PT+Sans");
+
 ::selection {
-  background: #272838;
+	background: #272838;
 }
 
-.qqml{
-  text-decoration: none;
-  text-align: center;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
+.qqml {
+	text-decoration: none;
+	text-align: center;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.qqml .category{
-  display: flex;
-  justify-content: space-around;
-  font-size: 50px;
-  line-height: 100px;
-  margin-bottom: 50px;
+.qqml .category {
+	display: flex;
+	justify-content: space-around;
+	font-size: 50px;
+	line-height: 100px;
+	margin-bottom: 50px;
 }
 
-.qqml .category div{
-  border: 1px solid black;
-  border-radius: 30px;
-  width: 100px;
-  height: 100px;
-  box-shadow: 0px 0px 10px 1px #212129;
+.qqml .category div {
+	border: 1px solid black;
+	border-radius: 30px;
+	width: 100px;
+	height: 100px;
+	box-shadow: 0px 0px 10px 1px #212129;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.qqml .qq2{
-  margin-bottom: 50px;
+.qqml .qq2 {
+	margin-bottom: 50px;
 }
 
 .qqml .wrapper {
-  position: relative;
-  background: linear-gradient(to left, #306bac, #141b41);
-  color: #fff;
-  margin: 10px;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px 1px #212129;
+	position: relative;
+	background: linear-gradient(to left, #306bac, #141b41);
+	color: #fff;
+	margin: 10px;
+	padding: 30px;
+	border-radius: 20px;
+	box-shadow: 0px 0px 10px 1px #212129;
 }
 
-.qqml .wrapper .image-wrapper{
-  width: 100%;
+.qqml .wrapper .image-wrapper {
+	width: 100%;
 }
+
 .qqml .wrapper .image-wrapper img {
-  width: 225px;
-  height: 225px;
-  border-radius: 50%;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+	width: 225px;
+	height: 225px;
+	border-radius: 50%;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
+
 .qqml .wrapper .name {
-  font-size: 2.2em;
-  margin-top: 10px;
+	font-size: 2.2em;
+	margin-top: 10px;
 }
+
 .qqml .wrapper .description {
-  color: #a1a2ad;
-  text-transform: uppercase;
-  margin-top: 5px;
-  width: 80%;
-  margin: auto;
+	color: #a1a2ad;
+	text-transform: uppercase;
+	margin-top: 5px;
+	width: 80%;
+	margin: auto;
 }
 
 .qqml .wrapper .information {
-  width: 80%;
-  margin-top: 50px;
-  margin: auto;
+	width: 80%;
+	margin-top: 50px;
+	margin: auto;
 }
 
 /* .wrapper .social-media a i {
@@ -83,33 +89,35 @@
 } */
 
 .qqml .wrapper .social-media a i:hover {
-  color: #a1a2ad;
-  transition: 300ms;
+	color: #a1a2ad;
+	transition: 300ms;
 }
+
 .qqml .wrapper .follow {
-  background: #fff;
-  color: #212129;
-  text-transform: uppercase;
-  font-size: 1.2em;
-  letter-spacing: 0.1em;
-  padding: 10px 45px;
-  border-radius: 30px;
-  transition: 300ms;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  margin-top: 45px;
-  text-decoration: none;
+	background: #fff;
+	color: #212129;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	letter-spacing: 0.1em;
+	padding: 10px 45px;
+	border-radius: 30px;
+	transition: 300ms;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin-top: 45px;
+	text-decoration: none;
 }
+
 .qqml .wrapper .follow:hover {
-  background: #212129;
-  color: #fff;
-  transition: 300ms;
+	background: #212129;
+	color: #fff;
+	transition: 300ms;
 }
 
 .qqml .category div:hover {
-  background: #212129;
-  color: #fff;
-  /* transition: 300ms; */
+	background: #212129;
+	color: #fff;
+	/* transition: 300ms; */
 }
