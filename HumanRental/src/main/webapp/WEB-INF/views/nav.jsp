@@ -34,7 +34,7 @@
 				<ul class="nav justify-content-end">
 					<% if(request.getSession().getAttribute("user") != null) { %>
 					<li class="nav-item"><a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link" href="<c:url value="/mypage"/>">MY</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value="/myInfo?mode=myPage"/>">MY</a></li>
 					<% } else {	%>
 					<li class="nav-item"><a class="nav-link" href="<c:url value="/login"/>">로그인</a></li>
 					<% } %>

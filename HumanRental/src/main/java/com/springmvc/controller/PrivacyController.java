@@ -7,9 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.Member;
 import com.springmvc.service.MemberService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -19,21 +24,45 @@ public class PrivacyController {
 	@Autowired
 	MemberService memberService;
 	
-	@GetMapping("/mypage")
-	public String requestMyPage(Model model, HttpServletRequest request) {
+	@GetMapping("/myInfo")
+	public String requestMyPage(@RequestParam("mode") String mode,
+								Model model, 
+								HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user") != null) {
 			String memberId = (String) session.getAttribute("user");
 			Member member = memberService.getMember(memberId);
-			System.out.println(member.getProfileImage());
+			model.addAttribute("member", member);
+			model.addAttribute("mode", mode);
 			
-			if(member.getProfileImage() == null) {
-				model.addAttribute("image", "default.png");
+			
+			if(mode.equals("myPage")) {
+				if(member.getProfileImage() == null) {
+					model.addAttribute("image", "default.png");
+				}
+				
+			} else if(mode.equals("myPageEdit")) {
+				if(member.getProfileImage() == null) {
+					model.addAttribute("image", "default.png");
+				}
+				
+			} else if(mode.equals("userCheck")) {
+				
 			}
 			
-			model.addAttribute("member", member);
 		}
 		
 		return "MyPage";
 	}
+	
+	
+	@PostMapping("/myInfo")
+	public String postMethodName(@RequestParam("mode") String mode) {
+		
+		
+		return "MyPage";
+	}
+	
+	
+	
 }
