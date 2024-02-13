@@ -22,12 +22,9 @@
 				</ul>
 			</div>
 			<div class="col-4">
-				<form class="form-inline d-flex" action="#">
-					<input class="form-control mr-2" type="text"
-						placeholder="어떤 멘토를 찾으세요?">
-					<button class="btn btn-primary" type="submit">
-						<i class="fa-solid fa-magnifying-glass"></i>
-					</button>
+				<form class="form-inline d-flex" action="<c:url value="/SearchPage"/>">
+					<input class="form-control mr-2" type="text" placeholder="어떤 멘토를 찾으세요?">
+					<button class="btn btn-primary" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
 				</form>
 			</div>
 			<div class="col-3">
