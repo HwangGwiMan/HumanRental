@@ -1,0 +1,18 @@
+.qqs3 .info{
+  font-size: 50px;
+  text-align: center;
+}
+
+.qqs3 .qq1{
+  border: 2px solid black;
+  border-radius: 40px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  height: 200px;
+  text-align: center;
+  box-shadow: 0px 0px 10px 1px #212129;
+}
+
+.qqs3 .classname{
+  font-size: 30px;
+}
