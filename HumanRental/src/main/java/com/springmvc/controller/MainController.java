@@ -10,7 +10,7 @@ public class MainController {
 	//페이지 테스트용
 	@GetMapping("/test")
 	public String test(Model model) {
-		return "mentorDetail";
+		return "SearchPage";
 	}
 	
 	// 메인 페이지 호출
