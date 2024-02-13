@@ -12,13 +12,11 @@ name varchar(20) not null,
 age int not null,
 gender varchar(10) not null,
 phone int not null,
-address varchar(100) not null
-
+address varchar(100) not null,
+nickname varchar(20) not null,
+profileImage varchar(20)
 );
 
-select *from Member;
-
-drop table Member;
 
 -- 멘토프로필관리 
 CREATE TABLE IF NOT EXISTS MentoProfile(
@@ -29,8 +27,6 @@ starRate int,
 foreign key(memberId) references Member(memberId)
 );
 
-select *from MentoProfile;
-drop  table MentoProfile;
 
 -- 멘티프로필 관리
 CREATE TABLE IF NOT EXISTS MentiProfile(
@@ -41,8 +37,6 @@ starRate int,
 foreign key(memberId) references Member(memberId)
 );
 
-select *from MentiProfile;
-drop  table MentiProfile;
 
 -- 팝니다 관리 
 CREATE TABLE IF NOT EXISTS Selling(
@@ -54,8 +48,6 @@ location varchar(50) not null,
 createDate date,
 foreign key(memberId) references Member(memberId)
 );
-
-select * from Selling;
 
 -- 삽니다 관리 
 CREATE TABLE IF NOT EXISTS Buying(
@@ -69,10 +61,6 @@ foreign key(memberId) references Member(memberId)
 
 ); 
 
-drop table Buying;
-
-select * from Buying;
-
 -- 찜목록 
 CREATE TABLE IF NOT EXISTS Save(
 saveListId varchar(20) not null primary key,
@@ -83,8 +71,6 @@ createDate date,
 foreign key(memberId) references Member(memberId),
 foreign key(sellingId) references Selling(sellingId)
 );
-
-select * from Save;
 
 -- 후기관리
 -- 팝니다 리뷰 -
@@ -110,8 +96,6 @@ starRate int,
 foreign key(memberId) references Member(memberId),
 foreign key(buyingId) references Buying(buyingId)
 );
-
-drop table BuyingReview;
 
 -- 예약 관리 
 CREATE TABLE IF NOT EXISTS SellAndBuyId(
