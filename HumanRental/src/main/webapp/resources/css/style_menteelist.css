@@ -116,8 +116,8 @@
 	text-decoration: none;
 }
 
-.qqml2 .wrapper .follow:hover {
+.qqml2 .category div:hover {
 	background: #212129;
 	color: #fff;
-	transition: 300ms;
+	/* transition: 300ms; */
 }
