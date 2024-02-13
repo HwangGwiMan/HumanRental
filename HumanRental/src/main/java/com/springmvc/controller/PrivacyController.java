@@ -62,7 +62,8 @@ public class PrivacyController {
 	public String postMethodName(@RequestParam("mode") String mode,
 								 Member member,
 								 Model model) {
-		if(memberService.Login(member.getMemberId(), member.getMemberPw()) != null) {
+		Member targetMember = memberService.Login(member.getMemberId(), member.getMemberPw());
+		if((targetMember.getMemberId().equals(member.getMemberId())) && (targetMember.getMemberPw().equals(member.getMemberPw()))) {
 			model.addAttribute("mode", mode);
 			return "redirect:/myInfo";
 		} else {

@@ -13,6 +13,6 @@ public class LogoutController {
 	public String Logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "Main";
+		return "redirect:/main";
 	}
 }
