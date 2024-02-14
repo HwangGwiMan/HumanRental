@@ -7,4 +7,5 @@ public interface MemberService {
 	public void join(Member member);
 	boolean idCheck(String memberId);
 	public Member getMember(String memberId);
+	public void deleteMember(String memberId, String memberPw);
 }

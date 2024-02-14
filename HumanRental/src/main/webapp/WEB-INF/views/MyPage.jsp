@@ -9,6 +9,7 @@
 		<title>마이 페이지</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 		<script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
+		 <script src="<c:url value="/resources/js/login.js" />"></script>
 		<link rel="stylesheet" href="<c:url value="/resources/css/style_myPage.css"/>">
 	</head>
 	<body>
@@ -32,7 +33,7 @@
 							</ul>
 						</li>
 						<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
-						<li class="nav-item"><a href="#" class="btn">회원 탈퇴</a></li>
+						<li class="nav-item"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></li>
 					</ul>
 				</div>
 				<div class="col">
@@ -75,14 +76,29 @@
 									<div class="row justify-content-center">아이디 비밀번호 확인</div>
 									<div class="row justify-content-center">
 										<div class="col-4">아이디 :</div> 
-										<div class="col"><input type="text" name="memberId"></div>
+										<div class="col"><input type="text"  name="memberId"></div>
 									</div> 
 									<div class="row justify-content-center">
 										<div class="col-4">비밀번호 :</div>
-										<div class="col"><input type="password" name="memberPw"></div>
+										<div class="col"><input type="password"  name="memberPw"></div>
 									</div>
 									<input type="submit" value="확인">
 								</form>
+							</c:when>
+							<c:when test="${ mode == 'delete' }">
+	    						<form class="col-4" action="<c:url value="/deleteMember" />" method="post">
+	       							 <div class="row justify-content-center">회원 탈퇴 </div>
+	        						<div class="row justify-content-center">
+	            						<div class="col-4">아이디</div> 
+	            						<div class="col"><input type="text" readonly="readonly" value="${member.memberId}" id=userid name="memberId"></div>
+	        						</div> 
+	       							 <div class="row justify-content-center">
+	            						<div class="col-4">비밀번호</div>
+	            						<div class="col"><input type="password" required id=userpass name="memberPw"></div>
+	        						</div>
+	        						<input type="hidden" name="mode" value="delete">
+	        						<button type="submit" onclick="deleteMember()">확인</button>
+	    						</form>
 							</c:when>
 						</c:choose>
 						

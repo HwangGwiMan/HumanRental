@@ -96,5 +96,11 @@ public class MemberRepositoryImpl implements MemberRepository {
 			return null;
 		}
 	}
+	//회원탈퇴
+	public void deleteMember(String memberId , String memberPw) {
+		
+	    String SQL = "delete from member where memberId=? and memberPw=?";
+	     template.update(SQL, memberId,memberPw);
+	}
 }
 
