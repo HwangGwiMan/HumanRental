@@ -11,7 +11,7 @@ public class Member {
 	private int phone;
 	private String address;
 	private String nickName;
-	private MultipartFile profileImage;
+	private String profileImage;
 	public String getMemberId() {
 		return memberId;
 	}
@@ -60,10 +60,10 @@ public class Member {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public MultipartFile getProfileImage() {
+	public String getProfileImage() {
 		return profileImage;
 	}
-	public void setProfileImage(MultipartFile profileImage) {
+	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
 	}
 }
