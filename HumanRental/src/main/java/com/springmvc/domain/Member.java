@@ -1,5 +1,7 @@
 package com.springmvc.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Member {
 	private String memberId;
 	private String memberPw;
@@ -8,6 +10,8 @@ public class Member {
 	private String gender;
 	private int phone;
 	private String address;
+	private String nickName;
+	private String profileImage;
 	public String getMemberId() {
 		return memberId;
 	}
@@ -49,5 +53,17 @@ public class Member {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getProfileImage() {
+		return profileImage;
+	}
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 }

@@ -35,7 +35,7 @@
                         <br>
                         <p class="information">경력 78년의 개씹풀스택 개발자 <br> 시키면 다 합니다</p>
                         <br>
-                        <a href="#" target="_blank" class="follow">신청하기</a>
+                        <a href="/HumanRental/mentorDetail" target="_blank" class="follow">신청하기</a>
                     </div>
                 </div>
             </div>

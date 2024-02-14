@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 	
+	//페이지 테스트용
+	@GetMapping("/test")
+	public String test(Model model) {
+		return "SearchPage";
+	}
+	
 	// 메인 페이지 호출
 	@GetMapping("/main")
 	public String requestHome1(Model model) {
@@ -44,10 +50,10 @@ public class MainController {
 	}
 	
 	// 마이 페이지 호출
-	@GetMapping("/mypage")
-	public String requestMypage(Model model) {
-		return "mypage";
-	}
+//	@GetMapping("/mypage")
+//	public String requestMypage(Model model) {
+//		return "mypage";
+//	}
 	
 	// 멘티 구함 페이지 호출
 	@GetMapping("/findMentee")
