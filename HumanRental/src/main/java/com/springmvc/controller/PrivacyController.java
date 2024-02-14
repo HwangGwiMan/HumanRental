@@ -149,7 +149,7 @@ public class PrivacyController {
 	@PostMapping("/deleteMember") 
 	public String deleteMember(@RequestParam("mode") String mode, @RequestParam("memberId") String memberId,
 	        @RequestParam("memberPw") String memberPw, Model model ,HttpServletRequest request) {
-	
+		System.out.println("deleteMember controller");
 	   
 	    memberService.deleteMember(memberId,memberPw);
 	    HttpSession session = request.getSession();

@@ -45,6 +45,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 	// 회원 가입
 	@Override
 	public void join(Member member) {
+		System.out.println("회원가입");
 		String SQL = "INSERT INTO member (memberId, memberPw, name, age, gender, phone, address, nickName) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(member.getNickName());
 		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName());
@@ -100,9 +101,10 @@ public class MemberRepositoryImpl implements MemberRepository {
   
 	//회원탈퇴
 	public void deleteMember(String memberId , String memberPw) {
-		
+		System.out.println("deleteMember started");
 	    String SQL = "delete from member where memberId=? and memberPw=?";
-	     template.update(SQL, memberId,memberPw);
+	    template.update(SQL, memberId,memberPw);
+
 	}
 	
 	@Override

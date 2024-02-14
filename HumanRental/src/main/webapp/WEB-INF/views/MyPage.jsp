@@ -27,7 +27,7 @@
 						<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
 						<li class="nav-item">프로필 수정
 							<ul>
-								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=metoProfile"/>" class="btn">멘토 프로필 조회</a></li>
+								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentoProfile"/>" class="btn">멘토 프로필 조회</a></li>
 								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
 							</ul>
 						<li>
@@ -113,7 +113,7 @@
 	        						<button type="submit" onclick="deleteMember()">확인</button>
 	    						</form>
 	    					</c:when>	
-							<c:when test="${ mode == 'metoProfile' }">
+							<c:when test="${ mode == 'mentoProfile' }">
 								<div class="col-1"></div>
 								<div class="col-4">
 									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
@@ -134,7 +134,14 @@
 									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
 								</div>
 								<div class="col-1"></div>
-								<div></div>
+								<div class="col-5">
+									<div class="row p-3">이름<input type="text" value="${member.name}"></div>
+									<div class="row p-3">닉네임<input type="text" value="${member.nickName}"></div>
+									<div class="row p-3">나이<input type="text" value="${member.age}"></div>
+									<div class="row p-3">성별<input type="text" value="${member.gender}"></div>
+									<div class="row p-3">전화번호<input type="text" value="${member.phone}"></div>
+									<div class="row p-3">소개<input type="content"style="width:500px;height:500px;font-size:20px;" value="${member.address}"></div>
+								</div>
 							</c:when>
 						</c:choose>
 					</div>
