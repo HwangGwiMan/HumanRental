@@ -20,4 +20,9 @@ public class MentorController {
 	public String MentorDetail(Model model) {
 		return "mentorDetail";
 	}
+	
+	@GetMapping("/mentorRegist")
+	public String requestMentorRegistPage() {
+		return "MentorRegist";
+	}
 }

@@ -26,14 +26,14 @@
 						<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
 						<li class="nav-item">프로필 수정
 							<ul>
-								<li class="dropdown-item"><a href="#" class="btn">멘토 프로필 수정</a></li>
-								<li class="dropdown-item"><a href="#" class="btn">멘티 프로필 수정</a></li>
+								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=metoProfile"/>" class="btn">멘토 프로필 조회</a></li>
+								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
 							</ul>
 						<li>
-						<li>예약 목록
+						<li>등록 목록
 							<ul>
-								<li class="nav-item"><a href="#" class="btn">삽니다 예약 목록</a></li>
-								<li class="nav-item"><a href="#" class="btn">팝니다 예약 목록</a></li>
+								<li class="nav-item"><a href="#" class="btn">삽니다 목록</a></li>
+								<li class="nav-item"><a href="#" class="btn">팝니다 목록</a></li>
 							</ul>
 						</li>
 						<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
@@ -56,10 +56,11 @@
 									<div class="row p-3"><p>성별 : ${ member.gender }</div>
 									<div class="row p-3"><p>전화번호 : ${ member.phone }</div>
 									<div class="row p-3"><p>주소 : ${ member.address }</div>
+									<div class="row p-3"><p>멘토 여부 : ${ isMentor }</div>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'myPageEdit' }">
-								<form class="col" action="<c:url value="/myPageEdit" />" method="post">
+								<form class="col" action="<c:url value="/myPageEdit" />" method="post" encType="multipart/form-data">
 									<div class="row">
 										<div class="col-1"></div>
 										<div class="col-4">
@@ -95,6 +96,29 @@
 									</div>
 									<input type="submit" value="확인">
 								</form>
+							</c:when>
+							<c:when test="${ mode == 'metoProfile' }">
+								<div class="col-1"></div>
+								<div class="col-4">
+									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
+								</div>
+								<div class="col-1"></div>
+								<div class="col-5">
+									<div class="row p-3"><p>이름 : ${ member.name }</div>
+									<div class="row p-3"><p>닉네임 : ${ member.nickName }</div>
+									<div class="row p-3"><p>나이 : ${ member.age }</div>
+									<div class="row p-3"><p>성별 : ${ member.gender }</div>
+									<div class="row p-3"><p>전화번호 : ${ member.phone }</div>
+									<div class="row p-3"><p>주소 : ${ member.address }</div>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'meteeProfile' }">
+								<div class="col-1"></div>
+								<div class="col-4">
+									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
+								</div>
+								<div class="col-1"></div>
+								<div></div>
 							</c:when>
 						</c:choose>
 						

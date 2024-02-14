@@ -98,10 +98,24 @@ public class MemberRepositoryImpl implements MemberRepository {
 		}
 	}
 	
+	@Override
+	public List<Member> getMembers() {
+		String SQL = "SELECT * FROM member";
+		
+		List<Member> members;
+		
+		try {
+			members = template.query(SQL, new BeanPropertyRowMapper<Member>(Member.class));
+			return members;
+		} catch(EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 	// 회원 정보 수정
 	@Override
 	public void updateMember(Member member, String memberId) {
-		String SQL = "UPDATE member set memberId = ?, memberPw = ?,  name = ?, age = ?, gender = ?, phone = ?, address = ?, nickName = ?, profileImage = ? WHERE memberId = ?";		
+		String SQL = "UPDATE member set memberId = ?, memberPw = ?,  name = ?, age = ?, gender = ?, phone = ?, address = ?, nickName = ?, profileImage = ? WHERE memberId = ?";	
 		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName(), member.getProfileImage(), memberId);
 	}
 	
