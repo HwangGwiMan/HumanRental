@@ -15,8 +15,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	@Override
-	public boolean Login(Member member) {
-		return memberRepository.Login(member);
+	public Member Login(String memberId, String memberPw) {
+		return memberRepository.Login(memberId, memberPw);
 	}
 
 	@Override
@@ -24,9 +24,14 @@ public class MemberServiceImpl implements MemberService {
 		memberRepository.join(member);
 	}
 
-	
 	@Override
 	public boolean idCheck(String memberId) {
 		return memberRepository.idCheck(memberId); 
 	}
+
+	@Override
+	public Member getMember(String memberId) {
+		return memberRepository.getMember(memberId);
+	}
+	
 }

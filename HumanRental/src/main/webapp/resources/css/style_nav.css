@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+.qqnav a{
+	color: black;
+    text-decoration: none;
+}
+
+
 .qqnav > div{
     height: 100%;
 }
@@ -13,6 +19,8 @@
     margin: auto 20px auto 20px;
 }
 
-.nav-link{
-    padding: 5px 10px;
+.nav{
+    padding: 0 !important;
+    --bs-nav-link-padding-x: 10px !important;
+    --bs-nav-link-padding-y: 5px !important;
 }

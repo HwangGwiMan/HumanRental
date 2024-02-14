@@ -5,10 +5,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,20 +25,17 @@ public class LoginController {
 		return "Login";
 	}
 	
-	@PostMapping("/login")
+	@GetMapping("/loginReq")
+	@ResponseBody
 	public String Login(@RequestParam("memberId") String memberId,
 						@RequestParam("memberPw") String memberPw,
 						HttpServletRequest request) {
 		
-		Member member = new Member();
-		member.setMemberId(memberId);
-		member.setMemberPw(memberPw);
+		Member loginMember = memberService.Login(memberId, memberPw); 
 		
-		System.out.println(member.getMemberId());
-		
-		if(memberService.Login(member)) {
+		if(loginMember != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("id", member.getMemberId());
+			session.setAttribute("user", memberId);
 			return "true";
 		} else {
 			return "false";
