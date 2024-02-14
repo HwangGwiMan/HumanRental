@@ -13,14 +13,14 @@ age int not null,
 gender varchar(10) not null,
 phone int not null,
 address varchar(100) not null,
-nickName varchar(20) not null,
+nickname varchar(20) not null,
 profileImage varchar(20)
 );
 
 
 -- 멘토프로필관리 
-CREATE TABLE IF NOT EXISTS MentorProfile(
-mentorId varchar(20) not null primary key,
+CREATE TABLE IF NOT EXISTS MentoProfile(
+mentoId varchar(20) not null primary key,
 memberId varchar(20) not null,
 introduction varchar(1000) not null,
 starRate int,
@@ -29,8 +29,8 @@ foreign key(memberId) references Member(memberId)
 
 
 -- 멘티프로필 관리
-CREATE TABLE IF NOT EXISTS MenteeProfile(
-menteeId varchar(20) not null primary key,
+CREATE TABLE IF NOT EXISTS MentiProfile(
+mentiId varchar(20) not null primary key,
 memberId varchar(20) not null,
 introduction varchar(1000)not null,
 starRate int,
@@ -104,14 +104,14 @@ contentId varchar(20) not null primary key
 );
 CREATE TABLE IF NOT EXISTS Reservation(
 reservationId varchar(20) not null primary key,
-menteeId varchar(20)not null,
-mentorId varchar(20)not null,
+mentiId varchar(20)not null,
+mentoId varchar(20)not null,
 contentId varchar(100)not null,
 memberId varchar(20)not null,
 signDate date,
 content varchar(10000),
-foreign key(menteeId) references  MenteeProfile(menteeId),
-foreign key(mentorId) references  MentorProfile(mentorId),
+foreign key(mentiId) references  MentiProfile(mentiId),
+foreign key(mentoId) references  MentoProfile(mentoId),
 foreign key(contentId) references SellAndBuyId(contentId),
 foreign key(memberId ) references Member(memberId)
 );
@@ -151,22 +151,27 @@ foreign key(questionId) references Question(questionId)
 
 --  커뮤니티 관리 
 CREATE TABLE IF NOT EXISTS Board(
-boardId varchar(20) not null primary key,
+boardId int primary key auto_increment,
 memberId varchar(20) not null,
+name varchar(20) not null,
 title varchar(100),
-content varchar(10000)
+content varchar(10000),
+regist_day varchar(30) not null,
+hit int default 0
 );
 
 
 CREATE TABLE IF NOT EXISTS Notice(
-noticeId varchar(20) not null primary key,
+noticeId varchar(20) not null primary key ,
 title varchar(100) not null,
 content varchar(10000) not null,
 writeDate date
 );
+
+
 CREATE TABLE IF NOT EXISTS Comment(
 commentId varchar(20) not null primary key,
-boardId varchar(20) not null,
+boardId int not null,
 memberId varchar(20) not null,
 content varchar(10000) not null,
 writeDate date,
@@ -215,7 +220,7 @@ schedulealarmId varchar(20) not null primary key
 );
 
  CREATE TABLE IF NOT EXISTS Alarm(
-memberId varchar(20)not null primary key,
+memberId varchar(20) not null primary key,
 chatalarmId varchar(20)not null,
 matchalarmId varchar(20)not null,
 schedulealarmId varchar(20)not null,

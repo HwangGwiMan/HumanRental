@@ -1,5 +1,7 @@
 package com.springmvc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +13,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberRepository memberRepository;
-	
-	
 	
 	@Override
 	public Member Login(String memberId, String memberPw) {
@@ -36,8 +36,17 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void deleteMember(String memberId , String memberPw) {
-
 	     memberRepository.deleteMember(memberId, memberPw);
 	}
 	
+	public void updateMember(Member member, String memberId) {
+		memberRepository.updateMember(member, memberId);
+	}
+
+	@Override
+	public List<Member> getMembers() {
+		return memberRepository.getMembers();
+	}
+
+
 }

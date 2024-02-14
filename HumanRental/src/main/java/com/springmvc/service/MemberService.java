@@ -1,5 +1,7 @@
 package com.springmvc.service;
 
+import java.util.List;
+
 import com.springmvc.domain.Member;
 
 public interface MemberService {
@@ -8,4 +10,7 @@ public interface MemberService {
 	boolean idCheck(String memberId);
 	public Member getMember(String memberId);
 	public void deleteMember(String memberId, String memberPw);
+	public void updateMember(Member member, String memberId);
+	public List<Member> getMembers();
+
 }
