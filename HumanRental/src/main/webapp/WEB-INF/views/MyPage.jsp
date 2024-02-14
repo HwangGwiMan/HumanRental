@@ -23,7 +23,7 @@
 						<li class="nav-item">프로필 수정
 							<ul>
 								<li class="dropdown-item"><a href="#" class="btn">멘토 프로필 수정</a></li>
-								<li class="dropdown-item"><a href="#" class="btn">멘티 프로필 수정</a></li>
+								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=metiUpdate"/>" class="btn">멘티 프로필 수정</a></li>
 							</ul>
 						<li>
 						<li>예약 목록
@@ -101,7 +101,6 @@
 	    						</form>
 							</c:when>
 						</c:choose>
-						
 					</div>
 				</div>
 			</div>

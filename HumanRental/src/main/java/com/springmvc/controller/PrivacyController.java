@@ -83,6 +83,6 @@ public class PrivacyController {
 	    
 	    return "redirect:main"; // 다른 페이지로 리다이렉트
 	}
-	 
+	
 	
 }
