@@ -20,8 +20,9 @@ function idDuplicateCheck() {
 		success : function(result) { // 결과 성공 콜백함수
 			if(result === "true") {
 				isIdCheck = true;
-				alert("사용 가능한 아이디 입니다.");	
+				alert("사용 가능한 아이디 입니다.");
 			} else {
+				isIdCheck = false;
 				alert("이미 사용중인 아이디 입니다.");
 			}
 		},
