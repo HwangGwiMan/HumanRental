@@ -30,9 +30,9 @@ public class LoginController {
 	public String Login(@RequestParam("memberId") String memberId,
 						@RequestParam("memberPw") String memberPw,
 						HttpServletRequest request) {
-		
+	
 		Member loginMember = memberService.Login(memberId, memberPw); 
-		
+	
 		if(loginMember != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", memberId);
