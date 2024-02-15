@@ -149,6 +149,18 @@ public class PrivacyController {
 	@PostMapping("/deleteMember") 
 	public String deleteMember(@RequestParam("mode") String mode, @RequestParam("memberId") String memberId,
 	        @RequestParam("memberPw") String memberPw, Model model ,HttpServletRequest request) {
+	System.out.println("ㄱㄴㄷㄻㅄㄹㅇㄷㅋㅌㅁㅍㅅ");
+	   
+	    memberService.deleteMember(memberId,memberPw);
+	    HttpSession session = request.getSession();
+		session.invalidate();
+	    
+	    return "redirect:main"; // 다른 페이지로 리다이렉트
+	}
+	//회원탈퇴처리
+	@PostMapping("/mentiprofile") 
+	public String mentiprofile(@RequestParam("mode") String mode, @RequestParam("memberId") String memberId,
+	        @RequestParam("memberPw") String memberPw, Model model ,HttpServletRequest request) {
 		System.out.println("deleteMember controller");
 	   
 	    memberService.deleteMember(memberId,memberPw);
@@ -157,6 +169,5 @@ public class PrivacyController {
 	    
 	    return "redirect:main"; // 다른 페이지로 리다이렉트
 	}
-	
 	
 }

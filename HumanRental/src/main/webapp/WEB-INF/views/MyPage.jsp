@@ -28,13 +28,13 @@
 						<li class="nav-item">프로필 수정
 							<ul>
 								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentoProfile"/>" class="btn">멘토 프로필 조회</a></li>
-								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
+								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" onclick="registormentee()" class="btn">멘티 프로필 조회</a></li>
 							</ul>
 						<li>
-						<li>등록 목록
+						<li>등록 이력
 							<ul>
-								<li class="nav-item"><a href="#" class="btn">삽니다 목록</a></li>
-								<li class="nav-item"><a href="#" class="btn">팝니다 목록</a></li>
+								<li class="nav-item"><a href="#" class="btn">삽니다 이력</a></li>
+								<li class="nav-item"><a href="#" class="btn">팝니다 이력</a></li>
 							</ul>
 						</li>
 						<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
@@ -99,6 +99,7 @@
 								</form>
 							</c:when>
 							<c:when test="${ mode == 'delete' }">
+							  <% System.out.println("회원탈퇴용 아이디 비번 나와랏!");%> 
 	    						<form class="col-4" action="<c:url value="/deleteMember" />" method="post">
 	       							 <div class="row justify-content-center">회원 탈퇴 </div>
 	        						<div class="row justify-content-center">
@@ -113,7 +114,7 @@
 	        						<button type="submit" onclick="deleteMember()">확인</button>
 	    						</form>
 	    					</c:when>	
-							<c:when test="${ mode == 'mentoProfile' }">
+							 <c:when test="${ mode == 'mentoProfile' }">
 								<div class="col-1"></div>
 								<div class="col-4">
 									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
@@ -129,20 +130,22 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'meteeProfile' }">
-								<div class="col-1"></div>
-								<div class="col-4">
-									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
-								</div>
-								<div class="col-1"></div>
+							
+								<div class="col-1"> </div>	
+								<br><br>
 								<div class="col-5">
-									<div class="row p-3">이름<input type="text" value="${member.name}"></div>
-									<div class="row p-3">닉네임<input type="text" value="${member.nickName}"></div>
-									<div class="row p-3">나이<input type="text" value="${member.age}"></div>
-									<div class="row p-3">성별<input type="text" value="${member.gender}"></div>
-									<div class="row p-3">전화번호<input type="text" value="${member.phone}"></div>
-									<div class="row p-3">소개<input type="content"style="width:500px;height:500px;font-size:20px;" value="${member.address}"></div>
+									<div class="row p-3"><p>이름 : ${ member.name }</div>
+									<div class="row p-3"><p>닉네임 : ${ member.nickName }</div>
+									<div class="row p-3"><p>나이 : ${ member.age }</div>
+									<div class="row p-3"><p>성별 : ${ member.gender }</div>
+									<div class="row p-3"><p>전화번호 : ${ member.phone }</div>
+									<div class="row p-3"><p>주소 : ${ member.address }</div>
+									<form class="col-4" action="<c:url value="/mentiprofile" />" method="post">
+										<div class="row p-2">관심분야 <input type="text" name="interest"></div>
+										<div class="row p-2">소개<input type="content" name=""></div>
+									<button type="submit" onclick="deleteMember()">확인</button>
 								</div>
-							</c:when>
+							</c:when> 
 						</c:choose>
 					</div>
 				</div>
