@@ -64,7 +64,7 @@ public class BoardController {
 	
 	@GetMapping("/boardview")
 	public String BoardViewAction(HttpServletRequest request, Model model) {
-		System.out.println("boardview 접근");
+		System.out.println("boardview GET 접근");
 		int BoardId = Integer.parseInt(request.getParameter("BoardId"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		System.out.println("BoardId="+BoardId);
@@ -75,11 +75,23 @@ public class BoardController {
 		board = boardService.getBoardByNum(BoardId, pageNum);
 		
 		request.setAttribute("BoardId", BoardId);		 
-   		request.setAttribute("page", pageNum); 
+   		request.setAttribute("page", pageNum); 		
 		model.addAttribute("board", board);
-		System.out.println(board.getContent());
+		
+		HttpSession session = request.getSession();
+		String MemberId = (String)session.getAttribute("user");
+		System.out.println("MemberId="+MemberId);
+		System.out.println("123");
 		
 		return "BoardView";
 	}
-	
+
+	@GetMapping("/boarddelete")
+	public String BoardDelete(HttpServletRequest request, Model model) {
+		System.out.println("board delete 접근");
+		
+		
+		
+		return null;
+	}
 }

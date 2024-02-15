@@ -40,12 +40,12 @@
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-offset-2 col-sm-10 ">
-				<c:set var="userId" value="${board.memberId}>" />
 				<c:if test="${sessionId==memberId}">
 					<p><a href="./BoardDeleteAction.do?num=${BoardId}%>&pageNum=${nowpage}" class="btn btn-danger">삭제</a> 
 						<input type="submit" class="btn btn-success" value="수정">
 				</c:if>
 				<a href="<c:url value="/board?page=${nowpage}"/>" class="btn btn-primary">목록</a>
+				<div>${sessionId.toString()},${board.getMemberId()}</div>
 			</div>
 		</div>
 		<hr>

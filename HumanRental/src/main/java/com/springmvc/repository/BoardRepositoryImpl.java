@@ -114,8 +114,6 @@ public class BoardRepositoryImpl implements BoardRepository {
 		String sql = "select * from board where BoardId = ? ";
 		Board board = template.queryForObject(sql, new BoardRowMapper(), BoardId);
 		
-		System.out.println(template.queryForObject(sql, new BoardRowMapper(), BoardId));
-		System.out.println(board.getContent());
 		System.out.println("board 담음");
 		return board;
 	}

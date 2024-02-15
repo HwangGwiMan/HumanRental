@@ -112,6 +112,7 @@
 	        						<input type="hidden" name="mode" value="delete">
 	        						<button type="submit" onclick="deleteMember()">확인</button>
 	    						</form>
+	    					</c:when>
 							<c:when test="${ mode == 'metoProfile' }">
 								<div class="col-1"></div>
 								<div class="col-4">
