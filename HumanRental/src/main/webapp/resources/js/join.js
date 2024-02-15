@@ -20,8 +20,9 @@ function idDuplicateCheck() {
 		success : function(result) { // 결과 성공 콜백함수
 			if(result === "true") {
 				isIdCheck = true;
-				alert("사용 가능한 아이디 입니다.");	
+				alert("사용 가능한 아이디 입니다.");
 			} else {
+				isIdCheck = false;
 				alert("이미 사용중인 아이디 입니다.");
 			}
 		},
@@ -47,4 +48,16 @@ function formSubmit() {
 		alert("아이디 중복 확인을 해주십시오.");
 		return;
 	}
+}
+
+function deleteMember() {
+    var id = document.getElementById("userid").value;
+    var pw = document.getElementById("userpass").value;
+
+    if (id == "" || pw == "") {
+        alert("아이디와 비밀번호를 모두 입력해주세요.");
+        event.preventDefault();
+    } else if (!confirm("정말 탈퇴하시겠습니까?")) {
+        event.preventDefault();
+    }
 }
