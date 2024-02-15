@@ -149,6 +149,10 @@ writeDate date,
 foreign key(questionId) references Question(questionId)
 );
 
+-- 멘토 리스트
+
+-- 멘티 리스트
+
 --  커뮤니티 관리 
 CREATE TABLE IF NOT EXISTS Board(
 boardId int primary key auto_increment,
