@@ -45,7 +45,7 @@
 			    	<div class="col">
 			    		<div class="row p-3"><a href="#" class="btn">카카오 로그인</a></div>
 				    	<div class="row p-3"><a href="#" class="btn">네이버 로그인</a></div>
-				    	<div class="row p-3"><a href="<c:url value="/join" />">회원 가입</a></div>
+				    	<div class="row p-3"><a href="<c:url value="/join" />" class="btn">회원 가입</a></div>
 			    	</div> 
 			    </form:form>
 		    </div>

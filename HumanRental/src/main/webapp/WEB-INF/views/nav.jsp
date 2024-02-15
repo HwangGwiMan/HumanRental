@@ -18,11 +18,11 @@
 					<li class="nav-item"><a class="nav-link" href="#">재능기부</a></li>
 					<li class="nav-item"><a class="nav-link" href="<c:url value="/menteelist"/>">멘티구함</a></li>
 					<li class="nav-item"><a class="nav-link" href="<c:url value="/mentorlist"/>">멘토구함</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value="/board"/>">커뮤니티</a></li>
 				</ul>
 			</div>
 			<div class="col-4">
-				<form class="form-inline d-flex" action="<c:url value="/SearchPage"/>">
+				<form class="form-inline d-flex mx-auto" action="<c:url value="/SearchPage"/>">
 					<input class="form-control mr-2" type="text" placeholder="어떤 멘토를 찾으세요?">
 					<button class="btn btn-primary" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
 				</form>
@@ -36,7 +36,7 @@
 					<li class="nav-item"><a class="nav-link" href="<c:url value="/login"/>">로그인</a></li>
 					<% } %>
 					<li class="nav-item"><a class="nav-link" href="#">찜목록</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">멘토신청</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value="/mentorRegist"/>">멘토신청</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"><i class="fa-regular fa-bell"></i></a></li>
 				</ul>
 			</div>
