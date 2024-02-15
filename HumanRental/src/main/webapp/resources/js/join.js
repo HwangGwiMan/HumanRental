@@ -49,3 +49,15 @@ function formSubmit() {
 		return;
 	}
 }
+
+function deleteMember() {
+    var id = document.getElementById("userid").value;
+    var pw = document.getElementById("userpass").value;
+
+    if (id == "" || pw == "") {
+        alert("아이디와 비밀번호를 모두 입력해주세요.");
+        event.preventDefault();
+    } else if (!confirm("정말 탈퇴하시겠습니까?")) {
+        event.preventDefault();
+    }
+}

@@ -13,7 +13,7 @@ age int not null,
 gender varchar(10) not null,
 phone int not null,
 address varchar(100) not null,
-nickName varchar(20) not null,
+nickname varchar(20) not null,
 profileImage varchar(20)
 );
 
@@ -149,24 +149,33 @@ writeDate date,
 foreign key(questionId) references Question(questionId)
 );
 
+-- 멘토 리스트
+
+-- 멘티 리스트
+
 --  커뮤니티 관리 
 CREATE TABLE IF NOT EXISTS Board(
-boardId varchar(20) not null primary key,
+boardId int primary key auto_increment,
 memberId varchar(20) not null,
+name varchar(20) not null,
 title varchar(100),
-content varchar(10000)
+content varchar(10000),
+regist_day varchar(30) not null,
+hit int default 0
 );
 
 
 CREATE TABLE IF NOT EXISTS Notice(
-noticeId varchar(20) not null primary key,
+noticeId varchar(20) not null primary key ,
 title varchar(100) not null,
 content varchar(10000) not null,
 writeDate date
 );
+
+
 CREATE TABLE IF NOT EXISTS Comment(
 commentId varchar(20) not null primary key,
-boardId varchar(20) not null,
+boardId int not null,
 memberId varchar(20) not null,
 content varchar(10000) not null,
 writeDate date,
@@ -215,7 +224,7 @@ schedulealarmId varchar(20) not null primary key
 );
 
  CREATE TABLE IF NOT EXISTS Alarm(
-memberId varchar(20)not null primary key,
+memberId varchar(20) not null primary key,
 chatalarmId varchar(20)not null,
 matchalarmId varchar(20)not null,
 schedulealarmId varchar(20)not null,
