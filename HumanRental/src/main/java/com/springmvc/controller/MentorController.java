@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.domain.Mentor;
+import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.MentorService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class MentorController {
@@ -40,6 +44,11 @@ public class MentorController {
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("user");
 		
+		
+		if(memberId == null) {
+			return "notLogin";
+		}
+		
 		Mentor mentor = mentorService.getMentor(memberId);
 		if(mentor == null) {
 			return "true";
@@ -48,10 +57,29 @@ public class MentorController {
 		}
 	}
 	
-	@GetMapping("/mentorRegist")
-	public String requestMentorRegistPage() {
-		return "MentorRegist";
+	@GetMapping("/mentorApply")
+	public String requestMentorRegistPage(HttpServletRequest request) {
+		return "MentorApply";
 	}
 	
+	@PostMapping("/mentorApply/submit")
+	public String mentorRegistSubmit(MentorRegistInfo mentorRegistInfo,
+									 HttpServletRequest request) {
+		
+		if(mentorRegistInfo.getSpecialty() == null) {
+			mentorRegistInfo.setSpecialty(new String[] {});
+		}
+		
+		if(mentorRegistInfo.getLocation() == null) {
+			mentorRegistInfo.setLocation(new String[] {});
+		}
+		
+		HttpSession session = request.getSession();
+		mentorRegistInfo.setMemberId((String) session.getAttribute("user"));
+		
+		mentorService.mentorApply(mentorRegistInfo);
+		
+		return "redirect:/mentorRegist";
+	}
 	
 }

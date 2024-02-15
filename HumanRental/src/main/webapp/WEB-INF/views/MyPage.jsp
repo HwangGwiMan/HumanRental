@@ -27,7 +27,7 @@
 						<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
 						<li class="nav-item">프로필 수정
 							<ul>
-								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=metoProfile"/>" class="btn">멘토 프로필 조회</a></li>
+								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
 								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
 							</ul>
 						<li>
@@ -112,7 +112,8 @@
 	        						<input type="hidden" name="mode" value="delete">
 	        						<button type="submit" onclick="deleteMember()">확인</button>
 	    						</form>
-							<c:when test="${ mode == 'metoProfile' }">
+	    					</c:when>
+							<c:when test="${ mode == 'mentorProfile' }">
 								<div class="col-1"></div>
 								<div class="col-4">
 									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>

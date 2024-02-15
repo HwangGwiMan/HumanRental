@@ -17,9 +17,19 @@ nickname varchar(20) not null,
 profileImage varchar(20)
 );
 
+-- 멘토 신청 정보 테이블
+CREATE TABLE IF NOT EXISTS MentorRegistInfo(
+	registId varchar(20) not null primary key,
+	memberId varchar(20) not null,
+    specialty varchar(255),
+    location varchar(255),
+    reason varchar(255),
+    etc varchar(1000),
+    foreign key(memberId) references Member(memberId)
+);
 
 -- 멘토프로필관리 
-CREATE TABLE IF NOT EXISTS MentoProfile(
+CREATE TABLE IF NOT EXISTS MentorProfile(
 mentoId varchar(20) not null primary key,
 memberId varchar(20) not null,
 introduction varchar(1000) not null,
