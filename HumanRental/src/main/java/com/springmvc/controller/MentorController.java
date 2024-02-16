@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mysql.cj.xdevapi.JsonArray;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorRegistInfo;
+import com.springmvc.service.AlarmService;
 import com.springmvc.service.MentorService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,9 @@ public class MentorController {
 	
 	@Autowired
 	MentorService mentorService; 
+	
+	@Autowired
+	AlarmService alarmService;
 	
 	@GetMapping("/mentorlist")
 	public String MentorList(Model model) {
@@ -72,9 +76,12 @@ public class MentorController {
 	public String mentorRegistSubmit(MentorRegistInfo mentorRegistInfo,
 									 HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		mentorRegistInfo.setMemberId((String) session.getAttribute("user"));
+		String memberId = (String) session.getAttribute("user");
+		mentorRegistInfo.setMemberId(memberId);
 			
 		mentorService.mentorApply(mentorRegistInfo);
+		
+		alarmService.createMentoApplyAlarm(memberId);
 		
 		return "redirect:/main";
 	}

@@ -235,15 +235,23 @@ schedulealarmId varchar(20) not null primary key
 
 );
 
- CREATE TABLE IF NOT EXISTS Alarm(
-memberId varchar(20) not null primary key,
-chatalarmId varchar(20)not null,
-matchalarmId varchar(20)not null,
-schedulealarmId varchar(20)not null,
- date date,
-content varchar(10000)not null,
-foreign key(memberId) references Member(memberId) ,
-foreign key(chatalarmId) references ChatAlarm(chatalarmId), 
-foreign key(memberId) references MatchAlarm(matchalarmId), 
-foreign key(schedulealarmId) references ScheduleAlarm(schedulealarmId) 
+--  CREATE TABLE IF NOT EXISTS Alarm(
+-- memberId varchar(20) not null primary key,
+-- chatalarmId varchar(20)not null,
+-- matchalarmId varchar(20)not null,
+-- schedulealarmId varchar(20)not null,
+--  date date,
+-- content varchar(10000)not null,
+-- foreign key(memberId) references Member(memberId) ,
+-- foreign key(chatalarmId) references ChatAlarm(chatalarmId), 
+-- foreign key(memberId) references MatchAlarm(matchalarmId), 
+-- foreign key(schedulealarmId) references ScheduleAlarm(schedulealarmId) 
+-- );
+
+CREATE TABLE IF NOT EXISTS Alarm(
+alarmId varchar(20) not null primary key,
+memberId varchar(20) not null,
+date date not null,
+content varchar(10000) not null,
+foreign key(memberId) references Member(memberId)
 );
