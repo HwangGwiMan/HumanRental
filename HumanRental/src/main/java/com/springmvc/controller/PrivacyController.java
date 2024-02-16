@@ -53,6 +53,9 @@ public class PrivacyController {
 			
 			if(mentorService.getMentor(memberId) == null) {
 				model.addAttribute("isMentor", "NO");
+				if(mentorService.getMentorApplyByMemberId(memberId) != null) {
+					model.addAttribute("isMentor", "멘토 심사 중");
+				} 
 			} else {
 				model.addAttribute("isMentor", "YES");
 			}
@@ -100,12 +103,10 @@ public class PrivacyController {
 		String realPath = request.getSession().getServletContext().getRealPath("/resources/img/ProfilePicture");
 		File saveFile = new File(realPath, setFileName(memberId));
 		
-		System.out.println(realPath);
-		
 		Member targetMember = memberService.getMember(memberId);
 		
 		// 새로운 이미지가 있을 경우 바로 업데이트
-		if(file != null && !file.isEmpty()) {
+		if(file != null && !file.isEmpty() && !file.getOriginalFilename().isEmpty()) {
 			
 			member.setProfileImage(setFileName(memberId));
 			try {
@@ -114,15 +115,15 @@ public class PrivacyController {
 				e.printStackTrace();
 			}
 		} else {// 이미지가 없을 경우
-			// 기존 이미지 체크
-			// 기존 이미지 있으면
-			if(!targetMember.getProfileImage().isEmpty()) {
-				// 기존 이미지 사용 
-				member.setProfileImage(setFileName(memberId)); 
-			} else {
-				// 디폴트 이미지 사용
+			// 디폴트 이미지일 경우			
+			if(targetMember.getProfileImage().equals("default.png")) {
 				member.setProfileImage("default.png");
+			} else { // 디폴트 이미지가 아닐 경우
+				// 기존 이미지 그대로 사용
+				member.setProfileImage(targetMember.getProfileImage());
 			}
+			
+
 		}
 
 		memberService.updateMember(member, memberId);

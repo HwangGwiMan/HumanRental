@@ -3,9 +3,9 @@ package com.springmvc.domain;
 public class MentorRegistInfo {
 	private String registrId;
 	private String memberId;
-	private String specialty[];
-	private String location[];
-	private String reason[];
+	private String specialty;
+	private String location;
+	private String reason;
 	private String etc;
 	public String getRegistrId() {
 		return registrId;
@@ -19,22 +19,22 @@ public class MentorRegistInfo {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String[] getSpecialty() {
+	public String getSpecialty() {
 		return specialty;
 	}
-	public void setSpecialty(String[] specialty) {
+	public void setSpecialty(String specialty) {
 		this.specialty = specialty;
 	}
-	public String[] getLocation() {
+	public String getLocation() {
 		return location;
 	}
-	public void setLocation(String[] location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String[] getReason() {
+	public String getReason() {
 		return reason;
 	}
-	public void setReason(String[] reason) {
+	public void setReason(String reason) {
 		this.reason = reason;
 	}
 	public String getEtc() {

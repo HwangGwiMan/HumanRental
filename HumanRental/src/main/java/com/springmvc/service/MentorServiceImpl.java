@@ -21,7 +21,11 @@ public class MentorServiceImpl implements MentorService {
 	@Override
 	public void mentorApply(MentorRegistInfo mentorRegistInfo) {
 		mentorRepository.mentorApply(mentorRegistInfo);
-		
+	}
+
+	@Override
+	public MentorRegistInfo getMentorApplyByMemberId(String memberId) {
+		return mentorRepository.getMentorApplyByMemberId(memberId);
 	}
 	
 

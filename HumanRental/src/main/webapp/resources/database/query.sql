@@ -17,9 +17,11 @@ nickname varchar(20) not null,
 profileImage varchar(20)
 );
 
+INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "default.png");
+
 -- 멘토 신청 정보 테이블
 CREATE TABLE IF NOT EXISTS MentorRegistInfo(
-	registId varchar(20) not null primary key,
+	registId varchar(50) not null primary key,
 	memberId varchar(20) not null,
     specialty varchar(255),
     location varchar(255),

@@ -47,8 +47,6 @@ public class MentorRepositroyImpl implements MentorRepository {
 		List<MentorRegistInfo> mentorApplyList;
 		long number;
 		try {
-			SQL = "SELECT * FROM mentorregistinfo";
-			mentorApplyList = template.query(SQL, new BeanPropertyRowMapper<MentorRegistInfo>(MentorRegistInfo.class));
 			number = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(); // 현재 시간 long로 변환
 			mentorRegistInfo.setRegistrId("mentorApply_" + number);
 			
@@ -56,6 +54,23 @@ public class MentorRepositroyImpl implements MentorRepository {
 			template.update(SQL, mentorRegistInfo.getRegistrId(), mentorRegistInfo.getMemberId(), mentorRegistInfo.getSpecialty(), mentorRegistInfo.getLocation(), mentorRegistInfo.getReason(), mentorRegistInfo.getEtc());
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<MentorRegistInfo> mentorApplyList() {
+		String SQL = "SELECT * FROM mentorregistinfo";
+		return template.query(SQL, new BeanPropertyRowMapper<MentorRegistInfo>(MentorRegistInfo.class));
+	}
+
+	@Override
+	public MentorRegistInfo getMentorApplyByMemberId(String memberId) {
+		String SQL = "SELECT * FROM mentorregistinfo WHERE memberId = ?";
+		try {
+			List<MentorRegistInfo> mentorApplyList = template.query(SQL, new BeanPropertyRowMapper<MentorRegistInfo>(MentorRegistInfo.class), memberId);
+			return mentorApplyList.get(0);
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			return null;
 		}
 	}
 }

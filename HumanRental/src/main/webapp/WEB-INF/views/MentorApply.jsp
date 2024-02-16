@@ -18,7 +18,7 @@
 	<body>
 		<jsp:include page="nav.jsp"/>
 		<div class="container">
-			<form method="post" action="<c:url value="/mentorRegist/submit"/>">
+			<form method="post" action="<c:url value="/mentorApply/submit"/>">
 				<div class="row p-4">
 					<label class="col-2">특기 분야</label> 
 					운동<input type="checkbox" class="col-sm-1" name="specialty" value="운동">  
@@ -29,23 +29,21 @@
 				</div>
 				<div class="row p-4">
 					<label class="col-2">주요 활동지</label>
-					<select name="location" id="addressRegion" class="col-sm-2"></select>
-				    <select name="location" id="addressDo" class="col-sm-2"></select>
-   					<select name="location" id="addressSiGunGu" class="col-sm-2"></select>
+					<select name="location" id="addressRegion" class="col-sm-2" required="required"></select>
+				    <select name="location" id="addressDo" class="col-sm-2" required="required"></select>
+   					<select name="location" id="addressSiGunGu" class="col-sm-2" required="required"></select>
 				</div>
 				<div class="row p-4">
 					<label class="col-2">신청하게 된 이유</label>
-					여유 시간 활용<input type="checkbox" class="col-sm-1">
-					사회적 교류<input type="checkbox" class="col-sm-1">
-					재능 기부를 통한 만족감<input type="checkbox" class="col-sm-1">
-					자기 발전<input type="checkbox" class="col-sm-1">
+					여유 시간 활용<input type="checkbox" class="col-sm-1" name="reason" value="여유 시간 활용">
+					사회적 교류<input type="checkbox" class="col-sm-1" name="reason" value="사회적 교류">
+					재능 기부를 통한 만족감<input type="checkbox" class="col-sm-1" name="reason" value="재능 기부를 통한 만족감">
+					자기 발전<input type="checkbox" class="col-sm-1" name="reason" value="자기 발전">
 				</div>
 				<div class="row p-4">
 					<label class="col-2">기타 사항</label>
 					<div class="col">
-						<textarea rows="5" cols="100" >
-							
-						</textarea>
+						<textarea rows="5" cols="100" name="etc"></textarea>
 					</div>
 				</div>
 				<input type="submit" value="Submit" />

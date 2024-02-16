@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysql.cj.xdevapi.JsonArray;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.MentorService;
@@ -44,9 +45,14 @@ public class MentorController {
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("user");
 		
-		
 		if(memberId == null) {
 			return "notLogin";
+		}
+		
+		MentorRegistInfo mentorRegistInfo = mentorService.getMentorApplyByMemberId(memberId);
+
+		if(mentorRegistInfo != null) {
+			return "AlreadyApply";
 		}
 		
 		Mentor mentor = mentorService.getMentor(memberId);
@@ -65,21 +71,12 @@ public class MentorController {
 	@PostMapping("/mentorApply/submit")
 	public String mentorRegistSubmit(MentorRegistInfo mentorRegistInfo,
 									 HttpServletRequest request) {
-		
-		if(mentorRegistInfo.getSpecialty() == null) {
-			mentorRegistInfo.setSpecialty(new String[] {});
-		}
-		
-		if(mentorRegistInfo.getLocation() == null) {
-			mentorRegistInfo.setLocation(new String[] {});
-		}
-		
 		HttpSession session = request.getSession();
 		mentorRegistInfo.setMemberId((String) session.getAttribute("user"));
-		
+			
 		mentorService.mentorApply(mentorRegistInfo);
 		
-		return "redirect:/mentorRegist";
+		return "redirect:/main";
 	}
 	
 }

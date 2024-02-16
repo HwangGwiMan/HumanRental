@@ -10,11 +10,14 @@ function mentorCheck() {
 
 		},
 		success : function(result) { // 결과 성공 콜백함수
-			if(result == 'true') {
+			if(result == "true") {
 				window.location.href = "./mentorApply";
 			} else if(result == "notLogin") {
 				alert("로그인이 필요합니다.");
 				window.location.href="./login";
+			} else if(result == "AlreadyApply") {
+				alert("이미 멘토 신청 중입니다.");
+				window.location.href="./main";
 			} else {
 				alert("이미 멘토 등록이 되어 있습니다.");
 				window.location.href = "./main";
