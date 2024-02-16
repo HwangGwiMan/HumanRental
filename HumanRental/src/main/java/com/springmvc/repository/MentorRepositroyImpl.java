@@ -16,9 +16,12 @@ import org.springframework.stereotype.Repository;
 import com.springmvc.domain.Member;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorRegistInfo;
+import com.springmvc.util.Utility;
 
 @Repository
 public class MentorRepositroyImpl implements MentorRepository {
+	
+	Utility util = new Utility(); 
 	
 	// JDBC
 	private JdbcTemplate template;
@@ -45,10 +48,8 @@ public class MentorRepositroyImpl implements MentorRepository {
 		String SQL;
 		
 		List<MentorRegistInfo> mentorApplyList;
-		long number;
 		try {
-			number = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(); // 현재 시간 long로 변환
-			mentorRegistInfo.setRegistrId("mentorApply_" + number);
+			mentorRegistInfo.setRegistrId(util.createId("mentorApply"));
 			
 			SQL = "INSERT INTO mentorregistinfo VALUES(?, ?, ?, ?, ?, ?)";
 			template.update(SQL, mentorRegistInfo.getRegistrId(), mentorRegistInfo.getMemberId(), mentorRegistInfo.getSpecialty(), mentorRegistInfo.getLocation(), mentorRegistInfo.getReason(), mentorRegistInfo.getEtc());
