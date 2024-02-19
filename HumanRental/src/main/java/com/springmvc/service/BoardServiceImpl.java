@@ -51,12 +51,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void insertBoard(Board board, String MemberId) {
+	public void insertBoard(Board board, String memberId) {
 		
 		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
 		String regist_day = formatter.format(new java.util.Date()); 
 		
-		board.setMemberId(MemberId);
+		board.setMemberId(memberId);
 		board.setHit(0);
 		board.setRegist_day(regist_day);
 		boardRepository.insertBoard(board);
@@ -88,20 +88,19 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Board getBoardByNum(int BoardId, int page) {
-		Board board = boardRepository.getBoardByNum(BoardId, page);
+	public Board getBoardByNum(int boardId, int page) {
+		Board board = boardRepository.getBoardByNum(boardId, page);
 		return board;
 	}
 
 	@Override
 	public void updateBoard(Board board) {
-		// TODO Auto-generated method stub
-		
+		boardRepository.updateBoard(board);
 	}
 
 	@Override
-	public void deleteBoard(int num) {
-		// TODO Auto-generated method stub
+	public void deleteBoard(int boardId) {
+		boardRepository.deleteBoard(boardId);
 		
 	}
 	
