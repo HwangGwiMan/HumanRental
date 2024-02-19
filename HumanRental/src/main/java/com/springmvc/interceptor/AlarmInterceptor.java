@@ -1,5 +1,8 @@
 package com.springmvc.interceptor;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,8 +36,14 @@ public class AlarmInterceptor extends HandlerInterceptorAdapter{
 		String memberId = (String) session.getAttribute("user");
 		
 		if(modelAndView != null && memberId != null) {
+			List<Duration> durations = new ArrayList<Duration>(); 
 			List<Alarm> alarmList = alarmService.selectAlarm(memberId);
+			for(Alarm alarm : alarmList) {
+				durations.add(Duration.between(alarm.getDate(), LocalDateTime.now()));
+			}
+
 			modelAndView.addObject("alarmList", alarmList);
+			modelAndView.addObject("duration", durations);
 		}
 	}
 

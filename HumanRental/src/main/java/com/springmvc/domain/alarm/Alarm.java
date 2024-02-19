@@ -1,13 +1,12 @@
 package com.springmvc.domain.alarm;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public abstract class Alarm {
 	private String alarmId;
 	private String sendMemberId;
 	private String receiveMemberId;
-	private Date date;
+	private LocalDateTime date;
 	protected String content;
 	public String getAlarmId() {
 		return alarmId;
@@ -21,10 +20,10 @@ public abstract class Alarm {
 	public void setSendMemberId(String sendMemberId) {
 		this.sendMemberId = sendMemberId;
 	}
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	public String getReceiveMemberId() {

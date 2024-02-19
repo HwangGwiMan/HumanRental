@@ -1,7 +1,6 @@
 package com.springmvc.domain.alarm;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class MentoApplyAlarm extends Alarm {
 	
@@ -22,6 +21,6 @@ public class MentoApplyAlarm extends Alarm {
 	}
 	@Override
 	public void createDate() {
-		super.setDate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
+		super.setDate(LocalDateTime.now());
 	}
 }

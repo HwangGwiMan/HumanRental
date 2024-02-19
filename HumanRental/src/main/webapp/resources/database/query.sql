@@ -14,10 +14,20 @@ gender varchar(10) not null,
 phone int not null,
 address varchar(100) not null,
 nickname varchar(20) not null,
+joinDate datetime not null,
 profileImage varchar(20)
 );
 
-INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "default.png");
+INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png");
+
+CREATE TABLE mentor(
+	mentorId varchar(50) primary key,
+    memberId varchar(20) unique,
+    registDate datetime not null,
+    foreign key(memberId) references Member(memberId)
+);
+
+INSERT INTO mentor VALUES("TestMentor1", "admin", "2024-02-19 12:00");
 
 -- 멘토 신청 정보 테이블
 CREATE TABLE IF NOT EXISTS MentorRegistInfo(
@@ -33,11 +43,7 @@ CREATE TABLE IF NOT EXISTS MentorRegistInfo(
 
 -- 멘토프로필관리 
 CREATE TABLE IF NOT EXISTS MentorProfile(
-<<<<<<< HEAD
 mentorId varchar(20) not null,
-=======
-mentorId varchar(20) not null primary key,
->>>>>>> refs/heads/main
 memberId varchar(20) not null,
 introduction varchar(1000) not null,
 starRate int,
@@ -128,13 +134,8 @@ contentId varchar(100)not null,
 memberId varchar(20)not null,
 signDate date,
 content varchar(10000),
-<<<<<<< HEAD
-foreign key(mentiId) references  MenteeProfile(mentiId),
-foreign key(mentoId) references  MentorProfile(mentoId),
-=======
 foreign key(menteeId) references  MenteeProfile(menteeId),
 foreign key(mentorId) references  MentorProfile(mentorId),
->>>>>>> refs/heads/main
 foreign key(contentId) references SellAndBuyId(contentId),
 foreign key(memberId ) references Member(memberId)
 );
@@ -176,7 +177,7 @@ foreign key(questionId) references Question(questionId)
 
 -- 멘티 리스트
 
---  커뮤니티 관리 (자유게시판)
+--  커뮤니티 관리 
 CREATE TABLE IF NOT EXISTS Board(
 boardId int primary key auto_increment,
 memberId varchar(20) not null,
@@ -187,16 +188,6 @@ regist_day varchar(30) not null,
 hit int default 0
 );
 
---  커뮤니티 관리 (공지사항)
-CREATE TABLE IF NOT EXISTS Board2(
-boardId int primary key auto_increment,
-memberId varchar(20) not null,
-name varchar(20) not null,
-title varchar(100),
-content varchar(10000),
-regist_day varchar(30) not null,
-hit int default 0
-);
 
 CREATE TABLE IF NOT EXISTS Notice(
 noticeId varchar(20) not null primary key ,
@@ -260,12 +251,3 @@ date date not null,
 content varchar(10000) not null,
 foreign key(memberId) references Member(memberId)
 );
-
-CREATE TABLE mentor(
-	mentorId varchar(50) primary key,
-    memberId varchar(20) unique,
-    registDate datetime not null,
-    foreign key(memberId) references Member(memberId)
-);
-
-INSERT INTO mentor VALUES("TestMentor1", "admin", "2024-02-19 12:00");

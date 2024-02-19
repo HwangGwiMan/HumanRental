@@ -12,4 +12,5 @@ public interface MentorService {
 	public List<MentorRegistInfo> getMentorApplyList();
 	public MentorRegistInfo getMentorApplyByMemberId(String memberId);
 	public List<Mentor> getMentorListWithMember();
+	public void mentorRegist(String memberId);
 }

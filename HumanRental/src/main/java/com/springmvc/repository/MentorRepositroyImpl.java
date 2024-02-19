@@ -82,9 +82,9 @@ public class MentorRepositroyImpl implements MentorRepository {
 
 	@Override
 	public List<Mentor> getMentorListWithMember() {
-		String SQL = "select mentor.mentorId, member.memberId, mentor.registDate from member "
-				+ "Left join mentor "
-				+ "on member.memberId = mentor.memberId";
+		String SQL = "SELECT mentor.mentorId, member.memberId, mentor.registDate FROM member "
+				+ "LEFT JOIN mentor "
+				+ "ON member.memberId = mentor.memberId";
 		
 		try {
 			return template.query(SQL, new BeanPropertyRowMapper<Mentor>(Mentor.class));
@@ -92,4 +92,18 @@ public class MentorRepositroyImpl implements MentorRepository {
 			return null;
 		}
 	}
+
+	@Override
+	public void mentorRegist(String memberId) {
+		String SQL = "INSERT INTO mentor VALUES(?, ?, ?)";
+		
+		
+		try {
+			template.update(SQL, util.createId("mentor"), memberId, LocalDateTime.now());
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			
+		}
+	}
+	
+	
 }

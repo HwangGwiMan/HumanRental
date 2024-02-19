@@ -40,6 +40,10 @@ public class MentorServiceImpl implements MentorService {
 	public List<MentorRegistInfo> getMentorApplyList() {
 		return mentorRepository.getMentorApplyList();
 	}
-	
-	
+
+	@Override
+	public void mentorRegist(String memberId) {
+		mentorRepository.mentorRegist(memberId);		
+	}
+
 }

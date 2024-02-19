@@ -202,7 +202,7 @@
 										<p>${ applyInfo.etc }
 									</div>
 									<div>
-										<a href="<c:url value="/mentorRegist" />" class="btn btn-success">승인</a>
+										<a href="<c:url value="/mentorRegist?id=${ applyInfo.memberId }" />" class="btn btn-success">승인</a>
 										<a href="<c:url value="/mentorApplyRefuse" />" class="btn btn-danger">거절</a>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
 									</div>

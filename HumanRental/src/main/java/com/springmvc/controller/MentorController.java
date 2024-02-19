@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.cj.xdevapi.JsonArray;
@@ -86,12 +87,14 @@ public class MentorController {
 		return "redirect:/main";
 	}	
 	
-	@PostMapping("/mentorRegist")
-	public String mentorRegist() {
-		return null;
+	@GetMapping("/mentorRegist")
+	public String mentorRegist(@RequestParam("id") String memberId) {
+		System.out.println(memberId);
+		mentorService.mentorRegist(memberId);
+		return "redirect:/myInfo?mode=mentorApplyManagement";
 	}
 	
-	@PostMapping("/mentorApplyRefuse")
+	@GetMapping("/mentorApplyRefuse")
 	public String mentorApplyRefuse() {
 		return null;
 	}

@@ -2,6 +2,8 @@ package com.springmvc.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -57,7 +59,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 					Alarm alarm = new MentoApplyAlarm();
 					alarm.setAlarmId(rs.getString(1));
 					alarm.setReceiveMemberId(rs.getString(2));
-					alarm.setDate(rs.getDate(3));
+					alarm.setDate(new java.sql.Timestamp(rs.getDate(3).getTime()).toLocalDateTime()); 
 					alarm.setContent(rs.getString(4));
 					return alarm;
 				}
