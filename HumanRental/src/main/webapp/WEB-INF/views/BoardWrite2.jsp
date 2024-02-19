@@ -14,15 +14,15 @@
 	<div class="container">
 		<hr>
 		<div class="row align-items-end">
-			<a href="<c:url value="/board"/>" class="text-decoration-none fw-bold fs-1 col-3 text-center text-dark">자유 게시판</a>
-			<a href="<c:url value="/board2"/>" class="text-decoration-none col-1 text-left text-dark">공지사항</a>
+			<a href="<c:url value="/board2"/>" class="text-decoration-none fw-bold fs-1 col-3 text-center text-dark">공지사항</a>
+			<a href="<c:url value="/board"/>" class="text-decoration-none col-1 text-left text-dark">자유 게시판</a>
 		</div>
 		<hr>
 	</div>
 
 	<div class="container">
 
-		<form:form modelAttribute="board" action="./boardwrite?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
+		<form:form modelAttribute="board" action="./boardwrite2?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
 			<input name="id" type="hidden" class="form-control"
 				value="${member.memberId}">
 			<div class="form-group row">
