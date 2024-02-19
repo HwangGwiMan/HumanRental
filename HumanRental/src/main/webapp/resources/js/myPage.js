@@ -58,6 +58,8 @@ function idDuplicateCheck(memberId) {
 			}
 		})
 	}
-	
+}
 
+function readApplyInfo(memberId) {
+	window.location.href="./myInfo?mode=applyInfo&id=" + memberId; 
 }

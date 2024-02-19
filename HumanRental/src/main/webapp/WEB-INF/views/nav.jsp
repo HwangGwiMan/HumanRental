@@ -43,14 +43,29 @@
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/mentorIntro"/>">멘토신청</a></li>
 						<li class="nav-item">
 							<a class="nav-link" href="#" id="alarmBtn">
-								<i class="fa-regular fa-bell"></i>
+								<i class="fa-regular fa-bell position-relative">
+									<c:if test="${ not empty alarmList }">
+										<span class="position-absolute badge top-0 start-100 translate-middle bg-danger rounded-circle p-1">
+											<span class="visually-hidden">new Alarm</span>
+										</span>
+									</c:if>
+								</i>
 							</a>
-							<div class="position-absolute end-0 alert alert-primary" style="display: none;">
-								<a href="#" class="btn">
-									<div>멘토 신청 알람</div>
-									<div class="p-1">사용자 님이 멘토 신청을 하셨습니다.</div>
-									<div>2024 / 2 / 16 (10초 전)</div>
-								</a>
+							<div class="position-absolute end-0 alert alert-primary col" style="display: none;">
+								<div>
+									<div>
+										<a href="#" class="row btn">
+											<div class="col">
+												<div class="row">멘토 신청 알람</div>
+												<div class="row">사용자 님이 멘토 신청을 하셨습니다.</div>
+												<div class="row">2024 / 2 / 16 (10초 전)</div>
+											</div>
+										</a>
+									</div>
+									<div class="justify-content-center">
+										<a href="#" class="row btn">x</a>
+									</div>
+								</div>
 							</div>
 						</li>
 					</ul>

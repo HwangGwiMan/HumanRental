@@ -96,13 +96,6 @@ public class MemberRepositoryImpl implements MemberRepository {
 			return null;
 		}
 	}
-  
-	//회원탈퇴
-	public void deleteMember(String memberId , String memberPw) {
-		
-	    String SQL = "delete from member where memberId=? and memberPw=?";
-	     template.update(SQL, memberId,memberPw);
-	}
 	
 	@Override
 	public List<Member> getMembers() {
@@ -118,6 +111,13 @@ public class MemberRepositoryImpl implements MemberRepository {
 		}
 	}
 	
+	//회원탈퇴
+	public void deleteMember(String memberId , String memberPw) {
+		
+	    String SQL = "delete from member where memberId=? and memberPw=?";
+	     template.update(SQL, memberId,memberPw);
+	}
+
 	// 회원 정보 수정
 	@Override
 	public void updateMember(Member member, String memberId) {

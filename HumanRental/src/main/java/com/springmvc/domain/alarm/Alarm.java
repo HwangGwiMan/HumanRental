@@ -7,8 +7,8 @@ public abstract class Alarm {
 	private String alarmId;
 	private String sendMemberId;
 	private String receiveMemberId;
-	private LocalDateTime date;
-	
+	private Date date;
+	protected String content;
 	public String getAlarmId() {
 		return alarmId;
 	}
@@ -21,10 +21,10 @@ public abstract class Alarm {
 	public void setSendMemberId(String sendMemberId) {
 		this.sendMemberId = sendMemberId;
 	}
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public String getReceiveMemberId() {
@@ -32,6 +32,12 @@ public abstract class Alarm {
 	}
 	public void setReceiveMemberId(String receiveMemberId) {
 		this.receiveMemberId = receiveMemberId;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 	abstract public void createContent();

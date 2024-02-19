@@ -1,11 +1,14 @@
 package com.springmvc.domain.alarm;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class MentoApplyAlarm extends Alarm {
 	
-	private String content;
-	
+	public MentoApplyAlarm() {
+		
+	}
+
 	public MentoApplyAlarm(String memberId) {
 		super.setSendMemberId(memberId);
 		this.createContent();
@@ -13,18 +16,12 @@ public class MentoApplyAlarm extends Alarm {
 		super.setReceiveMemberId("admin");
 	}
 	
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
 	@Override
 	public void createContent() {
-		this.content = super.getSendMemberId() + "님의 멘토 신청입니다.";
+		super.content = super.getSendMemberId() + "님의 멘토 신청입니다.";
 	}
 	@Override
 	public void createDate() {
-		super.setDate(LocalDateTime.now());
+		super.setDate(java.sql.Timestamp.valueOf(LocalDateTime.now()));
 	}
 }

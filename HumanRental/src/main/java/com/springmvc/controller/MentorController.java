@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.cj.xdevapi.JsonArray;
-import com.springmvc.domain.Mentor;
+import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.AlarmService;
 import com.springmvc.service.MentorService;
@@ -59,7 +59,7 @@ public class MentorController {
 			return "AlreadyApply";
 		}
 		
-		Mentor mentor = mentorService.getMentor(memberId);
+		MentorProfile mentor = mentorService.getMentor(memberId);
 		if(mentor == null) {
 			return "true";
 		} else {
@@ -73,7 +73,7 @@ public class MentorController {
 	}
 	
 	@PostMapping("/mentorApply/submit")
-	public String mentorRegistSubmit(MentorRegistInfo mentorRegistInfo,
+	public String mentorApplySubmit(MentorRegistInfo mentorRegistInfo,
 									 HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("user");
@@ -84,6 +84,15 @@ public class MentorController {
 		alarmService.createMentoApplyAlarm(memberId);
 		
 		return "redirect:/main";
+	}	
+	
+	@PostMapping("/mentorRegist")
+	public String mentorRegist() {
+		return null;
 	}
 	
+	@PostMapping("/mentorApplyRefuse")
+	public String mentorApplyRefuse() {
+		return null;
+	}
 }

@@ -23,22 +23,34 @@
 			<div class="row pt-5 align-items-center">
 				<div class="col-2 pt-5">
 					<ul class="navbar-nav row justify-content-center">
-						<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
-						<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
-						<li class="nav-item">프로필 수정
-							<ul>
-								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
-								<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
-							</ul>
-						<li>
-						<li>등록 목록
-							<ul>
-								<li class="nav-item"><a href="#" class="btn">삽니다 목록</a></li>
-								<li class="nav-item"><a href="#" class="btn">팝니다 목록</a></li>
-							</ul>
-						</li>
-						<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
-						<li class="nav-item"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></li>
+					
+					<c:choose>
+						<c:when test="${ member.memberId != 'admin' }">
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
+							<li class="nav-item">프로필 수정
+								<ul>
+									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
+									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
+								</ul>
+							<li>
+							<li>등록 목록
+								<ul>
+									<li class="nav-item"><a href="#" class="btn">삽니다 목록</a></li>
+									<li class="nav-item"><a href="#" class="btn">팝니다 목록</a></li>
+								</ul>
+							</li>
+							<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></li>
+						</c:when>
+						<c:when test="${ member.memberId eq 'admin' }">
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=memberManagement"/>" class="btn">회원 관리</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn">멘토 신청 관리</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=reportManagement"/>" class="btn">신고 관리</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=blackListManagement"/>" class="btn">블랙리스트 관리</a></li>
+						</c:when>
+					</c:choose>
 					</ul>
 				</div>
 				<div class="col">
@@ -110,7 +122,7 @@
 	            						<div class="col"><input type="password" required id=userpass name="memberPw"></div>
 	        						</div>
 	        						<input type="hidden" name="mode" value="delete">
-	        						<button type="submit" onclick="deleteMember()">확인</button>
+	        						<button type="button" onclick="javascript:deleteMember()">확인</button>
 	    						</form>
 	    					</c:when>
 							<c:when test="${ mode == 'mentorProfile' }">
@@ -135,6 +147,66 @@
 								</div>
 								<div class="col-1"></div>
 								<div></div>
+							</c:when>
+							<c:when test="${ mode == 'memberManagement' }">
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>유저 ID</th>
+											<th>멘토 권한</th>
+											<th>가입일</th>
+										</tr>
+										<c:forEach var="member" items="${memberList}" varStatus="status">					
+											<tr>
+												<td>${ status.count }</td>
+												<td>${ member.memberId }</td>
+												<td>
+													<c:if test="${ not empty member.mentorId }">승인</c:if>
+												</td>
+												<td>${ member.registDate }</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'mentorApplyManagement' }">
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>유저 ID</th>
+											<th>신청일</th>
+										</tr>
+										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
+											<tr onclick="javascript:readApplyInfo(${ applyInfo.memberId })">
+												<td>${ status.count }</td>
+												<td>${ applyInfo.memberId }</td>
+												<td>${ applyInfo.applyDate }</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'applyInfo' }">
+								<div class="col">
+									<div class="row">
+										<div class="col">
+											<img width="300" height="200" src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />">
+										</div>
+										<p>신청자 ID : ${ applyInfo.memberId }
+										<p>특기 분야 : ${ applyInfo.specialty }
+										<p>주요 활동 지역 : ${ applyInfo.location }
+										<p>신청 이유 : ${ applyInfo.reason }
+										<p>기타 사항
+										<p>${ applyInfo.etc }
+									</div>
+									<div>
+										<a href="<c:url value="/mentorRegist" />" class="btn btn-success">승인</a>
+										<a href="<c:url value="/mentorApplyRefuse" />" class="btn btn-danger">거절</a>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
+									</div>
+								</div>
 							</c:when>
 						</c:choose>
 					</div>

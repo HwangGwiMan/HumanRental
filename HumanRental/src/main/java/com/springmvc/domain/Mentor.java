@@ -1,10 +1,11 @@
 package com.springmvc.domain;
 
+import java.util.Date;
+
 public class Mentor {
 	private String mentorId;
 	private String memberId;
-	private String introduction;
-	private int starRate;
+	private Date registDate;
 	public String getMentorId() {
 		return mentorId;
 	}
@@ -17,16 +18,10 @@ public class Mentor {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getIntroduction() {
-		return introduction;
+	public Date getRegistDate() {
+		return registDate;
 	}
-	public void setIntroduction(String introduction) {
-		this.introduction = introduction;
-	}
-	public int getStarRate() {
-		return starRate;
-	}
-	public void setStarRate(int starRate) {
-		this.starRate = starRate;
+	public void setRegistDate(Date registDate) {
+		this.registDate = registDate;
 	}
 }
