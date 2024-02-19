@@ -11,10 +11,13 @@
 </script>
 <body>
 	<jsp:include page="nav.jsp" />
-	<div class="jumbotron">
-		<div class="container">
-			<h1 class="display-3">게시판</h1>
+	<div class="container">
+		<hr>
+		<div class="row align-items-end">
+			<a href="<c:url value="/board"/>" class="text-decoration-none fw-bold fs-1 col-3 text-center text-dark">자유 게시판</a>
+			<a href="<c:url value="/board2"/>" class="text-decoration-none col-1 text-left text-dark">공지사항</a>
 		</div>
+		<hr>
 	</div>
 
 	<div class="container">
@@ -43,14 +46,20 @@
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10 ">
-				 <input type="submit" class="btn btn-primary " value="등록 ">				
-					 <input type="reset" class="btn btn-primary " value="취소 ">
+					<input type="submit" class="btn btn-primary " value="수정">	
+					<input type="reset" class="btn btn-danger" value="취소" onclick="goBack()">
 				</div>
 			</div>
 		</form:form>
 		<hr>
 	</div>
 	<jsp:include page="footer.jsp" />
+	<script>
+    function goBack() {
+        // 브라우저의 이전 페이지로 이동
+        history.back();
+    }
+	</script>
 </body>
 </html>
 
