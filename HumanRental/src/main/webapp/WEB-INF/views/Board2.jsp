@@ -84,7 +84,7 @@
 								<option value="name">글쓴이에서</option>
 						</select> 
 						<input name="text" type="text" /> 
-						<input type="submit" id="btnAdd" class="btn btn-primary text-center" value="검색 " />
+						<input type="submit" id="btnAdd" class="btn btn-primary text-center" value="검색" />
 						</td>
 						<td width="100%" align="right">
 							<% if(sessionId=="admin"){ %>

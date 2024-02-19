@@ -20,26 +20,25 @@
 		<hr>
 	</div>
 
-	<div class="container">
-
+	<div class="container" style="margin-top: 50px">
 		<form:form modelAttribute="board" action="./boardwrite?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
 			<input name="id" type="hidden" class="form-control"
 				value="${member.memberId}">
 			<div class="form-group row">
-				<label class="col-sm-2 control-label" >닉네임</label>
+				<label class="col-sm-1 control-label" >닉네임</label>
 				<div class="col-sm-3">
 					<input name="name" type="text" class="form-control" value="${member.name}" readonly>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 control-label" >제목</label>
+				<label class="col-sm-1 control-label" >제목</label>
 				<div class="col-sm-5">
 
 					<input name="title" type="text" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 control-label" >내용</label>
+				<label class="col-sm-1 control-label" >내용</label>
 				<div class="col-sm-8">
 					<textarea name="content" cols="50" rows="5" class="form-control"></textarea>
 				</div>
