@@ -1,8 +1,5 @@
 package com.springmvc.controller;
 
-import java.util.Arrays;
-
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -30,8 +27,22 @@ public class BoardController {
 	@Autowired
 	MemberService memberService;
 	
+	// 보드1 (자유게시판)
 	@GetMapping("/board")
 	public String BoardList(Model model, HttpServletRequest request) {
+		
+		int pageNum;
+		if(request.getParameter("pageNum")==null)
+			pageNum=1;
+		else
+			pageNum=Integer.parseInt(request.getParameter("pageNum"));
+		boardService.BoardList(model, request, pageNum);
+		return "Board";
+	}
+	
+	@PostMapping("/board")
+	public String BoardSearch(Model model, HttpServletRequest request) {
+		
 		int pageNum;
 		if(request.getParameter("pageNum")==null)
 			pageNum=1;
@@ -43,51 +54,42 @@ public class BoardController {
 
 	@GetMapping("/boardwrite")
 	public String BoardWrite(@ModelAttribute Board board, Model model, HttpServletRequest request) {
-		System.out.println("boardwirte 접근");
+		
 		HttpSession session = request.getSession();
-		String MemberId = (String)session.getAttribute("user");
-		Member member = memberService.getMember(MemberId);
+		String memberId = (String)session.getAttribute("user");
+		Member member = memberService.getMember(memberId);
 		model.addAttribute("member", member);
 		return "BoardWrite";
 	}
 	
 	@PostMapping("/boardwrite")
-	public String BoardWriteAction(@Valid @ModelAttribute Board board, HttpServletRequest request) {
-//		System.out.println("네임"+board.getName());
-//		System.out.println("타이틀"+board.getTitle());
-//		System.out.println("컨텐츠"+board.getContent());
+	public String BoardWriteAction(@ModelAttribute Board board, HttpServletRequest request) {
+		
 		HttpSession session = request.getSession();
-		String MemberId = (String)session.getAttribute("user");
-		boardService.insertBoard(board, MemberId);
+		String memberId = (String)session.getAttribute("user");
+		boardService.insertBoard(board, memberId);
 		return "redirect:/board";
 	}
 	
 	@GetMapping("/boardview")
 	public String BoardViewAction(HttpServletRequest request, Model model) {
-		System.out.println("boardview GET 접근");
-		int BoardId = Integer.parseInt(request.getParameter("BoardId"));
+		
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-//		System.out.println("BoardId="+BoardId);
-//		System.out.println("pageNum="+pageNum);
 		
 		Board board=new Board();
-		boardService.updateHit(BoardId);
-		board = boardService.getBoardByNum(BoardId, pageNum);
-		
-		model.addAttribute("BoardId", BoardId);
+		boardService.updateHit(boardId);
+		board = boardService.getBoardByNum(boardId, pageNum);
+
+		model.addAttribute("BoardId", boardId);
 		model.addAttribute("pageNum", pageNum);		
 		model.addAttribute("board", board);
-		
-		HttpSession session = request.getSession();
-		String MemberId = (String)session.getAttribute("user");
-		System.out.println("MemberId="+MemberId);
 		
 		return "BoardView";
 	}
 
 	@GetMapping("/boarddelete")
 	public String BoardDelete(HttpServletRequest request, Model model) {
-		System.out.println("board delete 컨트롤러 접근");
 		
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));	
@@ -99,7 +101,6 @@ public class BoardController {
 	
 	@GetMapping("/boardupdate")
 	public String BoardUpdate(HttpServletRequest request, Model model) {
-		System.out.println("보드 업데이트 겟 컨트롤러 접근");
 
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
@@ -111,8 +112,89 @@ public class BoardController {
 
 	@PostMapping("/boardupdate")
 	public String BoardUpdateAction(@ModelAttribute Board board) {
-		System.out.println(board.getBoardId());
+		
 		boardService.updateBoard(board);
 		return "redirect:/board";
 	}
+	
+	// board2 (공지사항)
+	@GetMapping("/board2")
+	public String BoardList2(Model model, HttpServletRequest request) {
+		
+		System.out.println("보드2 컨트롤러");
+		
+		int pageNum;
+		if(request.getParameter("pageNum")==null)
+			pageNum=1;
+		else
+			pageNum=Integer.parseInt(request.getParameter("pageNum"));
+		boardService.BoardList2(model, request, pageNum);
+		return "Board2";
+	}
+	
+	@GetMapping("/boardwrite2")
+	public String BoardWrite2(@ModelAttribute Board board, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		Member member = memberService.getMember(memberId);
+		model.addAttribute("member", member);
+		return "BoardWrite2";
+	}
+	
+	@PostMapping("/boardwrite2")
+	public String BoardWriteAction2(@ModelAttribute Board board, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		boardService.insertBoard2(board, memberId);
+		return "redirect:/board2";
+	}
+	
+	@GetMapping("/boardview2")
+	public String BoardViewAction2(HttpServletRequest request, Model model) {
+		
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		
+		Board board=new Board();
+		boardService.updateHit2(boardId);
+		board = boardService.getBoardByNum2(boardId, pageNum);
+
+		model.addAttribute("BoardId", boardId);
+		model.addAttribute("pageNum", pageNum);		
+		model.addAttribute("board", board);
+		
+		return "BoardView2";
+	}
+
+	@GetMapping("/boarddelete2")
+	public String BoardDelete2(HttpServletRequest request, Model model) {
+		
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));	
+		
+		boardService.deleteBoard2(boardId);
+		
+		return "redirect:/board2?pageNum="+pageNum;
+	}
+
+	@GetMapping("/boardupdate2")
+	public String BoardUpdate2(HttpServletRequest request, Model model) {
+
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		Board board = boardService.getBoardByNum2(boardId, pageNum);
+		model.addAttribute("board", board);
+		
+		return "BoardUpdate2";
+	}
+
+	@PostMapping("/boardupdate2")
+	public String BoardUpdateAction2(@ModelAttribute Board board) {
+		
+		boardService.updateBoard2(board);
+		return "redirect:/board2";
+	}
+
 }

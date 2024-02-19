@@ -26,6 +26,8 @@ public class BoardServiceImpl implements BoardService{
 
 		String items = request.getParameter("items");
 		String text = request.getParameter("text");
+//		System.out.println("items="+items);
+//		System.out.println("text="+text);
 		
 		int total_record=boardRepository.getListCount(items, text);
 		List<Board> boardlist = boardRepository.getBoardList(pageNum, limit, items, text); 
@@ -43,12 +45,11 @@ public class BoardServiceImpl implements BoardService{
 		model.addAttribute("total_page", total_page);   
 		model.addAttribute("total_record",total_record); 
 		model.addAttribute("boardlist", boardlist);
-		
-		System.out.println("pageNum="+pageNum);
-		System.out.println("total_page="+total_page);
-		System.out.println("total_record="+total_record);
-		System.out.println("boardlist="+boardlist);
 	}
+	
+	
+
+
 
 	@Override
 	public void insertBoard(Board board, String memberId) {
@@ -60,31 +61,11 @@ public class BoardServiceImpl implements BoardService{
 		board.setHit(0);
 		board.setRegist_day(regist_day);
 		boardRepository.insertBoard(board);
-		
 	}
 
 	@Override
-	public int getListCount(String items, String text) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Board> getBoardList(int pageNum, int limit, String items, String text) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getLoginNameById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateHit(int BoardId) {
-		boardRepository.updateHit(BoardId);
-		
+	public void updateHit(int boardId) {
+		boardRepository.updateHit(boardId);
 	}
 
 	@Override
@@ -101,8 +82,67 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void deleteBoard(int boardId) {
 		boardRepository.deleteBoard(boardId);
-		
 	}
+
+	@Override
+	public void BoardList2(Model model, HttpServletRequest request, int pageNum) {
+		
+		int limit=LISTCOUNT;
+
+		String items = request.getParameter("items");
+		String text = request.getParameter("text");
+		
+		int total_record=boardRepository.getListCount2(items, text);
+		List<Board> boardlist = boardRepository.getBoardList2(pageNum, limit, items, text); 
+		
+		int total_page;
+		
+		if (total_record % limit == 0) {     
+	        total_page = total_record / limit;
+	    } else {
+	        total_page = total_record / limit;
+	        total_page = total_page + 1; 
+	    }   
+		
+		model.addAttribute("pageNum", pageNum);		  
+		model.addAttribute("total_page", total_page);   
+		model.addAttribute("total_record",total_record); 
+		model.addAttribute("boardlist", boardlist);
+	}
+
+	@Override
+	public void insertBoard2(Board board, String memberId) {
+		
+		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
+		String regist_day = formatter.format(new java.util.Date()); 
+		
+		board.setMemberId(memberId);
+		board.setHit(0);
+		board.setRegist_day(regist_day);
+		boardRepository.insertBoard2(board);
+	}
+
+	@Override
+	public void updateHit2(int boardId) {
+		boardRepository.updateHit2(boardId);
+	}
+
+	@Override
+	public Board getBoardByNum2(int boardId, int page) {
+		Board board = boardRepository.getBoardByNum2(boardId, page);
+		return board;
+	}
+
+	@Override
+	public void updateBoard2(Board board) {
+		boardRepository.updateBoard2(board);
+	}
+
+	@Override
+	public void deleteBoard2(int boardId) {
+		boardRepository.deleteBoard2(boardId);
+	}
+	
 	
 	
 }
