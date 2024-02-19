@@ -21,26 +21,25 @@
 	</div>
 
 	<div class="container" style="margin-top: 50px">
-		<form:form modelAttribute="board" action="./boardwrite?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
-			<input name="id" type="hidden" class="form-control"
-				value="${member.memberId}">
+		<form:form modelAttribute="board" action="./boardupdate?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal" method="POST">
+			<input name="id" type="hidden" class="form-control" value="${member.memberId}">
+			<input name="boardId" type="hidden" class="form-control" value="${board.boardId}">			
 			<div class="form-group row">
 				<label class="col-sm-1 control-label" >닉네임</label>
 				<div class="col-sm-3">
-					<input name="name" type="text" class="form-control" value="${member.name}" readonly>
+					<input name="name" type="text" class="form-control" value="${board.name}" readonly>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-1 control-label" >제목</label>
 				<div class="col-sm-5">
-
-					<input name="title" type="text" class="form-control">
+					<input name="title" type="text" class="form-control" value="${board.title}">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-1 control-label" >내용</label>
 				<div class="col-sm-8">
-					<textarea name="content" cols="50" rows="5" class="form-control"></textarea>
+					<textarea name="content" cols="50" rows="5" class="form-control">${board.content}</textarea>
 				</div>
 			</div>
 			<div class="form-group row">

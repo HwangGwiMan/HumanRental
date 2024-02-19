@@ -13,8 +13,7 @@ function setThumbnail(event) {
 
 var isIdCheck = true; 
 
-function idDuplicateCheck(memberId) 
-{
+function idDuplicateCheck(memberId) {
 	
 	var userId = document.getElementById("memberId").value;
 	

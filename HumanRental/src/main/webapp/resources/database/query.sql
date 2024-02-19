@@ -14,23 +14,47 @@ gender varchar(10) not null,
 phone int not null,
 address varchar(100) not null,
 nickname varchar(20) not null,
+joinDate datetime not null,
 profileImage varchar(20)
 );
 
+INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png");
+
+CREATE TABLE mentor(
+	mentorId varchar(50) primary key,
+    memberId varchar(20) unique,
+    registDate datetime not null,
+    foreign key(memberId) references Member(memberId)
+);
+
+INSERT INTO mentor VALUES("TestMentor1", "admin", "2024-02-19 12:00");
+
+-- 멘토 신청 정보 테이블
+CREATE TABLE IF NOT EXISTS MentorRegistInfo(
+	registId varchar(50) not null primary key,
+	memberId varchar(20) not null,
+    specialty varchar(255),
+    location varchar(255),
+    reason varchar(255),
+    etc varchar(1000),
+    applyDate datetime not null,
+    foreign key(memberId) references Member(memberId)
+);
 
 -- 멘토프로필관리 
-CREATE TABLE IF NOT EXISTS MentoProfile(
-mentoId varchar(20) not null primary key,
+CREATE TABLE IF NOT EXISTS MentorProfile(
+mentorId varchar(20) not null,
 memberId varchar(20) not null,
 introduction varchar(1000) not null,
 starRate int,
-foreign key(memberId) references Member(memberId)
+foreign key(memberId) references Member(memberId),
+foreign key(mentorId) references mentor(mentorId)
 );
 
 
 -- 멘티프로필 관리
-CREATE TABLE IF NOT EXISTS MentiProfile(
-mentiId varchar(20) not null primary key,
+CREATE TABLE IF NOT EXISTS MenteeProfile(
+menteeId varchar(20) not null primary key,
 memberId varchar(20) not null,
 introduction varchar(1000)not null,
 starRate int,
@@ -104,14 +128,14 @@ contentId varchar(20) not null primary key
 );
 CREATE TABLE IF NOT EXISTS Reservation(
 reservationId varchar(20) not null primary key,
-mentiId varchar(20)not null,
-mentoId varchar(20)not null,
+menteeId varchar(20)not null,
+mentorId varchar(20)not null,
 contentId varchar(100)not null,
 memberId varchar(20)not null,
 signDate date,
 content varchar(10000),
-foreign key(mentiId) references  MentiProfile(mentiId),
-foreign key(mentoId) references  MentoProfile(mentoId),
+foreign key(menteeId) references  MenteeProfile(menteeId),
+foreign key(mentorId) references  MentorProfile(mentorId),
 foreign key(contentId) references SellAndBuyId(contentId),
 foreign key(memberId ) references Member(memberId)
 );
@@ -148,6 +172,10 @@ content varchar(10000) not null,
 writeDate date,
 foreign key(questionId) references Question(questionId)
 );
+
+-- 멘토 리스트
+
+-- 멘티 리스트
 
 --  커뮤니티 관리 
 CREATE TABLE IF NOT EXISTS Board(
@@ -203,31 +231,23 @@ foreign key(memberId) references Member(memberId)
 
 -- 알람 관리 
 
+--  CREATE TABLE IF NOT EXISTS Alarm(
+-- memberId varchar(20) not null primary key,
+-- chatalarmId varchar(20)not null,
+-- matchalarmId varchar(20)not null,
+-- schedulealarmId varchar(20)not null,
+--  date date,
+-- content varchar(10000)not null,
+-- foreign key(memberId) references Member(memberId) ,
+-- foreign key(chatalarmId) references ChatAlarm(chatalarmId), 
+-- foreign key(memberId) references MatchAlarm(matchalarmId), 
+-- foreign key(schedulealarmId) references ScheduleAlarm(schedulealarmId) 
+-- );
 
-CREATE TABLE IF NOT EXISTS ChatAlarm(
-chatalarmId varchar(20) not null primary key
-
-);
-
-CREATE TABLE IF NOT EXISTS MatchAlarm(
-matchalarmId varchar(20) not null primary key
-
-);
-
-CREATE TABLE IF NOT EXISTS ScheduleAlarm(
-schedulealarmId varchar(20) not null primary key
-
-);
-
- CREATE TABLE IF NOT EXISTS Alarm(
-memberId varchar(20) not null primary key,
-chatalarmId varchar(20)not null,
-matchalarmId varchar(20)not null,
-schedulealarmId varchar(20)not null,
- date date,
-content varchar(10000)not null,
-foreign key(memberId) references Member(memberId) ,
-foreign key(chatalarmId) references ChatAlarm(chatalarmId), 
-foreign key(memberId) references MatchAlarm(matchalarmId), 
-foreign key(schedulealarmId) references ScheduleAlarm(schedulealarmId) 
+CREATE TABLE IF NOT EXISTS Alarm(
+alarmId varchar(50) not null primary key,
+memberId varchar(20) not null,
+date date not null,
+content varchar(10000) not null,
+foreign key(memberId) references Member(memberId)
 );

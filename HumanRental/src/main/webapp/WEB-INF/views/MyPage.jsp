@@ -40,6 +40,34 @@
 						</li>
 						<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
 						<li class="nav-item"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></li>
+					
+					<c:choose>
+						<c:when test="${ member.memberId != 'admin' }">
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
+							<li class="nav-item">프로필 수정
+								<ul>
+									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
+									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
+								</ul>
+							<li>
+							<li>등록 목록
+								<ul>
+									<li class="nav-item"><a href="#" class="btn">삽니다 목록</a></li>
+									<li class="nav-item"><a href="#" class="btn">팝니다 목록</a></li>
+								</ul>
+							</li>
+							<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></li>
+						</c:when>
+						<c:when test="${ member.memberId eq 'admin' }">
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=memberManagement"/>" class="btn">회원 관리</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn">멘토 신청 관리</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=reportManagement"/>" class="btn">신고 관리</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=blackListManagement"/>" class="btn">블랙리스트 관리</a></li>
+						</c:when>
+					</c:choose>
 					</ul>
 				</div>
 				<div class="col">

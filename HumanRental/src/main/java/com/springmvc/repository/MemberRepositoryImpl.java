@@ -1,5 +1,6 @@
 package com.springmvc.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -46,9 +47,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 	@Override
 	public void join(Member member) {
 		System.out.println("회원가입");
-		String SQL = "INSERT INTO member (memberId, memberPw, name, age, gender, phone, address, nickName) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-		System.out.println(member.getNickName());
-		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName());
+		String SQL = "INSERT INTO member (memberId, memberPw, name, age, gender, phone, address, nickName, joinDate, profileImage) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName(), LocalDateTime.now() ,"default.png");
 	}
 	
 	// 아이디 중복 확인
@@ -121,6 +121,13 @@ public class MemberRepositoryImpl implements MemberRepository {
 		}
 	}
 	
+	//회원탈퇴
+	public void deleteMember(String memberId , String memberPw) {
+		
+	    String SQL = "delete from member where memberId=? and memberPw=?";
+	     template.update(SQL, memberId,memberPw);
+	}
+
 	// 회원 정보 수정
 	@Override
 	public void updateMember(Member member, String memberId) {

@@ -33,7 +33,7 @@ public class LoginController {
 						HttpServletRequest request) {
 	
 		Member loginMember = memberService.Login(memberId, memberPw); 
-	
+		
 		if(loginMember != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", memberId);

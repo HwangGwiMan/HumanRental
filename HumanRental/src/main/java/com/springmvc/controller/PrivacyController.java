@@ -17,14 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.springmvc.domain.Member;
+import com.springmvc.domain.Mentor;
+import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.MemberService;
 import com.springmvc.service.MentorService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
-
 
 @Controller
 public class PrivacyController {
@@ -37,6 +36,7 @@ public class PrivacyController {
 	
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
+								@RequestParam(value = "id", defaultValue = "none") String targetId,
 								Model model, 
 								HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -51,18 +51,29 @@ public class PrivacyController {
 			model.addAttribute("member", member);
 			model.addAttribute("mode", mode);
 			
-			if(mentorService.getMentor(memberId) == null) {
-				model.addAttribute("isMentor", "NO");
+			// 어드민 관련 데이터
+			if(memberId.equals("admin")) {
+				model.addAttribute("memberList", mentorService.getMentorListWithMember());
+				model.addAttribute("applyList", mentorService.getMentorApplyList());
+				model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
+
+				return "MyPage";
 			} else {
-				model.addAttribute("isMentor", "YES");
+			// 일반 유저 관련 데이터
+				if(mentorService.getMentor(memberId) == null) {
+					model.addAttribute("isMentor", "NO");
+					if(mentorService.getMentorApplyByMemberId(memberId) != null) {
+						model.addAttribute("isMentor", "멘토 심사 중");
+					} 
+				} else {
+					model.addAttribute("isMentor", "YES");
+				}
 			}
 			
 			return "MyPage";
 		} else {
 			return "redirect:/main";
 		}
-		
-		
 	}
 	
 	// 2차 로그인 확인
@@ -100,12 +111,10 @@ public class PrivacyController {
 		String realPath = request.getSession().getServletContext().getRealPath("/resources/img/ProfilePicture");
 		File saveFile = new File(realPath, setFileName(memberId));
 		
-		System.out.println(realPath);
-		
 		Member targetMember = memberService.getMember(memberId);
 		
 		// 새로운 이미지가 있을 경우 바로 업데이트
-		if(file != null && !file.isEmpty()) {
+		if(file != null && !file.isEmpty() && !file.getOriginalFilename().isEmpty()) {
 			
 			member.setProfileImage(setFileName(memberId));
 			try {
@@ -114,14 +123,12 @@ public class PrivacyController {
 				e.printStackTrace();
 			}
 		} else {// 이미지가 없을 경우
-			// 기존 이미지 체크
-			// 기존 이미지 있으면
-			if(!targetMember.getProfileImage().isEmpty()) {
-				// 기존 이미지 사용 
-				member.setProfileImage(setFileName(memberId)); 
-			} else {
-				// 디폴트 이미지 사용
+			// 디폴트 이미지일 경우			
+			if(targetMember.getProfileImage().equals("default.png")) {
 				member.setProfileImage("default.png");
+			} else { // 디폴트 이미지가 아닐 경우
+				// 기존 이미지 그대로 사용
+				member.setProfileImage(targetMember.getProfileImage());
 			}
 		}
 
@@ -160,4 +167,6 @@ public class PrivacyController {
 
 	
 	
+
+
 }
