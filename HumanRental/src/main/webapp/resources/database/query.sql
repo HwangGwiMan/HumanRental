@@ -17,9 +17,21 @@ nickname varchar(20) not null,
 profileImage varchar(20)
 );
 
+INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "default.png");
+
+-- 멘토 신청 정보 테이블
+CREATE TABLE IF NOT EXISTS MentorRegistInfo(
+	registId varchar(50) not null primary key,
+	memberId varchar(20) not null,
+    specialty varchar(255),
+    location varchar(255),
+    reason varchar(255),
+    etc varchar(1000),
+    foreign key(memberId) references Member(memberId)
+);
 
 -- 멘토프로필관리 
-CREATE TABLE IF NOT EXISTS MentoProfile(
+CREATE TABLE IF NOT EXISTS MentorProfile(
 mentoId varchar(20) not null primary key,
 memberId varchar(20) not null,
 introduction varchar(1000) not null,
@@ -149,6 +161,10 @@ writeDate date,
 foreign key(questionId) references Question(questionId)
 );
 
+-- 멘토 리스트
+
+-- 멘티 리스트
+
 --  커뮤니티 관리 
 CREATE TABLE IF NOT EXISTS Board(
 boardId int primary key auto_increment,
@@ -219,15 +235,23 @@ schedulealarmId varchar(20) not null primary key
 
 );
 
- CREATE TABLE IF NOT EXISTS Alarm(
-memberId varchar(20) not null primary key,
-chatalarmId varchar(20)not null,
-matchalarmId varchar(20)not null,
-schedulealarmId varchar(20)not null,
- date date,
-content varchar(10000)not null,
-foreign key(memberId) references Member(memberId) ,
-foreign key(chatalarmId) references ChatAlarm(chatalarmId), 
-foreign key(memberId) references MatchAlarm(matchalarmId), 
-foreign key(schedulealarmId) references ScheduleAlarm(schedulealarmId) 
+--  CREATE TABLE IF NOT EXISTS Alarm(
+-- memberId varchar(20) not null primary key,
+-- chatalarmId varchar(20)not null,
+-- matchalarmId varchar(20)not null,
+-- schedulealarmId varchar(20)not null,
+--  date date,
+-- content varchar(10000)not null,
+-- foreign key(memberId) references Member(memberId) ,
+-- foreign key(chatalarmId) references ChatAlarm(chatalarmId), 
+-- foreign key(memberId) references MatchAlarm(matchalarmId), 
+-- foreign key(schedulealarmId) references ScheduleAlarm(schedulealarmId) 
+-- );
+
+CREATE TABLE IF NOT EXISTS Alarm(
+alarmId varchar(20) not null primary key,
+memberId varchar(20) not null,
+date date not null,
+content varchar(10000) not null,
+foreign key(memberId) references Member(memberId)
 );

@@ -40,12 +40,20 @@
 			    	</div>
 			    	<div class="row">
 			    		<div><input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }"></div>
-				    	<div class="col p-3"><a onclick="loginCheck()" class="btn">로그인</a> </div>
+				    	<div class="col p-3 justify-content-center">
+				    		<a onclick="loginCheck()" class="col-sm-2 btn">로그인</a>
+				    	</div>
 			    	</div>
 			    	<div class="col">
-			    		<div class="row p-3"><a href="#" class="btn">카카오 로그인</a></div>
-				    	<div class="row p-3"><a href="#" class="btn">네이버 로그인</a></div>
-				    	<div class="row p-3"><a href="<c:url value="/join" />" class="btn">회원 가입</a></div>
+			    		<div class="row p-3 justify-content-center">
+			    			<a href="#" class="col-sm-2 btn">카카오 로그인</a>
+		    			</div>
+				    	<div class="row p-3 justify-content-center">
+				    		<a href="#" class="col-sm-2 btn">네이버 로그인</a>
+			    		</div>
+				    	<div class="row p-3 justify-content-center">
+				    		<a href="<c:url value="/join" />" class="col-sm-2 btn">회원 가입</a>
+			    		</div>
 			    	</div> 
 			    </form:form>
 		    </div>
