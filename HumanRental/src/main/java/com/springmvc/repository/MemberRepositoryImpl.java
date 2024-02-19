@@ -94,7 +94,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 		try {
 			member = template.query(SQL, new BeanPropertyRowMapper<Member>(Member.class), memberId);
 			return member.get(0);
-		} catch(EmptyResultDataAccessException e) {
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			return null;
 		}
 	}
