@@ -22,17 +22,17 @@ public interface BoardService {
 	public String getLoginNameById(String id);
 	
 	//board 테이블에 새로운 글 삽입하기
-	public void insertBoard(Board board, String MemberId);
+	public void insertBoard(Board board, String memberId);
 	
 	//선택된 글의 조회 수 증가시키기
-	public void updateHit(int BoardId);
+	public void updateHit(int boardId);
 	
 	//선택된 글 상세 내용 가져오기
-	public Board getBoardByNum(int BoardId, int page);
+	public Board getBoardByNum(int boardId, int page);
 	
 	//선택된 글 내용 수정하기
 	public void updateBoard(Board board);
 	
 	//선택된 글 삭제하기
-	public void deleteBoard(int num);
+	public void deleteBoard(int boardId);
 }

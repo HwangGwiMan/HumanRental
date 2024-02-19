@@ -25,11 +25,11 @@ public interface BoardRepository {
 	public void updateHit(int BoardId);
 	
 	//선택된 글 상세 내용 가져오기
-	public Board getBoardByNum(int BoardId, int page);
+	public Board getBoardByNum(int boardId, int page);
 	
 	//선택된 글 내용 수정하기
 	public void updateBoard(Board board);
 	
 	//선택된 글 삭제하기
-	public void deleteBoard(int num);
+	public void deleteBoard(int boardId);
 }

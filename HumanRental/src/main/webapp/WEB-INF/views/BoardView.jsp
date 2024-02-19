@@ -23,29 +23,32 @@
 		<div class="form-group row">
 			<label class="col-sm-2 control-label">성명</label>
 			<div class="col-sm-3">
-				<input name="name" class="form-control" value="${board.getName()}">
+				<input name="name" class="form-control" value="${board.name}" readonly>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 control-label">제목</label>
 			<div class="col-sm-5">
-				<input name="subject" class="form-control" value="${board.title}">
+				<input name="subject" class="form-control" value="${board.title}" readonly>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 control-label">내용</label>
 			<div class="col-sm-8" style="word-break: break-all;">
-				<textarea name="content" class="form-control" cols="50" rows="5">${board.content}</textarea>
+				<textarea name="content" class="form-control" cols="50" rows="5" readonly>${board.content}</textarea>
 			</div>
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-offset-2 col-sm-10 ">
-				<c:if test="${sessionId==memberId}">
-					<p><a href="./BoardDeleteAction.do?num=${BoardId}%>&pageNum=${nowpage}" class="btn btn-danger">삭제</a> 
-						<input type="submit" class="btn btn-success" value="수정">
+				<c:set var="sessionId" value="${sessionScope.user}" />
+				<c:set var="pageNum" value="${pageNum}" />
+				<c:if test="${sessionId==board.memberId}">
+					<p>
+						<a href="./boarddelete?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-danger">삭제</a> 
+						<a href="./boardupdate?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-success">수정</a>
 				</c:if>
-				<a href="<c:url value="/board?page=${nowpage}"/>" class="btn btn-primary">목록</a>
-				<div>${sessionId.toString()},${board.getMemberId()}</div>
+				<a href="<c:url value="/board?page=${pageNum}"/>" class="btn btn-primary">목록</a>
+				<div>${board.memberId},${pageNum},${sessionId}</div>
 			</div>
 		</div>
 		<hr>

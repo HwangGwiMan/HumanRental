@@ -25,6 +25,7 @@
 		return false;
 	}
 </script>
+<style type=""></style>
 <title>Board</title>
 </head>
 <body>
@@ -44,11 +45,11 @@
 			<div style="padding-top: 50px">
 				<table class="table table-hover">
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성일</th>
-						<th>조회</th>
-						<th>글쓴이</th>
+						<th class="col-1">번호</th>
+						<th class="col-6">제목</th>
+						<th class="col-2">작성일</th>
+						<th class="col-1">조회</th>
+						<th class="col-2">글쓴이</th>
 					</tr>
 					<c:forEach items="${boardlist}" var="board">
                     <tr>

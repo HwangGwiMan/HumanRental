@@ -109,10 +109,10 @@ public class BoardRepositoryImpl implements BoardRepository {
 	}
 
 	@Override
-	public Board getBoardByNum(int BoardId, int page) {
+	public Board getBoardByNum(int boardId, int page) {
 		System.out.println("getBoardByNum 접근");
-		String sql = "select * from board where BoardId = ? ";
-		Board board = template.queryForObject(sql, new BoardRowMapper(), BoardId);
+		String sql = "select * from board where boardId = ? ";
+		Board board = template.queryForObject(sql, new BoardRowMapper(), boardId);
 		
 		System.out.println("board 담음");
 		return board;
@@ -120,13 +120,16 @@ public class BoardRepositoryImpl implements BoardRepository {
 
 	@Override
 	public void updateBoard(Board board) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("updateBoard dao 접근");
+		String sql = "update Board set `title` = ?, `content` = ? where boardId=?";
+		template.update(sql, board.getTitle(), board.getContent(), board.getBoardId());
 	}
 
 	@Override
-	public void deleteBoard(int num) {
-		// TODO Auto-generated method stub
+	public void deleteBoard(int boardId) {
+		System.out.println("보드 딜리트 dao 접근");
+		String sql = "delete from board where boardId=?";
+		template.update(sql, boardId);
 		
 	}
 	

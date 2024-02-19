@@ -53,9 +53,9 @@ public class BoardController {
 	
 	@PostMapping("/boardwrite")
 	public String BoardWriteAction(@Valid @ModelAttribute Board board, HttpServletRequest request) {
-		System.out.println("네임"+board.getName());
-		System.out.println("타이틀"+board.getTitle());
-		System.out.println("컨텐츠"+board.getContent());
+//		System.out.println("네임"+board.getName());
+//		System.out.println("타이틀"+board.getTitle());
+//		System.out.println("컨텐츠"+board.getContent());
 		HttpSession session = request.getSession();
 		String MemberId = (String)session.getAttribute("user");
 		boardService.insertBoard(board, MemberId);
@@ -67,31 +67,52 @@ public class BoardController {
 		System.out.println("boardview GET 접근");
 		int BoardId = Integer.parseInt(request.getParameter("BoardId"));
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		System.out.println("BoardId="+BoardId);
-		System.out.println("pageNum="+pageNum);
+//		System.out.println("BoardId="+BoardId);
+//		System.out.println("pageNum="+pageNum);
 		
 		Board board=new Board();
 		boardService.updateHit(BoardId);
 		board = boardService.getBoardByNum(BoardId, pageNum);
 		
-		request.setAttribute("BoardId", BoardId);		 
-   		request.setAttribute("page", pageNum); 		
+		model.addAttribute("BoardId", BoardId);
+		model.addAttribute("pageNum", pageNum);		
 		model.addAttribute("board", board);
 		
 		HttpSession session = request.getSession();
 		String MemberId = (String)session.getAttribute("user");
 		System.out.println("MemberId="+MemberId);
-		System.out.println("123");
 		
 		return "BoardView";
 	}
 
 	@GetMapping("/boarddelete")
 	public String BoardDelete(HttpServletRequest request, Model model) {
-		System.out.println("board delete 접근");
+		System.out.println("board delete 컨트롤러 접근");
 		
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));	
 		
+		boardService.deleteBoard(boardId);
 		
-		return null;
+		return "redirect:/board?pageNum="+pageNum;
+	}
+	
+	@GetMapping("/boardupdate")
+	public String BoardUpdate(HttpServletRequest request, Model model) {
+		System.out.println("보드 업데이트 겟 컨트롤러 접근");
+
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		Board board = boardService.getBoardByNum(boardId, pageNum);
+		model.addAttribute("board", board);
+		
+		return "BoardUpdate";
+	}
+
+	@PostMapping("/boardupdate")
+	public String BoardUpdateAction(@ModelAttribute Board board) {
+		System.out.println(board.getBoardId());
+		boardService.updateBoard(board);
+		return "redirect:/board";
 	}
 }
