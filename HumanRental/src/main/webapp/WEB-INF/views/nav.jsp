@@ -1,5 +1,8 @@
+<%@page import="java.time.Duration"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -43,14 +46,43 @@
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/mentorIntro"/>">멘토신청</a></li>
 						<li class="nav-item">
 							<a class="nav-link" href="#" id="alarmBtn">
-								<i class="fa-regular fa-bell"></i>
+								<i class="fa-regular fa-bell position-relative">
+									<c:if test="${ not empty alarmList }">
+										<span class="position-absolute badge top-0 start-100 translate-middle bg-danger rounded-circle p-1">
+											<span class="visually-hidden">new Alarm</span>
+										</span>
+									</c:if>
+								</i>
 							</a>
-							<div class="position-absolute end-0 alert alert-primary" style="display: none;">
-								<a href="#" class="btn">
-									<div>멘토 신청 알람</div>
-									<div class="p-1">사용자 님이 멘토 신청을 하셨습니다.</div>
-									<div>2024 / 2 / 16 (10초 전)</div>
-								</a>
+							<div class="position-absolute end-0 alert alert-primary col" style="display: none;">
+								<c:choose>
+									<c:when test="${ empty alarmList }">
+										알람이 없습니다.
+									</c:when>
+									<c:when test="${ not empty alarmList }">
+										<c:forEach var="alarm"  items="${ alarmList }" varStatus="status">
+											<div>
+												<div>
+													<a href="#" class="row btn">
+														<div class="col">
+															<c:choose>
+																<c:when test="${ fn:contains(alarm.alarmId , 'mentoApplyAlarm') }">
+																	<div class="row">멘토 신청 알림</div>
+																	<div class="row">사용자 님이 멘토 신청을 하셨습니다.</div>
+																</c:when>
+															</c:choose>
+															${ duration.get(status.index).getSeconds() }
+															<div class="row">2024 / 2 / 16 (10초 전)</div>
+														</div>
+													</a>
+												</div>
+												<div class="justify-content-center">
+													<a href="#" class="row btn">x</a>
+												</div>
+											</div>
+										</c:forEach>
+									</c:when>
+								</c:choose>
 							</div>
 						</li>
 					</ul>

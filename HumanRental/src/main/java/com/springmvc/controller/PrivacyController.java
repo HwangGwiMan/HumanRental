@@ -17,14 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.springmvc.domain.Member;
+import com.springmvc.domain.Mentor;
+import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.MemberService;
 import com.springmvc.service.MentorService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
-
 
 @Controller
 public class PrivacyController {
@@ -37,6 +36,7 @@ public class PrivacyController {
 	
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
+								@RequestParam(value = "id", defaultValue = "none") String targetId,
 								Model model, 
 								HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -51,21 +51,29 @@ public class PrivacyController {
 			model.addAttribute("member", member);
 			model.addAttribute("mode", mode);
 			
-			if(mentorService.getMentor(memberId) == null) {
-				model.addAttribute("isMentor", "NO");
-				if(mentorService.getMentorApplyByMemberId(memberId) != null) {
-					model.addAttribute("isMentor", "멘토 심사 중");
-				} 
+			// 어드민 관련 데이터
+			if(memberId.equals("admin")) {
+				model.addAttribute("memberList", mentorService.getMentorListWithMember());
+				model.addAttribute("applyList", mentorService.getMentorApplyList());
+				model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
+
+				return "MyPage";
 			} else {
-				model.addAttribute("isMentor", "YES");
+			// 일반 유저 관련 데이터
+				if(mentorService.getMentor(memberId) == null) {
+					model.addAttribute("isMentor", "NO");
+					if(mentorService.getMentorApplyByMemberId(memberId) != null) {
+						model.addAttribute("isMentor", "멘토 심사 중");
+					} 
+				} else {
+					model.addAttribute("isMentor", "YES");
+				}
 			}
 			
 			return "MyPage";
 		} else {
 			return "redirect:/main";
 		}
-		
-		
 	}
 	
 	// 2차 로그인 확인
@@ -122,8 +130,6 @@ public class PrivacyController {
 				// 기존 이미지 그대로 사용
 				member.setProfileImage(targetMember.getProfileImage());
 			}
-			
-
 		}
 
 		memberService.updateMember(member, memberId);
@@ -158,6 +164,5 @@ public class PrivacyController {
 	    
 	    return "redirect:main"; // 다른 페이지로 리다이렉트
 	}
-	 
-	
+
 }

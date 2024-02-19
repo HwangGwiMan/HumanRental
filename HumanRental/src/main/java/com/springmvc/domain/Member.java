@@ -1,7 +1,5 @@
 package com.springmvc.domain;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class Member {
 	private String memberId;
 	private String memberPw;

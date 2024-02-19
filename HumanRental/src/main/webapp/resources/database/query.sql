@@ -14,10 +14,20 @@ gender varchar(10) not null,
 phone int not null,
 address varchar(100) not null,
 nickname varchar(20) not null,
+joinDate datetime not null,
 profileImage varchar(20)
 );
 
-INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "default.png");
+INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png");
+
+CREATE TABLE mentor(
+	mentorId varchar(50) primary key,
+    memberId varchar(20) unique,
+    registDate datetime not null,
+    foreign key(memberId) references Member(memberId)
+);
+
+INSERT INTO mentor VALUES("TestMentor1", "admin", "2024-02-19 12:00");
 
 -- 멘토 신청 정보 테이블
 CREATE TABLE IF NOT EXISTS MentorRegistInfo(
@@ -27,16 +37,18 @@ CREATE TABLE IF NOT EXISTS MentorRegistInfo(
     location varchar(255),
     reason varchar(255),
     etc varchar(1000),
+    applyDate datetime not null,
     foreign key(memberId) references Member(memberId)
 );
 
 -- 멘토프로필관리 
 CREATE TABLE IF NOT EXISTS MentorProfile(
-mentorId varchar(20) not null primary key,
+mentorId varchar(20) not null,
 memberId varchar(20) not null,
 introduction varchar(1000) not null,
 starRate int,
-foreign key(memberId) references Member(memberId)
+foreign key(memberId) references Member(memberId),
+foreign key(mentorId) references mentor(mentorId)
 );
 
 
@@ -165,7 +177,7 @@ foreign key(questionId) references Question(questionId)
 
 -- 멘티 리스트
 
---  커뮤니티 관리 (자유게시판)
+--  커뮤니티 관리 
 CREATE TABLE IF NOT EXISTS Board(
 boardId int primary key auto_increment,
 memberId varchar(20) not null,
@@ -176,16 +188,6 @@ regist_day varchar(30) not null,
 hit int default 0
 );
 
---  커뮤니티 관리 (공지사항)
-CREATE TABLE IF NOT EXISTS Board2(
-boardId int primary key auto_increment,
-memberId varchar(20) not null,
-name varchar(20) not null,
-title varchar(100),
-content varchar(10000),
-regist_day varchar(30) not null,
-hit int default 0
-);
 
 CREATE TABLE IF NOT EXISTS Notice(
 noticeId varchar(20) not null primary key ,
@@ -229,22 +231,6 @@ foreign key(memberId) references Member(memberId)
 
 -- 알람 관리 
 
-
-CREATE TABLE IF NOT EXISTS ChatAlarm(
-chatalarmId varchar(20) not null primary key
-
-);
-
-CREATE TABLE IF NOT EXISTS MatchAlarm(
-matchalarmId varchar(20) not null primary key
-
-);
-
-CREATE TABLE IF NOT EXISTS ScheduleAlarm(
-schedulealarmId varchar(20) not null primary key
-
-);
-
 --  CREATE TABLE IF NOT EXISTS Alarm(
 -- memberId varchar(20) not null primary key,
 -- chatalarmId varchar(20)not null,
@@ -259,7 +245,7 @@ schedulealarmId varchar(20) not null primary key
 -- );
 
 CREATE TABLE IF NOT EXISTS Alarm(
-alarmId varchar(20) not null primary key,
+alarmId varchar(50) not null primary key,
 memberId varchar(20) not null,
 date date not null,
 content varchar(10000) not null,
