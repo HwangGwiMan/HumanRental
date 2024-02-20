@@ -2,7 +2,11 @@ package com.springmvc.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -53,8 +57,11 @@ public class PrivacyController {
 			
 			// 어드민 관련 데이터
 			if(memberId.equals("admin")) {
+				// 멘토 신청 관리
 				model.addAttribute("memberList", mentorService.getMentorListWithMember());
 				model.addAttribute("applyList", mentorService.getMentorApplyList());
+				
+				// 개별 멘토 신청 관리
 				model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
 
 				return "MyPage";

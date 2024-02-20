@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.cj.xdevapi.JsonArray;
+import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.AlarmService;
@@ -60,7 +61,7 @@ public class MentorController {
 			return "AlreadyApply";
 		}
 		
-		MentorProfile mentor = mentorService.getMentor(memberId);
+		Mentor mentor = mentorService.getMentor(memberId);
 		if(mentor == null) {
 			return "true";
 		} else {
@@ -89,7 +90,6 @@ public class MentorController {
 	
 	@GetMapping("/mentorRegist")
 	public String mentorRegist(@RequestParam("id") String memberId) {
-		System.out.println(memberId);
 		mentorService.mentorRegist(memberId);
 		return "redirect:/myInfo?mode=mentorApplyManagement";
 	}

@@ -23,11 +23,13 @@ INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TE
 CREATE TABLE mentor(
 	mentorId varchar(50) primary key,
     memberId varchar(20) unique,
+    specialty varchar(255),
+    location varchar(255),
+    reason varchar(255),
+    etc varchar(1000),
     registDate datetime not null,
     foreign key(memberId) references Member(memberId)
 );
-
-INSERT INTO mentor VALUES("TestMentor1", "admin", "2024-02-19 12:00");
 
 -- 멘토 신청 정보 테이블
 CREATE TABLE IF NOT EXISTS MentorRegistInfo(
@@ -250,5 +252,6 @@ sendMemberId varchar(20) not null,
 receiveMemberId varchar(20) not null,
 date date not null,
 content varchar(10000) not null,
-foreign key(memberId) references Member(memberId)
+foreign key(sendMemberId) references Member(memberId),
+foreign key(receiveMemberId) references Member(memberId)
 );
