@@ -2,6 +2,7 @@ package com.springmvc.interceptor;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,14 +37,26 @@ public class AlarmInterceptor extends HandlerInterceptorAdapter{
 		String memberId = (String) session.getAttribute("user");
 		
 		if(modelAndView != null && memberId != null) {
-			List<Duration> durations = new ArrayList<Duration>(); 
+			List<String> alarmTime = new ArrayList<String>();
+			List<String> durations = new ArrayList<String>(); 
 			List<Alarm> alarmList = alarmService.selectAlarm(memberId);
 			for(Alarm alarm : alarmList) {
-				durations.add(Duration.between(alarm.getDate(), LocalDateTime.now()));
+				long time = Duration.between(alarm.getDate(), LocalDateTime.now()).getSeconds();
+				if(time >= 86400) {
+					durations.add(String.valueOf(time / 86400) + "일 전");
+				} else if(time >= 3600) {
+					durations.add(String.valueOf(time / 3600) + "시간 전");
+				} else if(time >= 60) {
+					durations.add(String.valueOf(time / 60)+ "분 전");
+				} else {
+					durations.add(String.valueOf(time) + "초 전");
+				}
+				alarmTime.add(alarm.getDate().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")));
 			}
-
+			
 			modelAndView.addObject("alarmList", alarmList);
 			modelAndView.addObject("duration", durations);
+			modelAndView.addObject("alarmTime", alarmTime);
 		}
 	}
 

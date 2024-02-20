@@ -38,8 +38,8 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		String SQL;
 		
 		try {
-			SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?)";
-			template.update(SQL, util.createId("mentoApplyAlarm"), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
+			SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
+			template.update(SQL, util.createId("mentoApplyAlarm"),alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
 		} catch (EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +59,8 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 					Alarm alarm = new MentoApplyAlarm();
 					alarm.setAlarmId(rs.getString(1));
 					alarm.setReceiveMemberId(rs.getString(2));
-					alarm.setDate(new java.sql.Timestamp(rs.getDate(3).getTime()).toLocalDateTime()); 
+//					alarm.setDate(new java.sql.Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
+					alarm.setDate(rs.getTimestamp(3).toLocalDateTime());
 					alarm.setContent(rs.getString(4));
 					return alarm;
 				}
@@ -69,5 +70,17 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		}
 		
 		return alarmList;
+	}
+
+	@Override
+	public void deleteAlarm(String memberId, String alarmId) {
+		String SQL;
+		
+		try {
+			SQL = "DELETE FROM alarm WHERE memberId = ? and alarmId = ?";
+			template.update(SQL, memberId, alarmId);
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -246,7 +246,8 @@ foreign key(memberId) references Member(memberId)
 
 CREATE TABLE IF NOT EXISTS Alarm(
 alarmId varchar(50) not null primary key,
-memberId varchar(20) not null,
+sendMemberId varchar(20) not null,
+receiveMemberId varchar(20) not null,
 date date not null,
 content varchar(10000) not null,
 foreign key(memberId) references Member(memberId)

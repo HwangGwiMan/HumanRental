@@ -23,5 +23,10 @@ public class AlarmServiceImpl implements AlarmService{
 	public List<Alarm> selectAlarm(String memberId) {
 		return alarmRepository.selectAlarm(memberId);
 	}
+
+	@Override
+	public void deleteAlarm(String memberId, String alarmId) {
+		alarmRepository.deleteAlarm(memberId, alarmId);
+	}
 	
 }
