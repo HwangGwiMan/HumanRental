@@ -16,8 +16,6 @@ var ws = new SockJS("http://localhost:8080/HumanRental/deleteAlarm");
 
 function alarmDelete(id) {
 	ws.send(id);
-	
-
 }
 
 ws.onmessage = function(e) {

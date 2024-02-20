@@ -67,7 +67,7 @@
 										<c:forEach var="alarm"  items="${ alarmList }" varStatus="status">
 											<div id="alarmRow_${ alarm.alarmId }">
 												<div>
-													<a href="<c:url value="/myInfo?mode=applyInfo"/>" class="row btn">
+													<a href="<c:url value="/myInfo?mode=applyInfo&id=${ alarm.sendMemberId }"/>" class="row btn">
 														<div class="col">
 															<c:choose>
 																<c:when test="${ fn:contains(alarm.alarmId , 'mentoApplyAlarm') }">

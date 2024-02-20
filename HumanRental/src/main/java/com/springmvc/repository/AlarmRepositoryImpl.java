@@ -33,8 +33,8 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		this.template = new JdbcTemplate(dataSource);
 	}
 	
-	public void createMentoApplyAlarm(String memberId) {
-		Alarm alarm = new MentoApplyAlarm(memberId);
+	public void createMentoApplyAlarm(String sendMemberId) {
+		Alarm alarm = new MentoApplyAlarm(sendMemberId);
 		String SQL;
 		
 		try {
@@ -51,17 +51,18 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		List<Alarm> alarmList = null;
 		
 		try {
-			SQL = "SELECT * FROM alarm WHERE memberId = ?";
+			SQL = "SELECT * FROM alarm WHERE receiveMemberId = ?";
 			alarmList = template.query(SQL, new RowMapper<Alarm>() {
 
 				@Override
 				public Alarm mapRow(ResultSet rs, int rowNum) throws SQLException {
 					Alarm alarm = new MentoApplyAlarm();
 					alarm.setAlarmId(rs.getString(1));
-					alarm.setReceiveMemberId(rs.getString(2));
+					alarm.setSendMemberId(rs.getString(2));
+					alarm.setReceiveMemberId(rs.getString(3));
 //					alarm.setDate(new java.sql.Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
-					alarm.setDate(rs.getTimestamp(3).toLocalDateTime());
-					alarm.setContent(rs.getString(4));
+					alarm.setDate(rs.getTimestamp(4).toLocalDateTime());
+					alarm.setContent(rs.getString(5));
 					return alarm;
 				}
 			}, memberId);
@@ -77,7 +78,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		String SQL;
 		
 		try {
-			SQL = "DELETE FROM alarm WHERE memberId = ? and alarmId = ?";
+			SQL = "DELETE FROM alarm WHERE receiveMemberId = ? and alarmId = ?";
 			template.update(SQL, memberId, alarmId);
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
