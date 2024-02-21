@@ -20,7 +20,7 @@ public class BuyingRowMapper implements RowMapper<Buying> {
 		selling.setStarRate(rs.getInt(5));
 		selling.setTitle(rs.getString(6));
 		selling.setContent(rs.getString(7));
-		selling.setRegist_day(rs.getString(8));
+		selling.setRegist_day(rs.getTimestamp(8).toLocalDateTime());
 		selling.setCategory(rs.getString(9));
 		selling.setPrice(rs.getInt(10));
 		selling.setLocation(rs.getString(11));

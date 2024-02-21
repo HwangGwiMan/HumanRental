@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,13 @@ public class BuyingServiceImpl implements BuyingService{
 
 	@Override
 	public void BuyingCreate(Buying buying) {
-		
-		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
-		String regist_day = formatter.format(new java.util.Date());
 
 		//테스트코드
 		buying.setStarRate(5);
 		buying.setIntroduction("abc");
 		//
 		
-		buying.setRegist_day(regist_day);
+		buying.setRegist_day(LocalDateTime.now());
 		buying.setBuyingId(util.createId("buyingId"));
 		
 		buyingrepository.BuyingCreate(buying);

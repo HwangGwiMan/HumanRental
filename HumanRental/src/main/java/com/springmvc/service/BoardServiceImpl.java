@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -54,12 +55,9 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void insertBoard(Board board, String memberId) {
 		
-		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
-		String regist_day = formatter.format(new java.util.Date()); 
-		
 		board.setMemberId(memberId);
 		board.setHit(0);
-		board.setRegist_day(regist_day);
+		board.setRegist_day(LocalDateTime.now());
 		boardRepository.insertBoard(board);
 	}
 
@@ -113,12 +111,9 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void insertBoard2(Board board, String memberId) {
 		
-		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
-		String regist_day = formatter.format(new java.util.Date()); 
-		
 		board.setMemberId(memberId);
 		board.setHit(0);
-		board.setRegist_day(regist_day);
+		board.setRegist_day(LocalDateTime.now());
 		boardRepository.insertBoard2(board);
 	}
 
