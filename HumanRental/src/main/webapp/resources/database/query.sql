@@ -19,14 +19,10 @@ profileImage varchar(20)
 );
 
 INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png");
-
+-- 멘토 테이블
 CREATE TABLE mentor(
 	mentorId varchar(50) primary key,
     memberId varchar(20) unique,
-    specialty varchar(255),
-    location varchar(255),
-    reason varchar(255),
-    etc varchar(1000),
     registDate datetime not null,
     foreign key(memberId) references Member(memberId)
 );
@@ -40,6 +36,16 @@ CREATE TABLE IF NOT EXISTS MentorRegistInfo(
     reason varchar(255),
     etc varchar(1000),
     applyDate datetime not null,
+    foreign key(memberId) references Member(memberId)
+);
+
+-- 멘토 신청 관리 테이블
+CREATE TABLE IF NOT EXISTS MentorApply(
+	registId varchar(50) not null,
+    memberId varchar(20) not null,
+    confirmDate datetime,
+    state varchar(10) not null,
+    foreign key(registId) references MentorRegistInfo(registId),
     foreign key(memberId) references Member(memberId)
 );
 
@@ -124,21 +130,15 @@ foreign key(buyingId) references Buying(buyingId)
 );
 
 -- 예약 관리 
-CREATE TABLE IF NOT EXISTS SellAndBuyId(
-contentId varchar(20) not null primary key
-
-);
 CREATE TABLE IF NOT EXISTS Reservation(
 reservationId varchar(20) not null primary key,
 menteeId varchar(20)not null,
 mentorId varchar(20)not null,
-contentId varchar(100)not null,
 memberId varchar(20)not null,
 signDate date,
 content varchar(10000),
 foreign key(menteeId) references  MenteeProfile(menteeId),
 foreign key(mentorId) references  MentorProfile(mentorId),
-foreign key(contentId) references SellAndBuyId(contentId),
 foreign key(memberId ) references Member(memberId)
 );
 
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS Alarm(
 alarmId varchar(50) not null primary key,
 sendMemberId varchar(20) not null,
 receiveMemberId varchar(20) not null,
-date date not null,
+date datetime not null,
 content varchar(10000) not null,
 foreign key(sendMemberId) references Member(memberId),
 foreign key(receiveMemberId) references Member(memberId)

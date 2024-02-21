@@ -177,8 +177,9 @@
 							<c:when test="${ mode == 'mentorApplyManagement' }">
 								<div>
 									<div class="row text-center p-3">
-										<div class="col-2 "><a href="#" class="btn btn-primary">처리된 요청</a></div>
-										<div class="col-2"><a href="#" class="btn btn-secondary">보류 중인 요청</a></div>
+										<div class="col-1"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-outline-info">전체</a></div>
+										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="btn btn-primary">처리된 요청</a></div>
+										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="btn btn-secondary">보류 중인 요청</a></div>
 									</div>
 									<table class="table table-hover ">
 										<tr>
@@ -186,13 +187,25 @@
 											<th>유저 ID</th>
 											<th>신청일</th>
 											<th>처리결과</th>
+											<th>처리일</th>
 										</tr>
 										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
 											<tr onclick="javascript:readApplyInfo(${ applyInfo.memberId })">
 												<td>${ status.count }</td>
 												<td>${ applyInfo.memberId }</td>
 												<td>${ applyInfo.applyDate }</td>
-												<td>${ applyInfo.mentorId }</td>
+												<c:choose>
+													<c:when test="${ applyInfo.state == 'Wait' }">
+														<td><div class="badge bg-secondary">대기중</div></td>
+													</c:when>
+													<c:when test="${ applyInfo.state == 'Accept' }">
+														<td><div class="badge bg-success">승인</div></td>
+													</c:when>
+													<c:when test="${ applyInfo.state == 'Refuse' }">
+														<td><div class="badge bg-danger">거부</div></td>
+													</c:when>
+												</c:choose>
+												<td>${ applyInfo.confirmDate }</td>
 											</tr>
 										</c:forEach>
 									</table>
@@ -212,8 +225,8 @@
 										<p>${ applyInfo.etc }
 									</div>
 									<div>
-										<a href="<c:url value="/mentorRegist?id=${ applyInfo.memberId }" />" class="btn btn-success">승인</a>
-										<a href="<c:url value="/mentorApplyRefuse" />" class="btn btn-danger">거절</a>
+										<a href="<c:url value="/mentorRegist?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-success">승인</a>
+										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-danger">거절</a>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
 									</div>
 								</div>

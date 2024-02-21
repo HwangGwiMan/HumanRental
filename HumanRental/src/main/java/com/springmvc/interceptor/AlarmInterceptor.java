@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.springmvc.domain.alarm.Alarm;
+import com.springmvc.domain.Alarm;
 import com.springmvc.service.AlarmService;
 
 public class AlarmInterceptor extends HandlerInterceptorAdapter{

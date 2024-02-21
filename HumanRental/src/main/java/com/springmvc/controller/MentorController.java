@@ -55,9 +55,9 @@ public class MentorController {
 			return "notLogin";
 		}
 		
-		MentorRegistInfo mentorRegistInfo = mentorService.getMentorApplyByMemberId(memberId);
+//		MentorRegistInfo mentorRegistInfo = mentorService.getMentorApplyByMemberId(memberId);
 
-		if(mentorRegistInfo != null) {
+		if(mentorService.getMentorApplyState(memberId) != null) {
 			return "AlreadyApply";
 		}
 		
@@ -89,13 +89,18 @@ public class MentorController {
 	}	
 	
 	@GetMapping("/mentorRegist")
-	public String mentorRegist(@RequestParam("id") String memberId) {
-		mentorService.mentorRegist(memberId);
+	public String mentorRegist(@RequestParam("mId") String memberId,
+							   @RequestParam("rId") String registId) {
+		mentorService.mentorRegist(memberId, registId);
+		alarmService.createMentoApplyResultAlarm(memberId, "승인");
 		return "redirect:/myInfo?mode=mentorApplyManagement";
 	}
 	
 	@GetMapping("/mentorApplyRefuse")
-	public String mentorApplyRefuse() {
-		return null;
+	public String mentorApplyRefuse(@RequestParam("mId") String memberId,
+									@RequestParam("rId") String registId) {
+		mentorService.mentorRefuse(memberId, registId);
+		alarmService.createMentoApplyResultAlarm(memberId, "거절");
+		return "redirect:/myInfo?mode=mentorApplyManagement";
 	}
 }
