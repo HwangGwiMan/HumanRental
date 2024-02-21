@@ -1,9 +1,12 @@
 package com.springmvc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springmvc.domain.Mentor;
+import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.repository.MentorRepository;
 
@@ -14,7 +17,7 @@ public class MentorServiceImpl implements MentorService {
 	MentorRepository mentorRepository;
 	
 	@Override
-	public Mentor getMentor(String memberId) {
+	public MentorProfile getMentor(String memberId) {
 		return mentorRepository.getMentor(memberId);
 	}
 
@@ -27,6 +30,20 @@ public class MentorServiceImpl implements MentorService {
 	public MentorRegistInfo getMentorApplyByMemberId(String memberId) {
 		return mentorRepository.getMentorApplyByMemberId(memberId);
 	}
-	
+
+	@Override
+	public List<Mentor> getMentorListWithMember() {
+		return mentorRepository.getMentorListWithMember();
+	}
+
+	@Override
+	public List<MentorRegistInfo> getMentorApplyList() {
+		return mentorRepository.getMentorApplyList();
+	}
+
+	@Override
+	public void mentorRegist(String memberId) {
+		mentorRepository.mentorRegist(memberId);		
+	}
 
 }

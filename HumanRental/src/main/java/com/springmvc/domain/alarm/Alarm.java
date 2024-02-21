@@ -1,14 +1,13 @@
 package com.springmvc.domain.alarm;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public abstract class Alarm {
 	private String alarmId;
 	private String sendMemberId;
 	private String receiveMemberId;
 	private LocalDateTime date;
-	
+	protected String content;
 	public String getAlarmId() {
 		return alarmId;
 	}
@@ -32,6 +31,12 @@ public abstract class Alarm {
 	}
 	public void setReceiveMemberId(String receiveMemberId) {
 		this.receiveMemberId = receiveMemberId;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 	abstract public void createContent();

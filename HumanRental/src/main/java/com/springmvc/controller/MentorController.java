@@ -8,10 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.cj.xdevapi.JsonArray;
-import com.springmvc.domain.Mentor;
+import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.AlarmService;
 import com.springmvc.service.MentorService;
@@ -59,7 +60,7 @@ public class MentorController {
 			return "AlreadyApply";
 		}
 		
-		Mentor mentor = mentorService.getMentor(memberId);
+		MentorProfile mentor = mentorService.getMentor(memberId);
 		if(mentor == null) {
 			return "true";
 		} else {
@@ -73,7 +74,7 @@ public class MentorController {
 	}
 	
 	@PostMapping("/mentorApply/submit")
-	public String mentorRegistSubmit(MentorRegistInfo mentorRegistInfo,
+	public String mentorApplySubmit(MentorRegistInfo mentorRegistInfo,
 									 HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("user");
@@ -84,6 +85,17 @@ public class MentorController {
 		alarmService.createMentoApplyAlarm(memberId);
 		
 		return "redirect:/main";
+	}	
+	
+	@GetMapping("/mentorRegist")
+	public String mentorRegist(@RequestParam("id") String memberId) {
+		System.out.println(memberId);
+		mentorService.mentorRegist(memberId);
+		return "redirect:/myInfo?mode=mentorApplyManagement";
 	}
 	
+	@GetMapping("/mentorApplyRefuse")
+	public String mentorApplyRefuse() {
+		return null;
+	}
 }

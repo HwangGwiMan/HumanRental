@@ -1,13 +1,26 @@
 package com.springmvc.interceptor;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class AlarmInterceptor extends HandlerInterceptorAdapter{
+import com.springmvc.domain.alarm.Alarm;
+import com.springmvc.service.AlarmService;
 
+public class AlarmInterceptor extends HandlerInterceptorAdapter{
+	
+	@Autowired
+	AlarmService alarmService;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -18,10 +31,20 @@ public class AlarmInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		super.postHandle(request, response, handler, modelAndView);
-		System.out.println(modelAndView.getModelMap());
-		System.out.println(modelAndView.getViewName());
 		
+		HttpSession session = request.getSession();
+		String memberId = (String) session.getAttribute("user");
 		
+		if(modelAndView != null && memberId != null) {
+			List<Duration> durations = new ArrayList<Duration>(); 
+			List<Alarm> alarmList = alarmService.selectAlarm(memberId);
+			for(Alarm alarm : alarmList) {
+				durations.add(Duration.between(alarm.getDate(), LocalDateTime.now()));
+			}
+
+			modelAndView.addObject("alarmList", alarmList);
+			modelAndView.addObject("duration", durations);
+		}
 	}
 
 	@Override
