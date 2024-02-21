@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.cj.xdevapi.JsonArray;
+import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.AlarmService;
@@ -54,13 +55,13 @@ public class MentorController {
 			return "notLogin";
 		}
 		
-		MentorRegistInfo mentorRegistInfo = mentorService.getMentorApplyByMemberId(memberId);
+//		MentorRegistInfo mentorRegistInfo = mentorService.getMentorApplyByMemberId(memberId);
 
-		if(mentorRegistInfo != null) {
+		if(mentorService.getMentorApplyState(memberId) != null) {
 			return "AlreadyApply";
 		}
 		
-		MentorProfile mentor = mentorService.getMentor(memberId);
+		Mentor mentor = mentorService.getMentor(memberId);
 		if(mentor == null) {
 			return "true";
 		} else {
@@ -88,14 +89,18 @@ public class MentorController {
 	}	
 	
 	@GetMapping("/mentorRegist")
-	public String mentorRegist(@RequestParam("id") String memberId) {
-		System.out.println(memberId);
-		mentorService.mentorRegist(memberId);
+	public String mentorRegist(@RequestParam("mId") String memberId,
+							   @RequestParam("rId") String registId) {
+		mentorService.mentorRegist(memberId, registId);
+		alarmService.createMentoApplyResultAlarm(memberId, "승인");
 		return "redirect:/myInfo?mode=mentorApplyManagement";
 	}
 	
 	@GetMapping("/mentorApplyRefuse")
-	public String mentorApplyRefuse() {
-		return null;
+	public String mentorApplyRefuse(@RequestParam("mId") String memberId,
+									@RequestParam("rId") String registId) {
+		mentorService.mentorRefuse(memberId, registId);
+		alarmService.createMentoApplyResultAlarm(memberId, "거절");
+		return "redirect:/myInfo?mode=mentorApplyManagement";
 	}
 }

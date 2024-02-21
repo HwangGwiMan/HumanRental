@@ -3,7 +3,7 @@ package com.springmvc.domain;
 import java.time.LocalDateTime;
 
 public class MentorRegistInfo {
-	private String registrId;
+	private String registId;
 	private String memberId;
 	private String specialty;
 	private String location;
@@ -16,11 +16,11 @@ public class MentorRegistInfo {
 	public void setApplyDate(LocalDateTime applyDate) {
 		this.applyDate = applyDate;
 	}
-	public String getRegistrId() {
-		return registrId;
+	public String getRegistId() {
+		return registId;
 	}
-	public void setRegistrId(String registrId) {
-		this.registrId = registrId;
+	public void setRegistId(String registId) {
+		this.registId = registId;
 	}
 	public String getMemberId() {
 		return memberId;

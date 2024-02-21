@@ -14,6 +14,10 @@
 		<!-- jquery -->
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	    
+	    <!-- WebSocket -->
+	    <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
+	    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	    
 		<script src="<c:url value="/resources/js/nav.js"/>"></script>
 	</head>
 	<body>
@@ -48,7 +52,7 @@
 							<a class="nav-link" href="#" id="alarmBtn">
 								<i class="fa-regular fa-bell position-relative">
 									<c:if test="${ not empty alarmList }">
-										<span class="position-absolute badge top-0 start-100 translate-middle bg-danger rounded-circle p-1">
+										<span class="position-absolute badge top-0 start-100 translate-middle bg-danger rounded-circle p-1" id="alarmLight">
 											<span class="visually-hidden">new Alarm</span>
 										</span>
 									</c:if>
@@ -61,24 +65,29 @@
 									</c:when>
 									<c:when test="${ not empty alarmList }">
 										<c:forEach var="alarm"  items="${ alarmList }" varStatus="status">
-											<div>
+											<div id="alarmRow_${ alarm.alarmId }">
 												<div>
-													<a href="#" class="row btn">
-														<div class="col">
-															<c:choose>
-																<c:when test="${ fn:contains(alarm.alarmId , 'mentoApplyAlarm') }">
+													<div class="col">
+														<c:choose>
+															<c:when test="${ fn:contains(alarm.alarmId , 'mentorApplyAlarm') }">
+																<a href="<c:url value="/myInfo?mode=applyInfo&id=${ alarm.sendMemberId }"/>" class="row btn">
 																	<div class="row">멘토 신청 알림</div>
-																	<div class="row">사용자 님이 멘토 신청을 하셨습니다.</div>
-																</c:when>
-															</c:choose>
-															${ duration.get(status.index).getSeconds() }
-															<div class="row">2024 / 2 / 16 (10초 전)</div>
-														</div>
-													</a>
+																	<div class="row">${ alarm.content }</div>
+																</a>
+															</c:when>
+															<c:when test="${ fn:contains(alarm.alarmId , 'mentorApplyResultAlarm') }">
+																<div class="row">멘토 신청 결과 알림</div>
+																<div class="row">${ alarm.content }</div>
+															</c:when>
+														</c:choose>
+														
+														<div class="row">${ alarmTime.get(status.index) } (${ duration.get(status.index) })</div>
+													</div>
 												</div>
-												<div class="justify-content-center">
-													<a href="#" class="row btn">x</a>
+												<div class="row justify-content-center">
+													<a onclick="javascript:alarmDelete('${ alarm.alarmId }')"  class="col btn">x</a>
 												</div>
+												<hr>
 											</div>
 										</c:forEach>
 									</c:when>
