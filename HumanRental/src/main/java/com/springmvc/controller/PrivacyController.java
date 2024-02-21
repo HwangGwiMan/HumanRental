@@ -2,7 +2,11 @@ package com.springmvc.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,7 +41,7 @@ public class PrivacyController {
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
 								@RequestParam(value = "id", defaultValue = "none") String targetId,
-								Model model, 
+								@RequestParam(value = "t", defaultValue = "none") String state,								Model model, 
 								HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user") != null) {
@@ -53,16 +57,27 @@ public class PrivacyController {
 			
 			// 어드민 관련 데이터
 			if(memberId.equals("admin")) {
+				// 멤버 관리
 				model.addAttribute("memberList", mentorService.getMentorListWithMember());
-				model.addAttribute("applyList", mentorService.getMentorApplyList());
-				model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
 
-				return "MyPage";
-			} else {
-			// 일반 유저 관련 데이터
+				// 멘토 신청 관리
+				if(state.equals("none") ) {
+					model.addAttribute("applyList", mentorService.getMentorApplyList());
+				} else {
+					model.addAttribute("applyList", mentorService.getMentorApplyList(state));
+				}
+
+				
+				// 개별 멘토 신청 관리
+				model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
+			} else {// 일반 유저 관련 데이터
+				if(mode.equals("memberManagement") || mode.equals("applyInfo") || mode.equals("memberManagement")) {
+					mode = "myPage";
+				}
+				
 				if(mentorService.getMentor(memberId) == null) {
 					model.addAttribute("isMentor", "NO");
-					if(mentorService.getMentorApplyByMemberId(memberId) != null) {
+					if(mentorService.getMentorApplyState(memberId) != null) {
 						model.addAttribute("isMentor", "멘토 심사 중");
 					} 
 				} else {

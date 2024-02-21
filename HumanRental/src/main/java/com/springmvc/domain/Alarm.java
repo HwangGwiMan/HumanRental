@@ -1,13 +1,18 @@
-package com.springmvc.domain.alarm;
+package com.springmvc.domain;
 
 import java.time.LocalDateTime;
 
-public abstract class Alarm {
+public class Alarm {
 	private String alarmId;
 	private String sendMemberId;
 	private String receiveMemberId;
 	private LocalDateTime date;
 	protected String content;
+	
+	public Alarm() {
+		this.setDate(LocalDateTime.now());
+	}
+	
 	public String getAlarmId() {
 		return alarmId;
 	}
@@ -38,7 +43,4 @@ public abstract class Alarm {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	abstract public void createContent();
-	abstract public void createDate();
 }
