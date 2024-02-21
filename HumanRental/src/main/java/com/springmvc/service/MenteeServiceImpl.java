@@ -2,6 +2,8 @@ package com.springmvc.service;
 
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +17,29 @@ public class MenteeServiceImpl implements MenteeService {
     MenteeRepository MenteeRepository;
 
 	@Override
-	public void registerMentee(Mentee Mentee) {
-		MenteeRepository.registerMentee(Mentee);
+	public void registerMentee(Mentee Mentee ,HttpServletRequest request) {
+		MenteeRepository.registerMentee(Mentee,request);
 		
 	}
-	
-	
-	  public Mentee getMentee(Long MenteeId){
-	  MenteeRepository.getMentee(MenteeId); 
-	  }
-	 
-	
+
+	@Override
+	public int getMentee(String memberId) {
+		return MenteeRepository.getMentee(memberId);
+	}
+
+	@Override
+	public Mentee getInformation(String memberId){
+		return MenteeRepository.getInformation(memberId);
+	}
+
+	@Override
+	public Mentee UpdateMentee(Mentee Mentee, HttpServletRequest request) {
+		return  MenteeRepository.UpdateMentee(Mentee,request);
+	}
+
+	@Override
+	public void deleteMentee(HttpServletRequest request) {
+		 MenteeRepository.deleteMentee(request);
+	}
 	
 }

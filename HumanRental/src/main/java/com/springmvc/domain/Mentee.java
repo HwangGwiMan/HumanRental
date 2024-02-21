@@ -1,15 +1,15 @@
 package com.springmvc.domain;
 
 public class Mentee {
-	private Long menteeId;
+	private String menteeId;
 	private String memberId;
 	private String interest;
 	private String introduction;
 	private int starRate;
-	public Long getMenteeId() {
+	public String getMenteeId() {
 		return menteeId;
 	}
-	public void setMenteeId(Long menteeId) {
+	public void setMenteeId(String menteeId) {
 		this.menteeId = menteeId;
 	}
 	public String getMemberId() {
@@ -36,6 +36,7 @@ public class Mentee {
 	public void setStarRate(int starRate) {
 		this.starRate = starRate;
 	}
+
 
 
 	

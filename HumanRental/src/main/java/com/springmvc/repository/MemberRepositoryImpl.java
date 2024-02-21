@@ -99,13 +99,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 		}
 	}
   
-	//회원탈퇴
-	public void deleteMember(String memberId , String memberPw) {
-		System.out.println("deleteMember started");
-	    String SQL = "delete from member where memberId=? and memberPw=?";
-	    template.update(SQL, memberId,memberPw);
 
-	}
 	
 	@Override
 	public List<Member> getMembers() {

@@ -20,38 +20,61 @@ public class MenteeController {
 	
 	@Autowired
 	MenteeService MenteeService;
-	
-	
-	@PostMapping("menteeprofile")
-	public String Menteeprofile( @ModelAttribute Mentee Mentee ,HttpServletRequest request) {
-		System.out.println("멘티프로필등록 까지 올수있니..?");
-		/*
-		 * HttpSession session= request.getSession();
-		 * session.setAttribute("user",Mentee.getMenteeId());
-		 */
-		MenteeService.registerMentee(Mentee);
-		return "redirect:main";
-	}
-	
-	@PostMapping("menteeProfileRead")
-	public String Menteeread(@RequestParam("mode") String mode,Model model, HttpServletRequest request) {
-		System.out.println("맨티 프로필 조회까지 올수 있니?");
-		HttpSession session= request.getSession();	
-		System.out.println("그럼 여기는 올수 있냐?");
-		String MenteeId = (String)session.getAttribute("user");
 		
-		Mentee Mentee = MenteeService.getMentee(MenteeId); 
-		model.addAttribute("Mentee",Mentee);
-		System.out.println(Mentee);
-		return "redirect:mypage";
+	@GetMapping("/mentee")
+	public String Menteeread(@RequestParam("mode") String mode,Model model, HttpServletRequest request) {
+		System.out.println("Menteeroad함수로는 오니?");
+		HttpSession session = request.getSession();
+		String memberId	= (String)session.getAttribute("user");
+		System.out.println(memberId);
+		System.out.println("memberId가위에 뜰꺼임 떠야됨 뜰거임 무조건 ");
+		int a = MenteeService.getMentee(memberId);
+		System.out.println(a);
+		if(a==0) {
+			model.addAttribute("mode",mode);
+			
+		}else{
+			mode = "menteeInformation";
+			System.out.println("else 구문안인데 여긴 오니?");
+		Mentee mentee = MenteeService.getInformation(memberId);
+			model.addAttribute("mode",mode);
+			model.addAttribute("Mentee",mentee);
+		}
+		
+		return "MyPage";
 	}
 	
-	@GetMapping("/menteeupdate")
-	public String MenteeDet(Model model) {
-		return "redirect:main";
-	}
-	@GetMapping("/menteedelte")
-	public String MenteeDetail(Model model) {
-		return "redirect:main";
-	}
+	  @PostMapping("/mentee") 
+	  public String MenteeRegister(@ModelAttribute Mentee Mentee, Model model,HttpServletRequest request) {
+		  System.out.println("이건 멘티프로필 등록인데 여기는 오니?");
+		   MenteeService.registerMentee(Mentee,request);
+		  return "redirect:/mentee?mode=menteeProfileRead";
+	  }
+	 @GetMapping("/mentee2")
+	 public String MenteeProfileUpdateform(@RequestParam("mode") String mode,Model model ,HttpServletRequest request) {
+		 System.out.println("111111111");
+		 HttpSession session = request.getSession();
+		String memberId	= (String)session.getAttribute("user");
+		 Mentee mentee = MenteeService.getInformation(memberId);
+		 System.out.println(mentee.getIntroduction());
+		 System.out.println(mentee.getInterest());
+
+		
+		 model.addAttribute("mode",mode);
+		 model.addAttribute("Mentee",mentee);
+		 System.out.println("22222222222222");
+		return "MyPage"; 
+	 }
+	  @PostMapping("/menteeProfileUpdate") 
+	  public String MenteeProfileUpdate(@ModelAttribute Mentee Mentee, Model model,HttpServletRequest request) {
+		  System.out.println("이건 멘티프로필 등록인데 여기는 오니?");
+		   MenteeService.UpdateMentee(Mentee,request);
+		  return "redirect:/mentee?mode=menteeProfileRead";
+	  }
+	  @GetMapping("/mentee3")
+	  public String  MenteeProfileDelete(Model model, HttpServletRequest request) {
+		  MenteeService.deleteMentee(request);
+		  return "redirect:/myInfo?mode=myPage";
+	  }
+	  
 }
