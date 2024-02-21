@@ -36,7 +36,7 @@ public class ReservationServiceImpl implements ReservationService{
 		String signdate = formatter.format(new java.util.Date());
 		
 		Reservation reservation = new Reservation();
-		reservation.setReservationId(util.createId("ReservationId_Buy"));
+		reservation.setReservationId(util.createId("Buy"));
 		reservation.setTitle(buying.getTitle());
 		reservation.setMenteeId(buying.getMemberId());
 		reservation.setMentorId(memberId);
