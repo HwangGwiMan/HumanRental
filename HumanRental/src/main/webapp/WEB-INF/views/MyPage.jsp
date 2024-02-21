@@ -47,8 +47,7 @@
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
 							<li class="nav-item">프로필 수정
 								<ul>
-									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
-									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
+									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfileRead"/>" class="btn">멘토 프로필 조회</a></li>
 								</ul>
 							<li>
 							<li>등록 목록
@@ -143,19 +142,54 @@
 	        						<button type="button" onclick="deleteMember()">확인</button>
 	    						</form>
 	    					</c:when>	
-							 <c:when test="${ mode == 'mentoProfile' }">
-								<div class="col-1"></div>
-								<div class="col-4">
-									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
-								</div>
-								<div class="col-1"></div>
+							 <c:when test="${ mode == 'mentorProfileRead' }">
+								<div class="col-1"> </div>	
+								<br><br>
 								<div class="col-5">
-									<div class="row p-3"><p>이름 : ${ member.name }</div>
-									<div class="row p-3"><p>닉네임 : ${ member.nickName }</div>
-									<div class="row p-3"><p>나이 : ${ member.age }</div>
-									<div class="row p-3"><p>성별 : ${ member.gender }</div>
-									<div class="row p-3"><p>전화번호 : ${ member.phone }</div>
-									<div class="row p-3"><p>주소 : ${ member.address }</div>
+								<h3>멘토 프로필 등록</h3>
+								<br><br>
+								<form  action="<c:url value="/mentor"/>" method="post">
+										<h2>카테고리</h2>
+    								<div  style="display: flex;  justify-content:space-between;">
+        								<label for="checkbox-1">운동</label>
+        								<input type="checkbox" id="checkbox-1" name=interest value="운동">
+
+        								<label for="checkbox-2">음악</label>
+        								<input type="checkbox" id="checkbox-2" name=interest value="음악">
+
+        								<label for="checkbox-3">게임</label>
+        								<input type="checkbox" id="checkbox-3" name=interest value="게임">
+
+        								<label for="checkbox-4">공부</label>
+        								<input type="checkbox" id="checkbox-4" name=interest value="공부">
+        								
+        								<label for="checkbox-5">기타</label>
+        								<input type="checkbox" id="checkbox-5" name=interest value="기타">
+    								</div>
+    								<br><br>
+    								<div>
+    									<div>
+    										<h3>자기 소개</h3>
+    									</div>
+    									<div>
+        									<input type="text" name="introduction" style="width:400px;height:200px;font-size:20px;"></input>
+        								</div>
+    								</div>
+    								<br><br>
+    								<div>
+    									<h2>너의 자격증을 적어랑</h2>
+    								</div>
+    								<div>
+    									<input type=text name="certification" style="width:400px;height:100px;font-size:20px;" ></input>
+    								</div>
+    								<br><br>
+    								<div>
+	    								<h3 class="fileuploder"> 자격증등록 
+	            						<input type="file" id="ex_file" name="filename" multiple>
+	        							</h3>
+        							</div>
+        							<button type="submit">확인</button>
+								</form>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'menteeProfileRead' }">
@@ -170,15 +204,12 @@
         								<label for="checkbox-1">운동</label>
         								<input type="checkbox" id="checkbox-1" name=interest value="운동">
 
- 									
         								<label for="checkbox-2">음악</label>
         								<input type="checkbox" id="checkbox-2" name=interest value="음악">
 
-        								
         								<label for="checkbox-3">게임</label>
         								<input type="checkbox" id="checkbox-3" name=interest value="게임">
 
-        								
         								<label for="checkbox-4">공부</label>
         								<input type="checkbox" id="checkbox-4" name=interest value="공부">
         								
@@ -239,7 +270,7 @@
     									<div>
     										<h3>자기 소개</h3>
     									</div>
-        								<input name="introduction" value=${ Mentee.introduction} style="width:400px;height:200px;font-size:20px;"></input>
+        								<input type ="text" name="introduction" value=${ Mentee.introduction} style="width:400px;height:200px;font-size:20px;"></input>
     								</div>
     								<button type="submit">확인</button>
 								</form>
