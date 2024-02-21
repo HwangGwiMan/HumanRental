@@ -2,22 +2,17 @@ package com.springmvc.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.springmvc.domain.MentorRegistInfo;
-import com.springmvc.domain.alarm.Alarm;
-import com.springmvc.domain.alarm.MentoApplyAlarm;
+import com.springmvc.domain.Alarm;
 import com.springmvc.util.Utility;
 
 @Repository
@@ -33,34 +28,62 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		this.template = new JdbcTemplate(dataSource);
 	}
 	
-	public void createMentoApplyAlarm(String memberId) {
-		Alarm alarm = new MentoApplyAlarm(memberId);
+	// 멘토 신청 알람 생성
+	@Override
+	public void createMentoApplyAlarm(String sendMemberId) {
+		Alarm alarm = new Alarm();
+		alarm.setSendMemberId(sendMemberId);
+		alarm.setReceiveMemberId("admin");
+		alarm.setContent(sendMemberId + "님의 멘토 신청 알람입니다.");
 		String SQL;
 		
 		try {
-			SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?)";
-			template.update(SQL, util.createId("mentoApplyAlarm"), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
+			SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
+			template.update(SQL, util.createId("mentorApplyAlarm"),alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
 		} catch (EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	// 멘토 신청 결과 알람
+	@Override
+	public void createMentoApplyResultAlarm(String memberId, String result) {
+		Alarm alarm = new Alarm();
+		alarm.setSendMemberId("admin");
+		alarm.setReceiveMemberId(memberId);
+		alarm.setContent(memberId + "님의 멘토 신청이 " + result + " 되었습니다.");
+		
+		String SQL;
+		
+		try {
+			SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
+			template.update(SQL, util.createId("mentorApplyResultAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
+		} catch (EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	// 알람 목록
+	@Override
 	public List<Alarm> selectAlarm(String memberId) {
 		String SQL;
 		
 		List<Alarm> alarmList = null;
 		
 		try {
-			SQL = "SELECT * FROM alarm WHERE memberId = ?";
+			SQL = "SELECT * FROM alarm WHERE receiveMemberId = ?";
 			alarmList = template.query(SQL, new RowMapper<Alarm>() {
 
 				@Override
 				public Alarm mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Alarm alarm = new MentoApplyAlarm();
+					Alarm alarm = new Alarm();
 					alarm.setAlarmId(rs.getString(1));
-					alarm.setReceiveMemberId(rs.getString(2));
-					alarm.setDate(new java.sql.Timestamp(rs.getDate(3).getTime()).toLocalDateTime()); 
-					alarm.setContent(rs.getString(4));
+					alarm.setSendMemberId(rs.getString(2));
+					alarm.setReceiveMemberId(rs.getString(3));
+//					alarm.setDate(new java.sql.Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
+					alarm.setDate(rs.getTimestamp(4).toLocalDateTime());
+					alarm.setContent(rs.getString(5));
 					return alarm;
 				}
 			}, memberId);
@@ -69,5 +92,18 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		}
 		
 		return alarmList;
+	}
+	
+	// 알람 삭제
+	@Override
+	public void deleteAlarm(String memberId, String alarmId) {
+		String SQL;
+		
+		try {
+			SQL = "DELETE FROM alarm WHERE receiveMemberId = ? and alarmId = ?";
+			template.update(SQL, memberId, alarmId);
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -11,10 +11,10 @@
 <body>
     <div class="foot">
         <div>
-            <i class="fas fa-copyright text-light me-2"></i> <span>휴먼렌탈</span>, 세상을 바꾸는 힘.
+            <span>휴먼렌탈</span>, 세상을 바꾸는 힘.
         </div>
         <div>
-            Designed By <span>Jeonghwan Lee</span>
+            Produced by Team3
         </div>
     </div>
 </body>

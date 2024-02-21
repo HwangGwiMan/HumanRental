@@ -13,21 +13,19 @@ age int not null,
 gender varchar(10) not null,
 phone int not null,
 address varchar(100) not null,
-nickname varchar(20) not null,
+nickname varchar(20) not null unique,
 joinDate datetime not null,
 profileImage varchar(20)
 );
 
 INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png");
-
+-- 멘토 테이블
 CREATE TABLE mentor(
 	mentorId varchar(50) primary key,
     memberId varchar(20) unique,
     registDate datetime not null,
     foreign key(memberId) references Member(memberId)
 );
-
-INSERT INTO mentor VALUES("TestMentor1", "admin", "2024-02-19 12:00");
 
 -- 멘토 신청 정보 테이블
 CREATE TABLE IF NOT EXISTS MentorRegistInfo(
@@ -41,12 +39,22 @@ CREATE TABLE IF NOT EXISTS MentorRegistInfo(
     foreign key(memberId) references Member(memberId)
 );
 
+-- 멘토 신청 관리 테이블
+CREATE TABLE IF NOT EXISTS MentorApply(
+	registId varchar(50) not null,
+    memberId varchar(20) not null,
+    confirmDate datetime,
+    state varchar(10) not null,
+    foreign key(registId) references MentorRegistInfo(registId),
+    foreign key(memberId) references Member(memberId)
+);
+
 -- 멘토프로필관리 
 CREATE TABLE IF NOT EXISTS MentorProfile(
 mentorId varchar(20) not null,
 memberId varchar(20) not null,
-introduction varchar(1000) not null,
-starRate int,
+introduction varchar(1000) not null unique,
+starRate int unique,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
@@ -56,34 +64,43 @@ foreign key(mentorId) references mentor(mentorId)
 CREATE TABLE IF NOT EXISTS MenteeProfile(
 menteeId varchar(20) not null primary key,
 memberId varchar(20) not null,
-introduction varchar(1000)not null,
-starRate int,
+introduction varchar(1000)not null unique,
+starRate int unique,
 foreign key(memberId) references Member(memberId)
 );
 
 
 -- 팝니다 관리 
-CREATE TABLE IF NOT EXISTS Selling(
-sellingId varchar(20) not null primary key,
-memberId varchar(20) not null,
-information varchar(1000) not null,
-price int ,
-location varchar(50) not null,
-createDate date,
-foreign key(memberId) references Member(memberId)
+CREATE TABLE IF NOT EXISTS Selling (
+	sellingId VARCHAR(50) primary key,
+	memberId VARCHAR(20),
+	nickname VARCHAR(20),
+	introduction VARCHAR(1000),
+	starRate INT NULL,
+	title VARCHAR(20),
+	content TEXT NULL,
+	regist_day VARCHAR(30),
+	foreign key(memberId) references Member(memberId) ON DELETE CASCADE,
+	foreign key(nickname) references Member(nickname) ON DELETE CASCADE,
+	foreign key(introduction) references menteeprofile(introduction) ON DELETE CASCADE,
+	foreign key(starRate) references menteeprofile(starRate) ON DELETE CASCADE
 );
 
 -- 삽니다 관리 
-CREATE TABLE IF NOT EXISTS Buying(
-buyingId varchar(20) not null primary key,
-memberId varchar(20) not null,
-information varchar(1000) not null,
-price int,
-location varchar(50) not null,
-createDate date,
-foreign key(memberId) references Member(memberId)
-
-); 
+CREATE TABLE IF NOT EXISTS Buying (
+	buyingId VARCHAR(50) primary key,
+	memberId VARCHAR(20),
+	nickname VARCHAR(20),
+	introduction VARCHAR(1000),
+	starRate INT NULL,
+	title VARCHAR(20),
+	content TEXT NULL,
+	regist_day VARCHAR(30),
+	foreign key(memberId) references Member(memberId) ON DELETE CASCADE,
+	foreign key(nickname) references Member(nickname) ON DELETE CASCADE,
+	foreign key(introduction) references menteeprofile(introduction) ON DELETE CASCADE,
+	foreign key(starRate) references menteeprofile(starRate) ON DELETE CASCADE
+);
 
 -- 찜목록 
 CREATE TABLE IF NOT EXISTS Save(
@@ -122,21 +139,15 @@ foreign key(buyingId) references Buying(buyingId)
 );
 
 -- 예약 관리 
-CREATE TABLE IF NOT EXISTS SellAndBuyId(
-contentId varchar(20) not null primary key
-
-);
 CREATE TABLE IF NOT EXISTS Reservation(
 reservationId varchar(20) not null primary key,
 menteeId varchar(20)not null,
 mentorId varchar(20)not null,
-contentId varchar(100)not null,
 memberId varchar(20)not null,
 signDate date,
 content varchar(10000),
 foreign key(menteeId) references  MenteeProfile(menteeId),
 foreign key(mentorId) references  MentorProfile(mentorId),
-foreign key(contentId) references SellAndBuyId(contentId),
 foreign key(memberId ) references Member(memberId)
 );
 
@@ -246,8 +257,10 @@ foreign key(memberId) references Member(memberId)
 
 CREATE TABLE IF NOT EXISTS Alarm(
 alarmId varchar(50) not null primary key,
-memberId varchar(20) not null,
-date date not null,
+sendMemberId varchar(20) not null,
+receiveMemberId varchar(20) not null,
+date datetime not null,
 content varchar(10000) not null,
-foreign key(memberId) references Member(memberId)
+foreign key(sendMemberId) references Member(memberId),
+foreign key(receiveMemberId) references Member(memberId)
 );

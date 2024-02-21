@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<<<<<<< HEAD
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
+=======
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+>>>>>>> refs/heads/main
 <!DOCTYPE html>
 <html>
 	<head>
@@ -192,6 +197,7 @@
 								</form>
 								</div>
 							</c:when>
+<<<<<<< HEAD
 							<c:when test="${ mode == 'menteeProfileRead' }">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -225,8 +231,42 @@
     								</div>
     								<button type="submit">확인</button>
 								</form>
+=======
+							<c:when test="${ mode == 'meteeProfile' }">
+								<div class="col-1"></div>
+								<div class="col-4">
+									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
+								</div>
+								<div class="col-1"></div>
+								<div></div>
+							</c:when>
+							<c:when test="${ mode == 'memberManagement' }">
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>유저 ID</th>
+											<th>가입일</th>
+											<th>멘토 권한</th>
+											<th>멘토 등록일</th>
+										</tr>
+										<c:forEach var="member" items="${memberList}" varStatus="status">					
+											<tr>
+											
+												<td>${ status.count }</td>
+												<td>${ member.memberId }</td>
+												<td>${ member.memberJoinDate }</td>
+												<td>
+													<c:if test="${ not empty member.mentorId }">승인</c:if>
+												</td>
+												<td>${ member.mentorRegistDate }</td>
+											</tr>
+										</c:forEach>
+									</table>
+>>>>>>> refs/heads/main
 								</div>
 							</c:when>
+<<<<<<< HEAD
 							<c:when test="${ mode == 'menteeInformation' }">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -235,8 +275,46 @@
 									<div class="row p-3">소개 :${ Mentee.introduction}</div>
 									<div><a href="<c:url value="/mentee2?mode=menteeProfileUpdate"/>">멘티 프로필 수정</a></li></div>
 									<div><a href="<c:url value="/mentee3"/>">멘티 프로필 삭제</a></li></div>
+=======
+							<c:when test="${ mode == 'mentorApplyManagement' }">
+								<div>
+									<div class="row text-center p-3">
+										<div class="col-1"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-outline-info">전체</a></div>
+										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="btn btn-primary">처리된 요청</a></div>
+										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="btn btn-secondary">보류 중인 요청</a></div>
+									</div>
+									<table class="table table-hover ">
+										<tr>
+											<th>번호</th>
+											<th>유저 ID</th>
+											<th>신청일</th>
+											<th>처리결과</th>
+											<th>처리일</th>
+										</tr>
+										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
+											<tr onclick="javascript:readApplyInfo(${ applyInfo.memberId })">
+												<td>${ status.count }</td>
+												<td>${ applyInfo.memberId }</td>
+												<td>${ applyInfo.applyDate }</td>
+												<c:choose>
+													<c:when test="${ applyInfo.state == 'Wait' }">
+														<td><div class="badge bg-secondary">대기중</div></td>
+													</c:when>
+													<c:when test="${ applyInfo.state == 'Accept' }">
+														<td><div class="badge bg-success">승인</div></td>
+													</c:when>
+													<c:when test="${ applyInfo.state == 'Refuse' }">
+														<td><div class="badge bg-danger">거부</div></td>
+													</c:when>
+												</c:choose>
+												<td>${ applyInfo.confirmDate }</td>
+											</tr>
+										</c:forEach>
+									</table>
+>>>>>>> refs/heads/main
 								</div>
 							</c:when>
+<<<<<<< HEAD
 							<c:when test="${ mode == 'menteeProfileUpdate'}">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -274,6 +352,26 @@
     								</div>
     								<button type="submit">확인</button>
 								</form>
+=======
+							<c:when test="${ mode == 'applyInfo' }">
+								<div class="col">
+									<div class="row">
+										<div class="col">
+											<img width="300" height="200" src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />">
+										</div>
+										<p>신청자 ID : ${ applyInfo.memberId }
+										<p>특기 분야 : ${ applyInfo.specialty }
+										<p>주요 활동 지역 : ${ applyInfo.location }
+										<p>신청 이유 : ${ applyInfo.reason }
+										<p>기타 사항
+										<p>${ applyInfo.etc }
+									</div>
+									<div>
+										<a href="<c:url value="/mentorRegist?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-success">승인</a>
+										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-danger">거절</a>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
+									</div>
+>>>>>>> refs/heads/main
 								</div>
 							</c:when>							
 						</c:choose>
