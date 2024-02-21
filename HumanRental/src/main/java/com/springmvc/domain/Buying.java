@@ -1,8 +1,8 @@
 package com.springmvc.domain;
 
 
-public class Selling {
-	private String sellingId;
+public class Buying {
+	private String buyingId;
 	private String memberId;
 	private String nickname;
 	private String introduction;
@@ -14,11 +14,11 @@ public class Selling {
 	private int price;
 	private String location;
 	
-	public String getSellingId() {
-		return sellingId;
+	public String getBuyingId() {
+		return buyingId;
 	}
-	public void setSellingId(String sellingId) {
-		this.sellingId = sellingId;
+	public void setBuyingId(String buyingId) {
+		this.buyingId = buyingId;
 	}
 	public String getMemberId() {
 		return memberId;

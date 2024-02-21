@@ -12,72 +12,72 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.Member;
-import com.springmvc.domain.Selling;
+import com.springmvc.domain.Buying;
 import com.springmvc.service.MemberService;
-import com.springmvc.service.SellingService;
+import com.springmvc.service.BuyingService;
 
 @Controller
-public class SellingController {
+public class BuyingController {
 	
 	@Autowired
-	SellingService sellingservice;
+	BuyingService buyingservice;
 	
 	@Autowired
 	MemberService memberService;
 	
 	//멘티게시글 리스트 페이지
-	@GetMapping("/SellingList")
+	@GetMapping("/BuyingList")
 	public String MentorList(@RequestParam(name = "category", required = false) String category, Model model) {
 //		System.out.println("category : "+category);
-		sellingservice.SellingList(model, category);
-		return "SellingList";
+		buyingservice.BuyingList(model, category);
+		return "BuyingList";
 	}
 	
 	//멘티게시글 상세페이지
-	@GetMapping("/selling/detail")
-	public String SellingDetail(@RequestParam("sellingId") String sellingId, Model model) {
-		sellingservice.SellingDetailbyId(model, sellingId);
-		return "SellingDetail";
+	@GetMapping("/buying/detail")
+	public String BuyingDetail(@RequestParam("buyingId") String buyingId, Model model) {
+		buyingservice.BuyingDetailbyId(model, buyingId);
+		return "BuyingDetail";
 	}
 	
-	@GetMapping("/selling")
-	public String Selling(@ModelAttribute Selling selling, Model model, HttpServletRequest request) {
+	@GetMapping("/buying")
+	public String Buying(@ModelAttribute Buying buying, Model model, HttpServletRequest request) {
 //		System.out.println("셀링 겟 접근");
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		Member member = memberService.getMember(memberId);
 		model.addAttribute("member", member);
 		model.addAttribute("type", "view");
-		return "Selling";
+		return "Buying";
 	}
 	
-	@PostMapping("/selling")
-	public String SellingCreate(@ModelAttribute Selling selling, Model model, HttpServletRequest request) {
+	@PostMapping("/buying")
+	public String BuyingCreate(@ModelAttribute Buying buying, Model model, HttpServletRequest request) {
 //		System.out.println("셀링 포스트 접근");
-		sellingservice.SellingCreate(selling);
-		return "redirect:/SellingList";
+		buyingservice.BuyingCreate(buying);
+		return "redirect:/BuyingList";
 	}
 	
-	@GetMapping("/selling/delete")
-	public String SellingDelete(@RequestParam("sellingId") String sellingId) {
+	@GetMapping("/buying/delete")
+	public String BuyingDelete(@RequestParam("buyingId") String buyingId) {
 //		System.out.println("셀링 딜리트 접근");
-		sellingservice.SellingDelete(sellingId);
-		return "redirect:/SellingList";
+		buyingservice.BuyingDelete(buyingId);
+		return "redirect:/BuyingList";
 	}
 	
-	@GetMapping("/selling/update")
-	public String SellingUpdate(@ModelAttribute Selling selling, @RequestParam("sellingId") String sellingId, Model model) {
+	@GetMapping("/buying/update")
+	public String BuyingUpdate(@ModelAttribute Buying buying, @RequestParam("buyingId") String buyingId, Model model) {
 //		System.out.println("셀링 업데이트 겟 접근");
-		sellingservice.SellingDetailbyId(model, sellingId);
+		buyingservice.BuyingDetailbyId(model, buyingId);
 		model.addAttribute("type", "update");
-		return "Selling";
+		return "Buying";
 	}
 	
-	@PostMapping("/selling/update")
-	public String SellingUpdateAction(@ModelAttribute Selling selling, Model model) {
+	@PostMapping("/buying/update")
+	public String BuyingUpdateAction(@ModelAttribute Buying buying, Model model) {
 //		System.out.println("셀링 업데이트 포스트 접근");
-		sellingservice.SellingUpdate(selling);
+		buyingservice.BuyingUpdate(buying);
 		model.addAttribute("type", "view");
-		return "redirect:/SellingList";
+		return "redirect:/BuyingList";
 	}
 }

@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.springmvc.domain.Board;
-import com.springmvc.domain.Selling;
+import com.springmvc.domain.Buying;
 
-public class SellingRowMapper implements RowMapper<Selling> {
+public class BuyingRowMapper implements RowMapper<Buying> {
 
-	public Selling mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public Buying mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		Selling selling = new Selling();
-		selling.setSellingId(rs.getString(1));
+		Buying selling = new Buying();
+		selling.setBuyingId(rs.getString(1));
 		selling.setMemberId(rs.getString(2));
 		selling.setNickname(rs.getString(3));
 		selling.setIntroduction(rs.getString(4));

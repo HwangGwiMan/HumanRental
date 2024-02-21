@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="top d-flex">
 			
-			<c:set var="selling" value="${selling}" />
+			<c:set var="buying" value="${buying}" />
 			
 				<div class="left col-6">
 					<div class="img">이미지</div>
@@ -22,36 +22,36 @@
 				<div class="col-6">
 					<div class="info">
 						<div>
-							<h2>${selling.title}</h2>
-							<h5>${selling.regist_day}</h5>
+							<h2>${buying.title}</h2>
+							<h5>${buying.regist_day}</h5>
 							<br>
-							<h4>${selling.nickname} 
+							<h4>${buying.nickname} 
 							<span>
 							<c:choose>
-								<c:when test="${selling.starRate==0}">☆☆☆☆☆</c:when>
-								<c:when test="${selling.starRate==1}">★☆☆☆☆</c:when>
-								<c:when test="${selling.starRate==2}">★★☆☆☆</c:when>
-								<c:when test="${selling.starRate==3}">★★★☆☆</c:when>
-								<c:when test="${selling.starRate==4}">★★★★☆</c:when>
-								<c:when test="${selling.starRate==5}">★★★★★</c:when>
+								<c:when test="${buying.starRate==0}">☆☆☆☆☆</c:when>
+								<c:when test="${buying.starRate==1}">★☆☆☆☆</c:when>
+								<c:when test="${buying.starRate==2}">★★☆☆☆</c:when>
+								<c:when test="${buying.starRate==3}">★★★☆☆</c:when>
+								<c:when test="${buying.starRate==4}">★★★★☆</c:when>
+								<c:when test="${buying.starRate==5}">★★★★★</c:when>
 							</c:choose>
 							</span></h4>
 							<br>
-							<p>${selling.content}</p>
+							<p>${buying.content}</p>
 							<br>
 						</div>
 						<div class="qq">
-							<h4>시간당 ${selling.price}원</h4>
+							<h4>시간당 ${buying.price}원</h4>
 							<c:set var="sessionId" value="${sessionScope.user}" />
 							<c:choose>
-								<c:when test="${sessionId==selling.memberId}">
-									<div class="box1"><a href="<c:url value="/selling/delete?sellingId=${selling.sellingId}"/>">삭제</a></div>
-									<div class="box2"><a href="<c:url value="/selling/update?sellingId=${selling.sellingId}"/>">수정</a></div>
+								<c:when test="${sessionId==buying.memberId}">
+									<div class="box1"><a href="<c:url value="/buying/delete?buyingId=${buying.buyingId}"/>">삭제</a></div>
+									<div class="box2"><a href="<c:url value="/buying/update?buyingId=${buying.buyingId}"/>">수정</a></div>
 									
 								</c:when>
 								<c:otherwise>
-									<div class="box1">찜하기</div>
-									<div class="box2">신청하기</div>
+									<div class="box1"><a href="<c:url value="/reservation/create?buyingId=${buying.buyingId}"/>">신청하기</a></div>
+									<div class="box2"><a href="<c:url value="/buying/update?buyingId=${buying.buyingId}"/>">찜하기</a></div>
 								</c:otherwise>
 							</c:choose>
 						</div>
