@@ -171,7 +171,7 @@ public class PrivacyController {
 	@PostMapping("/deleteMember") 
 	public String deleteMember(@RequestParam("mode") String mode, @RequestParam("memberId") String memberId,
 	        @RequestParam("memberPw") String memberPw, Model model ,HttpServletRequest request) {
-	
+			System.out.println("회원탈퇴컨트롤러");
 	   
 	    memberService.deleteMember(memberId,memberPw);
 	    HttpSession session = request.getSession();
@@ -179,5 +179,9 @@ public class PrivacyController {
 	    
 	    return "redirect:main"; // 다른 페이지로 리다이렉트
 	}
+
+	
+	
+
 
 }
