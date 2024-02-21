@@ -51,7 +51,6 @@
 						<a href="./boardupdate2?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-success">수정</a>
 				</c:if>
 				<a href="<c:url value="/board2?page=${pageNum}"/>" class="btn btn-primary">목록</a>
-				<div>test = ${board.memberId},${pageNum},${sessionId}</div>
 			</div>
 		</div>
 		<hr>
