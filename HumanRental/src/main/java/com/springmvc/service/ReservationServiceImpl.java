@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,15 +33,13 @@ public class ReservationServiceImpl implements ReservationService{
 	public void ReservationCreate(String buyingId, String memberId) {
 		
 		Buying buying = buyingrepository.BuyingDetailbyId(buyingId);
-		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
-		String signdate = formatter.format(new java.util.Date());
 		
 		Reservation reservation = new Reservation();
-		reservation.setReservationId(util.createId("ReservationId_Buy"));
+		reservation.setReservationId(util.createId("Buy"));
 		reservation.setTitle(buying.getTitle());
 		reservation.setMenteeId(buying.getMemberId());
 		reservation.setMentorId(memberId);
-		reservation.setSignDate(signdate);
+		reservation.setSignDate(LocalDateTime.now());
 		
 		reservationrepository.ReservationCreate(reservation);
 	}

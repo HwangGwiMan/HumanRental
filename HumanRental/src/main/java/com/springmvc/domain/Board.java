@@ -1,5 +1,6 @@
 package com.springmvc.domain;
 
+import java.time.LocalDateTime;
 
 public class Board {
 	private int boardId;
@@ -7,7 +8,7 @@ public class Board {
 	private String name;
 	private String title;
 	private String content;
-	private String regist_day;
+	private LocalDateTime regist_day;
 	private int hit;
 	
 	public int getBoardId() {
@@ -40,10 +41,11 @@ public class Board {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getRegist_day() {
+	
+	public LocalDateTime getRegist_day() {
 		return regist_day;
 	}
-	public void setRegist_day(String regist_day) {
+	public void setRegist_day(LocalDateTime regist_day) {
 		this.regist_day = regist_day;
 	}
 	public int getHit() {
