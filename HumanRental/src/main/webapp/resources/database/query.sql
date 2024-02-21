@@ -79,7 +79,10 @@ CREATE TABLE IF NOT EXISTS Selling (
 	starRate INT NULL,
 	title VARCHAR(20),
 	content TEXT NULL,
-	regist_day VARCHAR(30),
+	regist_day datetime,
+    category varchar(10),
+    price int,
+    location VARCHAR(50),
 	foreign key(memberId) references Member(memberId) ON DELETE CASCADE,
 	foreign key(nickname) references Member(nickname) ON DELETE CASCADE,
 	foreign key(introduction) references menteeprofile(introduction) ON DELETE CASCADE,
@@ -95,7 +98,10 @@ CREATE TABLE IF NOT EXISTS Buying (
 	starRate INT NULL,
 	title VARCHAR(20),
 	content TEXT NULL,
-	regist_day VARCHAR(30),
+	regist_day datetime,
+    category varchar(10),
+    price int,
+    location VARCHAR(50),
 	foreign key(memberId) references Member(memberId) ON DELETE CASCADE,
 	foreign key(nickname) references Member(nickname) ON DELETE CASCADE,
 	foreign key(introduction) references menteeprofile(introduction) ON DELETE CASCADE,
@@ -140,15 +146,13 @@ foreign key(buyingId) references Buying(buyingId)
 
 -- 예약 관리 
 CREATE TABLE IF NOT EXISTS Reservation(
-reservationId varchar(20) not null primary key,
-menteeId varchar(20)not null,
-mentorId varchar(20)not null,
-memberId varchar(20)not null,
-signDate date,
-content varchar(10000),
+reservationId varchar(20) primary key,
+title varchar(20),
+menteeId varchar(20),
+mentorId varchar(20),
+signDate datetime,
 foreign key(menteeId) references  MenteeProfile(menteeId),
-foreign key(mentorId) references  MentorProfile(mentorId),
-foreign key(memberId ) references Member(memberId)
+foreign key(mentorId) references  MentorProfile(mentorId)
 );
 
 -- 알람 관리  이건 좀 나중에 
@@ -195,7 +199,7 @@ memberId varchar(20) not null,
 name varchar(20) not null,
 title varchar(100),
 content varchar(10000),
-regist_day varchar(30) not null,
+regist_day datetime not null,
 hit int default 0
 );
 

@@ -1,12 +1,14 @@
 package com.springmvc.domain;
 
+import java.time.LocalDateTime;
 
 public class Reservation {
 	private String reservationId;
 	private String title;
 	private String menteeId;
 	private String mentorId;
-	private String signDate;
+	private LocalDateTime signDate;
+	
 	public String getReservationId() {
 		return reservationId;
 	}
@@ -31,10 +33,10 @@ public class Reservation {
 	public void setMentorId(String mentorId) {
 		this.mentorId = mentorId;
 	}
-	public String getSignDate() {
+	public LocalDateTime getSignDate() {
 		return signDate;
 	}
-	public void setSignDate(String signDate) {
+	public void setSignDate(LocalDateTime signDate) {
 		this.signDate = signDate;
 	}
 	
