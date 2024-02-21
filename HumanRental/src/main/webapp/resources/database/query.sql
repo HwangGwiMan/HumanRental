@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS MentorApply(
 CREATE TABLE IF NOT EXISTS MentorProfile(
 mentorId varchar(20) not null,
 memberId varchar(20) not null,
-introduction varchar(1000) not null unique,
-starRate int unique,
+introduction varchar(1000) not null,
+starRate int,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
@@ -64,8 +64,8 @@ foreign key(mentorId) references mentor(mentorId)
 CREATE TABLE IF NOT EXISTS MenteeProfile(
 menteeId varchar(20) not null primary key,
 memberId varchar(20) not null,
-introduction varchar(1000)not null unique,
-starRate int unique,
+introduction varchar(1000)not null,
+starRate int,
 foreign key(memberId) references Member(memberId)
 );
 
@@ -84,9 +84,7 @@ CREATE TABLE IF NOT EXISTS Selling (
     price int,
     location VARCHAR(50),
 	foreign key(memberId) references Member(memberId) ON DELETE CASCADE,
-	foreign key(nickname) references Member(nickname) ON DELETE CASCADE,
-	foreign key(introduction) references menteeprofile(introduction) ON DELETE CASCADE,
-	foreign key(starRate) references menteeprofile(starRate) ON DELETE CASCADE
+	foreign key(nickname) references Member(nickname) ON DELETE CASCADE
 );
 
 -- 삽니다 관리 
@@ -103,9 +101,7 @@ CREATE TABLE IF NOT EXISTS Buying (
     price int,
     location VARCHAR(50),
 	foreign key(memberId) references Member(memberId) ON DELETE CASCADE,
-	foreign key(nickname) references Member(nickname) ON DELETE CASCADE,
-	foreign key(introduction) references menteeprofile(introduction) ON DELETE CASCADE,
-	foreign key(starRate) references menteeprofile(starRate) ON DELETE CASCADE
+	foreign key(nickname) references Member(nickname) ON DELETE CASCADE
 );
 
 -- 찜목록 

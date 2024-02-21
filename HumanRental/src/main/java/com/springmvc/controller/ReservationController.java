@@ -31,6 +31,6 @@ public class ReservationController {
 		String memberId = (String)session.getAttribute("user");
 		reservationservice.ReservationCreate(buyingId, memberId);
 		
-		return "SellingList";
+		return "Buying";
 	}
 }
