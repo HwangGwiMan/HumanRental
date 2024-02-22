@@ -34,18 +34,18 @@
 				<label class="col-sm-1 control-label" >제목</label>
 				<div class="col-sm-5">
 
-					<input name="title" type="text" class="form-control">
+					<input name="title" type="text" class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-1 control-label" >내용</label>
 				<div class="col-sm-8">
-					<textarea name="content" cols="50" rows="5" class="form-control"></textarea>
+					<textarea name="content" cols="50" rows="5" class="form-control" required></textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10 ">
-					<input type="submit" class="btn btn-primary " value="수정">	
+					<input type="submit" class="btn btn-primary " value="작성">	
 					<input type="reset" class="btn btn-danger" value="취소" onclick="goBack()">
 				</div>
 			</div>
