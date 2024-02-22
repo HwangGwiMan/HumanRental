@@ -57,19 +57,25 @@ public class PrivacyController {
 			
 			// 어드민 관련 데이터
 			if(memberId.equals("admin")) {
-				// 멤버 관리
-				model.addAttribute("memberList", mentorService.getMentorListWithMember());
-
-				// 멘토 신청 관리
-				if(state.equals("none") ) {
-					model.addAttribute("applyList", mentorService.getMentorApplyList());
-				} else {
-					model.addAttribute("applyList", mentorService.getMentorApplyList(state));
+				
+				if(mode.equals("memberManagement")) {
+					// 멤버 관리
+					model.addAttribute("memberList", mentorService.getMentorListWithMember());
+				} else if(mode.equals("mentorApplyManagement")) {
+					// 멘토 신청 관리
+					if(state.equals("none") ) {
+						model.addAttribute("applyList", mentorService.getMentorApplyList());
+					} else {
+						model.addAttribute("applyList", mentorService.getMentorApplyList(state));
+					}
+				} else if(mode.equals("applyInfo") ) {
+					// 개별 멘토 신청 관리
+					model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
+				} else if(mode.equals("report")) {
+					// 신고 관리
+					
 				}
 
-				
-				// 개별 멘토 신청 관리
-				model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
 			} else {// 일반 유저 관련 데이터
 				if(mode.equals("memberManagement") || mode.equals("applyInfo") || mode.equals("memberManagement")) {
 					mode = "myPage";

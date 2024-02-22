@@ -46,4 +46,7 @@ public interface BoardService {
 	
 	//선택된 글 삭제하기
 	public void deleteBoard2(int boardId);
+	
+	//선택된 글 멤버 ID 가져오기
+	public String getMemberIdByBoardId(int boardId);
 }

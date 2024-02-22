@@ -142,7 +142,10 @@ public class BoardServiceImpl implements BoardService{
 	public void deleteBoard2(int boardId) {
 		boardRepository.deleteBoard2(boardId);
 	}
-	
-	
-	
+
+	@Override
+	public String getMemberIdByBoardId(int boardId) {
+		return boardRepository.getMemberIdByBoardId(boardId);
+	}
+
 }

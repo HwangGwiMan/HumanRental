@@ -1,5 +1,7 @@
 package com.springmvc.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +9,10 @@ import javax.servlet.ServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Board;
@@ -200,6 +204,26 @@ public class BoardRepositoryImpl implements BoardRepository {
 	public void deleteBoard2(int boardId) {
 		String sql = "delete from board2 where boardId=?";
 		template.update(sql, boardId);
+	}
+	
+	@Override
+	public String getMemberIdByBoardId(int boardId) {
+		String SQL = "SELECT memberId FROM board WHERE boardId = ?";
+		
+		try {
+			return template.queryForObject(SQL, new RowMapper<String>() {
+
+				@Override
+				public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+					return rs.getString(1);
+				}
+				
+			}, boardId);
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			return null;
+		}
+		
+		
 	}
 	
 }

@@ -48,7 +48,7 @@
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=memberManagement"/>" class="btn">회원 관리</a></li>
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn">멘토 신청 관리</a></li>
-							<li class="nav-item"><a href="<c:url value="/myInfo?mode=reportManagement"/>" class="btn">신고 관리</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=report"/>" class="btn">신고 관리</a></li>
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=blackListManagement"/>" class="btn">블랙리스트 관리</a></li>
 						</c:when>
 					</c:choose>
@@ -229,6 +229,21 @@
 										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-danger">거절</a>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
 									</div>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'report' }">
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>신고자 ID</th>
+											<th>신고 유형</th>
+											<th>신고 대상</th>
+											<th>신고 내용</th>
+											<th>처리 상태</th>
+											<th>신고 날짜</th>
+										</tr>
+									</table>
 								</div>
 							</c:when>
 						</c:choose>
