@@ -57,7 +57,7 @@
 				<div class="col">
 					<div class="row justify-content-center">
 						<c:choose>
-							<c:when test="${ mode == 'myPage' }">
+							<c:when test="${ mode == 'myPage' }"><!-- 마이 페이지 -->
 								<div class="col-1"></div>
 								<div class="col-4">
 									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
@@ -73,7 +73,7 @@
 									<div class="row p-3"><p>멘토 여부 : ${ isMentor }</div>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'myPageEdit' }">
+							<c:when test="${ mode == 'myPageEdit' }"><!-- 회원 정보 수정 -->
 								<form class="col" action="<c:url value="/myPageEdit" />" method="post" encType="multipart/form-data">
 									<div class="row">
 										<div class="col-1"></div>
@@ -97,7 +97,7 @@
 									</div>
 								</form>
 							</c:when>
-							<c:when test="${ mode == 'userCheck' }">
+							<c:when test="${ mode == 'userCheck' }"><!-- 유저 2차 확인 -->
 								<form class="col-4" action="<c:url value="/myInfo" />" method="post">
 									<div class="row justify-content-center">아이디 비밀번호 확인</div>
 									<div class="row justify-content-center">
@@ -111,7 +111,7 @@
 									<input type="submit" value="확인">
 								</form>
 							</c:when>
-							<c:when test="${ mode == 'delete' }">
+							<c:when test="${ mode == 'delete' }"><!-- 회원 탈퇴 -->
 	    						<form class="col-4" action="<c:url value="/deleteMember" />" method="post">
 	       							 <div class="row justify-content-center">회원 탈퇴 </div>
 	        						<div class="row justify-content-center">
@@ -126,7 +126,7 @@
 	        						<button type="button" onclick="javascript:deleteMember()">확인</button>
 	    						</form>
 	    					</c:when>
-							<c:when test="${ mode == 'mentorProfile' }">
+							<c:when test="${ mode == 'mentorProfile' }"><!-- 멘토 프로필 -->
 								<div class="col-1"></div>
 								<div class="col-4">
 									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
@@ -141,7 +141,7 @@
 									<div class="row p-3"><p>주소 : ${ member.address }</div>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'meteeProfile' }">
+							<c:when test="${ mode == 'meteeProfile' }"><!-- 멘티 프로필 -->
 								<div class="col-1"></div>
 								<div class="col-4">
 									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
@@ -149,7 +149,7 @@
 								<div class="col-1"></div>
 								<div></div>
 							</c:when>
-							<c:when test="${ mode == 'memberManagement' }">
+							<c:when test="${ mode == 'memberManagement' }"><!-- 멤버 관리 페이지 -->
 								<div>
 									<table class="table table-hover">
 										<tr>
@@ -174,7 +174,7 @@
 									</table>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'mentorApplyManagement' }">
+							<c:when test="${ mode == 'mentorApplyManagement' }"><!-- 멘토 신청 관리 페이지 -->
 								<div>
 									<div class="row text-center p-3">
 										<div class="col-1"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-outline-info">전체</a></div>
@@ -190,7 +190,7 @@
 											<th>처리일</th>
 										</tr>
 										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
-											<tr onclick="javascript:readApplyInfo(${ applyInfo.memberId })">
+											<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }')">
 												<td>${ status.count }</td>
 												<td>${ applyInfo.memberId }</td>
 												<td>${ applyInfo.applyDate }</td>
@@ -211,7 +211,7 @@
 									</table>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'applyInfo' }">
+							<c:when test="${ mode == 'applyInfo' }"><!-- 멘토 신청 조회 페이지 -->
 								<div class="col">
 									<div class="row">
 										<div class="col">
@@ -231,7 +231,7 @@
 									</div>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'report' }">
+							<c:when test="${ mode == 'report' }"><!-- 신고 관리 페이지 -->
 								<div>
 									<table class="table table-hover">
 										<tr>
@@ -244,7 +244,7 @@
 											<th>신고 날짜</th>
 										</tr>
 										<c:forEach var="report" items="${ reportList }" varStatus="status">
-											<tr>
+											<tr onclick="javascript:readReportInfo('${ report.reportId }')">
 												<td>${ status.count }</td>
 												<td>${ report.reporterId }</td>
 												<td>${ report.target }</td>
@@ -262,6 +262,23 @@
 											</tr>
 										</c:forEach>
 									</table>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'reportInfo' }">
+								<div class="col">
+									<div class="row">
+										<p>신청자 ID : 
+										<p>특기 분야 : 
+										<p>주요 활동 지역 : 
+										<p>신청 이유 : 
+										<p>기타 사항
+										<p>
+									</div>
+									<div>
+										<a href="<c:url value="/" />" class="btn btn-success">처리</a>
+										<a href="<c:url value="/" />" class="btn btn-danger">내용</a>
+										<a href="<c:url value="/myInfo?mode=report" />" class="btn btn-secondary">목록</a>
+									</div>
 								</div>
 							</c:when>
 						</c:choose>

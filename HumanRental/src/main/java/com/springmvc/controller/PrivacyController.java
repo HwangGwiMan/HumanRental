@@ -78,6 +78,8 @@ public class PrivacyController {
 				} else if(mode.equals("report")) {
 					// 신고 관리
 					model.addAttribute("reportList", reportService.getReportList());
+				} else if(mode.equals("reportInfo")) {
+					
 				}
 
 			} else {// 일반 유저 관련 데이터
