@@ -238,11 +238,29 @@
 											<th>번호</th>
 											<th>신고자 ID</th>
 											<th>신고 유형</th>
-											<th>신고 대상</th>
+											<th>신고 대상 ID</th>
 											<th>신고 내용</th>
 											<th>처리 상태</th>
 											<th>신고 날짜</th>
 										</tr>
+										<c:forEach var="report" items="${ reportList }" varStatus="status">
+											<tr>
+												<td>${ status.count }</td>
+												<td>${ report.reporterId }</td>
+												<td>${ report.target }</td>
+												<td>${ report.targetId }</td>
+												<td>${ report.type }</td>
+												<c:choose>
+													<c:when test="${ report.state == 'Wait' }">
+														<td><div class="badge bg-secondary">대기중</div></td>
+													</c:when>
+													<c:when test="${ report.state == 'Solve' }">
+														<td><div class="badge bg-success">처리완료</div></td>
+													</c:when>
+												</c:choose>
+												<td>${ report.createDate }</td>
+											</tr>
+										</c:forEach>
 									</table>
 								</div>
 							</c:when>

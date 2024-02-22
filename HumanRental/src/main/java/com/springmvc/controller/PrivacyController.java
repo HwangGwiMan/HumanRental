@@ -25,6 +25,7 @@ import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.MemberService;
 import com.springmvc.service.MentorService;
+import com.springmvc.service.ReportService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,9 @@ public class PrivacyController {
 	
 	@Autowired
 	MentorService mentorService;
+	
+	@Autowired
+	ReportService reportService;
 	
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
@@ -73,7 +77,7 @@ public class PrivacyController {
 					model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
 				} else if(mode.equals("report")) {
 					// 신고 관리
-					
+					model.addAttribute("reportList", reportService.getReportList());
 				}
 
 			} else {// 일반 유저 관련 데이터
@@ -160,7 +164,6 @@ public class PrivacyController {
 	}
 	
 	public String setFileName(String memberId) {
-		List<Member> memberList = memberService.getMembers();
 		Member member = memberService.getMember(memberId);
 		
 		String fileImageName = member.getProfileImage();
@@ -168,8 +171,7 @@ public class PrivacyController {
 		if(fileImageName != null && fileImageName.contains("profileImage")) {
 			return fileImageName;
 		} else {
-			int userCount = memberList.size();
-			return "profileImage" + userCount +".jpg";
+			return "profileImage" + member.getMemberId() +".jpg";
 		}
 	}
 	

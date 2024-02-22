@@ -28,7 +28,7 @@
 					<div class="col"><input type="text" name="memberId" value="${ memberId }" disabled></div>
 				</div>
 				<div class="row">
-					<div class="col-4 p-2">게시글 ID :</div>
+					<div class="col-4 p-2">대상 ID :</div>
 					<div class="col">
 						<c:choose>
 							<c:when test="${ target == '게시글' }">
