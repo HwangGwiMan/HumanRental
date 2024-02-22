@@ -58,7 +58,9 @@ function idDuplicateCheck(memberId) {
 			}
 		})
 	}
+	
 }
+<<<<<<< HEAD
 
 function readApplyInfo(memberId) {
 	window.location.href="./myInfo?mode=applyInfo&id=" + memberId; 
@@ -67,3 +69,11 @@ function readApplyInfo(memberId) {
 function readReportInfo(reportId) {
 	window.location.href="./myInfo?mode=reportInfo&id=" + reportId;
 }
+=======
+function deletemember(){
+	var memberId = document.getElementById("memberId").value;
+	var memberPw = document.getElementById("memberPw").value;
+	
+	console.log("잘뜨고 잇냐?");
+}
+>>>>>>> refs/heads/main

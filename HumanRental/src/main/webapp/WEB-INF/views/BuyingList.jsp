@@ -16,26 +16,26 @@
             <br>멘티 리스트<br><br><br>
         </div>
         <div class="category">
-            <div><a href="<c:url value="/SellingList?category=music"/>"><i class="fa-solid fa-guitar"></i></a></div>
-            <div><a href="<c:url value="/SellingList?category=sports"/>"><i class="fa-solid fa-person-running"></i></a></div>
-            <div><a href="<c:url value="/SellingList?category=game"/>"><i class="fa-solid fa-gamepad"></i></a></div>
+            <div><a href="<c:url value="/BuyingList?category=music"/>"><i class="fa-solid fa-guitar"></i></a></div>
+            <div><a href="<c:url value="/BuyingList?category=sports"/>"><i class="fa-solid fa-person-running"></i></a></div>
+            <div><a href="<c:url value="/BuyingList?category=game"/>"><i class="fa-solid fa-gamepad"></i></a></div>
             <div><i class="fa-solid fa-comments"></i></div>
             <div><i class="fa-solid fa-car"></i></div>
             <div><i class="fa-solid fa-hammer"></i></div>
             <div><i class="fa-solid fa-book-open"></i></div>
-            <div><a href="<c:url value="/selling" />"><h4>쓰기</h4></a></div>
+            <div><a href="<c:url value="/buying" />"><h4>쓰기</h4></a></div>
             
         </div>
         <div class="qq1 row">
-	        <c:forEach items="${sellinglist}" var="selling">
+	        <c:forEach items="${buyinglist}" var="buying">
 	            <div class="qq2 col-3">
 	                <div class="wrapper">
 	                    <div class="image-wrapper">
 	                        <i class="fa-solid fa-guitar"></i>
-	                        <h1 class="name">${selling.title}</h1>
-	                        <p class="description">${selling.nickname}</p>
+	                        <h1 class="name">${buying.title}</h1>
+	                        <p class="description">${buying.nickname}</p>
 	                        <br>
-	                        <a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a>
+	                        <a href='<c:url value="/buying/detail?buyingId=${buying.buyingId}"/>' class="follow">신청하기</a>
 	                    </div>
 	                </div>
 	            </div>
