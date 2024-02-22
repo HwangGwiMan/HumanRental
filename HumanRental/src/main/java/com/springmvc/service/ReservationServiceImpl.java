@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +31,25 @@ public class ReservationServiceImpl implements ReservationService{
 	Utility util = new Utility();
 
 	@Override
-	public void ReservationCreate(String buyingId, String memberId) {
+	public Reservation ReservationCreate(String buyingId, String date, String content, String memberId) {
+		
+		// 추후에 멘티, 멘토 아이디로 변경해야함
 		
 		Buying buying = buyingrepository.BuyingDetailbyId(buyingId);
 		
 		Reservation reservation = new Reservation();
-		reservation.setReservationId(util.createId("Buy"));
+		reservation.setReservationId(util.createId("Reservation"));
+		reservation.setType("buy");
 		reservation.setTitle(buying.getTitle());
 		reservation.setMenteeId(buying.getMemberId());
 		reservation.setMentorId(memberId);
-		reservation.setSignDate(LocalDateTime.now());
+		reservation.setReservationdate(LocalDate.parse(date));
+		reservation.setReservationcontent(content);
+		reservation.setApprove(false);
 		
 		reservationrepository.ReservationCreate(reservation);
+		
+		return reservation;
 	}
 	
 	

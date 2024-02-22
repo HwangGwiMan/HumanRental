@@ -1,14 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
-=======
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
->>>>>>> refs/heads/main
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -197,7 +190,6 @@
 								</form>
 								</div>
 							</c:when>
-<<<<<<< HEAD
 							<c:when test="${ mode == 'menteeProfileRead' }">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -231,7 +223,7 @@
     								</div>
     								<button type="submit">확인</button>
 								</form>
-=======
+							</c:when>
 							<c:when test="${ mode == 'meteeProfile' }">
 								<div class="col-1"></div>
 								<div class="col-4">
@@ -263,10 +255,8 @@
 											</tr>
 										</c:forEach>
 									</table>
->>>>>>> refs/heads/main
 								</div>
 							</c:when>
-<<<<<<< HEAD
 							<c:when test="${ mode == 'menteeInformation' }">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -275,7 +265,7 @@
 									<div class="row p-3">소개 :${ Mentee.introduction}</div>
 									<div><a href="<c:url value="/mentee2?mode=menteeProfileUpdate"/>">멘티 프로필 수정</a></li></div>
 									<div><a href="<c:url value="/mentee3"/>">멘티 프로필 삭제</a></li></div>
-=======
+							</c:when>
 							<c:when test="${ mode == 'mentorApplyManagement' }">
 								<div>
 									<div class="row text-center p-3">
@@ -311,10 +301,8 @@
 											</tr>
 										</c:forEach>
 									</table>
->>>>>>> refs/heads/main
 								</div>
 							</c:when>
-<<<<<<< HEAD
 							<c:when test="${ mode == 'menteeProfileUpdate'}">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -352,7 +340,7 @@
     								</div>
     								<button type="submit">확인</button>
 								</form>
-=======
+							</c:when>
 							<c:when test="${ mode == 'applyInfo' }">
 								<div class="col">
 									<div class="row">
@@ -371,7 +359,6 @@
 										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-danger">거절</a>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
 									</div>
->>>>>>> refs/heads/main
 								</div>
 							</c:when>							
 						</c:choose>
