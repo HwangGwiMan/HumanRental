@@ -25,6 +25,7 @@ import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.service.MemberService;
 import com.springmvc.service.MentorService;
+import com.springmvc.service.ReportService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,9 @@ public class PrivacyController {
 	
 	@Autowired
 	MentorService mentorService;
+	
+	@Autowired
+	ReportService reportService;
 	
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
@@ -57,19 +61,27 @@ public class PrivacyController {
 			
 			// 어드민 관련 데이터
 			if(memberId.equals("admin")) {
-				// 멤버 관리
-				model.addAttribute("memberList", mentorService.getMentorListWithMember());
-
-				// 멘토 신청 관리
-				if(state.equals("none") ) {
-					model.addAttribute("applyList", mentorService.getMentorApplyList());
-				} else {
-					model.addAttribute("applyList", mentorService.getMentorApplyList(state));
+				
+				if(mode.equals("memberManagement")) {
+					// 멤버 관리
+					model.addAttribute("memberList", mentorService.getMentorListWithMember());
+				} else if(mode.equals("mentorApplyManagement")) {
+					// 멘토 신청 관리
+					if(state.equals("none") ) {
+						model.addAttribute("applyList", mentorService.getMentorApplyList());
+					} else {
+						model.addAttribute("applyList", mentorService.getMentorApplyList(state));
+					}
+				} else if(mode.equals("applyInfo") ) {
+					// 개별 멘토 신청 관리
+					model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
+				} else if(mode.equals("report")) {
+					// 신고 관리
+					model.addAttribute("reportList", reportService.getReportList());
+				} else if(mode.equals("reportInfo")) {
+					
 				}
 
-				
-				// 개별 멘토 신청 관리
-				model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
 			} else {// 일반 유저 관련 데이터
 				if(mode.equals("memberManagement") || mode.equals("applyInfo") || mode.equals("memberManagement")) {
 					mode = "myPage";
@@ -154,7 +166,6 @@ public class PrivacyController {
 	}
 	
 	public String setFileName(String memberId) {
-		List<Member> memberList = memberService.getMembers();
 		Member member = memberService.getMember(memberId);
 		
 		String fileImageName = member.getProfileImage();
@@ -162,8 +173,7 @@ public class PrivacyController {
 		if(fileImageName != null && fileImageName.contains("profileImage")) {
 			return fileImageName;
 		} else {
-			int userCount = memberList.size();
-			return "profileImage" + userCount +".jpg";
+			return "profileImage" + member.getMemberId() +".jpg";
 		}
 	}
 	

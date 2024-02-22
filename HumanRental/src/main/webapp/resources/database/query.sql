@@ -220,13 +220,16 @@ foreign key(memberId) references member(memberId)
 
 -- 신고 관리 
 CREATE TABLE IF NOT EXISTS Report(
-reportId varchar(20) not null primary key,
-memberId varchar(20),
-title varchar(100),
-content varchar(10000),
-category varchar(30),
-createDate date,
-foreign key(memberId) references Member(memberId)
+reportId varchar(20) not null primary key, -- 신고 ID
+memberId varchar(20), -- 신고 당한 멤버 ID
+reporterId varchar(20), -- 신고한 멤버 ID
+target varchar(20), -- 신고 대상
+targetId varchar(50), -- 신고 대상 ID
+type varchar(50), -- 신고 유형
+state varchar(20),
+createDate datetime, -- 신고 날짜
+foreign key(memberId) references Member(memberId),
+foreign key(reporterId) references Member(memberId)
 );
 
 

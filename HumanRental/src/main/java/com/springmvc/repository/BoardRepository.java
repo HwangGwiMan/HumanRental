@@ -55,4 +55,6 @@ public interface BoardRepository {
 	
 	//선택된 글 삭제하기
 	public void deleteBoard2(int boardId);
+
+	public String getMemberIdByBoardId(int boardId);
 }
