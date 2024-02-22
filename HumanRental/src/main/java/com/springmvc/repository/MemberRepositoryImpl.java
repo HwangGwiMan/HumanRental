@@ -46,6 +46,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 	// 회원 가입
 	@Override
 	public void join(Member member) {
+		System.out.println("회원가입");
 		String SQL = "INSERT INTO member (memberId, memberPw, name, age, gender, phone, address, nickName, joinDate, profileImage) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName(), LocalDateTime.now() ,"default.png");
 	}
@@ -93,10 +94,12 @@ public class MemberRepositoryImpl implements MemberRepository {
 		try {
 			member = template.query(SQL, new BeanPropertyRowMapper<Member>(Member.class), memberId);
 			return member.get(0);
-		} catch(EmptyResultDataAccessException e) {
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			return null;
 		}
 	}
+  
+
 	
 	@Override
 	public List<Member> getMembers() {

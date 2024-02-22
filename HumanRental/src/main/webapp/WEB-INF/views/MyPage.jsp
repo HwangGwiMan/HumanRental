@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<<<<<<< HEAD
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ 
+=======
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+>>>>>>> refs/heads/main
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,6 +30,21 @@
 			<div class="row pt-5 align-items-center">
 				<div class="col-2 pt-5">
 					<ul class="navbar-nav row justify-content-center">
+						<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
+						<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
+						<li class="nav-item">프로필 수정
+							<ul>
+								<li class="dropdown-item"><a href="<c:url value="/mentee?mode=menteeProfileRead"/>"  class="btn">멘티 프로필 조회</a></li>
+							</ul>
+						<li>
+						<li>등록 이력
+							<ul>
+								<li class="nav-item"><a href="#" class="btn">삽니다 이력</a></li>
+								<li class="nav-item"><a href="#" class="btn">팝니다 이력</a></li>
+							</ul>
+						</li>
+						<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
+						<li class="nav-item"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></li>
 					
 					<c:choose>
 						<c:when test="${ member.memberId != 'admin' }">
@@ -31,8 +52,7 @@
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
 							<li class="nav-item">프로필 수정
 								<ul>
-									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
-									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
+									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfileRead"/>" class="btn">멘토 프로필 조회</a></li>
 								</ul>
 							<li>
 							<li>등록 목록
@@ -112,6 +132,7 @@
 								</form>
 							</c:when>
 							<c:when test="${ mode == 'delete' }">
+							  <% System.out.println("회원탈퇴용 아이디 비번 나와랏!");%> 
 	    						<form class="col-4" action="<c:url value="/deleteMember" />" method="post">
 	       							 <div class="row justify-content-center">회원 탈퇴 </div>
 	        						<div class="row justify-content-center">
@@ -123,24 +144,94 @@
 	            						<div class="col"><input type="password" required id=userpass name="memberPw"></div>
 	        						</div>
 	        						<input type="hidden" name="mode" value="delete">
-	        						<button type="button" onclick="javascript:deleteMember()">확인</button>
+	        						<button type="button" onclick="deleteMember()">확인</button>
 	    						</form>
-	    					</c:when>
-							<c:when test="${ mode == 'mentorProfile' }">
-								<div class="col-1"></div>
-								<div class="col-4">
-									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
-								</div>
-								<div class="col-1"></div>
+	    					</c:when>	
+							 <c:when test="${ mode == 'mentorProfileRead' }">
+								<div class="col-1"> </div>	
+								<br><br>
 								<div class="col-5">
-									<div class="row p-3"><p>이름 : ${ member.name }</div>
-									<div class="row p-3"><p>닉네임 : ${ member.nickName }</div>
-									<div class="row p-3"><p>나이 : ${ member.age }</div>
-									<div class="row p-3"><p>성별 : ${ member.gender }</div>
-									<div class="row p-3"><p>전화번호 : ${ member.phone }</div>
-									<div class="row p-3"><p>주소 : ${ member.address }</div>
+								<h3>멘토 프로필 등록</h3>
+								<br><br>
+								<form  action="<c:url value="/mentor"/>" method="post">
+										<h2>카테고리</h2>
+    								<div  style="display: flex;  justify-content:space-between;">
+        								<label for="checkbox-1">운동</label>
+        								<input type="checkbox" id="checkbox-1" name=interest value="운동">
+
+        								<label for="checkbox-2">음악</label>
+        								<input type="checkbox" id="checkbox-2" name=interest value="음악">
+
+        								<label for="checkbox-3">게임</label>
+        								<input type="checkbox" id="checkbox-3" name=interest value="게임">
+
+        								<label for="checkbox-4">공부</label>
+        								<input type="checkbox" id="checkbox-4" name=interest value="공부">
+        								
+        								<label for="checkbox-5">기타</label>
+        								<input type="checkbox" id="checkbox-5" name=interest value="기타">
+    								</div>
+    								<br><br>
+    								<div>
+    									<div>
+    										<h3>자기 소개</h3>
+    									</div>
+    									<div>
+        									<input type="text" name="introduction" style="width:400px;height:200px;font-size:20px;"></input>
+        								</div>
+    								</div>
+    								<br><br>
+    								<div>
+    									<h2>너의 자격증을 적어랑</h2>
+    								</div>
+    								<div>
+    									<input type=text name="certification" style="width:400px;height:100px;font-size:20px;" ></input>
+    								</div>
+    								<br><br>
+    								<div>
+	    								<h3 class="fileuploder"> 자격증등록 
+	            						<input type="file" id="ex_file" name="filename" multiple>
+	        							</h3>
+        							</div>
+        							<button type="submit">확인</button>
+								</form>
 								</div>
 							</c:when>
+<<<<<<< HEAD
+							<c:when test="${ mode == 'menteeProfileRead' }">
+								<div class="col-1"> </div>	
+								<br><br>
+								<div class="col-5">
+								<h3>멘티 신청 항목</h3>
+								<br><br>
+								<form  action="<c:url value="/mentee"/>" method="post">
+										<h2>카테고리</h2>
+    								<div  style="display: flex;  justify-content:space-between;">
+        								<label for="checkbox-1">운동</label>
+        								<input type="checkbox" id="checkbox-1" name=interest value="운동">
+
+        								<label for="checkbox-2">음악</label>
+        								<input type="checkbox" id="checkbox-2" name=interest value="음악">
+
+        								<label for="checkbox-3">게임</label>
+        								<input type="checkbox" id="checkbox-3" name=interest value="게임">
+
+        								<label for="checkbox-4">공부</label>
+        								<input type="checkbox" id="checkbox-4" name=interest value="공부">
+        								
+        								<label for="checkbox-5">기타</label>
+        								<input type="checkbox" id="checkbox-5" name=interest value="기타">
+    								</div>
+    								<br><br>
+    								<div>
+    									<div>
+    										<h3>자기 소개</h3>
+    									</div>
+        								<input name="introduction" style="width:400px;height:200px;font-size:20px;"></input>
+    								</div>
+    								<button type="submit">확인</button>
+								</form>
+=======
 							<c:when test="${ mode == 'meteeProfile' }">
 								<div class="col-1"></div>
 								<div class="col-4">
@@ -172,8 +263,19 @@
 											</tr>
 										</c:forEach>
 									</table>
+>>>>>>> refs/heads/main
 								</div>
 							</c:when>
+<<<<<<< HEAD
+							<c:when test="${ mode == 'menteeInformation' }">
+								<div class="col-1"> </div>	
+								<br><br>
+								<div class="col-5">
+									<div class="row p-3">관심분야 :${ Mentee.interest} </div>
+									<div class="row p-3">소개 :${ Mentee.introduction}</div>
+									<div><a href="<c:url value="/mentee2?mode=menteeProfileUpdate"/>">멘티 프로필 수정</a></li></div>
+									<div><a href="<c:url value="/mentee3"/>">멘티 프로필 삭제</a></li></div>
+=======
 							<c:when test="${ mode == 'mentorApplyManagement' }">
 								<div>
 									<div class="row text-center p-3">
@@ -209,8 +311,48 @@
 											</tr>
 										</c:forEach>
 									</table>
+>>>>>>> refs/heads/main
 								</div>
 							</c:when>
+<<<<<<< HEAD
+							<c:when test="${ mode == 'menteeProfileUpdate'}">
+								<div class="col-1"> </div>	
+								<br><br>
+								<div class="col-5">
+								<form  action="<c:url value="/menteeProfileUpdate"/>" method="post">
+										<h2>카테고리</h2>
+    								<div  style="display: flex;  justify-content:space-between;">
+        								<label for="checkbox-1">운동</label>
+        								<input type="checkbox" id="checkbox-1" name=interest value="운동"
+        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('운동')}">checked</c:if>>
+        									
+        								<label for="checkbox-2">음악</label>
+        								<input type="checkbox" id="checkbox-2" name=interest value="음악"
+        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('음악')}">checked</c:if>>
+        								
+        								<label for="checkbox-3">게임</label>
+        								<input type="checkbox" id="checkbox-3" name=interest value="게임"
+        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('게임')}">checked</c:if>>
+        									
+        								<label for="checkbox-4">공부</label>
+        								<input type="checkbox" id="checkbox-4" name=interest value="공부"
+        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('공부')}">checked</c:if>>
+        								
+        								<label for="checkbox-5">기타</label>
+        								<input type="checkbox" id="checkbox-5" name=interest value="기타"
+        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('기타')}">checked</c:if>>
+        								
+    								</div>
+    								<br><br>
+    								<div>
+    									<div>
+    										<h3>자기 소개</h3>
+    									</div>
+        								<input type ="text" name="introduction" value=${ Mentee.introduction} style="width:400px;height:200px;font-size:20px;"></input>
+    								</div>
+    								<button type="submit">확인</button>
+								</form>
+=======
 							<c:when test="${ mode == 'applyInfo' }">
 								<div class="col">
 									<div class="row">
@@ -229,8 +371,9 @@
 										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-danger">거절</a>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
 									</div>
+>>>>>>> refs/heads/main
 								</div>
-							</c:when>
+							</c:when>							
 						</c:choose>
 					</div>
 				</div>
