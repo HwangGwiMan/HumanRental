@@ -22,6 +22,7 @@ public class LoginController {
 	// 회원 가입 페이지 호출
 	@GetMapping("/login")
 	public String requestMemberJoin(@ModelAttribute Member member) {
+		System.out.println("클래스; LoginController");
 		return "Login";
 	}
 	

@@ -58,8 +58,11 @@ function idDuplicateCheck(memberId) {
 			}
 		})
 	}
+	
 }
-
-function readApplyInfo(memberId) {
-	window.location.href="./myInfo?mode=applyInfo&id=" + memberId; 
+function deletemember(){
+	var memberId = document.getElementById("memberId").value;
+	var memberPw = document.getElementById("memberPw").value;
+	
+	console.log("잘뜨고 잇냐?");
 }

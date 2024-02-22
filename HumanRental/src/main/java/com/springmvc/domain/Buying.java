@@ -1,24 +1,25 @@
 package com.springmvc.domain;
 
+import java.time.LocalDateTime;
 
-public class Selling {
-	private String sellingId;
+public class Buying {
+	private String buyingId;
 	private String memberId;
 	private String nickname;
 	private String introduction;
 	private int starRate;
 	private String title;
 	private String content;
-	private String regist_day;
+	private LocalDateTime regist_day;
 	private String category;
 	private int price;
 	private String location;
 	
-	public String getSellingId() {
-		return sellingId;
+	public String getBuyingId() {
+		return buyingId;
 	}
-	public void setSellingId(String sellingId) {
-		this.sellingId = sellingId;
+	public void setBuyingId(String buyingId) {
+		this.buyingId = buyingId;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -56,10 +57,10 @@ public class Selling {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getRegist_day() {
+	public LocalDateTime getRegist_day() {
 		return regist_day;
 	}
-	public void setRegist_day(String regist_day) {
+	public void setRegist_day(LocalDateTime regist_day) {
 		this.regist_day = regist_day;
 	}
 	public String getCategory() {

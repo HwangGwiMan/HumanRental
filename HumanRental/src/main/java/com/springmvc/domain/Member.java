@@ -1,5 +1,7 @@
 package com.springmvc.domain;
 
+import java.time.LocalDateTime;
+
 public class Member {
 	private String memberId;
 	private String memberPw;
@@ -9,7 +11,14 @@ public class Member {
 	private int phone;
 	private String address;
 	private String nickName;
+	private LocalDateTime joinDate;
 	private String profileImage;
+	public LocalDateTime getJoinDate() {
+		return joinDate;
+	}
+	public void setJoinDate(LocalDateTime joinDate) {
+		this.joinDate = joinDate;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
