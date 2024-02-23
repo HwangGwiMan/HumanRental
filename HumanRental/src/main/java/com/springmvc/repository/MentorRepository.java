@@ -18,4 +18,8 @@ public interface MentorRepository {
 	public Map<String, Object> getMentorApplyState(String memberId);
 	public void mentorRegist(String memberId, String registId);
 	public void mentorRefuse(String memberId, String registId);
+	public void mentorProfileRegister(MentorProfile mentorprofile ,String memberId, String mentorId);
+	public int getMentorProfile();
+	public MentorProfile MentorInformation (String memberId);
+	
 }

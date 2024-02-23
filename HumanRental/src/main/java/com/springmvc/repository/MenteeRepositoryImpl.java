@@ -37,6 +37,7 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 		  String memberId	= (String)session.getAttribute("user");
 		  System.out.println(memberId);
 		  Mentee.setMemberId(memberId);
+		  System.out.println("여기는 insert 구문이 있는 함수다 나와라 ");
 		Utility utility = new Utility();
 	 String utility2 =utility.createId("menteeProfile");
 		String SQL = "INSERT INTO MenteeProfile (menteeId,memberId,interest,introduction) VALUES(?,?,?,?)";
@@ -73,7 +74,7 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 	}
 	@Override
 	public void deleteMentee( HttpServletRequest request) {
-		System.out.println("이거 데이터베이스ㅔ 멘티프로필 삭제하는 함수인데 여긴 오니?");
+		System.out.println("이거 데이터베이스에 멘티프로필 삭제하는 함수인데 여긴 오니?");
 		HttpSession session = request.getSession();
 		String memberId	= (String)session.getAttribute("user");
 		String SQL = "delete from MenteeProfile where memberId=?";  
