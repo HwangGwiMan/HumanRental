@@ -34,8 +34,8 @@
 							<tr>
 								<td>${ reservation.reservationId }</td>
 								<td>${ reservation.title }</td>
-								<td>${ reservation.mentorId }</td>
-								<td>${ reservation.menteeId }</td>
+								<td>${ mentorNickname }</td>
+								<td>${ menteeNickname }</td>
 								<td>${ reservation.reservationdate }</td>
 								<td class="col-5">${ reservation.reservationcontent }</td>
 							</tr>

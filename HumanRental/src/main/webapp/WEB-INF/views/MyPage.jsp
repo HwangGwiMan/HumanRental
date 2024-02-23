@@ -32,7 +32,7 @@
 							<li class="nav-item">프로필 수정
 								<ul>
 									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
-									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
+									<li class="dropdown-item"><a href="<c:url value="/mentee?mode=menteeProfileRead"/>" class="btn">멘티 프로필 조회</a></li>
 								</ul>
 							<li>
 							<li>등록 목록

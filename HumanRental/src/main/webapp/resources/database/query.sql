@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS MentorApply(
 
 -- 멘토프로필관리 
 CREATE TABLE IF NOT EXISTS MentorProfile(
-mentorId varchar(20) not null,
-memberId varchar(20) not null,
+mentorId varchar(50) not null,
+memberId varchar(50) not null,
 introduction varchar(1000) not null unique,
 certification varchar(100),
 category varchar(100),
@@ -66,8 +66,8 @@ foreign key(mentorId) references mentor(mentorId)
 
 -- 멘티프로필 관리
 CREATE TABLE IF NOT EXISTS MenteeProfile(
-menteeId varchar(20) not null primary key,
-memberId varchar(20) not null,
+menteeId varchar(50) not null primary key,
+memberId varchar(50) not null,
 interest varchar(50),
 introduction varchar(1000),
 starRate int ,
@@ -150,8 +150,8 @@ CREATE TABLE IF NOT EXISTS Reservation(
 reservationId varchar(50) primary key,
 type varchar(10),
 title varchar(20),
-menteeId varchar(20),
-mentorId varchar(20),
+menteeId varchar(50),
+mentorId varchar(50),
 reservationDate date,
 reservationContent text,
 approve tinyint,

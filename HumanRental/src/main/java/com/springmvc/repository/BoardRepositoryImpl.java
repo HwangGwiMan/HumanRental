@@ -59,8 +59,6 @@ public class BoardRepositoryImpl implements BoardRepository {
 		
 		int total_record = getListCount(items, text);
         int start = (page - 1) * limit;
-        System.out.println("start="+start);
-        System.out.println("limit="+limit);
 
         String sql;
         
