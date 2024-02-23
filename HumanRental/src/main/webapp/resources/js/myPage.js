@@ -70,7 +70,30 @@ function readReportInfo(reportId) {
 	window.location.href="./myInfo?mode=reportInfo&id=" + reportId;
 }
 
-function deletemember(){
+function registBlack(memberId) {
+	
+	$.ajax({
+		type:"POST",
+		url:"./registBlack",
+		data: {
+			"memberId" : memberId
+		},
+		success : function(result) {
+			if(result === "AlreadyRegistered") {
+				alert("이미 블랙리스트에 등록이 되어있습니다.");
+			} else if(result === "RegistrationCompleted") {
+				alert("블랙리스트 등록이 완료되었습니다.");
+			}
+		},
+		error : function(error) {
+			
+		}
+	});
+}
+
+function deleteMember(){
+	console.log(document.getElementById("memberId"));
+	console.log(document.getElementById("memberPw"));
 	var memberId = document.getElementById("memberId").value;
 	var memberPw = document.getElementById("memberPw").value;
 	

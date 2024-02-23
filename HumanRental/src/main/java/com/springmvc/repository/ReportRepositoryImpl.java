@@ -71,9 +71,10 @@ public class ReportRepositoryImpl implements ReportRepository {
 					+ "LEFT JOIN board "
 					+ "ON board.boardId = report.targetId "
 					+ "LEFT JOIN member "
-					+ "ON board.memberId = member.memberId;";
+					+ "ON board.memberId = member.memberId "
+					+ "WHERE reportId = ?;";
 			
-			return template.queryForMap(SQL);
+			return template.queryForMap(SQL, reportId);
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			return null;
 		}

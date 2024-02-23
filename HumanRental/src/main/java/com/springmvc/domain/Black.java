@@ -5,8 +5,7 @@ import java.time.LocalDateTime;
 public class Black {
 	private String blackId;
 	private String memberId;
-	private String reportId;
-	private LocalDateTime registDate;
+	private Object registDate;
 	public String getBlackId() {
 		return blackId;
 	}
@@ -19,16 +18,10 @@ public class Black {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getReportId() {
-		return reportId;
-	}
-	public void setReportId(String reportId) {
-		this.reportId = reportId;
-	}
-	public LocalDateTime getRegistDate() {
+	public Object getRegistDate() {
 		return registDate;
 	}
-	public void setRegistDate(LocalDateTime registDate) {
+	public void setRegistDate(Object registDate) {
 		this.registDate = registDate;
 	}
 }

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.springmvc.domain.Member;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorRegistInfo;
+import com.springmvc.repository.BlackRepository;
 import com.springmvc.service.MemberService;
 import com.springmvc.service.MentorService;
 import com.springmvc.service.ReportService;
@@ -41,6 +42,9 @@ public class PrivacyController {
 	
 	@Autowired
 	ReportService reportService;
+	
+	@Autowired
+	BlackRepository blackRepository;
 	
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
@@ -80,9 +84,9 @@ public class PrivacyController {
 					model.addAttribute("reportList", reportService.getReportList());
 				} else if(mode.equals("reportInfo")) {
 					// 개별 신고 관리
-					Map<String, Object> reportInfo = reportService.getReport(targetId);
-					
-					model.addAttribute("reportInfo", reportInfo);
+					model.addAttribute("reportInfo", reportService.getReport(targetId));
+				} else if(mode.equals("blackListManagement")) {
+					model.addAttribute("blackList", blackRepository.getBlackList());
 				}
 
 			} else {// 일반 유저 관련 데이터
