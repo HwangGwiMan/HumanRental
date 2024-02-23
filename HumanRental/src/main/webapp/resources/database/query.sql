@@ -64,6 +64,7 @@ foreign key(mentorId) references mentor(mentorId)
 CREATE TABLE IF NOT EXISTS MenteeProfile(
 menteeId varchar(20) not null primary key,
 memberId varchar(20) not null,
+interest varchar(50),
 introduction varchar(1000)not null unique,
 starRate int unique,
 foreign key(memberId) references Member(memberId)

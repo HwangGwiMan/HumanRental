@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
-=======
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
->>>>>>> refs/heads/main
 <!DOCTYPE html>
 <html>
 	<head>
@@ -52,7 +49,7 @@
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
 							<li class="nav-item">프로필 수정
 								<ul>
-									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfileRead"/>" class="btn">멘토 프로필 조회</a></li>
+									<li class="dropdown-item"><a href="<c:url value="/mentor?mode=mentorProfileRead"/>" class="btn">멘토 프로필 조회</a></li>
 								</ul>
 							<li>
 							<li>등록 목록
@@ -144,7 +141,7 @@
 	            						<div class="col"><input type="password" required id=userpass name="memberPw"></div>
 	        						</div>
 	        						<input type="hidden" name="mode" value="delete">
-	        						<button type="button" onclick="deleteMember()">확인</button>
+	        						<button type="button">확인</button>
 	    						</form>
 	    					</c:when>	
 							 <c:when test="${ mode == 'mentorProfileRead' }">
@@ -153,23 +150,23 @@
 								<div class="col-5">
 								<h3>멘토 프로필 등록</h3>
 								<br><br>
-								<form  action="<c:url value="/mentor"/>" method="post">
+								<form action="<c:url value='/mentorProfileRegister'/>" method="post" enctype="multipart/form-data">
 										<h2>카테고리</h2>
     								<div  style="display: flex;  justify-content:space-between;">
         								<label for="checkbox-1">운동</label>
-        								<input type="checkbox" id="checkbox-1" name=interest value="운동">
+        								<input type="checkbox" id="checkbox-1" name=category value="운동">
 
         								<label for="checkbox-2">음악</label>
-        								<input type="checkbox" id="checkbox-2" name=interest value="음악">
+        								<input type="checkbox" id="checkbox-2" name=category value="음악">
 
         								<label for="checkbox-3">게임</label>
-        								<input type="checkbox" id="checkbox-3" name=interest value="게임">
+        								<input type="checkbox" id="checkbox-3" name=category value="게임">
 
         								<label for="checkbox-4">공부</label>
-        								<input type="checkbox" id="checkbox-4" name=interest value="공부">
+        								<input type="checkbox" id="checkbox-4" name=category value="공부">
         								
         								<label for="checkbox-5">기타</label>
-        								<input type="checkbox" id="checkbox-5" name=interest value="기타">
+        								<input type="checkbox" id="checkbox-5" name=category value="기타">
     								</div>
     								<br><br>
     								<div>
@@ -190,14 +187,25 @@
     								<br><br>
     								<div>
 	    								<h3 class="fileuploder"> 자격증등록 
-	            						<input type="file" id="ex_file" name="filename" multiple>
+		            						<input type="file" id="ex_file" name="file1" multiple>
+		            						<input type="file" id="ex_file" name="file2" multiple>
+		            						<input type="file" id="ex_file" name="file3" multiple>
 	        							</h3>
         							</div>
         							<button type="submit">확인</button>
 								</form>
 								</div>
 							</c:when>
-<<<<<<< HEAD
+							<c:when test="${ mode == 'mentorInformation' }">
+								<div class="col-1"> </div>	
+								<br><br>
+								<div class="col-5">
+								<h3>멘토 프로필 정보 조회 </h3>
+								<br><br>
+								<div>멘토프로필 정보 나오냐</div>
+								
+							</c:when>
+							
 							<c:when test="${ mode == 'menteeProfileRead' }">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -231,7 +239,7 @@
     								</div>
     								<button type="submit">확인</button>
 								</form>
-=======
+							</c:when>	
 							<c:when test="${ mode == 'meteeProfile' }">
 								<div class="col-1"></div>
 								<div class="col-4">
@@ -263,10 +271,8 @@
 											</tr>
 										</c:forEach>
 									</table>
->>>>>>> refs/heads/main
 								</div>
 							</c:when>
-<<<<<<< HEAD
 							<c:when test="${ mode == 'menteeInformation' }">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -275,7 +281,7 @@
 									<div class="row p-3">소개 :${ Mentee.introduction}</div>
 									<div><a href="<c:url value="/mentee2?mode=menteeProfileUpdate"/>">멘티 프로필 수정</a></li></div>
 									<div><a href="<c:url value="/mentee3"/>">멘티 프로필 삭제</a></li></div>
-=======
+							</c:when>
 							<c:when test="${ mode == 'mentorApplyManagement' }">
 								<div>
 									<div class="row text-center p-3">
@@ -311,10 +317,8 @@
 											</tr>
 										</c:forEach>
 									</table>
->>>>>>> refs/heads/main
 								</div>
 							</c:when>
-<<<<<<< HEAD
 							<c:when test="${ mode == 'menteeProfileUpdate'}">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -340,8 +344,7 @@
         								
         								<label for="checkbox-5">기타</label>
         								<input type="checkbox" id="checkbox-5" name=interest value="기타"
-        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('기타')}">checked</c:if>>
-        								
+        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('기타')}">checked</c:if>>			
     								</div>
     								<br><br>
     								<div>
@@ -352,7 +355,7 @@
     								</div>
     								<button type="submit">확인</button>
 								</form>
-=======
+							</c:when>
 							<c:when test="${ mode == 'applyInfo' }">
 								<div class="col">
 									<div class="row">
@@ -371,7 +374,6 @@
 										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-danger">거절</a>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
 									</div>
->>>>>>> refs/heads/main
 								</div>
 							</c:when>							
 						</c:choose>

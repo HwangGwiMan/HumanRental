@@ -62,4 +62,19 @@ public class MentorServiceImpl implements MentorService {
 		return mentorRepository.getMentorApplyState(memberId);
 	}
 
+	@Override
+	public void mentorProfileRegister(MentorProfile mentorprofile , String memberId, String mentorId) {
+		 mentorRepository.mentorProfileRegister(mentorprofile,memberId,mentorId);
+	}
+
+	@Override
+	public int getMentorProfile() {
+		return mentorRepository.getMentorProfile();
+	}
+
+	@Override
+	public MentorProfile MentorInformation(String memberId) {
+		return mentorRepository.MentorInformation(memberId);
+	}
+
 }

@@ -22,6 +22,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Member;
+import com.springmvc.domain.Mentee;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.MentorRegistInfo;
@@ -220,5 +221,49 @@ public class MentorRepositroyImpl implements MentorRepository {
 		}
 		
 	}
+
 	
-}
+	
+	
+	
+	
+	//멘토프로필 등록 함수 
+	@Override
+	public void mentorProfileRegister(MentorProfile mentorprofile ,String memberId, String mentorId) {
+		String SQL;
+//		String SQL = "INSERT INTO MenteeProfile (menteeId,memberId,interest,introduction) VALUES(?,?,?,?)";
+//		template.update(SQL, utility2,Mentee.getMemberId(),Mentee.getInterest(),Mentee.getIntroduction());
+		
+		 String a ="mentorprofile_" + mentorprofile.getMentorId();
+		 System.out.println(a);
+		try {
+			SQL ="insert into  mentorProfile(mentorId,memberId,introduction,certification,category,filename1,filename2,filename3)VALUES(?,?,?,?,?,?,?,?)";
+			template.update(SQL, mentorId, memberId, mentorprofile.getIntroduction(),mentorprofile.getCertification(),mentorprofile.getCategory(),mentorprofile.getFilename1(),mentorprofile.getFilename2(),mentorprofile.getFilename3());
+			
+		}catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
+			e.printStackTrace();
+		}
+	}
+	
+	//멘토 프로필 조회 함수 count 로 읽을거임 
+	public int getMentorProfile() {
+		 String SQL = "select count(*) from MentorProfile";
+		    int rowCount = 0;
+		    
+		    try {
+		        rowCount = template.queryForObject(SQL, Integer.class);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return rowCount;
+	}	    
+	
+	///멘토 프로필 조회 함수 select쓸거임 
+	public MentorProfile MentorInformation (String memberId) {
+	    MentorProfile mentorprofile = null;
+	    System.out.println("그럼 이거는 데이터 베이스에서 셀렉하는 함수인데 여긴 오니?");
+	    String SQL = "select * from MenteeProfile where memberId=?";
+	    mentorprofile  = template.queryForObject(SQL, new Object[]{memberId}, new MentorProfileRowMapper());
+	    return mentorprofile;
+	}
+}	
