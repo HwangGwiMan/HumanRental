@@ -211,7 +211,7 @@
 										<h3>멘토 소개당</h3>
 										<div>${mentorprofile.introduction}</div>
 									</div>
-									<div><a></a></div>
+									<div><a>ㅇㅇㅇ</a></div>
 							</c:when>
 							<c:when test="${ mode == 'menteeProfileRead' }">
 								<div class="col-1"> </div>	
