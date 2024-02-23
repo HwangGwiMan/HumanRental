@@ -19,7 +19,6 @@ profileImage varchar(20),
 reportCount int
 );
 
-INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png");
 -- 멘토 테이블
 CREATE TABLE mentor(
 	mentorId varchar(50) primary key,
@@ -143,10 +142,14 @@ foreign key(buyingId) references Buying(buyingId)
 
 -- 예약 관리 
 CREATE TABLE IF NOT EXISTS Reservation(
-reservationId varchar(20) primary key,
+reservationId varchar(50) primary key,
+type varchar(10),
 title varchar(20),
 menteeId varchar(20),
 mentorId varchar(20),
+reservationDate date,
+reservationContent text,
+approve tinyint,
 signDate datetime,
 foreign key(menteeId) references  MenteeProfile(menteeId),
 foreign key(mentorId) references  MentorProfile(mentorId)
@@ -189,9 +192,9 @@ foreign key(questionId) references Question(questionId)
 
 -- 멘티 리스트
 
---  커뮤니티 관리 
+--  커뮤니티 관리 (board1 = 자유게시판, board2 = 공지사항)
 CREATE TABLE IF NOT EXISTS Board(
-boardId int primary key auto_increment,
+boardId varchar(50) primary key,
 memberId varchar(20) not null,
 name varchar(20) not null,
 title varchar(100),
@@ -200,6 +203,15 @@ regist_day datetime not null,
 hit int default 0
 );
 
+CREATE TABLE IF NOT EXISTS Board2(
+boardId varchar(50) primary key,
+memberId varchar(20) not null,
+name varchar(20) not null,
+title varchar(100),
+content varchar(10000),
+regist_day datetime not null,
+hit int default 0
+);
 
 CREATE TABLE IF NOT EXISTS Notice(
 noticeId varchar(20) not null primary key ,
@@ -211,7 +223,7 @@ writeDate date
 
 CREATE TABLE IF NOT EXISTS Comment(
 commentId varchar(20) not null primary key,
-boardId int not null,
+boardId varchar(50),
 memberId varchar(20) not null,
 content varchar(10000) not null,
 writeDate date,
@@ -268,3 +280,23 @@ content varchar(10000) not null,
 foreign key(sendMemberId) references Member(memberId),
 foreign key(receiveMemberId) references Member(memberId)
 );
+
+
+-- 테스트 데이터
+-- 회원 정보 추가
+INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png");
+INSERT INTO Member VALUES("qwer", "1234", "김이름", 25, "남", 01000000000, "TEST", "닉네임1", "2024-01-01 12:00:00" , "default.png");
+INSERT INTO Member VALUES("asdf", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임2", "2024-01-01 12:00:00" , "default.png");
+
+-- 자유게시판, 공지사항 내용 추가
+insert into board values('Board_001','admin','admin','게시글1','내용','2024-01-01 00:00:00',0);
+insert into board values('Board_002','qwer','김이름','게시글2','내용','2024-01-02 00:00:00',0);
+insert into board values('Board_003','qwer','김이름','게시글3','내용','2024-01-03 00:00:00',0);
+insert into board2 values('Board_001','admin','admin','공지사항1','내용','2024-01-01 00:00:00',0);
+insert into board2 values('Board_002','admin','admin','공지사항2','내용','2024-01-02 00:00:00',0);
+insert into board2 values('Board_003','admin','admin','공지사항3','내용','2024-01-03 00:00:00',0);
+
+-- buying 내용 추가
+insert into buying values('buyingId_001','qwer','닉네임1','introduction',3.5,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국');
+insert into buying values('buyingId_002','admin','admin','introduction',5,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국');
+insert into buying values('buyingId_003','asdf','닉네임2','introduction',5,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국');

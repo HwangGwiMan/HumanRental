@@ -3,7 +3,7 @@ package com.springmvc.domain;
 import java.time.LocalDateTime;
 
 public class Board {
-	private int boardId;
+	private String boardId;
 	private String memberId;
 	private String name;
 	private String title;
@@ -11,10 +11,10 @@ public class Board {
 	private LocalDateTime regist_day;
 	private int hit;
 	
-	public int getBoardId() {
+	public String getBoardId() {
 		return boardId;
 	}
-	public void setBoardId(int boardId) {
+	public void setBoardId(String boardId) {
 		this.boardId = boardId;
 	}
 	public String getMemberId() {

@@ -25,7 +25,7 @@ public class ReportController {
 	ReportService reportService;
 	
 	@GetMapping("/boardreport")
-	public String requestBoardReportPage(@RequestParam("boardId") int boardId,
+	public String requestBoardReportPage(@RequestParam("boardId") String boardId,
 										 Model model) {
 		model.addAttribute("target", "게시글");
 		model.addAttribute("memberId", boardService.getMemberIdByBoardId(boardId));

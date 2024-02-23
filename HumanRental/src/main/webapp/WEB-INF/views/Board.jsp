@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
 	String sessionId = (String) session.getAttribute("user");
 %>
@@ -53,9 +53,9 @@
 						<th class="col-1">조회</th>
 						<th class="col-2">글쓴이</th>
 					</tr>
-					<c:forEach items="${boardlist}" var="board">
+					<c:forEach items="${boardlist}" var="board" varStatus="status">
                     <tr>
-                        <td>${board.getBoardId()}</td>
+                        <td>${fn:length(boardlist) - status.index}</td>
                         <td><a href="./boardview?boardId=${board.getBoardId()}&pageNum=${pageNum}">${board.getTitle()}</a></td>
                         <td>${board.getRegist_day()}</td>
                         <td>${board.getHit()}</td>
