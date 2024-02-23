@@ -15,7 +15,8 @@ phone int not null,
 address varchar(100) not null,
 nickname varchar(20) not null unique,
 joinDate datetime not null,
-profileImage varchar(20)
+profileImage varchar(20),
+reportCount int
 );
 
 INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png");

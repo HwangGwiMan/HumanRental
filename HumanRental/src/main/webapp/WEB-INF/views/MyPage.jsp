@@ -266,17 +266,22 @@
 							</c:when>
 							<c:when test="${ mode == 'reportInfo' }">
 								<div class="col">
-									<div class="row">
-										<p>신청자 ID : 
-										<p>특기 분야 : 
-										<p>주요 활동 지역 : 
-										<p>신청 이유 : 
-										<p>기타 사항
-										<p>
-									</div>
+									<c:choose>
+										<c:when test="${ not empty reportInfo.boardId }">
+											<div class="row">
+												${ reportInfo }
+												<p>신고 대상 ID : ${ reportInfo.boardId } 
+												<p>신고 대상 멤버 ID : ${ reportInfo.memberId }
+												<p>게시글 제목 : ${ reportInfo.title }
+												<p>신고 유형 : ${ reportInfo.type }
+												<p>신고 횟수 : ${ reportInfo.reportCount }
+												<p><a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="btn">해당 게시글로 이동</a> 
+											</div>
+										</c:when>
+									</c:choose>
 									<div>
-										<a href="<c:url value="/" />" class="btn btn-success">처리</a>
-										<a href="<c:url value="/" />" class="btn btn-danger">내용</a>
+										<a href="<c:url value="/" />" class="btn">블랙리스트 추가</a>
+										<a href="<c:url value="/" />" class="btn">경고 전송</a>
 										<a href="<c:url value="/myInfo?mode=report" />" class="btn btn-secondary">목록</a>
 									</div>
 								</div>

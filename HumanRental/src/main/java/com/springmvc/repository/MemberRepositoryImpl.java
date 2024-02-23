@@ -47,8 +47,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 	@Override
 	public void join(Member member) {
 		System.out.println("회원가입");
-		String SQL = "INSERT INTO member (memberId, memberPw, name, age, gender, phone, address, nickName, joinDate, profileImage) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName(), LocalDateTime.now() ,"default.png");
+		String SQL = "INSERT INTO member (memberId, memberPw, name, age, gender, phone, address, nickName, joinDate, profileImage, reportCount) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName(), LocalDateTime.now() ,"default.png", 0);
 	}
 	
 	// 아이디 중복 확인
