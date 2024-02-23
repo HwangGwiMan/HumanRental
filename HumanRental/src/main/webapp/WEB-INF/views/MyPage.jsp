@@ -197,15 +197,22 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'mentorInformation' }">
-								<div class="col-1"> </div>	
-								<br><br>
-								<div class="col-5">
-								<h3>멘토 프로필 정보 조회 </h3>
-								<br><br>
-								<div>멘토프로필 정보 나오냐</div>
-								
+									<br><br>
+									<div class="col-5">
+										<h3>멘토 프로필 정보 조회 </h3>
+										<br><br>
+										<br><br>
+										<h3>멘토 카테고리</h3>
+										<div>${mentorprofile.category}</div>
+										<br><br>
+										<h3>멘토 자격증이당 </h3>
+										<div>${mentorprofile.certification}</div>
+										<br><br>
+										<h3>멘토 소개당</h3>
+										<div>${mentorprofile.introduction}</div>
+									</div>
+									<div><a></a></div>
 							</c:when>
-							
 							<c:when test="${ mode == 'menteeProfileRead' }">
 								<div class="col-1"> </div>	
 								<br><br>

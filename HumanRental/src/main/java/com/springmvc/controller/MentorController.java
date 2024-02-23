@@ -115,14 +115,17 @@ public class MentorController {
 
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("user");
-			
-	
-		if ( ) {
+		MentorProfile mentorprofile = mentorService.MentorInformation(memberId);
+		System.out.println(mentorprofile);
+		System.out.println("야 꼭 떠줘 부탁해 ");
+		if (mentorprofile ==null ) {
+			System.out.println("떳다 null값22222");
 			model.addAttribute("mode",mode);
 		}else {
 			mode = "mentorInformation";
-			
+			System.out.println("객체 가져 왓냐?3333333");
 			model.addAttribute("mode",mode);
+			model.addAttribute("mentorprofile",mentorprofile);
 			
 		}
 

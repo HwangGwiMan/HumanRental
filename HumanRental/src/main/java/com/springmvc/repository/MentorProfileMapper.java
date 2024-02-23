@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.springmvc.domain.Mentee;
 import com.springmvc.domain.MentorProfile;
 
-public class MentorProfileRowMapper implements RowMapper<MentorProfile> {
+public class MentorProfileMapper implements RowMapper<MentorProfile> {
 
 	public MentorProfile mapRow(ResultSet rs , int rowNum) throws SQLException{
 		

@@ -260,10 +260,23 @@ public class MentorRepositroyImpl implements MentorRepository {
 	
 	///멘토 프로필 조회 함수 select쓸거임 
 	public MentorProfile MentorInformation (String memberId) {
-	    MentorProfile mentorprofile = null;
-	    System.out.println("그럼 이거는 데이터 베이스에서 셀렉하는 함수인데 여긴 오니?");
-	    String SQL = "select * from MenteeProfile where memberId=?";
-	    mentorprofile  = template.queryForObject(SQL, new Object[]{memberId}, new MentorProfileRowMapper());
-	    return mentorprofile;
+		 System.out.println("데이터베이스에서 정보를 찾는 중...");
+		    String SQL = "select * from MentorProfile where memberId=?";
+		    
+		    // 데이터베이스에서 정보를 찾는 작업
+		    List<MentorProfile> profiles = template.query(SQL, new Object[]{memberId}, new MentorProfileMapper());
+
+		    // 정보가 있다면, 그 정보를 사용
+		    if (!profiles.isEmpty()) {
+		        MentorProfile mentorprofile = profiles.get(0);
+		        System.out.println("멘토 소개: " + mentorprofile.getIntroduction());
+		        System.out.println("멘토 ID: " + mentorprofile.getMemberId());
+		        System.out.println("자격증 정보: " + mentorprofile.getCertification());
+		        return mentorprofile;
+		    } else {
+		        // 정보가 없다면, null을 반환
+		        System.out.println("조회 결과가 없음");
+		        return null;
+		    }
 	}
-}	
+}

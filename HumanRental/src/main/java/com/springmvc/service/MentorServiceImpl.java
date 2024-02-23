@@ -76,5 +76,6 @@ public class MentorServiceImpl implements MentorService {
 	public MentorProfile MentorInformation(String memberId) {
 		return mentorRepository.MentorInformation(memberId);
 	}
+	
 
 }
