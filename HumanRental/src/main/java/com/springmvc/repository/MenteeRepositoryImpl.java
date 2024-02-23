@@ -30,7 +30,6 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 		super();
 	}
 
-		
 
 	public void registerMentee(Mentee Mentee , HttpServletRequest request) {
 		  HttpSession session = request.getSession();
@@ -39,7 +38,7 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 		  Mentee.setMemberId(memberId);
 		  System.out.println("여기는 insert 구문이 있는 함수다 나와라 ");
 		Utility utility = new Utility();
-	 String utility2 =utility.createId("menteeProfile");
+	 String utility2 =utility.createId("mentee");
 		String SQL = "INSERT INTO MenteeProfile (menteeId,memberId,interest,introduction) VALUES(?,?,?,?)";
 		template.update(SQL, utility2,Mentee.getMemberId(),Mentee.getInterest(),Mentee.getIntroduction());	
 	}

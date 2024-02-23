@@ -28,15 +28,15 @@ public class ReservationController {
 	public String ReservationCreate(@RequestParam("buyingId") String buyingId, Model model,
 			@RequestParam("date") String date, @RequestParam("content") String content, HttpServletRequest request) {
 		
-		System.out.println("예약 생성 포스트 접근");
-		System.out.println(date);
-		System.out.println(content);
+//		System.out.println(date);
+//		System.out.println(content);
 		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
-		Reservation reservation = reservationservice.ReservationCreate(buyingId, date, content, memberId);
+		Reservation reservation = reservationservice.ReservationCreate(buyingId, date, content, memberId, model);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("mode", "reservation");
 		return "CheckPage"; // 추후 예약 현황 페이지로
 	}
+	
 }

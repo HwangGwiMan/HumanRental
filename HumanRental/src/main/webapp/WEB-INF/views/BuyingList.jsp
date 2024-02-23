@@ -21,8 +21,9 @@
             <div><a href="<c:url value="/BuyingList?category=game"/>"><i class="fa-solid fa-gamepad"></i></a></div>
             <div><i class="fa-solid fa-comments"></i></div>
             <div><i class="fa-solid fa-car"></i></div>
-            <div><i class="fa-solid fa-hammer"></i></div>
+<!--             <div><i class="fa-solid fa-hammer"></i></div> -->
             <div><i class="fa-solid fa-book-open"></i></div>
+            <div><a href="<c:url value="/BuyingList"/>"><h4>전체</h4></a></div>
             <div><a href="<c:url value="/buying" />"><h4>쓰기</h4></a></div>
             
         </div>
@@ -31,7 +32,17 @@
 	            <div class="qq2 col-3">
 	                <div class="wrapper">
 	                    <div class="image-wrapper">
-	                        <i class="fa-solid fa-guitar"></i>
+	                    	<c:choose>
+	                    	<c:when test="${buying.category eq 'music'}">
+	                        	<i class="fa-solid fa-guitar"></i>
+	                        </c:when>
+	                        <c:when test="${buying.category eq 'sports'}">
+	                        	<i class="fa-solid fa-person-running"></i>
+	                        </c:when>
+	                        <c:when test="${buying.category eq 'game'}">
+	                        	<i class="fa-solid fa-gamepad"></i>
+	                        </c:when>
+	                        </c:choose>
 	                        <h1 class="name">${buying.title}</h1>
 	                        <p class="description">${buying.nickname}</p>
 	                        <br>
