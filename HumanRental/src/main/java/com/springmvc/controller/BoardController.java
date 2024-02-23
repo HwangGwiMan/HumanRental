@@ -74,7 +74,7 @@ public class BoardController {
 	@GetMapping("/boardview")
 	public String BoardViewAction(HttpServletRequest request, Model model) {
 		
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		String boardId = request.getParameter("boardId");
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
 		Board board=new Board();
@@ -91,7 +91,7 @@ public class BoardController {
 	@GetMapping("/boarddelete")
 	public String BoardDelete(HttpServletRequest request, Model model) {
 		
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		String boardId = request.getParameter("boardId");
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));	
 		
 		boardService.deleteBoard(boardId);
@@ -102,7 +102,7 @@ public class BoardController {
 	@GetMapping("/boardupdate")
 	public String BoardUpdate(HttpServletRequest request, Model model) {
 
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		String boardId = request.getParameter("boardId");
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Board board = boardService.getBoardByNum(boardId, pageNum);
 		model.addAttribute("board", board);
@@ -120,8 +120,6 @@ public class BoardController {
 	// board2 (공지사항)
 	@GetMapping("/board2")
 	public String BoardList2(Model model, HttpServletRequest request) {
-		
-		System.out.println("보드2 컨트롤러");
 		
 		int pageNum;
 		if(request.getParameter("pageNum")==null)
@@ -154,7 +152,7 @@ public class BoardController {
 	@GetMapping("/boardview2")
 	public String BoardViewAction2(HttpServletRequest request, Model model) {
 		
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		String boardId = request.getParameter("boardId");
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
 		Board board=new Board();
@@ -171,7 +169,7 @@ public class BoardController {
 	@GetMapping("/boarddelete2")
 	public String BoardDelete2(HttpServletRequest request, Model model) {
 		
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		String boardId = request.getParameter("boardId");
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));	
 		
 		boardService.deleteBoard2(boardId);
@@ -182,7 +180,7 @@ public class BoardController {
 	@GetMapping("/boardupdate2")
 	public String BoardUpdate2(HttpServletRequest request, Model model) {
 
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		String boardId = request.getParameter("boardId");
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Board board = boardService.getBoardByNum2(boardId, pageNum);
 		model.addAttribute("board", board);

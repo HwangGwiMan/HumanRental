@@ -11,7 +11,7 @@ public class BoardRowMapper implements RowMapper<Board> {
 
 	public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Board board = new Board();
-		board.setBoardId(rs.getInt(1));
+		board.setBoardId(rs.getString(1));
 		board.setMemberId(rs.getString(2));
 		board.setName(rs.getString(3));
 		board.setTitle(rs.getString(4));

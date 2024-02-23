@@ -12,12 +12,15 @@ import org.springframework.ui.Model;
 
 import com.springmvc.domain.Board;
 import com.springmvc.repository.BoardRepository;
+import com.springmvc.util.Utility;
 
 @Service
 public class BoardServiceImpl implements BoardService{
 	
 	static final int LISTCOUNT = 10; 
-
+	
+	Utility util = new Utility();
+	
 	@Autowired
 	BoardRepository boardRepository;
 	
@@ -48,13 +51,10 @@ public class BoardServiceImpl implements BoardService{
 		model.addAttribute("boardlist", boardlist);
 	}
 	
-	
-
-
-
 	@Override
 	public void insertBoard(Board board, String memberId) {
 		
+		board.setBoardId(util.createId("Board"));
 		board.setMemberId(memberId);
 		board.setHit(0);
 		board.setRegist_day(LocalDateTime.now());
@@ -62,12 +62,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void updateHit(int boardId) {
+	public void updateHit(String boardId) {
 		boardRepository.updateHit(boardId);
 	}
 
 	@Override
-	public Board getBoardByNum(int boardId, int page) {
+	public Board getBoardByNum(String boardId, int page) {
 		Board board = boardRepository.getBoardByNum(boardId, page);
 		return board;
 	}
@@ -78,7 +78,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void deleteBoard(int boardId) {
+	public void deleteBoard(String boardId) {
 		boardRepository.deleteBoard(boardId);
 	}
 
@@ -111,6 +111,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void insertBoard2(Board board, String memberId) {
 		
+		board.setBoardId(util.createId("Board2"));
 		board.setMemberId(memberId);
 		board.setHit(0);
 		board.setRegist_day(LocalDateTime.now());
@@ -118,12 +119,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void updateHit2(int boardId) {
+	public void updateHit2(String boardId) {
 		boardRepository.updateHit2(boardId);
 	}
 
 	@Override
-	public Board getBoardByNum2(int boardId, int page) {
+	public Board getBoardByNum2(String boardId, int page) {
 		Board board = boardRepository.getBoardByNum2(boardId, page);
 		return board;
 	}
@@ -134,12 +135,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void deleteBoard2(int boardId) {
+	public void deleteBoard2(String boardId) {
 		boardRepository.deleteBoard2(boardId);
 	}
 
 	@Override
-	public String getMemberIdByBoardId(int boardId) {
+	public String getMemberIdByBoardId(String boardId) {
 		return boardRepository.getMemberIdByBoardId(boardId);
 	}
 

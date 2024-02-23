@@ -1,10 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%
-	String sessionId = (String) session.getAttribute("user");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -48,9 +45,9 @@
 						<th class="col-1">조회</th>
 						<th class="col-2">글쓴이</th>
 					</tr>
-					<c:forEach items="${boardlist}" var="board">
+					<c:forEach items="${boardlist}" var="board" varStatus="status">
                     <tr>
-                        <td>${board.getBoardId()}</td>
+                        <td>${fn:length(boardlist) - status.index}</td>
                         <td><a href="./boardview2?boardId=${board.getBoardId()}&pageNum=${pageNum}">${board.getTitle()}</a></td>
                         <td>${board.getRegist_day()}</td>
                         <td>${board.getHit()}</td>
@@ -87,9 +84,9 @@
 						<input type="submit" id="btnAdd" class="btn btn-primary text-center" value="검색" />
 						</td>
 						<td width="100%" align="right">
-							<% if(sessionId=="admin"){ %>
+							<c:if test="${sessionScope.user eq 'admin'}">
 							<a href="#" onclick="checkForm(); return false;" class="btn btn-primary text-nowrap">&laquo;글쓰기</a>
-							<%}else{}%>
+							</c:if>
 						</td>
 					</tr>
 				</table>
