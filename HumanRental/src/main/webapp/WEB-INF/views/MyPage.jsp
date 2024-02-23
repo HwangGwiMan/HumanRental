@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD
-=======
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
->>>>>>> refs/heads/OJH
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
@@ -37,12 +31,8 @@
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
 							<li class="nav-item">프로필 수정
 								<ul>
-<<<<<<< HEAD
 									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
 									<li class="dropdown-item"><a href="<c:url value="/myInfo?mode=meteeProfile"/>" class="btn">멘티 프로필 조회</a></li>
-=======
-									<li class="dropdown-item"><a href="<c:url value="/mentor?mode=mentorProfileRead"/>" class="btn">멘토 프로필 조회</a></li>
->>>>>>> refs/heads/OJH
 								</ul>
 							<li>
 							<li>등록 목록
@@ -133,11 +123,7 @@
 	            						<div class="col"><input type="password" required id=userpass name="memberPw"></div>
 	        						</div>
 	        						<input type="hidden" name="mode" value="delete">
-<<<<<<< HEAD
 	        						<button type="button" onclick="javascript:deleteMember()">확인</button>
-=======
-	        						<button type="button">확인</button>
->>>>>>> refs/heads/OJH
 	    						</form>
 	    					</c:when>
 							<c:when test="${ mode == 'mentorProfile' }"><!-- 멘토 프로필 -->
@@ -147,14 +133,12 @@
 								</div>
 								<div class="col-1"></div>
 								<div class="col-5">
-<<<<<<< HEAD
 									<div class="row p-3"><p>이름 : ${ member.name }</div>
 									<div class="row p-3"><p>닉네임 : ${ member.nickName }</div>
 									<div class="row p-3"><p>나이 : ${ member.age }</div>
 									<div class="row p-3"><p>성별 : ${ member.gender }</div>
 									<div class="row p-3"><p>전화번호 : ${ member.phone }</div>
 									<div class="row p-3"><p>주소 : ${ member.address }</div>
-=======
 								<h3>멘토 프로필 등록</h3>
 								<br><br>
 								<form action="<c:url value='/mentorProfileRegister'/>" method="post" enctype="multipart/form-data">
@@ -201,12 +185,8 @@
         							</div>
         							<button type="submit">확인</button>
 								</form>
->>>>>>> refs/heads/OJH
 								</div>
 							</c:when>
-<<<<<<< HEAD
-							<c:when test="${ mode == 'meteeProfile' }"><!-- 멘티 프로필 -->
-=======
 							<c:when test="${ mode == 'mentorInformation' }">
 									<br><br>
 									<div class="col-5">
@@ -259,7 +239,6 @@
 								</form>
 							</c:when>	
 							<c:when test="${ mode == 'meteeProfile' }">
->>>>>>> refs/heads/OJH
 								<div class="col-1"></div>
 								<div class="col-4">
 									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
@@ -292,9 +271,6 @@
 									</table>
 								</div>
 							</c:when>
-<<<<<<< HEAD
-							<c:when test="${ mode == 'mentorApplyManagement' }"><!-- 멘토 신청 관리 페이지 -->
-=======
 							<c:when test="${ mode == 'menteeInformation' }">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -305,7 +281,6 @@
 									<div><a href="<c:url value="/mentee3"/>">멘티 프로필 삭제</a></li></div>
 							</c:when>
 							<c:when test="${ mode == 'mentorApplyManagement' }">
->>>>>>> refs/heads/OJH
 								<div>
 									<div class="row text-center p-3">
 										<div class="col-1"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-outline-info">전체</a></div>
@@ -342,9 +317,6 @@
 									</table>
 								</div>
 							</c:when>
-<<<<<<< HEAD
-							<c:when test="${ mode == 'applyInfo' }"><!-- 멘토 신청 조회 페이지 -->
-=======
 							<c:when test="${ mode == 'menteeProfileUpdate'}">
 								<div class="col-1"> </div>	
 								<br><br>
@@ -383,7 +355,6 @@
 								</form>
 							</c:when>
 							<c:when test="${ mode == 'applyInfo' }">
->>>>>>> refs/heads/OJH
 								<div class="col">
 									<div class="row">
 										<div class="col">
