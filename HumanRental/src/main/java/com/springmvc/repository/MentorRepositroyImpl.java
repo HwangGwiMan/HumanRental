@@ -22,6 +22,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Member;
+import com.springmvc.domain.Mentee;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.MentorRegistInfo;
@@ -220,5 +221,62 @@ public class MentorRepositroyImpl implements MentorRepository {
 		}
 		
 	}
+
 	
+	
+	
+	
+	
+	//멘토프로필 등록 함수 
+	@Override
+	public void mentorProfileRegister(MentorProfile mentorprofile ,String memberId, String mentorId) {
+		String SQL;
+//		String SQL = "INSERT INTO MenteeProfile (menteeId,memberId,interest,introduction) VALUES(?,?,?,?)";
+//		template.update(SQL, utility2,Mentee.getMemberId(),Mentee.getInterest(),Mentee.getIntroduction());
+		
+		 String a ="mentorprofile_" + mentorprofile.getMentorId();
+		 System.out.println(a);
+		try {
+			SQL ="insert into  mentorProfile(mentorId,memberId,introduction,certification,category,filename1,filename2,filename3)VALUES(?,?,?,?,?,?,?,?)";
+			template.update(SQL, mentorId, memberId, mentorprofile.getIntroduction(),mentorprofile.getCertification(),mentorprofile.getCategory(),mentorprofile.getFilename1(),mentorprofile.getFilename2(),mentorprofile.getFilename3());
+			
+		}catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
+			e.printStackTrace();
+		}
+	}
+	
+	//멘토 프로필 조회 함수 count 로 읽을거임 
+	public int getMentorProfile() {
+		 String SQL = "select count(*) from MentorProfile";
+		    int rowCount = 0;
+		    
+		    try {
+		        rowCount = template.queryForObject(SQL, Integer.class);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return rowCount;
+	}	    
+	
+	///멘토 프로필 조회 함수 select쓸거임 
+	public MentorProfile MentorInformation (String memberId) {
+		 System.out.println("데이터베이스에서 정보를 찾는 중...");
+		    String SQL = "select * from MentorProfile where memberId=?";
+		    
+		    // 데이터베이스에서 정보를 찾는 작업
+		    List<MentorProfile> profiles = template.query(SQL, new Object[]{memberId}, new MentorProfileMapper());
+
+		    // 정보가 있다면, 그 정보를 사용
+		    if (!profiles.isEmpty()) {
+		        MentorProfile mentorprofile = profiles.get(0);
+		        System.out.println("멘토 소개: " + mentorprofile.getIntroduction());
+		        System.out.println("멘토 ID: " + mentorprofile.getMemberId());
+		        System.out.println("자격증 정보: " + mentorprofile.getCertification());
+		        return mentorprofile;
+		    } else {
+		        // 정보가 없다면, null을 반환
+		        System.out.println("조회 결과가 없음");
+		        return null;
+		    }
+	}
 }
