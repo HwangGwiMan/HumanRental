@@ -53,8 +53,13 @@ CREATE TABLE IF NOT EXISTS MentorApply(
 CREATE TABLE IF NOT EXISTS MentorProfile(
 mentorId varchar(20) not null,
 memberId varchar(20) not null,
-introduction varchar(1000) not null,
-starRate int,
+introduction varchar(1000) not null unique,
+certification varchar(100),
+category varchar(100),
+filename1 varchar(1000),
+filename2 varchar(1000),
+filename3 varchar(1000),
+starRate int unique,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
@@ -64,8 +69,9 @@ foreign key(mentorId) references mentor(mentorId)
 CREATE TABLE IF NOT EXISTS MenteeProfile(
 menteeId varchar(20) not null primary key,
 memberId varchar(20) not null,
-introduction varchar(1000)not null,
-starRate int,
+interest varchar(50),
+introduction varchar(1000),
+starRate int ,
 foreign key(memberId) references Member(memberId)
 );
 
