@@ -59,6 +59,8 @@ public class BoardRepositoryImpl implements BoardRepository {
 		
 		int total_record = getListCount(items, text);
         int start = (page - 1) * limit;
+        System.out.println("start="+start);
+        System.out.println("limit="+limit);
 
         String sql;
         
@@ -86,7 +88,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 	}
 
 	@Override
-	public void updateHit(int BoardId) {
+	public void updateHit(String BoardId) {
 		String sql = "select hit from board where BoardId = ?";
 		int hit = template.queryForObject(sql, Integer.class, BoardId);
 		hit = hit+1;
@@ -95,7 +97,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 	}
 
 	@Override
-	public Board getBoardByNum(int boardId, int page) {
+	public Board getBoardByNum(String boardId, int page) {
 		String sql = "select * from board where boardId = ? ";
 		Board board = template.queryForObject(sql, new BoardRowMapper(), boardId);
 		
@@ -109,7 +111,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 	}
 
 	@Override
-	public void deleteBoard(int boardId) {
+	public void deleteBoard(String boardId) {
 		String sql = "delete from board where boardId=?";
 		template.update(sql, boardId);
 		
@@ -176,7 +178,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 
 
 	@Override
-	public void updateHit2(int BoardId) {
+	public void updateHit2(String BoardId) {
 		String sql = "select hit from board2 where BoardId = ?";
 		int hit = template.queryForObject(sql, Integer.class, BoardId);
 		hit = hit+1;
@@ -186,7 +188,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 
 
 	@Override
-	public Board getBoardByNum2(int boardId, int page) {
+	public Board getBoardByNum2(String boardId, int page) {
 		String sql = "select * from board2 where boardId = ? ";
 		Board board = template.queryForObject(sql, new BoardRowMapper(), boardId);
 		
@@ -201,13 +203,13 @@ public class BoardRepositoryImpl implements BoardRepository {
 	}
 
 	@Override
-	public void deleteBoard2(int boardId) {
+	public void deleteBoard2(String boardId) {
 		String sql = "delete from board2 where boardId=?";
 		template.update(sql, boardId);
 	}
 	
 	@Override
-	public String getMemberIdByBoardId(int boardId) {
+	public String getMemberIdByBoardId(String boardId) {
 		String SQL = "SELECT memberId FROM board WHERE boardId = ?";
 		
 		try {

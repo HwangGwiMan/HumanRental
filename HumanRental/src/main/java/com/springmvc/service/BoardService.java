@@ -17,16 +17,16 @@ public interface BoardService {
 	public void insertBoard(Board board, String memberId);
 	
 	//선택된 글의 조회 수 증가시키기
-	public void updateHit(int boardId);
+	public void updateHit(String boardId);
 	
 	//선택된 글 상세 내용 가져오기
-	public Board getBoardByNum(int boardId, int page);
+	public Board getBoardByNum(String boardId, int page);
 	
 	//선택된 글 내용 수정하기
 	public void updateBoard(Board board);
 	
 	//선택된 글 삭제하기
-	public void deleteBoard(int boardId);
+	public void deleteBoard(String boardId);
 	
 
 	//보드2 (공지사항)
@@ -36,17 +36,17 @@ public interface BoardService {
 	public void insertBoard2(Board board, String memberId);
 	
 	//선택된 글의 조회 수 증가시키기
-	public void updateHit2(int boardId);
+	public void updateHit2(String boardId);
 	
 	//선택된 글 상세 내용 가져오기
-	public Board getBoardByNum2(int boardId, int page);
+	public Board getBoardByNum2(String boardId, int page);
 	
 	//선택된 글 내용 수정하기
 	public void updateBoard2(Board board);
 	
 	//선택된 글 삭제하기
-	public void deleteBoard2(int boardId);
+	public void deleteBoard2(String boardId);
 	
 	//선택된 글 멤버 ID 가져오기
-	public String getMemberIdByBoardId(int boardId);
+	public String getMemberIdByBoardId(String boardId);
 }
