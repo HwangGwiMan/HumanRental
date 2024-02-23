@@ -269,19 +269,18 @@
 									<c:choose>
 										<c:when test="${ not empty reportInfo.boardId }">
 											<div class="row">
-												${ reportInfo }
 												<p>신고 대상 ID : ${ reportInfo.boardId } 
 												<p>신고 대상 멤버 ID : ${ reportInfo.memberId }
 												<p>게시글 제목 : ${ reportInfo.title }
 												<p>신고 유형 : ${ reportInfo.type }
 												<p>신고 횟수 : ${ reportInfo.reportCount }
-												<p><a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="btn">해당 게시글로 이동</a> 
+												<p><a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="btn btn-light">해당 게시글로 이동</a> 
 											</div>
 										</c:when>
 									</c:choose>
 									<div>
-										<a href="<c:url value="/" />" class="btn">블랙리스트 추가</a>
-										<a href="<c:url value="/" />" class="btn">경고 전송</a>
+										<a href="<c:url value="/" />" class="btn btn-dark">블랙리스트 추가</a>
+										<a href="<c:url value="/" />" class="btn btn-warning">경고 전송</a>
 										<a href="<c:url value="/myInfo?mode=report" />" class="btn btn-secondary">목록</a>
 									</div>
 								</div>

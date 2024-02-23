@@ -249,10 +249,10 @@ foreign key(reporterId) references Member(memberId)
 
 -- 블랙리스트 관리 
 CREATE TABLE IF NOT EXISTS BlackList(
-blackId varchar(20) not null primary key,
+blackId varchar(50) not null primary key,
 memberId varchar(20),
-content varchar(10000),
-createDate date,
+reportId varchar(50),
+registDate date,
 foreign key(memberId) references Member(memberId)
 );
 

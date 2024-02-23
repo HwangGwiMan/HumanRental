@@ -81,15 +81,7 @@ public class PrivacyController {
 				} else if(mode.equals("reportInfo")) {
 					// 개별 신고 관리
 					Map<String, Object> reportInfo = reportService.getReport(targetId);
-
-					if(reportInfo.get("boardId") != null) {
-						int boardId = (int) reportInfo.get("boardId");
-						int pN = boardId / 10;
-						if(boardId % 10 != 0) {
-							pN++;
-						}
-						reportInfo.put("pageNum", pN);
-					}
+					
 					model.addAttribute("reportInfo", reportInfo);
 				}
 
