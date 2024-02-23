@@ -31,6 +31,7 @@
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
 							<li class="nav-item">프로필 수정
 								<ul>
+
 									<li class="dropdown-item"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
 									<li class="dropdown-item"><a href="<c:url value="/mentee?mode=menteeProfileRead"/>" class="btn">멘티 프로필 조회</a></li>
 								</ul>
@@ -319,42 +320,43 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'menteeProfileUpdate'}">
-								<div class="col-1"> </div>	
-								<br><br>
-								<div class="col-5">
-									<form  action="<c:url value="/menteeProfileUpdate"/>" method="post">
-											<h2>카테고리</h2>
-	    								<div  style="display: flex;  justify-content:space-between;">
-	        								<label for="checkbox-1">운동</label>
-	        								<input type="checkbox" id="checkbox-1" name=interest value="운동"
-	        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('운동')}">checked</c:if>>
-	        									
-	        								<label for="checkbox-2">음악</label>
-	        								<input type="checkbox" id="checkbox-2" name=interest value="음악"
-	        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('음악')}">checked</c:if>>
-	        								
-	        								<label for="checkbox-3">게임</label>
-	        								<input type="checkbox" id="checkbox-3" name=interest value="게임"
-	        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('게임')}">checked</c:if>>
-	        									
-	        								<label for="checkbox-4">공부</label>
-	        								<input type="checkbox" id="checkbox-4" name=interest value="공부"
-	        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('공부')}">checked</c:if>>
-	        								
-	        								<label for="checkbox-5">기타</label>
-	        								<input type="checkbox" id="checkbox-5" name=interest value="기타"
-	        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('기타')}">checked</c:if>>			
-	    								</div>
-	    								<br><br>
-	    								<div>
-	    									<div>
-	    										<h3>자기 소개</h3>
-	    									</div>
-	        								<input type ="text" name="introduction" value=${ Mentee.introduction} style="width:400px;height:200px;font-size:20px;"></input>
-	    								</div>
-	    								<button type="submit">확인</button>
-									</form>
-								</div>	
+								<div class="col-1">
+									<br><br>
+									<div class="col-5">
+										<form  action="<c:url value="/menteeProfileUpdate"/>" method="post">
+												<h2>카테고리</h2>
+		    								<div  style="display: flex;  justify-content:space-between;">
+		        								<label for="checkbox-1">운동</label>
+		        								<input type="checkbox" id="checkbox-1" name=interest value="운동"
+		        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('운동')}">checked</c:if>>
+		        									
+		        								<label for="checkbox-2">음악</label>
+		        								<input type="checkbox" id="checkbox-2" name=interest value="음악"
+		        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('음악')}">checked</c:if>>
+		        								
+		        								<label for="checkbox-3">게임</label>
+		        								<input type="checkbox" id="checkbox-3" name=interest value="게임"
+		        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('게임')}">checked</c:if>>
+		        									
+		        								<label for="checkbox-4">공부</label>
+		        								<input type="checkbox" id="checkbox-4" name=interest value="공부"
+		        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('공부')}">checked</c:if>>
+		        								
+		        								<label for="checkbox-5">기타</label>
+		        								<input type="checkbox" id="checkbox-5" name=interest value="기타"
+		        								<c:if test="${Mentee.interest.trim().toLowerCase().contains('기타')}">checked</c:if>>			
+		    								</div>
+		    								<br><br>
+		    								<div>
+		    									<div>
+		    										<h3>자기 소개</h3>
+		    									</div>
+		        								<input type ="text" name="introduction" value=${ Mentee.introduction} style="width:400px;height:200px;font-size:20px;"></input>
+		    								</div>
+		    								<button type="submit">확인</button>
+										</form>
+									</div>
+								 </div>		
 							</c:when>
 							<c:when test="${ mode == 'applyInfo' }">
 								<div class="col">
