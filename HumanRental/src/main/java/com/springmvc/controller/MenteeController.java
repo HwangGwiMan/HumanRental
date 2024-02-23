@@ -29,6 +29,7 @@ public class MenteeController {
 		System.out.println(memberId);
 		System.out.println("memberId가위에 뜰꺼임 떠야됨 뜰거임 무조건 ");
 		int a = MenteeService.getMentee(memberId);
+			  
 		System.out.println(a);
 		if(a==0) {
 			model.addAttribute("mode",mode);

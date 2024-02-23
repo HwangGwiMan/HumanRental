@@ -1,7 +1,7 @@
 CREATE DATABASE HumanRental DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 
-
 use HumanRental;
+
 
 
 -- 회원관리
@@ -74,6 +74,7 @@ starRate int ,
 foreign key(memberId) references Member(memberId)
 );
 
+select * from  MenteeProfile;
 
 -- 팝니다 관리 
 CREATE TABLE IF NOT EXISTS Selling (

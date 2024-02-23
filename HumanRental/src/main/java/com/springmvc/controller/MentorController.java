@@ -116,9 +116,11 @@ public class MentorController {
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("user");
 		MentorProfile mentorprofile = mentorService.MentorInformation(memberId);
+		Mentor mentor = mentorService.getMentor(memberId);
+		String mentorId =mentor.getMentorId();
 		System.out.println(mentorprofile);
 		System.out.println("야 꼭 떠줘 부탁해 ");
-		if (mentorprofile ==null ) {
+		if (mentorprofile ==null && mentorId != null) {
 			System.out.println("떳다 null값22222");
 			model.addAttribute("mode",mode);
 		}else {
