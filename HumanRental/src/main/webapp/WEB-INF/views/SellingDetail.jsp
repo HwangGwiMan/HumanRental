@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="top d-flex">
 			
-			<c:set var="buying" value="${buying}" />
+			<c:set var="selling" value="${selling}" />
 			
 				<div class="left col-6">
 					<div class="img">이미지</div>
@@ -35,23 +35,23 @@
 				<div class="col-6">
 					<div class="info">
 						<div>
-							<h2>${buying.title}</h2>
-							<h5>${buying.regist_day}</h5>
+							<h2>${selling.title}</h2>
+							<h5>${selling.regist_day}</h5>
 							<br>
-							<h4>${buying.nickname} 
+							<h4>${selling.nickname} 
 							<span>
 								<c:choose>
-								    <c:when test="${buying.starRate==0}"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
-								    <c:when test="${buying.starRate==1}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
-								    <c:when test="${buying.starRate==2}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
-								    <c:when test="${buying.starRate==3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
-								    <c:when test="${buying.starRate==4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></c:when>
-								    <c:when test="${buying.starRate==5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></c:when>
-								    <c:when test="${buying.starRate > 0 && buying.starRate < 1}"><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
-								    <c:when test="${buying.starRate > 1 && buying.starRate < 2}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
-								    <c:when test="${buying.starRate > 2 && buying.starRate < 3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
-								    <c:when test="${buying.starRate > 3 && buying.starRate < 4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i></c:when>
-								    <c:when test="${buying.starRate > 4 && buying.starRate < 5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></c:when>
+								    <c:when test="${selling.starRate==0}"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+								    <c:when test="${selling.starRate==1}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+								    <c:when test="${selling.starRate==2}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+								    <c:when test="${selling.starRate==3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+								    <c:when test="${selling.starRate==4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+								    <c:when test="${selling.starRate==5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></c:when>
+								    <c:when test="${selling.starRate > 0 && selling.starRate < 1}"><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+								    <c:when test="${selling.starRate > 1 && selling.starRate < 2}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+								    <c:when test="${selling.starRate > 2 && selling.starRate < 3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+								    <c:when test="${selling.starRate > 3 && selling.starRate < 4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i></c:when>
+								    <c:when test="${selling.starRate > 4 && selling.starRate < 5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></c:when>
 									<c:otherwise>
 									<i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
 									</c:otherwise>
@@ -59,31 +59,31 @@
 							</span>
 							</h4>
 							<br>
-							<p>${buying.content}</p>
+							<p>${selling.content}</p>
 							<br>
 						</div>
 						<div class="qq">
-							<h4>시간당 ${buying.price}원</h4>
+							<h4>시간당 ${selling.price}원</h4>
 							<c:set var="sessionId" value="${sessionScope.user}" />
 							<c:choose>
-								<c:when test="${sessionId==buying.memberId}">
-									<div class="box1"><a href="<c:url value="/buying/delete?buyingId=${buying.buyingId}"/>">삭제</a></div>
-									<div class="box2"><a href="<c:url value="/buying/update?buyingId=${buying.buyingId}"/>">수정</a></div>
+								<c:when test="${sessionId==selling.memberId}">
+									<div class="box1"><a href="<c:url value="/selling/delete?sellingId=${selling.sellingId}"/>">삭제</a></div>
+									<div class="box2"><a href="<c:url value="/selling/update?sellingId=${selling.sellingId}"/>">수정</a></div>
 								</c:when>
 								<c:otherwise>
 									<div class="box1">
 									    <a href="javascript:void(0)" onclick="showCalendar()">신청하기</a>
 									</div>
 									<div id="calendarForm" class="calendarForm" style="display: none;">
-										<form:form action="../reservation/buying?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
-											<input name="buyingId" type="hidden" value="${buying.buyingId}">
+										<form:form action="../reservation/selling?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
+											<input name="sellingId" type="hidden" value="${selling.sellingId}">
 									    	예약일 : <input name="date" type="date" class="date" required>
 									    	<br><br>
 									    	예약 상세 내용 : <textarea name="content" cols="50" rows="5" class="form-control" required placeholder="오후 7시부터 2시간 예약하고 싶어요"></textarea>
 									    	<input type="submit" value="제출">
 										</form:form>
 									</div>
-									<div class="box2"><a href="<c:url value="/buying/update?buyingId=${buying.buyingId}"/>">찜하기</a></div>
+									<div class="box2"><a href="<c:url value="/selling/update?sellingId=${selling.sellingId}"/>">찜하기</a></div>
 								</c:otherwise>
 							</c:choose>
 						</div>
