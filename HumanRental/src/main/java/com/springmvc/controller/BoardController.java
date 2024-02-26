@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.Board;
 import com.springmvc.domain.Member;
@@ -72,10 +73,9 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardview")
-	public String BoardViewAction(HttpServletRequest request, Model model) {
-		
-		String boardId = request.getParameter("boardId");
-		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+	public String BoardViewAction(@RequestParam("boardId") String boardId,
+			   					  @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, 
+			   					  Model model) {
 		
 		Board board=new Board();
 		boardService.updateHit(boardId);
@@ -150,10 +150,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardview2")
-	public String BoardViewAction2(HttpServletRequest request, Model model) {
-		
-		String boardId = request.getParameter("boardId");
-		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+	public String BoardViewAction2(@RequestParam("boardId") String boardId,
+								   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+								   Model model) {
+			
 		
 		Board board=new Board();
 		boardService.updateHit2(boardId);
