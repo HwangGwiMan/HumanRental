@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.springmvc.domain.Buying;
 import com.springmvc.domain.Selling;
 
 public interface SellingRepository {
@@ -12,4 +13,5 @@ public interface SellingRepository {
 	public Selling SellingDetailbyId(String sellingId);
 	public void SellingDelete(String sellingId);
 	public void SellingUpdate(Selling selling);
+	public List<Selling> getSellingListById(String memberId);
 }

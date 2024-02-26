@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.springmvc.domain.Buying;
 import com.springmvc.domain.Selling;
 import com.springmvc.repository.SellingRepository;
 import com.springmvc.util.Utility;
@@ -56,6 +57,13 @@ public class SellingServiceImpl implements SellingService{
 	@Override
 	public void SellingUpdate(Selling selling) {
 		sellingrepository.SellingUpdate(selling);
+	}
+
+
+	@Override
+	public void getSellingListById(Model model, String memberId) {
+		List<Selling> sellinglist = sellingrepository.getSellingListById(memberId);
+		model.addAttribute("sellinglist",sellinglist);
 	}
 	
 	

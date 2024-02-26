@@ -80,4 +80,13 @@ public class SellingController {
 		model.addAttribute("type", "view");
 		return "redirect:/SellingList";
 	}
+	
+	@GetMapping("/sellingListManagement")
+	public String SellingListManagement(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		sellingservice.getSellingListById(model, memberId);
+		model.addAttribute("mode", "sellingListManagement");
+		return "MyPage";
+	}
 }

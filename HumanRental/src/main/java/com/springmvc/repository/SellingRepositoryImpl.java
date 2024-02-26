@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.springmvc.domain.Buying;
 import com.springmvc.domain.Selling;
 
 @Repository
@@ -71,7 +72,15 @@ public class SellingRepositoryImpl implements SellingRepository{
 				selling.getLocation(), selling.getCategory(), selling.getSellingId());
 	}
 	
-	
+	@Override
+	public List<Selling> getSellingListById(String memberId) {
+		
+		ArrayList<Selling> list = new ArrayList<Selling>();
+		String sql = "select * from selling where memberId = ?";
+		
+        list = (ArrayList<Selling>)template.query(sql, new SellingRowMapper(), memberId);
+        return list;
+	}
 	
 	
 }

@@ -42,4 +42,21 @@ public class LoginController {
 			return "false";
 		}
 	}
+	
+//	@GetMapping("/logincheck")
+//	@ResponseBody
+//	public String LoginCheck(HttpServletRequest request) {
+//		HttpSession session = request.getSession();
+//		String memberId = (String)session.getAttribute("user");
+//		System.out.println("memberId="+memberId);
+//		
+//		if(memberId == null) {
+//			System.out.println("flase");
+//			return "false";
+//		}
+//		else {
+//			System.out.println("true");
+//			return "true";
+//		}
+//	}
 }

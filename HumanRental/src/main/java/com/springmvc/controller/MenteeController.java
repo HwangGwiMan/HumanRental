@@ -82,10 +82,14 @@ public class MenteeController {
 	  }
 	  
 	  @GetMapping("/menteeprofileCheck")
-		@ResponseBody
-		public String MenteeCheck(HttpServletRequest request) {
+	  @ResponseBody
+	  	public String MenteeCheck(HttpServletRequest request) {
 			HttpSession session = request.getSession();
 			String memberId = (String) session.getAttribute("user");
+			
+			if(memberId == null) {
+				return "notLogin";
+			}
 			
 			int mentee = MenteeService.getMentee(memberId);
 			if(mentee == 0) {
