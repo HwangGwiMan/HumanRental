@@ -77,3 +77,5 @@ function deletemember(){
 	console.log("잘뜨고 잇냐?");
 }
 
+
+

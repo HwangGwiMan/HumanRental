@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,8 +33,7 @@
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
 							<li class="nav-item">프로필 수정
 								<ul>
-
-									<li class="dropdown-item"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
+									<li class="dropdown-item"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn" onclick="checkMentorId()" >멘토 프로필 조회</a></li>
 									<li class="dropdown-item"><a href="<c:url value="/mentee?mode=menteeProfileRead"/>" class="btn">멘티 프로필 조회</a></li>
 								</ul>
 							<li>
@@ -127,6 +128,14 @@
 	        						<button type="button" onclick="javascript:deleteMember()">확인</button>
 	    						</form>
 	    					</c:when>
+	    					<c:when test="${ mode == 'mentorFail' }">
+	                           <script type="text/javascript">
+	                                  window.onload = function(){
+	                                    alert("멘토 등록이 필요합니다.");
+	                                    window.history.back();
+	                                	}
+	                            </script>
+                     		</c:when>         
 							<c:when test="${ mode == 'mentorProfile' }"><!-- 멘토 프로필 -->
 								<div class="col-4">
 									<h3>멘토 프로필 등록</h3>
@@ -188,22 +197,86 @@
 							<c:when test="${ mode == 'mentorInformation' }">
 									<br><br>
 									<center>
-									<div class="col-5">
-										<h3>멘토 프로필 정보 조회 </h3>
-										<br><br>
-										<br><br>
-										<h3>멘토 카테고리</h3>
-										<div>${mentorprofile.category}</div>
-										<br><br>
-										<h3>멘토 자격증이당 </h3>
-										<div>${mentorprofile.certification}</div>
-										<br><br>
-										<h3>멘토 소개당</h3>
-										<div>${mentorprofile.introduction}</div>
-									</div>
-									
+										<div class="col-5">
+											<h3>멘토 프로필 정보 조회 </h3>
+											<br><br>
+											<br><br>
+											<h3>멘토 카테고리</h3>
+											<div>${mentorprofile.category}</div>
+											<br><br>
+											<h3>멘토 자격증이당 </h3>
+											<div>${mentorprofile.certification}</div>
+											<br><br>
+											<h3>멘토 소개당</h3>
+											<div>${mentorprofile.introduction}</div>
+										</div>
+										<div><a href="<c:url value="/mentor2?mode=mentorProfileUpdate"/>" >멘토프로필 수정 </a></div>
+										<div><a href="<c:url value="/mentor3?mode=mentorProfileDelete"/>" >멘토프로필 삭제 </a></div>
 									</center>
-									<div><a>ㅇㅇㅇ</a></div>
+							</c:when>
+							<c:when test="${ mode == 'mentorProfileUpdate' }">
+								<div class="col-4">
+									<h3>멘토 프로필 업데이트</h3>
+									<br><br>
+									<form action="<c:url value='/mentorProfileUpdate'/>" method="post" enctype="multipart/form-data">
+											<h2>카테고리</h2>
+	    								<div  style="display: flex;  justify-content:space-between;">
+	        								<label for="checkbox-1">운동</label>
+	        								<input type="checkbox" id="checkbox-1" name=category value="운동"
+											<c:if test="${mentorprofile.category.trim().toLowerCase().contains('운동')}">checked</c:if>>
+											
+	        								<label for="checkbox-2">음악</label>
+	        								<input type="checkbox" id="checkbox-2" name=category value="음악"
+											<c:if test="${mentorprofile.category.trim().toLowerCase().contains('음악')}">checked</c:if>>
+											
+	        								<label for="checkbox-3">게임</label>
+	        								<input type="checkbox" id="checkbox-3" name=category value="게임"
+											<c:if test="${mentorprofile.category.trim().toLowerCase().contains('게임')}">checked</c:if>>
+											
+	        								<label for="checkbox-4">공부</label>
+	        								<input type="checkbox" id="checkbox-4" name=category value="공부"
+	        								<c:if test="${mentorprofile.category.trim().toLowerCase().contains('공부')}">checked</c:if>>
+	        								
+	        								<label for="checkbox-5">기타</label>
+	        								<input type="checkbox" id="checkbox-5" name=category value="기타"
+	        								<c:if test="${mentorprofile.category.trim().toLowerCase().contains('기타')}">checked</c:if>>
+	        								
+	    								</div>
+	    								<br><br>
+	    								<div>
+	    									<div>
+	    										<h3>자기 소개</h3>
+	    									</div>
+	    									<div>
+												<input type="text" name="introduction" style="width:400px;height:200px;font-size:20px;" value="${fn:escapeXml(mentorprofile.introduction)}"></input>
+	        								</div>
+	    								</div>
+	    								<br><br>
+	    								<div>
+	    									<h2>너의 자격증을 적어랑</h2>
+	    								</div>
+	    								<div>
+	    									<input type=text name="certification" style="width:400px;height:100px;font-size:20px;" value="${fn:escapeXml(mentorprofile.introduction)}" ></input>
+	    								</div>
+	    								<br><br>
+	    								<div class="file-uploader-section">
+    										<h3 class="fileuploder">자격증 등록</h3>
+    										<div class="file-upload-field">
+        										<label for="file1">자격증 파일 1:</label>
+        										<input type="file" id="file1" name="file1" multiple>
+    										</div>
+    										<div class="file-upload-field">
+        										<label for="file2">자격증 파일 2:</label>
+        										<input type="file" id="file2" name="file2" multiple>
+    										</div>
+    										<div class="file-upload-field">
+        										<label for="file3">자격증 파일 3:</label>
+        										<input type="file" id="file3" name="file3" multiple>
+    										</div>
+										</div>
+										<button type="submit">확인</button>
+									</form>
+								</div>
 							</c:when>
 							<c:when test="${ mode == 'menteeProfileRead' }">
 								<div class="col-1"></div>	

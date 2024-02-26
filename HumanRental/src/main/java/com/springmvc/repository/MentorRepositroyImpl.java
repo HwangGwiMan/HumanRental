@@ -279,4 +279,24 @@ public class MentorRepositroyImpl implements MentorRepository {
 		        return null;
 		    }
 	}
+	@Override
+	public void UpdateMentorProfile(MentorProfile mentorprofile , String memberId) {
+	    System.out.println("여긴오니?");
+	    MentorProfile mentorId = MentorInformation(memberId);
+	    String SQL = "UPDATE MentorProfile SET mentorId=?, introduction = ?, certification = ? ,  category = ? ,filename1 =? ,filename2=? , filename3=?, starRate=? where memberId=?";
+	    template.update(SQL,  mentorId.getMentorId(), mentorprofile.getIntroduction(), mentorprofile.getCertification(), mentorprofile.getCategory(), mentorprofile.getFilename1(), mentorprofile.getFilename2(), mentorprofile.getFilename3(), mentorprofile.getStarRate(), memberId);
+	    System.out.println("업데이트sql 구문을 뛰어넘고 와줬니?");
+	}
+
+	@Override
+	public void DeleteMentorProfile(String memberId) {
+	
+		String SQL = "DELETE FROM MentorProfile WHERE memberId=?";
+
+		template.update(SQL,memberId);
+		System.out.println("야 삭제 구문 뚫냐 ");
+	}
+
+	
+	
 }

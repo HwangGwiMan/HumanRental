@@ -18,6 +18,7 @@ joinDate datetime not null,
 profileImage varchar(20)
 );
 
+select * from member;
 -- 멘토 테이블
 CREATE TABLE mentor(
 	mentorId varchar(50) primary key,
@@ -50,19 +51,20 @@ CREATE TABLE IF NOT EXISTS MentorApply(
 
 -- 멘토프로필관리 
 CREATE TABLE IF NOT EXISTS MentorProfile(
-mentorId varchar(50) not null,
-memberId varchar(50) not null,
-introduction varchar(1000) not null unique,
+mentorId varchar(20) not null,
+memberId varchar(20) not null,
+introduction varchar(1000) not null ,
 certification varchar(100),
 category varchar(100),
 filename1 varchar(1000),
 filename2 varchar(1000),
 filename3 varchar(1000),
-starRate int unique,
+starRate int ,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
 
+select * from  MentorProfile;
 
 -- 멘티프로필 관리
 CREATE TABLE IF NOT EXISTS MenteeProfile(
@@ -151,8 +153,8 @@ CREATE TABLE IF NOT EXISTS Reservation(
 reservationId varchar(50) primary key,
 type varchar(10),
 title varchar(20),
-menteeId varchar(50),
-mentorId varchar(50),
+menteeId varchar(20),
+mentorId varchar(20),
 reservationDate date,
 reservationContent text,
 approve tinyint,
