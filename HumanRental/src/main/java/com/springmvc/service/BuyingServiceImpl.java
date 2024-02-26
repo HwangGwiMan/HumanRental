@@ -31,7 +31,6 @@ public class BuyingServiceImpl implements BuyingService{
 
 		//테스트코드
 		buying.setStarRate(5);
-		buying.setIntroduction("abc");
 		//
 		
 		buying.setRegist_day(LocalDateTime.now());

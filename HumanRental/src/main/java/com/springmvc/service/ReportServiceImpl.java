@@ -1,6 +1,7 @@
 package com.springmvc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +25,11 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public List<Report> getReportList() {
 		return reportRepository.getReportList();
+	}
+
+	@Override
+	public Map<String, Object> getReport(String reportId) {
+		return reportRepository.getReport(reportId);
 	}
 	
 }

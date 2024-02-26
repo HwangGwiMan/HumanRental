@@ -118,11 +118,11 @@
 	       							 <div class="row justify-content-center">회원 탈퇴 </div>
 	        						<div class="row justify-content-center">
 	            						<div class="col-4">아이디</div> 
-	            						<div class="col"><input type="text" readonly="readonly" value="${member.memberId}" id=userid name="memberId"></div>
+	            						<div class="col"><input type="text" readonly="readonly" value="${member.memberId}" id="memberId" name="memberId"></div>
 	        						</div> 
 	       							 <div class="row justify-content-center">
 	            						<div class="col-4">비밀번호</div>
-	            						<div class="col"><input type="password" required id=userpass name="memberPw"></div>
+	            						<div class="col"><input type="password" required id="memberPw" name="memberPw"></div>
 	        						</div>
 	        						<input type="hidden" name="mode" value="delete">
 	        						<button type="button" onclick="javascript:deleteMember()">확인</button>
@@ -488,19 +488,43 @@
 							</c:when>
 							<c:when test="${ mode == 'reportInfo' }">
 								<div class="col">
-									<div class="row">
-										<p>신청자 ID : 
-										<p>특기 분야 : 
-										<p>주요 활동 지역 : 
-										<p>신청 이유 : 
-										<p>기타 사항
-										<p>
-									</div>
+									<c:choose>
+										<c:when test="${ not empty reportInfo.boardId }">
+											<div class="row">
+												<p>신고 대상 ID : ${ reportInfo.boardId } 
+												<p>신고 대상 멤버 ID : ${ reportInfo.memberId }
+												<p>게시글 제목 : ${ reportInfo.title }
+												<p>신고 유형 : ${ reportInfo.type }
+												<p>신고 횟수 : ${ reportInfo.reportCount }
+												<p><a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="btn btn-light">해당 게시글로 이동</a> 
+											</div>
+										</c:when>
+									</c:choose>
 									<div>
-										<a href="<c:url value="/" />" class="btn btn-success">처리</a>
-										<a href="<c:url value="/" />" class="btn btn-danger">내용</a>
+										<div onclick="javascript:registBlack('${ reportInfo.memberId }')" class="btn btn-dark">블랙리스트 추가</div>
+										<a href="<c:url value="/" />" class="btn btn-warning">경고 전송</a>
 										<a href="<c:url value="/myInfo?mode=report" />" class="btn btn-secondary">목록</a>
 									</div>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'blackListManagement' }"><!-- 신고 관리 페이지 -->
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>블랙리스트 ID</th>
+											<th>멤버 ID</th>
+											<th>등록일</th>
+											<th></th>
+										</tr>
+										<c:forEach var="black" items="${ blackList }" varStatus="status">
+											<td>${ status.count }</td>
+											<td>${ black.blackId }</td>
+											<td>${ black.memberId }</td>
+											<td>${ black.registDate }</td>
+											<td>해제</td>
+										</c:forEach>
+									</table>
 								</div>
 							</c:when>
 						</c:choose>

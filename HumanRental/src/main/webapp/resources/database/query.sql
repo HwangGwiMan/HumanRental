@@ -15,10 +15,10 @@ phone int not null,
 address varchar(100) not null,
 nickname varchar(20) not null unique,
 joinDate datetime not null,
-profileImage varchar(20)
+profileImage varchar(20),
+reportCount int
 );
 
-select * from member;
 -- 멘토 테이블
 CREATE TABLE mentor(
 	mentorId varchar(50) primary key,
@@ -51,9 +51,9 @@ CREATE TABLE IF NOT EXISTS MentorApply(
 
 -- 멘토프로필관리 
 CREATE TABLE IF NOT EXISTS MentorProfile(
-mentorId varchar(20) not null,
-memberId varchar(20) not null,
-introduction varchar(1000) not null ,
+mentorId varchar(50) not null,
+memberId varchar(50) not null,
+introduction varchar(1000) not null unique,
 certification varchar(100),
 category varchar(100),
 filename1 varchar(1000),
@@ -64,7 +64,7 @@ foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
 
-select * from  MentorProfile;
+
 
 -- 멘티프로필 관리
 CREATE TABLE IF NOT EXISTS MenteeProfile(
@@ -153,8 +153,8 @@ CREATE TABLE IF NOT EXISTS Reservation(
 reservationId varchar(50) primary key,
 type varchar(10),
 title varchar(20),
-menteeId varchar(20),
-mentorId varchar(20),
+menteeId varchar(50),
+mentorId varchar(50),
 reservationDate date,
 reservationContent text,
 approve tinyint,
@@ -257,10 +257,9 @@ foreign key(reporterId) references Member(memberId)
 
 -- 블랙리스트 관리 
 CREATE TABLE IF NOT EXISTS BlackList(
-blackId varchar(20) not null primary key,
-memberId varchar(20),
-content varchar(10000),
-createDate date,
+blackId varchar(50) not null primary key,
+memberId varchar(20) unique,
+registDate datetime,
 foreign key(memberId) references Member(memberId)
 );
 
@@ -292,9 +291,9 @@ foreign key(receiveMemberId) references Member(memberId)
 
 -- 테스트 데이터
 -- 회원 정보 추가
-INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png");
-INSERT INTO Member VALUES("qwer", "1234", "김이름", 25, "남", 01000000000, "TEST", "닉네임1", "2024-01-01 12:00:00" , "default.png");
-INSERT INTO Member VALUES("asdf", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임2", "2024-01-01 12:00:00" , "default.png");
+INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("qwer", "1234", "김이름", 25, "남", 01000000000, "TEST", "닉네임1", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("asdf", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임2", "2024-01-01 12:00:00" , "default.png", 0);
 
 -- 자유게시판, 공지사항 내용 추가
 insert into board values('Board_001','admin','admin','게시글1','내용','2024-01-01 00:00:00',0);

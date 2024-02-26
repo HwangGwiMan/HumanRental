@@ -55,7 +55,7 @@
 							<button onclick="window.open('./boardreport?boardId=${board.boardId}', 'window_name','width=430,height=500,location=no,status=no,scrollbars=no')" class="btn btn-warning">신고</button>
 					</c:when>
 				</c:choose>
-				<a href="<c:url value="/board?page=${pageNum}"/>" class="btn btn-primary">목록</a>
+				<a href="<c:url value="/board?pageNum=${pageNum}"/>" class="btn btn-primary">목록</a>
 			</div>
 		</div>
 		<hr>

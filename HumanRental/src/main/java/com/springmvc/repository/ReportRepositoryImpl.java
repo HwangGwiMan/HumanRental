@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
@@ -61,6 +62,23 @@ public class ReportRepositoryImpl implements ReportRepository {
 		}
 	}
 	
+	@Override
+	public Map<String, Object> getReport(String reportId) {
+		String SQL;
+		
+		try {
+			SQL = "SELECT board.boardId, board.memberId, board.title, report.type, member.reportCount FROM report "
+					+ "LEFT JOIN board "
+					+ "ON board.boardId = report.targetId "
+					+ "LEFT JOIN member "
+					+ "ON board.memberId = member.memberId "
+					+ "WHERE reportId = ?;";
+			
+			return template.queryForMap(SQL, reportId);
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
 	
 	@Override
 	public void createBoardReport(HttpServletRequest request, String reporterId) {
