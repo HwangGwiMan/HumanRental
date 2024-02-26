@@ -30,4 +30,10 @@ public class BlackController {
 			return "AlreadyRegistered";
 		}
 	}
+	
+	@GetMapping("/removeBlack")
+	public String removeBlack(@RequestParam("id") String blackId) {
+		blackService.removeBlack(blackId);
+		return "redirect:/myInfo?mode=blackListManagement";
+	}
 }

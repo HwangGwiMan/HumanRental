@@ -36,7 +36,16 @@ public class BlackRepositoryImpl implements BlackRepository {
 		
 		black.setBlackId(util.createId("black"));
 		SQL = "INSERT INTO blacklist VALUES(?, ?, ?)";
+		System.out.println(LocalDateTime.now());
 		template.update(SQL,  black.getBlackId(), black.getMemberId(), LocalDateTime.now());
+	}
+	
+	@Override
+	public void removeBlack(String blackId) {
+		String SQL;
+		
+		SQL = "DELETE FROM blacklist WHERE blackId = ?";
+		template.update(SQL, blackId);
 	}
 	
 	@Override
@@ -52,7 +61,6 @@ public class BlackRepositoryImpl implements BlackRepository {
 					Black black = new Black();
 					black.setBlackId(rs.getString(1));
 					black.setMemberId(rs.getString(2));
-					System.out.println(rs.getTimestamp(3).getTimezoneOffset());
 					black.setRegistDate(rs.getTimestamp(3));
 					return black;
 				}

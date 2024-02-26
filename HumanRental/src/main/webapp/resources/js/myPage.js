@@ -91,6 +91,24 @@ function registBlack(memberId) {
 	});
 }
 
+function sendWarning(memberId, type, title) {
+	$.ajax({
+		type:"POST",
+		url:"./sendWarning",
+		data: {
+			"memberId" : memberId,
+			"type" : type,
+			"title" : title
+		},
+		success : function(result) {
+			
+		},
+		error : function(error) {
+			
+		}
+	});
+}
+
 function deleteMember(){
 	console.log(document.getElementById("memberId"));
 	console.log(document.getElementById("memberPw"));

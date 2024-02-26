@@ -25,6 +25,12 @@ public class BlackServiceImpl implements BlackService {
 	public List<Black> getBlackList() {
 		return blackRepository.getBlackList();
 	}
+
+	@Override
+	public void removeBlack(String blackId) {
+		blackRepository.removeBlack(blackId);
+		
+	}
 	
 	
 }

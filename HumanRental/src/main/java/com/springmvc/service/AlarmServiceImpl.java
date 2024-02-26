@@ -1,6 +1,7 @@
 package com.springmvc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,12 @@ public class AlarmServiceImpl implements AlarmService{
 	public void createMentoApplyResultAlarm(String memberId, String result) {
 		alarmRepository.createMentoApplyResultAlarm(memberId, result);
 	}
+
+	@Override
+	public void createWarningAlarm(Map<String, Object> data) {
+		alarmRepository.createWarningAlarm(data);
+		
+	}
+	
 	
 }
