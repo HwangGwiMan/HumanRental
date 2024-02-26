@@ -24,7 +24,6 @@
 			<div class="row pt-5 align-items-center">
 				<div class="col-2 pt-5">
 					<ul class="navbar-nav row justify-content-center">
-					
 					<c:choose>
 						<c:when test="${ member.memberId != 'admin' }">
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
@@ -403,8 +402,11 @@
 													<c:when test="${ report.state == 'Wait' }">
 														<td><div class="badge bg-secondary">대기중</div></td>
 													</c:when>
-													<c:when test="${ report.state == 'Solve' }">
-														<td><div class="badge bg-success">처리완료</div></td>
+													<c:when test="${ report.state == 'Warning' }">
+														<td><div class="badge bg-warning">경고 처리</div></td>
+													</c:when>
+													<c:when test="${ report.state == 'Black' }">
+														<td><div class="badge bg-dark">블랙 처리</div></td>
 													</c:when>
 												</c:choose>
 												<td>${ report.createDate }</td>
@@ -426,12 +428,12 @@
 												<p><a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="btn btn-light">해당 게시글로 이동</a>
 											</div>
 											<div class="row">
-												<p><a onclick="javascript:sendWarning('${ reportInfo.memberId }','${ reportInfo.type }', '${ reportInfo.title }')" class="btn btn-warning">경고 전송</a>
+												<p><a onclick="javascript:sendWarning('${ reportInfo.memberId }','${ reportInfo.type }', '${ reportInfo.title }', '${ reportInfo.reportId }')" class="btn btn-warning">경고 전송</a>
 											</div>
 										</c:when>
 									</c:choose>
 									<div>
-										<div onclick="javascript:registBlack('${ reportInfo.memberId }')" class="btn btn-dark">블랙리스트 추가</div>
+										<div onclick="javascript:registBlack('${ reportInfo.memberId }', '${ reportInfo.reportId }')" class="btn btn-dark">블랙리스트 추가</div>
 										<a href="<c:url value="/myInfo?mode=report" />" class="btn btn-secondary">목록</a>
 									</div>
 								</div>

@@ -45,8 +45,6 @@ public class ReportRepositoryImpl implements ReportRepository {
 			SQL = "SELECT * FROM report";
 			return template.query(SQL, new RowMapper<Report>() {
 				
-				
-				
 				@Override
 				public Report mapRow(ResultSet rs, int rowNum) throws SQLException {
 					Report report = new Report();
@@ -73,7 +71,7 @@ public class ReportRepositoryImpl implements ReportRepository {
 		String SQL;
 		
 		try {
-			SQL = "SELECT board.boardId, board.memberId, board.title, report.type, member.reportCount FROM report "
+			SQL = "SELECT report.reportId, board.boardId, board.memberId, board.title, report.type, member.reportCount FROM report "
 					+ "LEFT JOIN board "
 					+ "ON board.boardId = report.targetId "
 					+ "LEFT JOIN member "
@@ -84,6 +82,14 @@ public class ReportRepositoryImpl implements ReportRepository {
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			return null;
 		}
+	}
+	
+	@Override
+	public void stateUpdate(String reportId, String state) {
+		String SQL;
+		
+		SQL = "UPDATE report SET state = ? WHERE reportId = ?";
+		template.update(SQL, state, reportId);
 	}
 	
 	@Override

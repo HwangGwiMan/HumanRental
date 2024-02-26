@@ -70,13 +70,14 @@ function readReportInfo(reportId) {
 	window.location.href="./myInfo?mode=reportInfo&id=" + reportId;
 }
 
-function registBlack(memberId) {
+function registBlack(memberId, reportId) {
 	
 	$.ajax({
 		type:"POST",
 		url:"./registBlack",
 		data: {
-			"memberId" : memberId
+			"memberId" : memberId,
+			"reportId" : reportId
 		},
 		success : function(result) {
 			if(result === "AlreadyRegistered") {
@@ -91,14 +92,15 @@ function registBlack(memberId) {
 	});
 }
 
-function sendWarning(memberId, type, title) {
+function sendWarning(memberId, type, title, reportId) {
 	$.ajax({
 		type:"POST",
 		url:"./sendWarning",
 		data: {
 			"memberId" : memberId,
 			"type" : type,
-			"title" : title
+			"title" : title,
+			"reportId" : reportId
 		},
 		success : function(result) {
 			

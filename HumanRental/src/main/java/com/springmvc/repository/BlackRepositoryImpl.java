@@ -36,7 +36,6 @@ public class BlackRepositoryImpl implements BlackRepository {
 		
 		black.setBlackId(util.createId("black"));
 		SQL = "INSERT INTO blacklist VALUES(?, ?, ?)";
-		System.out.println(LocalDateTime.now());
 		template.update(SQL,  black.getBlackId(), black.getMemberId(), LocalDateTime.now());
 	}
 	

@@ -52,6 +52,7 @@ public class ReportController {
 	@PostMapping("/sendWarning")
 	@ResponseBody
 	public void sendWarning(@RequestParam Map<String, Object> data) {
+		reportService.stateUpdate((String) data.get("reportId"), "Warning");
 		alarmService.createWarningAlarm(data);
 	}
 	

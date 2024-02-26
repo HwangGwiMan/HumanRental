@@ -10,6 +10,7 @@ import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.sql.DataSource;
 
@@ -81,6 +82,8 @@ public class MentorRepositroyImpl implements MentorRepository {
 		String SQL = "SELECT mentorregistinfo.registId, mentorregistinfo.memberId, mentorregistinfo.applyDate, mentorapply.state, mentorapply.confirmDate FROM mentorapply "
 				+ "LEFT JOIN mentorregistinfo "
 				+ "ON mentorapply.registId = mentorregistinfo.registId";
+		
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		
 		try {
 			return template.query(SQL, new RowMapper<Map<String, Object>>() {
@@ -181,8 +184,8 @@ public class MentorRepositroyImpl implements MentorRepository {
 					Map<String, Object> memberInfo = new HashMap<String, Object>();
 					memberInfo.put("mentorId", rs.getString(1));
 					memberInfo.put("memberId", rs.getString(2));
-					memberInfo.put("mentorRegistDate", rs.getString(3));
-					memberInfo.put("memberJoinDate", rs.getString(4));
+					memberInfo.put("mentorRegistDate", rs.getTimestamp(3));
+					memberInfo.put("memberJoinDate", rs.getTimestamp(4));
 					
 					return memberInfo;
 				}
