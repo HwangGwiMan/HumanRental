@@ -309,5 +309,5 @@ insert into buying values('buyingId_003','asdf','닉네임2','introduction',5,'�
 
 -- selling 내용 추가
 insert into selling values('sellingId_001','qwer','닉네임1','introduction',3.5,'기타 알려드림니다','내용','2024-01-01 00:00:00','music',10000,'한국');
-insert into selling values('sellingId_002','admin','admin','introduction',5,'k리그 출신 강의','내용','2024-01-02 00:00:00','sports',20000,'한국');
+insert into selling values('sellingId_002','admin','admin','introduction',5,'k리그 출신 축구강의','내용','2024-01-02 00:00:00','sports',20000,'한국');
 insert into selling values('sellingId_003','asdf','닉네임2','introduction',5,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국');

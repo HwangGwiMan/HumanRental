@@ -10,4 +10,5 @@ public interface SellingService {
 	public void SellingDetailbyId(Model model, String sellingId);
 	public void SellingDelete(String sellingId);
 	public void SellingUpdate(Selling selling);
+	public void getSellingListById(Model model, String memberId);
 }

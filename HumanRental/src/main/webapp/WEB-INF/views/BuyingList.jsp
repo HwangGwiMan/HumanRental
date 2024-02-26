@@ -6,7 +6,8 @@
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="<c:url value="/resources/css/style_menteelist.css"/>">
+	<link rel="stylesheet" href="<c:url value="/resources/css/style_menteelist.css"/>">
+	<script src="<c:url value="/resources/js/myPage.js"/>"></script>
 </head>
 
 <body>
@@ -21,10 +22,10 @@
             <div><a href="<c:url value="/BuyingList?category=game"/>"><i class="fa-solid fa-gamepad"></i></a></div>
             <div><i class="fa-solid fa-comments"></i></div>
             <div><i class="fa-solid fa-car"></i></div>
-<!--             <div><i class="fa-solid fa-hammer"></i></div> -->
             <div><i class="fa-solid fa-book-open"></i></div>
             <div><a href="<c:url value="/BuyingList"/>"><h4>전체</h4></a></div>
-            <div><a href="<c:url value="/buying" />"><h4>쓰기</h4></a></div>
+<%--             <div><a href="<c:url value="/buying" />"><h4>쓰기</h4></a></div> --%>
+            <div><a onclick="menteeCheck2()"><h4>쓰기</h4></a></div>
             
         </div>
         <div class="qq1 row">
@@ -55,24 +56,5 @@
         </div>
     </div>
 	<jsp:include page="footer.jsp" />
-	<script type="text/javascript">
-	function mentorCheck(element) {
-	    var buyingId = element.getAttribute('data-buying-id');
-	    $.ajax({
-	        type: 'get',
-	        url: './mentorprofileCheck',
-	        success: function(result) {
-	            if (result === "true") {
-	                window.location.href = "./buying/detail?buyingId=" + buyingId;
-	            } else {
-	                alert("멘토 프로필을 등록한 회원만 조회 가능합니다.");
-	            }
-	        },
-	        error: function(request, status, error) {
-	            console.log(request);
-	        }
-	    });
-	}
-	</script>
 </body>
 </html>
