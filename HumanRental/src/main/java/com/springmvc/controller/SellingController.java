@@ -12,81 +12,81 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.Member;
-import com.springmvc.domain.Buying;
+import com.springmvc.domain.Selling;
 import com.springmvc.service.MemberService;
-import com.springmvc.service.BuyingService;
+import com.springmvc.service.SellingService;
 
 @Controller
-public class BuyingController {
+public class SellingController {
 	
 	@Autowired
-	BuyingService buyingservice;
+	SellingService sellingservice;
 	
 	@Autowired
 	MemberService memberService;
 	
 	//멘티게시글 리스트 페이지
-	@GetMapping("/BuyingList")
+	@GetMapping("/SellingList")
 	public String MentorList(@RequestParam(name = "category", required = false) String category, Model model) {
 //		System.out.println("category : "+category);
-		buyingservice.BuyingList(model, category);
-		return "BuyingList";
+		sellingservice.SellingList(model, category);
+		return "SellingList";
 	}
 	
 	//멘티게시글 상세페이지
-	@GetMapping("/buying/detail")
-	public String BuyingDetail(@RequestParam("buyingId") String buyingId, Model model) {
-		buyingservice.BuyingDetailbyId(model, buyingId);
-		return "BuyingDetail";
+	@GetMapping("/selling/detail")
+	public String SellingDetail(@RequestParam("sellingId") String sellingId, Model model) {
+		sellingservice.SellingDetailbyId(model, sellingId);
+		return "SellingDetail";
 	}
 	
-	@GetMapping("/buying")
-	public String Buying(@ModelAttribute Buying buying, Model model, HttpServletRequest request) {
+	@GetMapping("/selling")
+	public String Selling(@ModelAttribute Selling selling, Model model, HttpServletRequest request) {
 //		System.out.println("셀링 겟 접근");
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		Member member = memberService.getMember(memberId);
 		model.addAttribute("member", member);
 		model.addAttribute("type", "view");
-		return "Buying";
+		return "Selling";
 	}
 	
-	@PostMapping("/buying")
-	public String BuyingCreate(@ModelAttribute Buying buying, Model model, HttpServletRequest request) {
+	@PostMapping("/selling")
+	public String SellingCreate(@ModelAttribute Selling selling, Model model, HttpServletRequest request) {
 //		System.out.println("셀링 포스트 접근");
-		buyingservice.BuyingCreate(buying);
-		return "redirect:/BuyingList";
+		sellingservice.SellingCreate(selling);
+		return "redirect:/SellingList";
 	}
 	
-	@GetMapping("/buying/delete")
-	public String BuyingDelete(@RequestParam("buyingId") String buyingId) {
+	@GetMapping("/selling/delete")
+	public String SellingDelete(@RequestParam("sellingId") String sellingId) {
 //		System.out.println("셀링 딜리트 접근");
-		buyingservice.BuyingDelete(buyingId);
-		return "redirect:/BuyingList";
+		sellingservice.SellingDelete(sellingId);
+		return "redirect:/SellingList";
 	}
 	
-	@GetMapping("/buying/update")
-	public String BuyingUpdate(@ModelAttribute Buying buying, @RequestParam("buyingId") String buyingId, Model model) {
+	@GetMapping("/selling/update")
+	public String SellingUpdate(@ModelAttribute Selling selling, @RequestParam("sellingId") String sellingId, Model model) {
 //		System.out.println("셀링 업데이트 겟 접근");
-		buyingservice.BuyingDetailbyId(model, buyingId);
+		sellingservice.SellingDetailbyId(model, sellingId);
 		model.addAttribute("type", "update");
-		return "Buying";
+		return "Selling";
 	}
 	
-	@PostMapping("/buying/update")
-	public String BuyingUpdateAction(@ModelAttribute Buying buying, Model model) {
+	@PostMapping("/selling/update")
+	public String SellingUpdateAction(@ModelAttribute Selling selling, Model model) {
 //		System.out.println("셀링 업데이트 포스트 접근");
-		buyingservice.BuyingUpdate(buying);
+		sellingservice.SellingUpdate(selling);
 		model.addAttribute("type", "view");
-		return "redirect:/BuyingList";
+		return "redirect:/SellingList";
 	}
 	
-	@GetMapping("/buyingListManagement")
-	public String BuyingListManagement(Model model, HttpServletRequest request) {
+	@GetMapping("/sellingListManagement")
+	public String SellingListManagement(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
-		buyingservice.getBuyingListById(model, memberId);
-		model.addAttribute("mode", "buyingListManagement");
+		sellingservice.getSellingListById(model, memberId);
+		model.addAttribute("mode", "sellingListManagement");
 		return "MyPage";
 	}
 }

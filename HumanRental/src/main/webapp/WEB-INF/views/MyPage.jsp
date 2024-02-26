@@ -37,8 +37,8 @@
 							<li>
 							<li>등록 목록
 								<ul>
-									<li class="nav-item"><a href="#" class="btn">삽니다 목록</a></li>
-									<li class="nav-item"><a href="#" class="btn">팝니다 목록</a></li>
+									<li class="nav-item"><a href="<c:url value="/buyingListManagement"/>" class="btn">삽니다 목록</a></li>
+									<li class="nav-item"><a href="<c:url value="/sellingListManagement"/>" class="btn">팝니다 목록</a></li>
 								</ul>
 							</li>
 							<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
@@ -455,6 +455,46 @@
 												<td>${ black.memberId }</td>
 												<td>${ black.registDate }</td>
 												<td><a href="<c:url value="/removeBlack?id=${ black.blackId }" />" class="btn">해제</a></td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'buyingListManagement' }"><!-- 삽니다 관리 페이지 -->
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>제목</th>
+											<th>카테고리</th>
+											<th>등록일</th>
+										</tr>
+										<c:forEach var="buying" items="${buyinglist}" varStatus="status">					
+											<tr>		
+												<td>${ status.count }</td>
+												<td><a href='<c:url value="/buying/detail?buyingId=${buying.buyingId}"/>' class="follow">${ buying.title }</a></td>
+												<td>${ buying.category }</td>
+												<td>${ member.regist_day }</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'sellingListManagement' }"><!-- 삽니다 관리 페이지 -->
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>제목</th>
+											<th>카테고리</th>
+											<th>등록일</th>
+										</tr>
+										<c:forEach var="selling" items="${sellinglist}" varStatus="status">					
+											<tr>		
+												<td>${ status.count }</td>
+												<td><a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">${ selling.title }</a></td>
+												<td>${ selling.category }</td>
+												<td>${ member.regist_day }</td>
 											</tr>
 										</c:forEach>
 									</table>

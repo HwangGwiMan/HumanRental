@@ -72,8 +72,15 @@ public class BuyingRepositoryImpl implements BuyingRepository{
 		template.update(sql, buying.getTitle(), buying.getContent(), buying.getPrice(), 
 				buying.getLocation(), buying.getCategory(), buying.getBuyingId());
 	}
-	
-	
-	
+
+	@Override
+	public List<Buying> getBuyingListById(String memberId) {
+		
+		ArrayList<Buying> list = new ArrayList<Buying>();
+		String sql = "select * from buying where memberId = ?";
+		
+        list = (ArrayList<Buying>)template.query(sql, new BuyingRowMapper(), memberId);
+        return list;
+	}
 	
 }

@@ -24,8 +24,8 @@ public class ReservationController {
 	ReservationService reservationservice;
 	
 	//멘티게시글 리스트 페이지
-	@PostMapping("/reservation/create")
-	public String ReservationCreate(@RequestParam("buyingId") String buyingId, Model model,
+	@PostMapping("/reservation/buying")
+	public String BuyingReservation(@RequestParam("buyingId") String buyingId, Model model,
 			@RequestParam("date") String date, @RequestParam("content") String content, HttpServletRequest request) {
 		
 //		System.out.println(date);
@@ -33,7 +33,24 @@ public class ReservationController {
 		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
-		Reservation reservation = reservationservice.ReservationCreate(buyingId, date, content, memberId, model);
+		Reservation reservation = reservationservice.BuyingReservationCreate(buyingId, date, content, memberId, model);
+		model.addAttribute("reservation", reservation);
+		model.addAttribute("mode", "reservation");
+		return "CheckPage"; // 추후 예약 현황 페이지로
+	}
+	
+
+	//멘티게시글 리스트 페이지
+	@PostMapping("/reservation/selling")
+	public String SellingReservation(@RequestParam("sellingId") String sellingId, Model model,
+			@RequestParam("date") String date, @RequestParam("content") String content, HttpServletRequest request) {
+		
+//		System.out.println(date);
+//		System.out.println(content);
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		Reservation reservation = reservationservice.SellingReservationCreate(sellingId, date, content, memberId, model);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("mode", "reservation");
 		return "CheckPage"; // 추후 예약 현황 페이지로
