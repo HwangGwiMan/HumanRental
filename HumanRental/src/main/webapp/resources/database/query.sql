@@ -58,7 +58,7 @@ category varchar(100),
 filename1 varchar(1000),
 filename2 varchar(1000),
 filename3 varchar(1000),
-starRate int unique,
+starRate int,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );

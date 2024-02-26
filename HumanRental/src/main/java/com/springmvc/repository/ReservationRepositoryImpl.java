@@ -28,15 +28,6 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 	@Override
 	public void ReservationCreate(Reservation reservation) {
 		
-		System.out.println("getReservationId="+reservation.getReservationId());
-		System.out.println("getType="+reservation.getType());
-		System.out.println("getTitle="+reservation.getTitle());
-		System.out.println("getMenteeId="+reservation.getMenteeId());
-		System.out.println("getMentorId="+reservation.getMentorId());
-		System.out.println("getReservationdate="+reservation.getReservationdate());
-		System.out.println("getReservationcontent="+reservation.getReservationcontent());
-		System.out.println("isApprove="+reservation.isApprove());
-		System.out.println("getSigndate="+reservation.getSigndate());
 		String sql = "insert into Reservation values(?,?,?,?,?,?,?,?,?)";
 		template.update(sql, reservation.getReservationId(), reservation.getType(), reservation.getTitle(), 
 				reservation.getMenteeId(), reservation.getMentorId(), reservation.getReservationdate(), reservation.getReservationcontent(), 
