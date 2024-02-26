@@ -40,6 +40,14 @@ public class BlackRepositoryImpl implements BlackRepository {
 	}
 	
 	@Override
+	public void removeBlack(String blackId) {
+		String SQL;
+		
+		SQL = "DELETE FROM blacklist WHERE blackId = ?";
+		template.update(SQL, blackId);
+	}
+	
+	@Override
 	public List<Black> getBlackList() {
 		String SQL;
 		
@@ -52,7 +60,6 @@ public class BlackRepositoryImpl implements BlackRepository {
 					Black black = new Black();
 					black.setBlackId(rs.getString(1));
 					black.setMemberId(rs.getString(2));
-					System.out.println(rs.getTimestamp(3).getTimezoneOffset());
 					black.setRegistDate(rs.getTimestamp(3));
 					return black;
 				}

@@ -32,4 +32,8 @@ public class ReportServiceImpl implements ReportService {
 		return reportRepository.getReport(reportId);
 	}
 	
+	@Override
+	public void stateUpdate(String reportId, String state) {
+		reportRepository.stateUpdate(reportId, state);
+	}
 }

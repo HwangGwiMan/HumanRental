@@ -70,13 +70,14 @@ function readReportInfo(reportId) {
 	window.location.href="./myInfo?mode=reportInfo&id=" + reportId;
 }
 
-function registBlack(memberId) {
+function registBlack(memberId, reportId) {
 	
 	$.ajax({
 		type:"POST",
 		url:"./registBlack",
 		data: {
-			"memberId" : memberId
+			"memberId" : memberId,
+			"reportId" : reportId
 		},
 		success : function(result) {
 			if(result === "AlreadyRegistered") {
@@ -84,6 +85,25 @@ function registBlack(memberId) {
 			} else if(result === "RegistrationCompleted") {
 				alert("블랙리스트 등록이 완료되었습니다.");
 			}
+		},
+		error : function(error) {
+			
+		}
+	});
+}
+
+function sendWarning(memberId, type, title, reportId) {
+	$.ajax({
+		type:"POST",
+		url:"./sendWarning",
+		data: {
+			"memberId" : memberId,
+			"type" : type,
+			"title" : title,
+			"reportId" : reportId
+		},
+		success : function(result) {
+			
 		},
 		error : function(error) {
 			
