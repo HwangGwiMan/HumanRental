@@ -46,7 +46,8 @@
 	                        <h1 class="name">${buying.title}</h1>
 	                        <p class="description">${buying.nickname}</p>
 	                        <br>
-	                        <a href='<c:url value="/buying/detail?buyingId=${buying.buyingId}"/>' class="follow">신청하기</a>
+<%-- 	                        <a href='<c:url value="/buying/detail?buyingId=${buying.buyingId}"/>' class="follow">신청하기</a> --%>
+	                        <a onclick="mentorCheck(this)" data-buying-id="${buying.buyingId}" class="follow">신청하기</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -55,31 +56,23 @@
     </div>
 	<jsp:include page="footer.jsp" />
 	<script type="text/javascript">
-		function loginCheck() {
-			
-			var memberId = document.getElementById("memberId").value;
-			
-			$.ajax({
-				type : 'get', // 타입 (get, post, put 등등)    
-				url : './loginReq', // 요청할 서버url
-				contentType : "application/json; charset=UTF-8",
-				dataType : 'text',// 데이터 타입 (html, xml, json, text 등등)
-				data : {  // 보낼 데이터 (Object , String, Array)
-				"memberId" : memberId,
-				"memberPw" : memberPw
-				},
-				success : function(result) { // 결과 성공 콜백함수
-					if(result === "false") {
-						alert("아이디와 비밀번호를 확인해주세요.");	
-					} else {
-						window.location.href = "./main"
-					}
-				},
-				error : function(request, status, error) { // 결과 에러 콜백함수
-					console.log(request);
-				}
-			})
-		}
+	function mentorCheck(element) {
+	    var buyingId = element.getAttribute('data-buying-id');
+	    $.ajax({
+	        type: 'get',
+	        url: './mentorprofileCheck',
+	        success: function(result) {
+	            if (result === "true") {
+	                window.location.href = "./buying/detail?buyingId=" + buyingId;
+	            } else {
+	                alert("멘토 프로필을 등록한 회원만 조회 가능합니다.");
+	            }
+	        },
+	        error: function(request, status, error) {
+	            console.log(request);
+	        }
+	    });
+	}
 	</script>
 </body>
 </html>

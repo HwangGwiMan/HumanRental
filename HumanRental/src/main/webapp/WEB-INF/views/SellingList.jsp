@@ -37,7 +37,8 @@
 	                        <p class="description">${selling.nickname}</p>
 	                        <br>
 	                        <p class="information">간단한 내용(한줄)</p>
-	                        <a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a>
+<%-- 	                        <a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a> --%>
+	                        <a onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" class="follow">신청하기</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -45,5 +46,24 @@
         </div>
     </div>
 	<jsp:include page="footer.jsp" />
+	<script type="text/javascript">
+	function menteeCheck(element) {
+	    var SellingId = element.getAttribute('data-selling-id');
+	    $.ajax({
+	        type: 'get',
+	        url: './menteeprofileCheck',
+	        success: function(result) {
+	            if (result === "true") {
+	                window.location.href = "./selling/detail?sellingId=" + SellingId;
+	            } else {
+	                alert("멘티 프로필을 등록한 회원만 조회 가능합니다.");
+	            }
+	        },
+	        error: function(request, status, error) {
+	            console.log(request);
+	        }
+	    });
+	}
+	</script>
 </body>
 </html>
