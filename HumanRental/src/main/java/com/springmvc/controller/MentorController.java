@@ -183,4 +183,21 @@ public class MentorController {
 		return "Main";
 	}
 	
+	@GetMapping("/mentorprofileCheck")
+	@ResponseBody
+	public String MentorProfileCheck(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String memberId = (String) session.getAttribute("user");
+		
+		if(memberId == null) {
+			return "notLogin";
+		}
+		
+		MentorProfile mentorprofile = mentorService.MentorInformation(memberId);
+		if(mentorprofile == null) {
+			return "false";
+		} else {
+			return "true";
+		}
+	}
 }

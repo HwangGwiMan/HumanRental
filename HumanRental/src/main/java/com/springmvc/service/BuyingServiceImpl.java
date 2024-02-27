@@ -31,7 +31,6 @@ public class BuyingServiceImpl implements BuyingService{
 
 		//테스트코드
 		buying.setStarRate(5);
-		buying.setIntroduction("abc");
 		//
 		
 		buying.setRegist_day(LocalDateTime.now());
@@ -58,7 +57,12 @@ public class BuyingServiceImpl implements BuyingService{
 	public void BuyingUpdate(Buying buying) {
 		buyingrepository.BuyingUpdate(buying);
 	}
-	
-	
+
+
+	@Override
+	public void getBuyingListById(Model model, String memberId) {
+		List<Buying> buyinglist = buyingrepository.getBuyingListById(memberId);
+		model.addAttribute("buyinglist",buyinglist);
+	}
 	
 }

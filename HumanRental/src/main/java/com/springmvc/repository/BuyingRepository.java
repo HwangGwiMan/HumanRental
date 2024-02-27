@@ -12,4 +12,5 @@ public interface BuyingRepository {
 	public Buying BuyingDetailbyId(String buyingId);
 	public void BuyingDelete(String buyingId);
 	public void BuyingUpdate(Buying buying);
+	public List<Buying> getBuyingListById(String memberId);
 }

@@ -27,6 +27,7 @@
 					<div class="row justify-content-center">
 					<c:choose>
 						<c:when test="${ member.memberId != 'admin' }">
+<<<<<<< HEAD
 							<div class="row"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></div><!-- 기본값 -->
 							<div class="row"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></div>
 							<div class="row justify-content-center">
@@ -45,6 +46,25 @@
 							</div>
 							<div class="row"><a href="#" class="btn">일정 정보</a></div>
 							<div class="row"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></div>
+=======
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
+							<li class="nav-item">프로필 수정
+								<ul>
+
+									<li class="dropdown-item"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
+									<li class="dropdown-item"><a href="<c:url value="/mentee?mode=menteeProfileRead"/>" class="btn">멘티 프로필 조회</a></li>
+								</ul>
+							<li>
+							<li>등록 목록
+								<ul>
+									<li class="nav-item"><a href="<c:url value="/buyingListManagement"/>" class="btn">삽니다 목록</a></li>
+									<li class="nav-item"><a href="<c:url value="/sellingListManagement"/>" class="btn">팝니다 목록</a></li>
+								</ul>
+							</li>
+							<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
+							<li class="nav-item"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></li>
+>>>>>>> refs/heads/main
 						</c:when>
 						<c:when test="${ member.memberId eq 'admin' }">
 							<li class=""><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
@@ -452,6 +472,46 @@
 												<td>${ black.memberId }</td>
 												<td>${ black.registDate }</td>
 												<td><a href="<c:url value="/removeBlack?id=${ black.blackId }" />" class="btn">해제</a></td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'buyingListManagement' }"><!-- 삽니다 관리 페이지 -->
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>제목</th>
+											<th>카테고리</th>
+											<th>등록일</th>
+										</tr>
+										<c:forEach var="buying" items="${buyinglist}" varStatus="status">					
+											<tr>		
+												<td>${ status.count }</td>
+												<td><a href='<c:url value="/buying/detail?buyingId=${buying.buyingId}"/>' class="follow">${ buying.title }</a></td>
+												<td>${ buying.category }</td>
+												<td>${ member.regist_day }</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'sellingListManagement' }"><!-- 삽니다 관리 페이지 -->
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>제목</th>
+											<th>카테고리</th>
+											<th>등록일</th>
+										</tr>
+										<c:forEach var="selling" items="${sellinglist}" varStatus="status">					
+											<tr>		
+												<td>${ status.count }</td>
+												<td><a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">${ selling.title }</a></td>
+												<td>${ selling.category }</td>
+												<td>${ member.regist_day }</td>
 											</tr>
 										</c:forEach>
 									</table>
