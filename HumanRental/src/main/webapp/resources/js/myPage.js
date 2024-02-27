@@ -120,3 +120,25 @@ function deleteMember(){
 	console.log("잘뜨고 잇냐?");
 }
 
+$(function() {
+	var profileBtn = document.getElementById("profileBtn");
+	var registBtn = document.getElementById("registBtn");
+	
+	profileBtn.addEventListener("click", function(event) {
+		var menu = profileBtn.nextElementSibling;
+		if(menu.style.display === "none") {
+			menu.style.display = "block";	
+		} else {
+			menu.style.display = "none";
+		}
+	})
+	
+	registBtn.addEventListener("click", function(event) {
+		var menu = registBtn.nextElementSibling;
+		if(menu.style.display === "none") {
+			menu.style.display = "block";	
+		} else {
+			menu.style.display = "none";
+		}
+	})
+})

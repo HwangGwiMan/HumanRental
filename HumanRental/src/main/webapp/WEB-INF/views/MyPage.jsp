@@ -22,47 +22,44 @@
 		<jsp:include page="nav.jsp"/>
 		<div class="container">
 			<div class="row pt-5 align-items-center">
-				<div class="col-2 pt-5">
-					<ul class="navbar-nav row justify-content-center">
+				<div class="col-2">
+					<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
+					<div class="row justify-content-center">
 					<c:choose>
 						<c:when test="${ member.memberId != 'admin' }">
-							<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
-							<li class="nav-item"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></li>
-							<li class="nav-item">프로필 수정
-								<ul>
-
-									<li class="dropdown-item"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></li>
-									<li class="dropdown-item"><a href="<c:url value="/mentee?mode=menteeProfileRead"/>" class="btn">멘티 프로필 조회</a></li>
-								</ul>
-							<li>
-							<li>등록 목록
-								<ul>
-									<li class="nav-item"><a href="#" class="btn">삽니다 목록</a></li>
-									<li class="nav-item"><a href="#" class="btn">팝니다 목록</a></li>
-								</ul>
-							</li>
-							<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
-							<li class="nav-item"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></li>
+							<div class="row"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></div><!-- 기본값 -->
+							<div class="row"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn">회원 정보 수정</a></div>
+							<div class="row justify-content-center">
+								<a href="#" class="btn" id="profileBtn">프로필 수정</a>
+								<div class="text-center" style="display: none;">
+									<div><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn">멘토 프로필 조회</a></div>
+									<div><a href="<c:url value="/mentee?mode=menteeProfileRead"/>" class="btn">멘티 프로필 조회</a></div>
+								</div>
+							</div>
+							<div class="row">
+								<a href="#" class="btn" id="registBtn">등록 목록</a>
+								<div class="text-center" style="display: none;">
+									<div><a href="#" class="btn">삽니다 목록</a></div>
+									<div><a href="#" class="btn">팝니다 목록</a></div>
+								</div>
+							</div>
+							<div class="row"><a href="#" class="btn">일정 정보</a></div>
+							<div class="row"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></div>
 						</c:when>
 						<c:when test="${ member.memberId eq 'admin' }">
-							<li class="nav-item"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
-							<li class="nav-item"><a href="<c:url value="/myInfo?mode=memberManagement"/>" class="btn">회원 관리</a></li>
-							<li class="nav-item"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn">멘토 신청 관리</a></li>
-							<li class="nav-item"><a href="<c:url value="/myInfo?mode=report"/>" class="btn">신고 관리</a></li>
-							<li class="nav-item"><a href="<c:url value="/myInfo?mode=blackListManagement"/>" class="btn">블랙리스트 관리</a></li>
+							<li class=""><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn">마이 페이지</a></li><!-- 기본값 -->
+							<li class=""><a href="<c:url value="/myInfo?mode=memberManagement"/>" class="btn">회원 관리</a></li>
+							<li class=""><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn">멘토 신청 관리</a></li>
+							<li class=""><a href="<c:url value="/myInfo?mode=report"/>" class="btn">신고 관리</a></li>
+							<li class=""><a href="<c:url value="/myInfo?mode=blackListManagement"/>" class="btn">블랙리스트 관리</a></li>
 						</c:when>
 					</c:choose>
-					</ul>
-				</div>
+					</div>
+				</div> 
 				<div class="col">
-					<div class="row justify-content-center">
+					<div class="row justify-content-center ">
 						<c:choose>
 							<c:when test="${ mode == 'myPage' }"><!-- 마이 페이지 -->
-								<div class="col-1"></div>
-								<div class="col-4">
-									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
-								</div>
-								<div class="col-1"></div>
 								<div class="col-5">
 									<div class="row p-3"><p>이름 : ${ member.name }</div>
 									<div class="row p-3"><p>닉네임 : ${ member.nickName }</div>
