@@ -21,5 +21,6 @@ public interface MentorRepository {
 	public void mentorProfileRegister(MentorProfile mentorprofile ,String memberId, String mentorId);
 	public int getMentorProfile();
 	public MentorProfile MentorInformation (String memberId);
+	public Mentor getMentor2(String mentorId);
 	 
 }

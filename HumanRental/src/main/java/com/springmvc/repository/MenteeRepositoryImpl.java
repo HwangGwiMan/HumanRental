@@ -79,5 +79,13 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 		String SQL = "delete from MenteeProfile where memberId=?";  
 		template.update(SQL,memberId);
 	}
-
+	
+	public Mentee getMentee2(String menteeId) { // 예약 전용
+		Mentee mentee = null;
+//		System.out.println("겟멘티2 접근");
+		String SQL = "select * from MenteeProfile where menteeId=?";
+	    mentee = template.queryForObject(SQL, new MenteeRowMapper(), menteeId);
+		return mentee;
+	}
+		 
 }
