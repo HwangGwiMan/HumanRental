@@ -25,10 +25,11 @@
 		<!-- js -->	    
    	    <script src="<c:url value="/resources/js/login.js" />"></script>
 	</head>
-	<body>
+	<body class="vh-100">
 	    <jsp:include page="nav.jsp" />
-	    <div class="container vh-100 justify-content-center text-center d-flex flex-column align-items-center">
-		    <div class="row">
+	    <div style="height: 80%;" class="container justify-content-center text-center d-flex flex-column align-items-center">
+	    	<div class="row"><h1>로그인</h1></div>
+		    <div class="row justify-content-center" >
 			    <form:form modelAttribute="member" method="post" class="row justify-content-center">
 			    	<div class="row justify-content-center">
 			    		<div class="col-2 p-3 align-self-center">아이디</div>
@@ -41,18 +42,18 @@
 			    	<div class="row">
 			    		<div><input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }"></div>
 				    	<div class="col p-3 justify-content-center">
-				    		<a onclick="loginCheck()" class="col-sm-2 btn">로그인</a>
+				    		<a onclick="loginCheck()" class="col-sm-2 btn btn-outline-primary">로그인</a>
 				    	</div>
 			    	</div>
-			    	<div class="col">
-			    		<div class="row p-3 justify-content-center">
-			    			<a href="#" class="col-sm-2 btn">카카오 로그인</a>
+			    	<div class="row justify-content-center">
+<!-- 			    		<div class="row p-3 justify-content-center">
+			    			<a href="#" class="col-sm-2 btn btn-outline-warning ">카카오 로그인</a>
 		    			</div>
 				    	<div class="row p-3 justify-content-center">
-				    		<a href="#" class="col-sm-2 btn">네이버 로그인</a>
-			    		</div>
+				    		<a href="#" class="col-sm-2 btn btn-outline-success">네이버 로그인</a>
+			    		</div> -->
 				    	<div class="row p-3 justify-content-center">
-				    		<a href="<c:url value="/join" />" class="col-sm-2 btn">회원 가입</a>
+				    		<a href="<c:url value="/join" />" class="col-sm-2 btn btn-outline-info">회원 가입</a>
 			    		</div>
 			    	</div> 
 			    </form:form>
