@@ -95,11 +95,8 @@ public class MentorRepositroyImpl implements MentorRepository {
 					applyData.put("memberId", rs.getString(2));
 					applyData.put("applyDate", rs.getTimestamp(3));
 					applyData.put("state", rs.getString(4));
-					if(rs.getTimestamp(5) != null) {
-						applyData.put("confirmDate", rs.getTimestamp(5));
-					} else {
-						applyData.put("confirmDate", null);
-					}
+					applyData.put("confirmDate", rs.getTimestamp(5));
+
 					return applyData;
 				}
 				
