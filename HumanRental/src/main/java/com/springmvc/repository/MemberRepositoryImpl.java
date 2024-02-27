@@ -128,5 +128,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 		String SQL = "UPDATE member set memberId = ?, memberPw = ?,  name = ?, age = ?, gender = ?, phone = ?, address = ?, nickName = ?, profileImage = ? WHERE memberId = ?";	
 		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName(), member.getProfileImage(), memberId);
 	}
+	
+	
 }
 

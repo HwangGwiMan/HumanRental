@@ -9,4 +9,5 @@ import com.springmvc.domain.Reservation;
 
 public interface ReservationRepository {
 	public void ReservationCreate(Reservation reservation);
+	public List<Reservation> getReservationListById(String menteeid, String mentorid);
 }

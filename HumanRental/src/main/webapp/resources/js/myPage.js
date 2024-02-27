@@ -143,7 +143,7 @@ $(function() {
 })
 
 function mentorCheck(element) {
-    var buyingId = element.getAttribute('buyingid');
+    var buyingId = element.getAttribute('data-buying-id');
     $.ajax({
         type: 'get',
         url: './mentorprofileCheck',

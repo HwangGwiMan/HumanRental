@@ -11,4 +11,5 @@ public interface MenteeRepository {
 	public Mentee getInformation(String memberId);
 	public Mentee UpdateMentee(Mentee Mentee,HttpServletRequest request);
 	public void deleteMentee(HttpServletRequest request);
+	public Mentee getMentee2(String menteeId);
 }

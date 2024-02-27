@@ -279,4 +279,13 @@ public class MentorRepositroyImpl implements MentorRepository {
 		        return null;
 		    }
 	}
+	
+	// 예약 전용
+	@Override
+	public Mentor getMentor2(String mentorId) {
+//		System.out.println("겟멘토2 접근");
+		String SQL = "SELECT * FROM mentor WHERE mentorId = ?";
+		Mentor mentor = template.queryForObject(SQL, new BeanPropertyRowMapper<Mentor>(Mentor.class), mentorId);
+		return mentor;
+	}
 }

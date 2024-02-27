@@ -11,8 +11,10 @@ public class Reservation {
 	private String mentorId;
 	private LocalDate reservationdate;
 	private String reservationcontent;
-	private boolean approve;
+	private String approve;
 	private LocalDateTime signdate;
+	private String menteeNickname;
+	private String mentorNickname;
 	
 	public String getType() {
 		return type;
@@ -50,10 +52,11 @@ public class Reservation {
 	public void setReservationdate(LocalDate reservationdate) {
 		this.reservationdate = reservationdate;
 	}
-	public boolean isApprove() {
+	
+	public String getApprove() {
 		return approve;
 	}
-	public void setApprove(boolean approve) {
+	public void setApprove(String approve) {
 		this.approve = approve;
 	}
 	public LocalDateTime getSigndate() {
@@ -67,6 +70,18 @@ public class Reservation {
 	}
 	public void setReservationcontent(String reservationcontent) {
 		this.reservationcontent = reservationcontent;
+	}
+	public String getMenteeNickname() {
+		return menteeNickname;
+	}
+	public void setMenteeNickname(String menteeNickname) {
+		this.menteeNickname = menteeNickname;
+	}
+	public String getMentorNickname() {
+		return mentorNickname;
+	}
+	public void setMentorNickname(String mentorNickname) {
+		this.mentorNickname = mentorNickname;
 	}
 	
 	
