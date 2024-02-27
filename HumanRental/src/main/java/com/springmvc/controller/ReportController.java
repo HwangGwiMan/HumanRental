@@ -1,5 +1,7 @@
 package com.springmvc.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.springmvc.service.AlarmService;
 import com.springmvc.service.BoardService;
 import com.springmvc.service.ReportService;
 
@@ -23,6 +26,9 @@ public class ReportController {
 	
 	@Autowired
 	ReportService reportService;
+	
+	@Autowired
+	AlarmService alarmService;
 	
 	@GetMapping("/boardreport")
 	public String requestBoardReportPage(@RequestParam("boardId") String boardId,
@@ -43,5 +49,11 @@ public class ReportController {
 		reportService.createBoardReport(request, reporterId);
 	}
 	
+	@PostMapping("/sendWarning")
+	@ResponseBody
+	public void sendWarning(@RequestParam Map<String, Object> data) {
+		reportService.stateUpdate((String) data.get("reportId"), "Warning");
+		alarmService.createWarningAlarm(data);
+	}
 	
 }

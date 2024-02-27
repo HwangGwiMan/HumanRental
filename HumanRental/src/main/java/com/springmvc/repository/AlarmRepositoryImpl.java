@@ -3,6 +3,7 @@ package com.springmvc.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -43,6 +44,26 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		} catch (EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 경고 알람 생성
+	@Override
+	public void createWarningAlarm(Map<String, Object> data) {
+		Alarm alarm = new Alarm();
+		alarm.setSendMemberId("admin");
+		alarm.setReceiveMemberId((String) data.get("memberId"));
+		String content = (String) data.get("type") + " 관련으로 경고가 발생했습니다. 대상 ";
+		if(data.get("title") != null) {
+			content += (String) data.get("title") + " 게시글";
+		}
+		
+		alarm.setContent(content);
+		
+		String SQL;
+		
+		SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
+		template.update(SQL, util.createId("warningAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
+		
 	}
 	
 	// 멘토 신청 결과 알람

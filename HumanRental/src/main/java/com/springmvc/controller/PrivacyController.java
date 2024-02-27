@@ -86,6 +86,7 @@ public class PrivacyController {
 					// 개별 신고 관리
 					model.addAttribute("reportInfo", reportService.getReport(targetId));
 				} else if(mode.equals("blackListManagement")) {
+					// 블랙리스트 관리
 					model.addAttribute("blackList", blackRepository.getBlackList());
 				}
 
