@@ -38,10 +38,11 @@
 							<li>
 							<li>등록 목록
 								<ul>
-									<li class="nav-item"><a href="<c:url value="/buyingListManagement"/>" class="btn">삽니다 목록</a></li>
-									<li class="nav-item"><a href="<c:url value="/sellingListManagement"/>" class="btn">팝니다 목록</a></li>
+									<li class="nav-item"><a href="<c:url value="/buyingListManagement"/>" class="btn">삽니다 등록 목록</a></li>
+									<li class="nav-item"><a href="<c:url value="/sellingListManagement"/>" class="btn">팝니다 등록 목록</a></li>
 								</ul>
 							</li>
+							<li class="nav-item"><a href="<c:url value="/reservationListManagement"/>" class="btn">예약 목록</a></li>
 							<li class="nav-item"><a href="#" class="btn">일정 정보</a></li>
 							<li class="nav-item"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn">회원 탈퇴</a></li>
 						</c:when>
@@ -474,7 +475,7 @@
 									</table>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'sellingListManagement' }"><!-- 삽니다 관리 페이지 -->
+							<c:when test="${ mode == 'sellingListManagement' }"><!-- 팝니다 관리 페이지 -->
 								<div>
 									<table class="table table-hover">
 										<tr>
@@ -489,6 +490,49 @@
 												<td><a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">${ selling.title }</a></td>
 												<td>${ selling.category }</td>
 												<td>${ member.regist_day }</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'reservationListManagement' }"><!-- 예약 관리 페이지 -->
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>제목</th>
+											<th>구분</th>
+											<th>멘토</th>
+											<th>멘티</th>
+											<th>승인 여부</th>
+											<th>승인 날짜</th>
+										</tr>
+										<c:forEach var="reservationlist" items="${reservationlist}" varStatus="status">					
+											<tr>		
+												<td>${ status.count }</td>
+												<td>${ reservationlist.title }</td>
+												<c:choose>
+												    <c:when test="${ reservationlist.type == 'buy' }">
+												        <td>재능구매</td>
+												    </c:when>
+												    <c:when test="${ reservationlist.type == 'sell' }">
+												        <td>재능판매</td>
+												    </c:when>
+												</c:choose>
+												<td>${ reservationlist.mentorNickname }</td>
+												<td>${ reservationlist.menteeNickname }</td>
+												<c:choose>
+												    <c:when test="${ reservationlist.approve == '대기' }">
+												        <td>예약 대기</td>
+												    </c:when>
+												    <c:when test="${ reservationlist.approve == '승인' }">
+												        <td>예약 승인</td>
+												    </c:when>
+												    <c:when test="${ reservationlist.approve == '거절' }">
+												        <td>예약 거절</td>
+												    </c:when>
+												</c:choose>
+												<td>${ reservationlist.signdate }</td>
 											</tr>
 										</c:forEach>
 									</table>

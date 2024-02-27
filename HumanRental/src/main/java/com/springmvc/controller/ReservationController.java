@@ -45,9 +45,6 @@ public class ReservationController {
 	public String SellingReservation(@RequestParam("sellingId") String sellingId, Model model,
 			@RequestParam("date") String date, @RequestParam("content") String content, HttpServletRequest request) {
 		
-//		System.out.println(date);
-//		System.out.println(content);
-		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		Reservation reservation = reservationservice.SellingReservationCreate(sellingId, date, content, memberId, model);
@@ -56,4 +53,12 @@ public class ReservationController {
 		return "CheckPage"; // 추후 예약 현황 페이지로
 	}
 	
+	@GetMapping("/reservationListManagement")
+	public String ReservationListManagement(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		reservationservice.getReservationListById(memberId, model);
+		model.addAttribute("mode", "reservationListManagement");
+		return "MyPage";
+	}
 }
