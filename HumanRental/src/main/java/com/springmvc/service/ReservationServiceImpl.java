@@ -175,14 +175,18 @@ public class ReservationServiceImpl implements ReservationService{
 		
 		if(reservation.getBoardId().contains("buy")) {
 			menteeNickname = memberrepository.getMember(reservation.getApplicantMemberId()).getNickName();
+			mentorNickname = memberrepository.getMember(reservation.getMemberId()).getNickName();
 			reservation.setMenteeNickname(menteeNickname);
+			reservation.setMentorNickname(mentorNickname);
 		}
 		else {
+			menteeNickname = memberrepository.getMember(reservation.getMemberId()).getNickName();
 			mentorNickname = memberrepository.getMember(reservation.getApplicantMemberId()).getNickName();
+			reservation.setMenteeNickname(menteeNickname);
 			reservation.setMentorNickname(mentorNickname);
 		}
 		
-		model.addAttribute("reservationinfo", reservation);
+		model.addAttribute("reservation", reservation);
 	}
 
 	@Override
