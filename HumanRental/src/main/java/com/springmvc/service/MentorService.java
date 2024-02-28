@@ -12,7 +12,6 @@ public interface MentorService {
 	public void mentorApply(MentorRegistInfo mentorRegistInfo);
 	public List<Map<String, Object>> getMentorApplyList();
 	public List<Map<String, Object>> getMentorApplyList(String state);
-	public MentorRegistInfo getMentorApplyByMemberId(String memberId);
 	public List<Map<String, Object>> getMentorListWithMember();
 	public void mentorRegist(String memberId, String registId);
 	public void mentorRefuse(String memberId, String registId);
@@ -20,4 +19,5 @@ public interface MentorService {
 	public void mentorProfileRegister(MentorProfile mentorprofile, String memberId, String mentorId);
 	public int getMentorProfile();
 	public MentorProfile MentorInformation (String memberId);
+	public MentorRegistInfo getMentorApplyByRegistId(String registId);
 }
