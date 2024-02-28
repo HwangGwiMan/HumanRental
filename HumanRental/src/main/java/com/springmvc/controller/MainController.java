@@ -1,15 +1,23 @@
 package com.springmvc.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.springmvc.service.SellingService;
+
 @Controller
 public class MainController {
+	
+	@Autowired
+	SellingService sellingService;
 	
 	// 메인 페이지 호출
 	@GetMapping("/main")
 	public String requestHome1(Model model) {
+		sellingService.SellingList(model, null);
+		
 		return "Main";
 	}
 
