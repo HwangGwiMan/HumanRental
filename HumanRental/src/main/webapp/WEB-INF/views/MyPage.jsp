@@ -454,15 +454,30 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'reportInfo' }">
-								<div class="col">
+								<div class="p-5">
 									<c:choose>
 										<c:when test="${ not empty reportInfo.boardId }">
 											<div class="row">
-												<p>신고 대상 ID : ${ reportInfo.boardId } 
-												<p>신고 대상 멤버 ID : ${ reportInfo.memberId }
-												<p>게시글 제목 : ${ reportInfo.title }
-												<p>신고 유형 : ${ reportInfo.type }
-												<p>신고 횟수 : ${ reportInfo.reportCount }
+												<div class="row p-3">
+													<div class="col-3">신고 대상 ID :</div>
+													<div class="col">${ reportInfo.boardId }</div>
+												</div> 
+												<div class="row p-3">
+													<div class="col-3">신고 대상 멤버 ID :</div>
+													<div class="col">${ reportInfo.memberId }</div>
+												</div>
+												<div class="row p-3">
+													<div class="col-3">게시글 제목 :</div>
+													<div class="col">${ reportInfo.title }</div>
+												</div>
+												<div class="row p-3">
+													<div class="col-3">신고 유형 :</div>
+													<div class="col">${ reportInfo.type }</div>
+												</div>
+												<div class="row p-3">
+													<div class="col-3">신고 횟수 :</div>
+													<div class="col">${ reportInfo.reportCount } 회</div>
+												</div>
 												<p><a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="btn btn-light">해당 게시글로 이동</a>
 											</div>
 											<div class="row">
@@ -477,7 +492,7 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'blackListManagement' }"><!-- 신고 관리 페이지 -->
-								<div>
+								<div class="p-5">
 									<table class="table table-hover">
 										<tr>
 											<th>번호</th>
