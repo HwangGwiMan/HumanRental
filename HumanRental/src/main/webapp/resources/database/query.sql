@@ -154,14 +154,17 @@ foreign key(buyingId) references Buying(buyingId)
 -- 예약 관리 
 CREATE TABLE IF NOT EXISTS Reservation(
 reservationId varchar(50) primary key,
-type varchar(10),
+boardId varchar(50),
 title varchar(20),
 menteeId varchar(50),
 mentorId varchar(50),
 reservationDate date,
 reservationContent text,
-approve tinyint,
+approve varchar(10),
 signDate datetime,
+memberId varchar(20),
+applicantMemberId varchar(20),
+regist_day datetime,
 foreign key(menteeId) references  MenteeProfile(menteeId),
 foreign key(mentorId) references  MentorProfile(mentorId)
 );
