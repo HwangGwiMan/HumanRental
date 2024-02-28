@@ -573,7 +573,7 @@
 											<th>제목</th>
 											<th>구분</th>
 											<th>신청자</th>
-											<th>신청일</th>
+											<th>예약일</th>
 											<th>승인 여부</th>
 											<th>정보</th>
 										</tr>
@@ -603,6 +603,12 @@
 												    <c:when test="${ reservation.approve == '거절' }">
 												        <td>거절</td>
 												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈완료' }">
+												        <td>렌탈완료</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈실패' }">
+												        <td>렌탈실패</td>
+												    </c:when>
 												</c:choose>
 												<td><a href="/HumanRental/reservationApprovalInfo?reservationId=${ reservation.reservationId }">상세보기</a></td>
 											</tr>
@@ -630,6 +636,13 @@
 									<c:if test="${reservation.approve == '대기'}">
 										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=yes">승인</a>
 										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=no">거절</a>
+									</c:if>
+									<c:if test="${reservation.approve == '승인'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalyes">렌탈완료</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
+									</c:if>
+									<c:if test="${reservation.approve == '렌탈완료'}">
+										<a href="#">후기작성</a>
 									</c:if>
 									<a href="/HumanRental/reservationApprovalManagement">목록</a>
 								</div>
@@ -673,6 +686,12 @@
 												    <c:when test="${ reservation.approve == '거절' }">
 												        <td>거절</td>
 												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈완료' }">
+												        <td>렌탈완료</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈실패' }">
+												        <td>렌탈실패</td>
+												    </c:when>
 												</c:choose>
 												<td><a href="/HumanRental/reservationInfo?reservationId=${ reservation.reservationId }">상세보기</a></td>
 											</tr>
@@ -703,8 +722,17 @@
 									승인일 : ${reservation.signdate}
 								</div>
 								<div>
-									
-									<a href="/HumanRental/reservationApprovalManagement">후기작성</a>
+									<c:if test="${reservation.approve == '대기'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=yes">승인</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=no">거절</a>
+									</c:if>
+									<c:if test="${reservation.approve == '승인'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalyes">렌탈완료</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
+									</c:if>
+									<c:if test="${reservation.approve == '렌탈완료'}">
+										<a href="#">후기작성</a>
+									</c:if>
 									<a href="/HumanRental/reservationListManagement">목록</a>
 								</div>
 							</c:when>
