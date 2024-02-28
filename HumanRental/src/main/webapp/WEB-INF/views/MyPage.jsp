@@ -18,7 +18,7 @@
 		
 		<script src="<c:url value="/resources/js/myPage.js"/>"></script>
 	</head>
-	<body class="vh-100">
+	<body class="">
 		<jsp:include page="nav.jsp"/>
 		<div class="container h-75">
 			<div class="row pt-5 align-items-start h-75">

@@ -95,9 +95,7 @@ public class ReportRepositoryImpl implements ReportRepository {
 	@Override
 	public void createBoardReport(HttpServletRequest request, String reporterId) {
 		String SQL;
-		
-		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-		
+				
 		SQL = "INSERT INTO report VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		template.update(SQL, util.createId("report"), request.getParameter("memberId"), reporterId, request.getParameter("target"), request.getParameter("boardId"), request.getParameter("type"), "Wait" ,LocalDateTime.now());
 		

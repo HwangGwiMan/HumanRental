@@ -177,7 +177,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 					memberInfo.put("mentorId", rs.getString(1));
 					memberInfo.put("memberId", rs.getString(2));
 					memberInfo.put("mentorRegistDate", rs.getTimestamp(3));
-					memberInfo.put("memberJoinDate", rs.getTimestamp(4));
+					memberInfo.put("memberJoinDate", util.outputFormatting(rs.getTimestamp(4)));
 					
 					return memberInfo;
 				}
