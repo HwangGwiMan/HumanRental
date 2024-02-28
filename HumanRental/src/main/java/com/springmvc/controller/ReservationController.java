@@ -61,4 +61,28 @@ public class ReservationController {
 		model.addAttribute("mode", "reservationListManagement");
 		return "MyPage";
 	}
+	
+
+	@GetMapping("/reservationApprovalManagement")
+	public String ReservationApprovalManagement(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		reservationservice.getReservationApprovalListById(memberId, model);
+		model.addAttribute("mode", "reservationApprovalManagement");
+		return "MyPage";
+	}
+	
+	@GetMapping("/reservationinfo")
+	public String ReservationInfo(@RequestParam String reservationId, Model model) {
+		reservationservice.GetReservationInfo(reservationId, model);
+		model.addAttribute("mode", "reservationInfo");
+		return "MyPage";
+	}
+
+	@GetMapping("/reservationApproval")
+	public String ReservationApproval(@RequestParam String reservationId, @RequestParam String approval, Model model) {
+		reservationservice.ReservationApproval(reservationId, approval);
+		model.addAttribute("mode", "reservationApprovalManagement");
+		return "redirect:/reservationApprovalManagement";
+	}
 }
