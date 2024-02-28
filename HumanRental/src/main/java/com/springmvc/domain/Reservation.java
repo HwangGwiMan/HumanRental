@@ -18,7 +18,14 @@ public class Reservation {
 	private String menteeNickname;
 	private String mentorNickname;
 	private LocalDateTime regist_day;
+	private LocalDateTime completionDate;
 	
+	public LocalDateTime getCompletionDate() {
+		return completionDate;
+	}
+	public void setCompletionDate(LocalDateTime completionDate) {
+		this.completionDate = completionDate;
+	}
 	public String getBoardId() {
 		return boardId;
 	}
