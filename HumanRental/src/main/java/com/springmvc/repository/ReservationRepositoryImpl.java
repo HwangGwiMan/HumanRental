@@ -1,5 +1,6 @@
 package com.springmvc.repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +30,10 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 	@Override
 	public void ReservationCreate(Reservation reservation) {
 		
-		String sql = "insert into Reservation values(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into Reservation values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		template.update(sql, reservation.getReservationId(), reservation.getBoardId(), reservation.getTitle(), 
 				reservation.getMenteeId(), reservation.getMentorId(), reservation.getReservationdate(), reservation.getReservationcontent(), 
-				reservation.getApprove(), reservation.getSigndate(), reservation.getMemberId(), reservation.getApplicantMemberId());
+				reservation.getApprove(), reservation.getSigndate(), reservation.getMemberId(), reservation.getApplicantMemberId(), reservation.getRegist_day());
 	}
 
 	@Override
@@ -63,5 +64,21 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 		String sql = "select * from Reservation where reservationId = ?";
 		Reservation reservation = template.query(sql, new ReservationRowMapper(), reservationId).get(0);
 		return reservation;
+	}
+	
+	@Override
+	public void ReservationApproval(String reservationId, String approval) {
+		System.out.println(reservationId);
+		System.out.println(approval);
+		String sql;
+		if(approval.equals("yes")) {
+			sql = "UPDATE reservation SET approve = ?, signdate = ? WHERE reservationId = ?";
+			template.update(sql, "승인", LocalDateTime.now(), reservationId);
+		}
+		else {
+			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
+			template.update(sql, "거절", reservationId);
+		}
+		
 	}
 }

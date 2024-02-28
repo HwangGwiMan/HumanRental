@@ -17,6 +17,7 @@ public class Reservation {
 	private String applicantMemberId;
 	private String menteeNickname;
 	private String mentorNickname;
+	private LocalDateTime regist_day;
 	
 	public String getBoardId() {
 		return boardId;
@@ -96,6 +97,12 @@ public class Reservation {
 	}
 	public void setMentorNickname(String mentorNickname) {
 		this.mentorNickname = mentorNickname;
+	}
+	public LocalDateTime getRegist_day() {
+		return regist_day;
+	}
+	public void setRegist_day(LocalDateTime regist_day) {
+		this.regist_day = regist_day;
 	}
 	
 	

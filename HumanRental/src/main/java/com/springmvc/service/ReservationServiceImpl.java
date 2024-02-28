@@ -1,6 +1,7 @@
 package com.springmvc.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,7 @@ public class ReservationServiceImpl implements ReservationService{
 		reservation.setApprove("대기");
 		reservation.setMemberId(buying.getMemberId());
 		reservation.setApplicantMemberId(memberId);
+		reservation.setRegist_day(LocalDateTime.now());
 		
 		reservationrepository.ReservationCreate(reservation);
 		
@@ -90,6 +92,7 @@ public class ReservationServiceImpl implements ReservationService{
 		reservation.setApprove("대기");
 		reservation.setMemberId(selling.getMemberId());
 		reservation.setApplicantMemberId(memberId);
+		reservation.setRegist_day(LocalDateTime.now());
 		
 		reservationrepository.ReservationCreate(reservation);
 		
@@ -181,4 +184,12 @@ public class ReservationServiceImpl implements ReservationService{
 		
 		model.addAttribute("reservationinfo", reservation);
 	}
+
+	@Override
+	public void ReservationApproval(String reservationId, String approval) {
+		reservationrepository.ReservationApproval(reservationId, approval);
+		
+	}
+	
+	
 }

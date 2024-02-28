@@ -78,4 +78,11 @@ public class ReservationController {
 		model.addAttribute("mode", "reservationInfo");
 		return "MyPage";
 	}
+
+	@GetMapping("/reservationApproval")
+	public String ReservationApproval(@RequestParam String reservationId, @RequestParam String approval, Model model) {
+		reservationservice.ReservationApproval(reservationId, approval);
+		model.addAttribute("mode", "reservationApprovalManagement");
+		return "redirect:/reservationApprovalManagement";
+	}
 }

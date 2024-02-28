@@ -29,6 +29,7 @@ public class ReservationRowMapper implements RowMapper<Reservation> {
 		}
 		reservation.setMemberId(rs.getString(10));
 		reservation.setApplicantMemberId(rs.getString(11));
+		reservation.setRegist_day(rs.getTimestamp(12).toLocalDateTime());
 		
 		return reservation;
 	}

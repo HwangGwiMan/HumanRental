@@ -45,7 +45,7 @@ public class MenteeController {
 			model.addAttribute("Mentee",mentee);
 		}
 		
-		return "MyPage";
+		return "redirect:/myInfo";
 	}
 	
 	  @PostMapping("/mentee") 

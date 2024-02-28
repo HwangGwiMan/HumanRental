@@ -12,4 +12,5 @@ public interface ReservationRepository {
 	public List<Reservation> getReservationListById(String menteeid, String mentorid);
 	public List<Reservation> getReservationApprovalListById(String memberId);
 	public Reservation GetReservationInfo(String reservationId);
+	public void ReservationApproval(String reservationId, String approval);
 }

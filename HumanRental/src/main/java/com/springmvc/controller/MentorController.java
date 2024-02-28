@@ -132,7 +132,7 @@ public class MentorController {
 		}
 
 		
-		return "MyPage";
+		return "redirect:/myInfo";
 	}
 	
 	

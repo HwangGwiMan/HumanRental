@@ -61,7 +61,6 @@ function idDuplicateCheck(memberId) {
 	
 }
 
-
 function readApplyInfo(memberId) {
 	window.location.href="./myInfo?mode=applyInfo&id=" + memberId; 
 }
@@ -119,6 +118,39 @@ function deleteMember(){
 	
 	console.log("잘뜨고 잇냐?");
 }
+
+$(function() {
+	var profileBtn = document.getElementById("profileBtn");
+	var registBtn = document.getElementById("registBtn");
+	var resvBtn = document.getElementById("resvBtn");
+	
+	profileBtn.addEventListener("click", function(event) {
+		var menu = profileBtn.nextElementSibling;
+		if(menu.style.display === "none") {
+			menu.style.display = "block";	
+		} else {
+			menu.style.display = "none";
+		}
+	})
+	
+	registBtn.addEventListener("click", function(event) {
+		var menu = registBtn.nextElementSibling;
+		if(menu.style.display === "none") {
+			menu.style.display = "block";	
+		} else {
+			menu.style.display = "none";
+		}
+	})
+	
+	resvBtn.addEventListener("click", function(event) {
+		var menu = resvBtn.nextElementSibling;
+		if(menu.style.display === "none") {
+			menu.style.display = "block";	
+		} else {
+			menu.style.display = "none";
+		}
+	})
+})
 
 function mentorCheck(element) {
     var buyingId = element.getAttribute('data-buying-id');
@@ -194,6 +226,33 @@ function menteeCheck2() {
             } else {
                 alert("멘티 프로필을 등록한 회원만 등록 가능합니다.");
             }
+        },
+        error: function(request, status, error) {
+            console.log(request);
+        }
+    });
+}
+
+function userCheck() {
+	var memberId = document.getElementsByName("memberId")[0].value;
+	var memberPw = document.getElementsByName("memberPw")[0].value;
+	
+	console.log(memberId);
+	console.log(memberPw);
+	
+	$.ajax({
+        type: 'post',
+        url: './myInfo',
+        data: {
+			"memberId" : memberId,
+			"memberPw" : memberPw
+		},
+        success: function(result) {
+            if (result === "true") {
+                window.location.href = "./myInfo?mode=myPageEdit";
+            } else {
+				alert("아이디 비밀번호를 다시 확인해주세요.");	
+			}
         },
         error: function(request, status, error) {
             console.log(request);
