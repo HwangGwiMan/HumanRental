@@ -1,6 +1,7 @@
 package com.springmvc.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,7 +40,7 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	@Autowired
 	MemberRepository memberrepository;
-	
+
 	Utility util = new Utility();
 
 	@Override
@@ -57,7 +58,7 @@ public class ReservationServiceImpl implements ReservationService{
 		reservation.setMentorId(mentor.getMentorId());
 		reservation.setReservationdate(LocalDate.parse(date));
 		reservation.setReservationcontent(content);
-		reservation.setApprove(false);
+		reservation.setApprove("대기");
 		
 		reservationrepository.ReservationCreate(reservation);
 		
@@ -84,7 +85,7 @@ public class ReservationServiceImpl implements ReservationService{
 		reservation.setMentorId(mentor.getMentorId());
 		reservation.setReservationdate(LocalDate.parse(date));
 		reservation.setReservationcontent(content);
-		reservation.setApprove(false);
+		reservation.setApprove("대기");
 		
 		reservationrepository.ReservationCreate(reservation);
 		
@@ -94,6 +95,43 @@ public class ReservationServiceImpl implements ReservationService{
 		model.addAttribute("mentorNickname",mentorNickname);
 		
 		return reservation;
+	}
+
+	@Override
+	public List<Reservation> getReservationListById(String memberId, Model model) {
+		
+		String menteeid;
+		String mentorid;
+		String menteeNickname;
+		String mentorNickname;
+		
+		try {
+			menteeid = menteerepository.getInformation(memberId).getMenteeId();
+		}
+		catch(Exception e){
+			menteeid = null;
+		}
+		
+		try {
+			mentorid = mentorrepository.getMentor(memberId).getMentorId();
+		}
+		catch(Exception e){
+			mentorid = null;
+		}
+		
+		List<Reservation> list = reservationrepository.getReservationListById(menteeid, mentorid);
+		
+		if(list != null) {
+			for(Reservation a : list) {
+				menteeNickname = memberrepository.getMember(menteerepository.getMentee2(a.getMenteeId()).getMemberId()).getNickName();
+				mentorNickname = memberrepository.getMember(mentorrepository.getMentor2(a.getMentorId()).getMemberId()).getNickName();
+				a.setMenteeNickname(menteeNickname);
+				a.setMentorNickname(mentorNickname);
+			}
+		}
+		model.addAttribute("reservationlist", list);
+		
+		return null;
 	}
 	
 	

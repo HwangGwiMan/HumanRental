@@ -57,7 +57,12 @@ public class BuyingServiceImpl implements BuyingService{
 	public void BuyingUpdate(Buying buying) {
 		buyingrepository.BuyingUpdate(buying);
 	}
-	
-	
+
+
+	@Override
+	public void getBuyingListById(Model model, String memberId) {
+		List<Buying> buyinglist = buyingrepository.getBuyingListById(memberId);
+		model.addAttribute("buyinglist",buyinglist);
+	}
 	
 }

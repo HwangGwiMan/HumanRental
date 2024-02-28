@@ -7,6 +7,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/style_mentorlist.css"/>">
+<script src="<c:url value="/resources/js/myPage.js"/>"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 <!--             <div><i class="fa-solid fa-hammer"></i></div> -->
             <div><i class="fa-solid fa-book-open"></i></div>
             <div><a href="<c:url value="/SellingList"/>"><h4>전체</h4></a></div>
-            <div><a href="<c:url value="/selling" />"><h4>쓰기</h4></a></div>
+            <div><a onclick="mentorCheck2()" /><h4>쓰기</h4></a></div>
             
         </div>
         <div class="qq1 row">
@@ -37,7 +38,8 @@
 	                        <p class="description">${selling.nickname}</p>
 	                        <br>
 	                        <p class="information">간단한 내용(한줄)</p>
-	                        <a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a>
+<%-- 	                        <a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a> --%>
+	                        <a onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" class="follow">신청하기</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -45,5 +47,8 @@
         </div>
     </div>
 	<jsp:include page="footer.jsp" />
+	<script type="text/javascript">
+	
+	</script>
 </body>
 </html>

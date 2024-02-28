@@ -1,7 +1,11 @@
 package com.springmvc.util;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.TimeZone;
 
 public class Utility {
 	
@@ -12,4 +16,13 @@ public class Utility {
 		return target + "_" + number;
 	}
 	
+	// 출력 날짜 포메팅
+	public String outputFormatting(Timestamp date) {
+		
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		dateFormat.setTimeZone(TimeZone.getDefault());
+
+		return dateFormat.format(date);
+	}
 }

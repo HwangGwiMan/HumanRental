@@ -10,6 +10,7 @@ import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.sql.DataSource;
 
@@ -81,6 +82,8 @@ public class MentorRepositroyImpl implements MentorRepository {
 		String SQL = "SELECT mentorregistinfo.registId, mentorregistinfo.memberId, mentorregistinfo.applyDate, mentorapply.state, mentorapply.confirmDate FROM mentorapply "
 				+ "LEFT JOIN mentorregistinfo "
 				+ "ON mentorapply.registId = mentorregistinfo.registId";
+		
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		
 		try {
 			return template.query(SQL, new RowMapper<Map<String, Object>>() {
@@ -181,8 +184,8 @@ public class MentorRepositroyImpl implements MentorRepository {
 					Map<String, Object> memberInfo = new HashMap<String, Object>();
 					memberInfo.put("mentorId", rs.getString(1));
 					memberInfo.put("memberId", rs.getString(2));
-					memberInfo.put("mentorRegistDate", rs.getString(3));
-					memberInfo.put("memberJoinDate", rs.getString(4));
+					memberInfo.put("mentorRegistDate", rs.getTimestamp(3));
+					memberInfo.put("memberJoinDate", rs.getTimestamp(4));
 					
 					return memberInfo;
 				}
@@ -279,24 +282,25 @@ public class MentorRepositroyImpl implements MentorRepository {
 		        return null;
 		    }
 	}
+	
+	// 예약 전용
 	@Override
-	public void UpdateMentorProfile(MentorProfile mentorprofile , String memberId) {
-	    System.out.println("여긴오니?");
-	    MentorProfile mentorId = MentorInformation(memberId);
-	    String SQL = "UPDATE MentorProfile SET mentorId=?, introduction = ?, certification = ? ,  category = ? ,filename1 =? ,filename2=? , filename3=?, starRate=? where memberId=?";
-	    template.update(SQL,  mentorId.getMentorId(), mentorprofile.getIntroduction(), mentorprofile.getCertification(), mentorprofile.getCategory(), mentorprofile.getFilename1(), mentorprofile.getFilename2(), mentorprofile.getFilename3(), mentorprofile.getStarRate(), memberId);
-	    System.out.println("업데이트sql 구문을 뛰어넘고 와줬니?");
+	public Mentor getMentor2(String mentorId) {
+//		System.out.println("겟멘토2 접근");
+		String SQL = "SELECT * FROM mentor WHERE mentorId = ?";
+		Mentor mentor = template.queryForObject(SQL, new BeanPropertyRowMapper<Mentor>(Mentor.class), mentorId);
+		return mentor;
+	}
+
+	@Override
+	public void UpdateMentorProfile(MentorProfile mentorprofile, String memberId) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void DeleteMentorProfile(String memberId) {
-	
-		String SQL = "DELETE FROM MentorProfile WHERE memberId=?";
-
-		template.update(SQL,memberId);
-		System.out.println("야 삭제 구문 뚫냐 ");
+		// TODO Auto-generated method stub
+		
 	}
-
-	
-	
 }

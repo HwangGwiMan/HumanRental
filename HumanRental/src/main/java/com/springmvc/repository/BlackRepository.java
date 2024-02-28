@@ -10,4 +10,5 @@ import com.springmvc.domain.Black;
 public interface BlackRepository {
 	public void registBlack(Black black) throws DataIntegrityViolationException;
 	public List<Black> getBlackList();
+	void removeBlack(String blackId);
 }

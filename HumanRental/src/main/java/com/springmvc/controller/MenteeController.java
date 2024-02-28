@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.springmvc.domain.Mentee;
+import com.springmvc.domain.Mentor;
 import com.springmvc.service.MenteeService;
 import com.springmvc.domain.Member;
 
@@ -42,7 +45,7 @@ public class MenteeController {
 			model.addAttribute("Mentee",mentee);
 		}
 		
-		return "MyPage";
+		return "redirect:/myInfo";
 	}
 	
 	  @PostMapping("/mentee") 
@@ -79,4 +82,21 @@ public class MenteeController {
 		  return "redirect:/myInfo?mode=myPage";
 	  }
 	  
+	  @GetMapping("/menteeprofileCheck")
+	  @ResponseBody
+	  	public String MenteeCheck(HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			String memberId = (String) session.getAttribute("user");
+			
+			if(memberId == null) {
+				return "notLogin";
+			}
+			
+			int mentee = MenteeService.getMentee(memberId);
+			if(mentee == 0) {
+				return "false";
+			} else {
+				return "true";
+			}
+		}
 }

@@ -80,4 +80,13 @@ public class BuyingController {
 		model.addAttribute("type", "view");
 		return "redirect:/BuyingList";
 	}
+	
+	@GetMapping("/buyingListManagement")
+	public String BuyingListManagement(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		buyingservice.getBuyingListById(model, memberId);
+		model.addAttribute("mode", "buyingListManagement");
+		return "MyPage";
+	}
 }

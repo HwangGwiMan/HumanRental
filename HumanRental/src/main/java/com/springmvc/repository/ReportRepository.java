@@ -11,5 +11,6 @@ public interface ReportRepository {
 	public void createBoardReport(HttpServletRequest request, String reporterId);
 	public List<Report> getReportList();
 	public Map<String, Object> getReport(String reportId);
+	void stateUpdate(String reportId, String state);
 	
 }

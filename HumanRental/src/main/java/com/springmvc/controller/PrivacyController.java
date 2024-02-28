@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -86,6 +87,7 @@ public class PrivacyController {
 					// 개별 신고 관리
 					model.addAttribute("reportInfo", reportService.getReport(targetId));
 				} else if(mode.equals("blackListManagement")) {
+					// 블랙리스트 관리
 					model.addAttribute("blackList", blackRepository.getBlackList());
 				}
 
@@ -112,6 +114,7 @@ public class PrivacyController {
 	
 	// 2차 로그인 확인
 	@PostMapping("/myInfo")
+	@ResponseBody
 	public String userCheck(HttpServletRequest request, 
 							Member member,
 							Model model) {
@@ -122,14 +125,14 @@ public class PrivacyController {
 		if(sessionMember != null) {
 			if((sessionMember.getMemberId().equals(member.getMemberId())) && (sessionMember.getMemberPw().equals(member.getMemberPw()))) {
 				model.addAttribute("mode", "myPageEdit");
-				return "redirect:/myInfo";
+				return "true";
 			} else {
 				model.addAttribute("mode", "myPage");
-				return "redirect:/myInfo"; 
+				return "false"; 
 			}
 		} else {
 			model.addAttribute("mode", "myPage");
-			return "redirect:/myInfo"; 
+			return "false"; 
 		}
 	}
 	
