@@ -13,7 +13,7 @@ public class ReservationRowMapper implements RowMapper<Reservation> {
 	public Reservation mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Reservation reservation = new Reservation();
 		reservation.setReservationId(rs.getString(1));
-		reservation.setType(rs.getString(2));
+		reservation.setBoardId(rs.getString(2));
 		reservation.setTitle(rs.getString(3));
 		reservation.setMenteeId(rs.getString(4));
 		reservation.setMentorId(rs.getString(5));
@@ -27,6 +27,9 @@ public class ReservationRowMapper implements RowMapper<Reservation> {
 		else {
 			reservation.setSigndate(rs.getTimestamp(9).toLocalDateTime());
 		}
+		reservation.setMemberId(rs.getString(10));
+		reservation.setApplicantMemberId(rs.getString(11));
+		
 		return reservation;
 	}
 }

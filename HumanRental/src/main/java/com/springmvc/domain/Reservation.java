@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class Reservation {
 	private String reservationId;
-	private String type;
+	private String boardId;
 	private String title;
 	private String menteeId;
 	private String mentorId;
@@ -13,14 +13,16 @@ public class Reservation {
 	private String reservationcontent;
 	private String approve;
 	private LocalDateTime signdate;
+	private String memberId;
+	private String applicantMemberId;
 	private String menteeNickname;
 	private String mentorNickname;
 	
-	public String getType() {
-		return type;
+	public String getBoardId() {
+		return boardId;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setBoardId(String boardId) {
+		this.boardId = boardId;
 	}
 	public String getReservationId() {
 		return reservationId;
@@ -70,6 +72,18 @@ public class Reservation {
 	}
 	public void setReservationcontent(String reservationcontent) {
 		this.reservationcontent = reservationcontent;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public String getApplicantMemberId() {
+		return applicantMemberId;
+	}
+	public void setApplicantMemberId(String applicantMemberId) {
+		this.applicantMemberId = applicantMemberId;
 	}
 	public String getMenteeNickname() {
 		return menteeNickname;

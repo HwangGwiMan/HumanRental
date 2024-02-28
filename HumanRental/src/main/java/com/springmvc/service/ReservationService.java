@@ -11,4 +11,6 @@ public interface ReservationService {
 	public Reservation BuyingReservationCreate(String buyingId, String date, String content, String memberId, Model model);
 	public Reservation SellingReservationCreate(String sellingId, String date, String content, String memberId, Model model);
 	public List<Reservation> getReservationListById(String memberId, Model model);
+	public List<Reservation> getReservationApprovalListById(String memberId, Model model);
+	public void GetReservationInfo(String reservationId, Model model);
 }

@@ -29,10 +29,10 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 	@Override
 	public void ReservationCreate(Reservation reservation) {
 		
-		String sql = "insert into Reservation values(?,?,?,?,?,?,?,?,?)";
-		template.update(sql, reservation.getReservationId(), reservation.getType(), reservation.getTitle(), 
+		String sql = "insert into Reservation values(?,?,?,?,?,?,?,?,?,?,?)";
+		template.update(sql, reservation.getReservationId(), reservation.getBoardId(), reservation.getTitle(), 
 				reservation.getMenteeId(), reservation.getMentorId(), reservation.getReservationdate(), reservation.getReservationcontent(), 
-				reservation.getApprove(), reservation.getSigndate());
+				reservation.getApprove(), reservation.getSigndate(), reservation.getMemberId(), reservation.getApplicantMemberId());
 	}
 
 	@Override
@@ -43,7 +43,25 @@ public class ReservationRepositoryImpl implements ReservationRepository{
         list = (ArrayList<Reservation>)template.query(sql, new ReservationRowMapper(), menteeid, mentorid);
         return list;
 	}
+
+	@Override
+	public List<Reservation> getReservationApprovalListById(String memberId) {
+		
+		ArrayList<Reservation> list = new ArrayList<Reservation>();
+		String sql = "select * from Reservation where memberId = ? order by reservationdate";
+        try {
+    		list = (ArrayList<Reservation>)template.query(sql, new ReservationRowMapper(), memberId);
+        }
+        catch(Exception e) {
+        	return null;
+        }
+        return list;
+	}
 	
-	
-	
+	@Override
+	public Reservation GetReservationInfo(String reservationId) {
+		String sql = "select * from Reservation where reservationId = ?";
+		Reservation reservation = template.query(sql, new ReservationRowMapper(), reservationId).get(0);
+		return reservation;
+	}
 }
