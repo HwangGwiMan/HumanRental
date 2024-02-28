@@ -28,8 +28,8 @@ public class MentorServiceImpl implements MentorService {
 	}
 
 	@Override
-	public MentorRegistInfo getMentorApplyByMemberId(String memberId) {
-		return mentorRepository.getMentorApplyByMemberId(memberId);
+	public MentorRegistInfo getMentorApplyByRegistId(String registId) {
+		return mentorRepository.getMentorApplyByRegistId(registId);
 	}
 
 	@Override

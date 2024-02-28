@@ -79,7 +79,7 @@ public class PrivacyController {
 					}
 				} else if(mode.equals("applyInfo") ) {
 					// 개별 멘토 신청 관리
-					model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
+					model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistId(targetId));
 				} else if(mode.equals("report")) {
 					// 신고 관리
 					model.addAttribute("reportList", reportService.getReportList());

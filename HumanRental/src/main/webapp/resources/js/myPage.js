@@ -61,8 +61,8 @@ function idDuplicateCheck(memberId) {
 	
 }
 
-function readApplyInfo(memberId) {
-	window.location.href="./myInfo?mode=applyInfo&id=" + memberId; 
+function readApplyInfo(memberId, registId) {
+	window.location.href="./myInfo?mode=applyInfo&id=" + registId; 
 }
 
 function readReportInfo(reportId) {

@@ -80,23 +80,48 @@
 											<div class="row"><input type="file" accept=".jpg, .png" id="fileUpload" class="btn" name="Image" onchange="javascript:setThumbnail(event);"/></div>
 										</div>
 										<div class="col-1"></div>
-										<div class="col-5">
-											<div class="row p-3"><p>아이디 : <input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required"/><a onclick="javascript:idDuplicateCheck(${ member.memberId })" class="btn">중복 확인</a></div>
-											<div class="row p-3"><p>비밀번호 : <input type="password"  value="${ member.memberPw }" name="memberPw" required="required"/></div>
-											<div class="row p-3"><p>이름 : <input type="text"  value="${ member.name }" name="name" required="required"/></div>
-											<div class="row p-3"><p>닉네임 : <input type="text"  value="${ member.nickName }" name="nickName" required="required"/></div>
-											<div class="row p-3"><p>나이 : <input type="text"  value="${ member.age }" name="age" required="required"/></div>
-											<div class="row p-3"><p>성별 : <input type="text"  value="${ member.gender }" name="gender" required="required"/></div>
-											<div class="row p-3"><p>전화번호 : <input type="text"  value="${ member.phone }" name="phone" required="required"/></div>
-											<div class="row p-3"><p>주소 : <input width="100px" type="text"  value="${ member.address }" name="address" required="required"/></div>
-											<input type="submit" class="btn" value="확인" id="submitBtn">
-											<a href="<c:url value="/myInfo?mode=myPage" />" class="btn">취소</a>
+										<div class="col-5 ">
+											<div class="row p-3 flex-nowrap align-items-center">
+												<div class="col-4 ">아이디 :</div>
+												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required"/></div>
+												<div class="col-5"><a onclick="javascript:idDuplicateCheck('${ member.memberId }')" class="btn btn-secondary">중복 확인</a></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">비밀번호 :</div>
+												<div class="col"><input type="password"  value="${ member.memberPw }" name="memberPw" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">이름 :</div>
+												<div class="col"><input type="text"  value="${ member.name }" name="name" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">닉네임 :</div>
+												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">나이 :</div>
+												<div class="col"><input type="text"  value="${ member.age }" name="age" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">성별 :</div>
+												<div class="col"><input type="text"  value="${ member.gender }" name="gender" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">전화번호 :</div>
+												<div class="col"><input type="text"  value="${ member.phone }" name="phone" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">주소 :</div>
+												<div class="col"><input width="100px" type="text"  value="${ member.address }" name="address" required="required"/></div>
+											</div>
+											<input type="submit" class="btn btn-outline-primary" value="확인" id="submitBtn">
+											<a href="<c:url value="/myInfo?mode=myPage" />" class="btn btn-outline-dark">취소</a>
 										</div>
 									</div>
 								</form>
 							</c:when>
 							<c:when test="${ mode == 'userCheck' }"><!-- 유저 2차 확인 -->
-								<form class="col p-5 text-center justify-content-center" action="<c:url value="/myInfo" />" method="post">
+								<form class="col p-5 text-center" action="<c:url value="/myInfo" />" method="post">
 									<div class="row"><h2 class="text-nowrap">아이디 비밀번호 확인</h2></div>
 									<div class="row justify-content-center pt-5">
 										<div class="col-2 p-3">아이디 :</div> 
@@ -110,18 +135,18 @@
 								</form>
 							</c:when>
 							<c:when test="${ mode == 'delete' }"><!-- 회원 탈퇴 -->
-	    						<form class="col-4" action="<c:url value="/deleteMember" />" method="post">
-	       							 <div class="row justify-content-center">회원 탈퇴 </div>
-	        						<div class="row justify-content-center">
-	            						<div class="col-4">아이디</div> 
-	            						<div class="col"><input type="text" readonly="readonly" value="${member.memberId}" id="memberId" name="memberId"></div>
+	    						<form class="col p-5 text-center" action="<c:url value="/deleteMember" />" method="post">
+	       							<div class="row"><h2>회원 탈퇴</h2></div>
+	        						<div class="row justify-content-center pt-5">
+	            						<div class="col-2 p-3">아이디 :</div> 
+	            						<div class="col-3 p-3"><input type="text" readonly="readonly" value="${member.memberId}" id="memberId" name="memberId"></div>
 	        						</div> 
-	       							 <div class="row justify-content-center">
-	            						<div class="col-4">비밀번호</div>
-	            						<div class="col"><input type="password" required id="memberPw" name="memberPw"></div>
+	       							<div class="row justify-content-center pb-5">
+	            						<div class="col-2 p-3">비밀번호 :</div>
+	            						<div class="col-3 p-3"><input type="password" required id="memberPw" name="memberPw"></div>
 	        						</div>
 	        						<input type="hidden" name="mode" value="delete">
-	        						<button type="button" onclick="javascript:deleteMember()">확인</button>
+	        						<button type="button" onclick="javascript:deleteMember()" class="btn btn-outline-primary">확인</button>
 	    						</form>
 	    					</c:when>
 							<c:when test="${ mode == 'mentorProfile' }"><!-- 멘토 프로필 -->
@@ -245,7 +270,7 @@
 								<div></div>
 							</c:when>
 							<c:when test="${ mode == 'memberManagement' }"><!-- 멤버 관리 페이지 -->
-								<div>
+								<div class="p-5">
 									<table class="table table-hover">
 										<tr>
 											<th>번호</th>
@@ -260,7 +285,9 @@
 												<td>${ member.memberId }</td>
 												<td>${ member.memberJoinDate }</td>
 												<td>
-													<c:if test="${ not empty member.mentorId }">승인</c:if>
+													<c:if test="${ not empty member.mentorId }">
+														<div class="badge bg-success">승인</div>
+													</c:if>
 												</td>
 												<td>${ member.mentorRegistDate }</td>
 											</tr>
@@ -279,13 +306,13 @@
 								</div>	
 							</c:when>
 							<c:when test="${ mode == 'mentorApplyManagement' }">
-								<div>
-									<div class="row text-center p-3">
-										<div class="col-1"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-outline-info">전체</a></div>
-										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="btn btn-primary">처리된 요청</a></div>
-										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="btn btn-secondary">보류 중인 요청</a></div>
+								<div class="p-5">
+									<div class="row p-3 text-center">
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="col-1 m-1 btn btn-outline-info">전체</a>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="col-2 m-1  btn btn-primary">처리된 요청</a>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="col-2 m-1 btn btn-secondary">보류 중인 요청</a>
 									</div>
-									<table class="table table-hover ">
+									<table class="table table-hover "><!-- 멘토 신청 관리 -->
 										<tr>
 											<th>번호</th>
 											<th>유저 ID</th>
@@ -294,7 +321,7 @@
 											<th>처리일</th>
 										</tr>
 										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
-											<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }')">
+											<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }', '${ applyInfo.registId }')">
 												<td>${ status.count }</td>
 												<td>${ applyInfo.memberId }</td>
 												<td>${ applyInfo.applyDate }</td>
@@ -357,27 +384,41 @@
 								 	</div>		
 							</c:when>
 							<c:when test="${ mode == 'applyInfo' }">
-								<div class="col">
+								<div class="col p-5">
 									<div class="row">
-										<div class="col">
+										<div class="col m-2">
 											<img width="300" height="200" src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />">
 										</div>
-										<p>신청자 ID : ${ applyInfo.memberId }
-										<p>특기 분야 : ${ applyInfo.specialty }
-										<p>주요 활동 지역 : ${ applyInfo.location }
-										<p>신청 이유 : ${ applyInfo.reason }
-										<p>기타 사항
-										<p>${ applyInfo.etc }
+										<div class="row p-3">
+											<div class="col-2">신청자 ID :</div>
+											<div class="col">${ applyInfo.memberId }</div>
+										</div>
+										<div class="row p-3">
+											<div class="col-2">특기 분야 :</div>
+											<div class="col">${ applyInfo.specialty }</div>
+										</div>
+										<div class="row p-3">
+											<div class="col-2">주요 활동 지역 :</div>
+											<div class="col">${ applyInfo.location }</div>
+										</div>
+										<div class="row p-3">
+											<div class="col-2">신청 이유 :</div>
+											<div class="col">${ applyInfo.reason }</div>
+										</div>
+										<div class="row p-3">
+											<div>기타 사항</div>
+											<div>${ applyInfo.etc }</div>
+										</div>
 									</div>
-									<div>
-										<a href="<c:url value="/mentorRegist?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-success">승인</a>
-										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-danger">거절</a>
-										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
+									<div class="row">
+										<a href="<c:url value="/mentorRegist?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 btn btn-success">승인</a>
+										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 btn btn-danger">거절</a>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="col-1 m-1 btn btn-secondary">목록</a>
 									</div>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'report' }"><!-- 신고 관리 페이지 -->
-								<div>
+								<div class="p-5">
 									<table class="table table-hover">
 										<tr>
 											<th>번호</th>
