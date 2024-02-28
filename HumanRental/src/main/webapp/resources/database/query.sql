@@ -160,6 +160,7 @@ approve varchar(10),
 signDate datetime,
 memberId varchar(20),
 applicantMemberId varchar(20),
+regist_day datetime,
 foreign key(menteeId) references  MenteeProfile(menteeId),
 foreign key(mentorId) references  MentorProfile(mentorId)
 );
