@@ -41,7 +41,6 @@ public class SaveController {
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		
-		System.out.println(buyingId);
 		System.out.println("인설트세이브리스트인데 여긴 올거니?");
 		buyingService.BuyingDetailbyId(model, buyingId);
 		
@@ -67,5 +66,13 @@ public class SaveController {
 		
 		return "Savelist";
 	}
-	
+	@GetMapping("/deletesavelist")
+	public String deleteSavelist( @RequestParam("saveListId") String savelistid ,Model model) {
+		System.out.println("일단 여기는 와라 ");
+		System.out.println("ㄳㄳ 와줘서");
+		 saveService.deletesavelist(savelistid);
+		
+		
+		return "Savelist";
+	}
 }

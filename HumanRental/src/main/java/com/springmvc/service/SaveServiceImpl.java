@@ -21,4 +21,11 @@ public class SaveServiceImpl implements SaveService{
 	public List<Save> getsaveinformation(String memberId) {
 		return saveRepository.getsaveinformation(memberId);
 	}
+	@Override
+	public void deletesavelist(String savelistid) {
+		 saveRepository.deletesavelist(savelistid);
+		
+	}
+	
+	
 }

@@ -54,6 +54,14 @@ public class SaveRepositoryImpl implements SaveRepository{
 	    List<Save> savelist = template.query(SQL, new Object[]{memberId}, new SaveRowMapper());
 	    
 	    return savelist;
+	}
+
+	@Override
+	public void deletesavelist(String savelistid) {
+//		String SQL = "delete from MenteeProfile where memberId=?";  
+//		template.update(SQL,memberId);
+		String SQL ="delete  from save where saveListId=?";
+		template.update(SQL,savelistid);
 	};
 	
 	

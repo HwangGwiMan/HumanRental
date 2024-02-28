@@ -197,7 +197,6 @@
 								<div class="col-5">
 									<h3>멘토 프로필 정보 조회 </h3>
 									<br><br>
-									<center>
 										<div class="col-5">
 											<h3>멘토 프로필 정보 조회 </h3>
 											<br><br>
@@ -213,7 +212,6 @@
 										</div>
 										<div><a href="<c:url value="/mentor2?mode=mentorProfileUpdate"/>" >멘토프로필 수정 </a></div>
 										<div><a href="<c:url value="/mentor3?mode=mentorProfileDelete"/>" >멘토프로필 삭제 </a></div>
-									</center>
 							</c:when>
 							<c:when test="${ mode == 'mentorProfileUpdate' }">
 								<div class="col-4">

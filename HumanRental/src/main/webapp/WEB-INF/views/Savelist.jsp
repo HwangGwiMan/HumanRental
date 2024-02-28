@@ -24,21 +24,20 @@
 	        <table class="table table-hover">
 	        <tr>
 	            <th>번호</th>
-	            <th>닉네임</th>
 	            <th>제목</th>
 	            <th>내용</th>
 	            <th>카테고리</th>
 	            <th>얼마?</th>
+	            <th>삭제</th>
 	        </tr>
-	        <%System.out.println("for each 앞까지인데 오니?"); %>
-	        <c:forEach items="${saveList}" var="saveList">
+			<c:forEach items="${saveList}" var="savelist" varStatus="status">
 	    		<tr>
-	        	 	<td>${saveList.category}</td>
-	        		<td>b</td>
-	        		<td>c</td>
-	        		<td>d</td> 
-	        		<td>e</td>
-	        		<td>f</td>
+	        		<td>${status.count}</td>
+	        		<td>${savelist.title}</td>
+	        		<td>${savelist.content}</td>
+	        		<td>${savelist.category}</td> 
+	        		<td>${savelist.price}</td>
+	        		<td><a href="<c:url value="/save/deletesavelist?saveListId=${savelist.saveListId}"/>">삭제</a></td>
 	    		</tr>
 			</c:forEach>
         <tr>
@@ -49,7 +48,7 @@
             <th></th>
         </tr>
         </table>
-        <a href="<c:url value="/books"/>" class="btn btn-secondary">&laquo; 메인페이지 돌아가기</a> 
+        <a href="<c:url value="/Main"/>" class="btn btn-secondary">&laquo; 메인페이지 돌아가기</a> 
     </div>
     <hr>
     <footer>

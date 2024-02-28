@@ -9,5 +9,5 @@ public interface SaveRepository {
 
 	public void insertSavelist (Buying buying ,String memberId);
 	public List<Save> getsaveinformation(String memberId);
-	
+	public void deletesavelist(String savelistid);
 }
