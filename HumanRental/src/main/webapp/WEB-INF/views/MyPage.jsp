@@ -478,16 +478,18 @@
 													<div class="col-3">신고 횟수 :</div>
 													<div class="col">${ reportInfo.reportCount } 회</div>
 												</div>
-												<p><a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="btn btn-light">해당 게시글로 이동</a>
+												<div class="row p-3">
+													<a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="col-3 m-1 p-1 btn btn-light">해당 게시글로 이동</a>
+												</div>
 											</div>
 											<div class="row">
-												<p><a onclick="javascript:sendWarning('${ reportInfo.memberId }','${ reportInfo.type }', '${ reportInfo.title }', '${ reportInfo.reportId }')" class="btn btn-warning">경고 전송</a>
+												<a onclick="javascript:sendWarning('${ reportInfo.memberId }','${ reportInfo.type }', '${ reportInfo.title }', '${ reportInfo.reportId }')" class="col-2 m-1 p-1 btn btn-warning">경고 전송</a>
 											</div>
 										</c:when>
 									</c:choose>
-									<div>
-										<div onclick="javascript:registBlack('${ reportInfo.memberId }', '${ reportInfo.reportId }')" class="btn btn-dark">블랙리스트 추가</div>
-										<a href="<c:url value="/myInfo?mode=report" />" class="btn btn-secondary">목록</a>
+									<div class="row">
+										<div onclick="javascript:registBlack('${ reportInfo.memberId }', '${ reportInfo.reportId }')" class="col-2 m-1 p-1 btn btn-dark">블랙리스트 추가</div>
+										<a href="<c:url value="/myInfo?mode=report" />" class="col-1 m-1 p-1 btn btn-secondary">목록</a>
 									</div>
 								</div>
 							</c:when>

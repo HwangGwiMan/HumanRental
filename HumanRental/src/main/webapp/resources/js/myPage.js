@@ -102,7 +102,7 @@ function sendWarning(memberId, type, title, reportId) {
 			"reportId" : reportId
 		},
 		success : function(result) {
-			
+			alert("경고문구를 전송했습니다.");
 		},
 		error : function(error) {
 			
