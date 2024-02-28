@@ -1,6 +1,7 @@
 package com.springmvc.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +48,21 @@ public class ReservationServiceImpl implements ReservationService{
 	public Reservation BuyingReservationCreate(String buyingId, String date, String content, String memberId, Model model) {
 		
 		Buying buying = buyingrepository.BuyingDetailbyId(buyingId);
-		Mentee mentee=menteerepository.getInformation(buying.getMemberId());
-		Mentor mentor=mentorrepository.getMentor(memberId);
+		Mentee mentee = menteerepository.getInformation(buying.getMemberId());
+		Mentor mentor = mentorrepository.getMentor(memberId);
 		
 		Reservation reservation = new Reservation();
 		reservation.setReservationId(util.createId("Reservation"));
-		reservation.setType("buy");
+		reservation.setBoardId(buying.getBuyingId());
 		reservation.setTitle(buying.getTitle());
 		reservation.setMenteeId(mentee.getMenteeId());
 		reservation.setMentorId(mentor.getMentorId());
 		reservation.setReservationdate(LocalDate.parse(date));
 		reservation.setReservationcontent(content);
 		reservation.setApprove("대기");
+		reservation.setMemberId(buying.getMemberId());
+		reservation.setApplicantMemberId(memberId);
+		reservation.setRegist_day(LocalDateTime.now());
 		
 		reservationrepository.ReservationCreate(reservation);
 		
@@ -74,18 +78,21 @@ public class ReservationServiceImpl implements ReservationService{
 	public Reservation SellingReservationCreate(String sellingId, String date, String content, String memberId, Model model) {
 		
 		Selling selling = sellingrepository.SellingDetailbyId(sellingId);
-		Mentee mentee=menteerepository.getInformation(memberId);
-		Mentor mentor=mentorrepository.getMentor(selling.getMemberId());
+		Mentee mentee = menteerepository.getInformation(memberId);
+		Mentor mentor = mentorrepository.getMentor(selling.getMemberId());
 		
 		Reservation reservation = new Reservation();
 		reservation.setReservationId(util.createId("Reservation"));
-		reservation.setType("sell");
+		reservation.setBoardId(selling.getSellingId());
 		reservation.setTitle(selling.getTitle());
 		reservation.setMenteeId(mentee.getMenteeId());
 		reservation.setMentorId(mentor.getMentorId());
 		reservation.setReservationdate(LocalDate.parse(date));
 		reservation.setReservationcontent(content);
 		reservation.setApprove("대기");
+		reservation.setMemberId(selling.getMemberId());
+		reservation.setApplicantMemberId(memberId);
+		reservation.setRegist_day(LocalDateTime.now());
 		
 		reservationrepository.ReservationCreate(reservation);
 		
@@ -134,7 +141,55 @@ public class ReservationServiceImpl implements ReservationService{
 		return null;
 	}
 	
+	@Override
+	public List<Reservation> getReservationApprovalListById(String memberId, Model model) {
+
+		String menteeNickname;
+		String mentorNickname;
+		
+		List<Reservation> list = reservationrepository.getReservationApprovalListById(memberId);
+		if(list != null) {
+			for(Reservation a : list) {
+				if(a.getBoardId().contains("buy")) {
+					menteeNickname = memberrepository.getMember(a.getApplicantMemberId()).getNickName();
+					a.setMenteeNickname(menteeNickname);
+				}
+				else {
+					mentorNickname = memberrepository.getMember(a.getApplicantMemberId()).getNickName();
+					a.setMentorNickname(mentorNickname);
+				}
+			}
+		}
+		model.addAttribute("reservationlist", list);
+		
+		return null;
+	}
 	
+	@Override
+	public void GetReservationInfo(String reservationId, Model model) {
+		
+		String menteeNickname;
+		String mentorNickname;
+		
+		Reservation reservation = reservationrepository.GetReservationInfo(reservationId);
+		
+		if(reservation.getBoardId().contains("buy")) {
+			menteeNickname = memberrepository.getMember(reservation.getApplicantMemberId()).getNickName();
+			reservation.setMenteeNickname(menteeNickname);
+		}
+		else {
+			mentorNickname = memberrepository.getMember(reservation.getApplicantMemberId()).getNickName();
+			reservation.setMentorNickname(mentorNickname);
+		}
+		
+		model.addAttribute("reservationinfo", reservation);
+	}
+
+	@Override
+	public void ReservationApproval(String reservationId, String approval) {
+		reservationrepository.ReservationApproval(reservationId, approval);
+		
+	}
 	
 	
 }
