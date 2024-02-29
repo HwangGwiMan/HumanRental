@@ -30,10 +30,11 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 	@Override
 	public void ReservationCreate(Reservation reservation) {
 		
-		String sql = "insert into Reservation values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into Reservation values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		template.update(sql, reservation.getReservationId(), reservation.getBoardId(), reservation.getTitle(), 
 				reservation.getMenteeId(), reservation.getMentorId(), reservation.getReservationdate(), reservation.getReservationcontent(), 
-				reservation.getApprove(), reservation.getSigndate(), reservation.getMemberId(), reservation.getApplicantMemberId(), reservation.getRegist_day());
+				reservation.getApprove(), reservation.getSigndate(), reservation.getMemberId(), reservation.getApplicantMemberId(), 
+				reservation.getRegist_day(), reservation.getCompletionDate());
 	}
 
 	@Override
@@ -75,9 +76,17 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 			sql = "UPDATE reservation SET approve = ?, signdate = ? WHERE reservationId = ?";
 			template.update(sql, "승인", LocalDateTime.now(), reservationId);
 		}
-		else {
+		else if(approval.equals("no")) {
 			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
 			template.update(sql, "거절", reservationId);
+		}
+		else if(approval.equals("rentalyes")) {
+			sql = "UPDATE reservation SET approve = ?, completionDate = ? WHERE reservationId = ?";
+			template.update(sql, "렌탈완료", LocalDateTime.now(), reservationId);
+		}
+		else if(approval.equals("rentalno")) {
+			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
+			template.update(sql, "렌탈실패", reservationId);
 		}
 		
 	}

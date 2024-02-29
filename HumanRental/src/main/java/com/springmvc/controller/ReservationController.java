@@ -72,10 +72,10 @@ public class ReservationController {
 		return "MyPage";
 	}
 	
-	@GetMapping("/reservationinfo")
-	public String ReservationInfo(@RequestParam String reservationId, Model model) {
+	@GetMapping("/reservationApprovalInfo")
+	public String ReservationApprovalInfo(@RequestParam String reservationId, Model model) {
 		reservationservice.GetReservationInfo(reservationId, model);
-		model.addAttribute("mode", "reservationInfo");
+		model.addAttribute("mode", "reservationApprovalInfo");
 		return "MyPage";
 	}
 
@@ -84,5 +84,12 @@ public class ReservationController {
 		reservationservice.ReservationApproval(reservationId, approval);
 		model.addAttribute("mode", "reservationApprovalManagement");
 		return "redirect:/reservationApprovalManagement";
+	}
+	
+	@GetMapping("/reservationInfo")
+	public String ReservationInfo(@RequestParam String reservationId, Model model) {
+		reservationservice.GetReservationInfo(reservationId, model);
+		model.addAttribute("mode", "reservationInfo");
+		return "MyPage";
 	}
 }

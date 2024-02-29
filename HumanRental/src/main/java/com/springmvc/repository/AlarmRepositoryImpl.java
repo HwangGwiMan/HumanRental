@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Alarm;
+import com.springmvc.domain.ReportType;
 import com.springmvc.util.Utility;
 
 @Repository
@@ -52,10 +53,16 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		Alarm alarm = new Alarm();
 		alarm.setSendMemberId("admin");
 		alarm.setReceiveMemberId((String) data.get("memberId"));
-		String content = (String) data.get("type") + " 관련으로 경고가 발생했습니다. 대상 ";
-		if(data.get("title") != null) {
-			content += (String) data.get("title") + " 게시글";
+		String type = (String) data.get("type");
+		
+		String content = "";
+		for(int i = 0; i < ReportType.TYPES.length; i++) {
+			if(type.equals(ReportType.TYPES[i])) {
+				content = ReportType.TYPES_KOR[i] + " 관련으로 경고가 발생했습니다. 대상 "; 
+			}
 		}
+		
+		content += (String) data.get("title") + " 게시글";
 		
 		alarm.setContent(content);
 		

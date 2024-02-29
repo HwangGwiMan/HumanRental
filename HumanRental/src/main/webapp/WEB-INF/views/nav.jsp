@@ -1,4 +1,4 @@
-<%@page import="java.time.Duration"%>
+<%-- <%@page import="java.time.Duration"%> --%>
 <%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -60,35 +60,33 @@
 									</c:if>
 								</i>
 							</a>
-							<div class="position-absolute end-0 alert alert-primary col" style="display: none;">
+							<div class="z-3 position-absolute end-0 alert alert-primary col" style="display: none; width: 300px;">
 								<c:choose>
 									<c:when test="${ empty alarmList }">
 										알람이 없습니다.
 									</c:when>
 									<c:when test="${ not empty alarmList }">
 										<c:forEach var="alarm"  items="${ alarmList }" varStatus="status">
-											<div id="alarmRow_${ alarm.alarmId }">
-												<div>
-													<div class="col">
-														<c:choose>
-															<c:when test="${ fn:contains(alarm.alarmId , 'mentorApplyAlarm') }">
-																<a href="<c:url value="/myInfo?mode=applyInfo&id=${ alarm.sendMemberId }"/>" class="row btn">
-																	<div class="row">멘토 신청 알림</div>
-																	<div class="row">${ alarm.content }</div>
-																</a>
-															</c:when>
-															<c:when test="${ fn:contains(alarm.alarmId , 'mentorApplyResultAlarm') }">
-																<div class="row">멘토 신청 결과 알림</div>
-																<div class="row">${ alarm.content }</div>
-															</c:when>
-															<c:when test="${ fn:contains(alarm.alarmId , 'warningAlarm') }">
-																<div class="row">이용 경고 안내</div>
-																<div class="row">${ alarm.content }</div>
-															</c:when>
-														</c:choose>
-														
-														<div class="row">${ alarmTime.get(status.index) } (${ duration.get(status.index) })</div>
-													</div>
+											<div id="alarmRow_${ alarm.alarmId }" class="row justify-content-center">
+												<div class="row justify-content-center">
+													<c:choose>
+														<c:when test="${ fn:contains(alarm.alarmId , 'mentorApplyAlarm') }">
+															<a href="<c:url value="/myInfo?mode=applyInfo&id=${ alarm.sendMemberId }"/>" class="row btn">
+																<div class="row">멘토 신청 알림</div>
+																<div class="row text-nowrap">${ alarm.content }</div>
+															</a>
+														</c:when>
+														<c:when test="${ fn:contains(alarm.alarmId , 'mentorApplyResultAlarm') }">
+															<div class="row">멘토 신청 결과 알림</div>
+															<div class="row">${ alarm.content }</div>
+														</c:when>
+														<c:when test="${ fn:contains(alarm.alarmId , 'warningAlarm') }">
+															<div class="row">이용 경고 안내</div>
+															<div class="row">${ alarm.content }</div>
+														</c:when>
+													</c:choose>
+													
+													<div class="row">${ alarmTime.get(status.index) } (${ duration.get(status.index) })</div>
 												</div>
 												<div class="row justify-content-center">
 													<a onclick="javascript:alarmDelete('${ alarm.alarmId }')"  class="col btn">x</a>

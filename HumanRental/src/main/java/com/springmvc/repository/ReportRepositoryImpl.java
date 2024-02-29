@@ -40,7 +40,7 @@ public class ReportRepositoryImpl implements ReportRepository {
 	@Override
 	public List<Report> getReportList() {
 		String SQL;
-		
+				
 		try {
 			SQL = "SELECT * FROM report";
 			return template.query(SQL, new RowMapper<Report>() {
@@ -55,7 +55,7 @@ public class ReportRepositoryImpl implements ReportRepository {
 					report.setTargetId(rs.getString(5));
 					report.setType(rs.getString(6));
 					report.setState(rs.getString(7));
-					report.setCreateDate(util.outputFormatting(rs.getTimestamp(8)));
+					report.setCreateDate(rs.getTimestamp(8));
 
 					return report;
 				}
@@ -94,9 +94,16 @@ public class ReportRepositoryImpl implements ReportRepository {
 	
 	@Override
 	public void createBoardReport(HttpServletRequest request, String reporterId) {
-		String SQL = "INSERT INTO report VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-		
+		String SQL;
+				
+		SQL = "INSERT INTO report VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		template.update(SQL, util.createId("report"), request.getParameter("memberId"), reporterId, request.getParameter("target"), request.getParameter("boardId"), request.getParameter("type"), "Wait" ,LocalDateTime.now());
+		
+		SQL = "SELECT reportCount FROM member WHERE memberId = ?";
+		int reportCount = template.queryForObject(SQL, Integer.class, request.getParameter("memberId"));
+		reportCount++;
+		SQL = "UPDATE member SET reportCount = ? WHERE memberId = ?";
+		template.update(SQL, reportCount, request.getParameter("memberId"));
 	}
 	
 	

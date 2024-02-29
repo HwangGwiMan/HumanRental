@@ -11,24 +11,26 @@
 
 <body>
 	<div class="qqs1 container">
-        <div class="qqs2 container">
-        <div class="info">
-            <br>인기 멘토<br><br>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <div class="d-flex justify-content-center qq1">
-                    <div style="width: 50%;">
-                        <img src="/HumanRental/resources/image/duke.png" alt="">
-                    </div>
-                    <div class="align-self-center" style="width: 50%;">
-                        <h4>{이름}</h4>
-                        <div>{내용}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="qqs2 row justify-content-center">
+	        <div class="info">
+	            <br>인기 멘토<br><br>
+	        </div>
+	        <div class="row">
+	        	<c:forEach var="selling" items="${ sellinglist }">
+		            <div class="col-4 ">
+		                <div class="d-flex justify-content-center qq1">
+		                    <div style="width: 50%;">
+		                        <img src="/HumanRental/resources/image/duke.png" alt="">
+		                    </div>
+		                    <div class="align-self-center" style="width: 50%;">
+		                        <h4>${ selling.nickname }</h4>
+		                        <div>${ selling.title }</div>
+		                    </div>
+		                </div>
+		            </div>
+	            </c:forEach>
+	        </div>
+    	</div>
     </div>
 </body>
 </html>
