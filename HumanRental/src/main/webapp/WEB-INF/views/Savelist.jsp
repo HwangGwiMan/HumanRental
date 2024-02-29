@@ -25,18 +25,23 @@
 	        <tr>
 	            <th>번호</th>
 	            <th>제목</th>
-	            <th>내용</th>
 	            <th>카테고리</th>
 	            <th>얼마?</th>
+	            <th>예약</th>
 	            <th>삭제</th>
 	        </tr>
 			<c:forEach items="${saveList}" var="savelist" varStatus="status">
 	    		<tr>
 	        		<td>${status.count}</td>
-	        		<td>${savelist.title}</td>
-	        		<td>${savelist.content}</td>
-	        		<td>${savelist.category}</td> 
-	        		<td>${savelist.price}</td>
+			 		 <c:if test="${savelist.saveListId.contains('buying')}">
+						<td> <a href="<c:url value="/buying/detail?buyingId=${savelist.saveListId}"/>">${savelist.title}</a></td>
+					</c:if>
+					<c:if test="${savelist.saveListId.contains('selling')}">
+						<td> <a href="<c:url value="/selling/detail?sellingId=${savelist.saveListId}"/>">${savelist.title}</a></td>
+					</c:if>
+            		<td>${savelist.category}</td>
+	        		<td>${savelist.price}</td> 
+	        		<td><a href="">예약</a></td>
 	        		<td><a href="<c:url value="/save/deletesavelist?saveListId=${savelist.saveListId}"/>">삭제</a></td>
 	    		</tr>
 			</c:forEach>
@@ -48,7 +53,7 @@
             <th></th>
         </tr>
         </table>
-        <a href="<c:url value="/Main"/>" class="btn btn-secondary">&laquo; 메인페이지 돌아가기</a> 
+        <a href="<c:url value="/main"/>" class="btn btn-secondary">&laquo; 메인페이지 돌아가기</a> 
     </div>
     <hr>
     <footer>

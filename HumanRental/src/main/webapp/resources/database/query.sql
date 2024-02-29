@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS Buying (
 	foreign key(memberId) references Member(memberId) ON DELETE CASCADE,
 	foreign key(nickname) references Member(nickname) ON DELETE CASCADE
 );
-
+select * from buying;
 
 -- 찜목록 
 CREATE TABLE IF NOT EXISTS Save(
@@ -125,6 +125,8 @@ content varchar(1000),
 foreign key(memberId) references Member(memberId)
 
 );
+
+select * from save;
 
 -- 후기관리
 -- 팝니다 리뷰 -
