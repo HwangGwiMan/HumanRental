@@ -171,12 +171,6 @@ foreign key(menteeId) references  MenteeProfile(menteeId),
 foreign key(mentorId) references  MentorProfile(mentorId)
 );
 
--- 알람 관리  이건 좀 나중에 
--- CREATE TABLE IF NOT EXISTS Alarm(
--- member
-
--- );
-
 -- 일정관리 
 CREATE TABLE IF NOT EXISTS Calendar(
 calendarId varchar(20) not null primary key,
@@ -203,10 +197,6 @@ content varchar(10000) not null,
 writeDate date,
 foreign key(questionId) references Question(questionId)
 );
-
--- 멘토 리스트
-
--- 멘티 리스트
 
 --  커뮤니티 관리 (board1 = 자유게시판, board2 = 공지사항)
 CREATE TABLE IF NOT EXISTS Board(
@@ -310,6 +300,11 @@ insert into board values('Board_003','qwer','김이름','게시글3','내용','2
 insert into board2 values('Board_001','admin','admin','공지사항1','내용','2024-01-01 00:00:00',0);
 insert into board2 values('Board_002','admin','admin','공지사항2','내용','2024-01-02 00:00:00',0);
 insert into board2 values('Board_003','admin','admin','공지사항3','내용','2024-01-03 00:00:00',0);
+
+-- mentor 추가
+insert into mentor values('mentor_001' , 'qwer', '2024-01-01 00:00:00');
+insert into mentor values('mentor_002' , 'admin', '2024-01-01 00:00:00');
+insert into mentor values('mentor_003' , 'asdf', '2024-01-01 00:00:00');
 
 -- buying 내용 추가
 insert into buying values('buyingId_001','qwer','닉네임1','introduction',3.5,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국');
