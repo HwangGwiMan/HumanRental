@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS MentorApply(
 CREATE TABLE IF NOT EXISTS MentorProfile(
 mentorId varchar(50) not null,
 memberId varchar(50) not null,
-introduction varchar(1000) not null unique,
+introduction varchar(1000) not null,
 certification varchar(100),
 category varchar(100),
 filename1 varchar(1000),
@@ -306,6 +306,16 @@ insert into board2 values('Board_003','admin','admin','공지사항3','내용','
 insert into mentor values('mentor_001' , 'qwer', '2024-01-01 00:00:00');
 insert into mentor values('mentor_002' , 'admin', '2024-01-01 00:00:00');
 insert into mentor values('mentor_003' , 'asdf', '2024-01-01 00:00:00');
+
+-- menteeprofile 추가
+insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0);
+insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0);
+insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0);
+
+-- mentorprofile 추가
+insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
+insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
+insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
 
 -- buying 내용 추가
 insert into buying values('buyingId_001','qwer','닉네임1','introduction',3.5,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국');
