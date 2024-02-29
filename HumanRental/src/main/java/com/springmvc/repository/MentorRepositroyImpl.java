@@ -278,4 +278,16 @@ public class MentorRepositroyImpl implements MentorRepository {
 		Mentor mentor = template.queryForObject(SQL, new BeanPropertyRowMapper<Mentor>(Mentor.class), mentorId);
 		return mentor;
 	}
+
+	@Override
+	public void UpdateMentorProfile(MentorProfile mentorprofile, String memberId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DeleteMentorProfile(String memberId) {
+		// TODO Auto-generated method stub
+		
+	}
 }

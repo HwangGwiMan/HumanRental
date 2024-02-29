@@ -54,6 +54,7 @@ public class MenteeController {
 		   MenteeService.registerMentee(Mentee,request);
 		  return "redirect:/mentee?mode=menteeProfileRead";
 	  }
+	  
 	 @GetMapping("/mentee2")
 	 public String MenteeProfileUpdateform(@RequestParam("mode") String mode,Model model ,HttpServletRequest request) {
 		 System.out.println("111111111");

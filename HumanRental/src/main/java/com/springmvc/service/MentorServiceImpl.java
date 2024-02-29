@@ -77,5 +77,14 @@ public class MentorServiceImpl implements MentorService {
 		return mentorRepository.MentorInformation(memberId);
 	}
 	
+	public void UpdateMentorProfile(MentorProfile mentorprofile ,String memberId) {
+		 mentorRepository.UpdateMentorProfile(mentorprofile ,memberId);
+	}
+
+	@Override
+	public void DeleteMentorProfile(String memberId) {
+		 mentorRepository.DeleteMentorProfile(memberId);
+		
+	}
 
 }
