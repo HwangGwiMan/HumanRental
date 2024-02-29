@@ -48,7 +48,7 @@
 						<% } else {	%>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/login"/>">로그인</a></li>
 						<% } %>
-						<li class="nav-item"><a class="nav-link" href="#">찜목록</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value="/save/saveread"/>">찜목록</a></li>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/mentorIntro"/>">멘토신청</a></li>
 						<li class="nav-item">
 							<a class="nav-link" href="#" id="alarmBtn">

@@ -59,11 +59,12 @@ category varchar(100),
 filename1 varchar(1000),
 filename2 varchar(1000),
 filename3 varchar(1000),
-starRate int,
+starRate int ,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
 
+select * from MentorProfile;
 
 -- 멘티프로필 관리
 CREATE TABLE IF NOT EXISTS MenteeProfile(
@@ -110,17 +111,22 @@ CREATE TABLE IF NOT EXISTS Buying (
 	foreign key(memberId) references Member(memberId) ON DELETE CASCADE,
 	foreign key(nickname) references Member(nickname) ON DELETE CASCADE
 );
+select * from buying;
 
 -- 찜목록 
 CREATE TABLE IF NOT EXISTS Save(
-saveListId varchar(20) not null primary key,
-sellingId varchar(20)not null ,
+saveListId varchar(50),
 memberId varchar(20) not null,
-content varchar(10000),
-createDate date,
-foreign key(memberId) references Member(memberId),
-foreign key(sellingId) references Selling(sellingId)
+category VARCHAR(20),
+nickname varchar(20),
+title varchar(50),
+price int,
+content varchar(1000),
+foreign key(memberId) references Member(memberId)
+
 );
+
+select * from save;
 
 -- 후기관리
 -- 팝니다 리뷰 -

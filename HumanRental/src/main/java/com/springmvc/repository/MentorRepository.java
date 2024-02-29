@@ -21,6 +21,7 @@ public interface MentorRepository {
 	public int getMentorProfile();
 	public MentorProfile MentorInformation (String memberId);
 	public Mentor getMentor2(String mentorId);
+	public void	UpdateMentorProfile(MentorProfile mentorprofile,String memberId);
+	public void	DeleteMentorProfile(String memberId);
 	public MentorRegistInfo getMentorApplyByRegistId(String registId);
-	 
 }
