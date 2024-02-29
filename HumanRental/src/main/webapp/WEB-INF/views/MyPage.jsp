@@ -573,63 +573,76 @@
 											<th>제목</th>
 											<th>구분</th>
 											<th>신청자</th>
-											<th>신청일</th>
+											<th>예약일</th>
 											<th>승인 여부</th>
 											<th>정보</th>
 										</tr>
-										<c:forEach var="reservationlist" items="${reservationlist}" varStatus="status">					
+										<c:forEach var="reservation" items="${reservationlist}" varStatus="status">					
 											<tr>		
 												<td>${ status.count }</td>
 												<c:choose>
-												    <c:when test="${ reservationlist.boardId.contains('buy') }">
-														<td><a href="/HumanRental/buying/detail?buyingId=${reservationlist.boardId}">${ reservationlist.title }</a></td>
+												    <c:when test="${ reservation.boardId.contains('buy') }">
+														<td><a href="/HumanRental/buying/detail?buyingId=${reservation.boardId}">${ reservation.title }</a></td>
 												        <td>재능구매</td>
-														<td>${ reservationlist.menteeNickname }</td>
+														<td>${ reservation.menteeNickname }</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.boardId.contains('sell') }">
-														<td><a href="/HumanRental/selling/detail?sellingId=${reservationlist.boardId}">${ reservationlist.title }</a></td>
+												    <c:when test="${ reservation.boardId.contains('sell') }">
+														<td><a href="/HumanRental/selling/detail?sellingId=${reservation.boardId}">${ reservation.title }</a></td>
 												        <td>재능판매</td>
-														<td>${ reservationlist.mentorNickname }</td>
+														<td>${ reservation.mentorNickname }</td>
 												    </c:when>
 												</c:choose>
-												<td>${ reservationlist.reservationdate }</td>
+												<td>${ reservation.reservationdate }</td>
 												<c:choose>
-												    <c:when test="${ reservationlist.approve == '대기' }">
+												    <c:when test="${ reservation.approve == '대기' }">
 												        <td>대기</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.approve == '승인' }">
+												    <c:when test="${ reservation.approve == '승인' }">
 												        <td>승인</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.approve == '거절' }">
+												    <c:when test="${ reservation.approve == '거절' }">
 												        <td>거절</td>
 												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈완료' }">
+												        <td>렌탈완료</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈실패' }">
+												        <td>렌탈실패</td>
+												    </c:when>
 												</c:choose>
-												<td><a href="/HumanRental/reservationinfo?reservationId=${ reservationlist.reservationId }">상세보기</a></td>
+												<td><a href="/HumanRental/reservationApprovalInfo?reservationId=${ reservation.reservationId }">상세보기</a></td>
 											</tr>
 										</c:forEach>
 									</table>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'reservationInfo' }"><!-- 예약 상세 정보 페이지 -->
+							<c:when test="${ mode == 'reservationApprovalInfo' }"><!-- 예약 상세 정보 페이지 -->
 								<div><hr><h2>예약 상세 정보</h2><hr></div>
 								<div>
 									<c:choose>
-									    <c:when test="${ reservationinfo.boardId.contains('buy') }">
-											게시글 : <a href="/HumanRental/buying/detail?buyingId=${reservationinfo.boardId}">${ reservationinfo.title }</a><br>
-											신청자 : ${reservationinfo.menteeNickname}<br>
+									    <c:when test="${ reservation.boardId.contains('buy') }">
+											게시글 : <a href="/HumanRental/buying/detail?buyingId=${reservation.boardId}">${ reservation.title }</a><br>
+											신청자 : ${reservation.menteeNickname}<br>
 									    </c:when>
-									    <c:when test="${ reservationinfo.boardId.contains('sell') }">
-											게시글 : <a href="/HumanRental/selling/detail?sellingId=${reservationinfo.boardId}">${ reservationinfo.title }</a><br>
-											신청자 : ${reservationinfo.mentorNickname}<br>
+									    <c:when test="${ reservation.boardId.contains('sell') }">
+											게시글 : <a href="/HumanRental/selling/detail?sellingId=${reservation.boardId}">${ reservation.title }</a><br>
+											신청자 : ${reservation.mentorNickname}<br>
 									    </c:when>
 									</c:choose>
-									예약 신청 날짜 : ${reservationinfo.reservationdate}<br>
-									예약 내용 : ${reservationinfo.reservationcontent}<br>
+									예약일 : ${reservation.reservationdate}<br>
+									예약 내용 : ${reservation.reservationcontent}<br>
 								</div>
 								<div>
-									<c:if test="${reservationinfo.approve == '대기'}">
-										<a href="/HumanRental/reservationApproval?reservationId=${ reservationinfo.reservationId }&approval=yes">승인</a>
-										<a href="/HumanRental/reservationApproval?reservationId=${ reservationinfo.reservationId }&approval=no">거절</a>
+									<c:if test="${reservation.approve == '대기'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=yes">승인</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=no">거절</a>
+									</c:if>
+									<c:if test="${reservation.approve == '승인'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalyes">렌탈완료</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
+									</c:if>
+									<c:if test="${reservation.approve == '렌탈완료'}">
+										<a href="#">후기작성</a>
 									</c:if>
 									<a href="/HumanRental/reservationApprovalManagement">목록</a>
 								</div>
@@ -642,43 +655,85 @@
 											<th>번호</th>
 											<th>제목</th>
 											<th>구분</th>
-											<th>멘토</th>
-											<th>멘티</th>
-											<th>신청일</th>
+											<th>신청자</th>
+											<th>예약일</th>
 											<th>승인 여부</th>
-											<th>승인 날짜</th>
+											<th>정보</th>
 										</tr>
-										<c:forEach var="reservationlist" items="${reservationlist}" varStatus="status">					
+										<c:forEach var="reservation" items="${reservationlist}" varStatus="status">					
 											<tr>		
 												<td>${ status.count }</td>
 												<c:choose>
-												    <c:when test="${ reservationlist.boardId.contains('buy') }">
-														<td><a href="/HumanRental/buying/detail?buyingId=${reservationlist.boardId}">${ reservationlist.title }</a></td>
+												    <c:when test="${ reservation.boardId.contains('buy') }">
+														<td><a href="/HumanRental/buying/detail?buyingId=${reservation.boardId}">${ reservation.title }</a></td>
 												        <td>재능구매</td>
+														<td>${ reservation.mentorNickname }</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.boardId.contains('sell') }">
-														<td><a href="/HumanRental/selling/detail?sellingId=${reservationlist.boardId}">${ reservationlist.title }</a></td>
+												    <c:when test="${ reservation.boardId.contains('sell') }">
+														<td><a href="/HumanRental/selling/detail?sellingId=${reservation.boardId}">${ reservation.title }</a></td>
 												        <td>재능판매</td>
+														<td>${ reservation.menteeNickname }</td>
 												    </c:when>
 												</c:choose>
-												<td>${ reservationlist.mentorNickname }</td>
-												<td>${ reservationlist.menteeNickname }</td>
-												<td>${ reservationlist.regist_day }</td>
+												<td>${ reservation.reservationdate }</td>
 												<c:choose>
-												    <c:when test="${ reservationlist.approve == '대기' }">
+												    <c:when test="${ reservation.approve == '대기' }">
 												        <td>대기</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.approve == '승인' }">
+												    <c:when test="${ reservation.approve == '승인' }">
 												        <td>승인</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.approve == '거절' }">
+												    <c:when test="${ reservation.approve == '거절' }">
 												        <td>거절</td>
 												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈완료' }">
+												        <td>렌탈완료</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈실패' }">
+												        <td>렌탈실패</td>
+												    </c:when>
 												</c:choose>
-												<td>${ reservationlist.signdate }</td>
+												<td><a href="/HumanRental/reservationInfo?reservationId=${ reservation.reservationId }">상세보기</a></td>
 											</tr>
 										</c:forEach>
 									</table>
+								</div>
+								
+							</c:when>
+							<c:when test="${ mode == 'reservationInfo' }"><!-- 예약 상세 정보 페이지 -->
+								<div><hr><h2>예약 상세 정보</h2><hr></div>
+								<div>
+									예약 신청일 : ${reservation.regist_day}<br>
+									<c:choose>
+									    <c:when test="${ reservation.boardId.contains('buy') }">
+											게시글 : <a href="/HumanRental/buying/detail?buyingId=${reservation.boardId}">${ reservation.title }</a><br>
+											멘토 : ${reservation.mentorNickname}<br>
+											멘티 : ${reservation.menteeNickname}<br>
+									    </c:when>
+									    <c:when test="${ reservation.boardId.contains('sell') }">
+											게시글 : <a href="/HumanRental/selling/detail?sellingId=${reservation.boardId}">${ reservation.title }</a><br>
+											멘토 : ${reservation.mentorNickname}<br>
+											멘티 : ${reservation.menteeNickname}<br>
+									    </c:when>
+									</c:choose>
+									예약일 : ${reservation.reservationdate}<br>
+									예약 내용 : ${reservation.reservationcontent}<br>
+									승인 여부 : ${reservation.approve}<br>
+									승인일 : ${reservation.signdate}
+								</div>
+								<div>
+									<c:if test="${reservation.approve == '대기'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=yes">승인</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=no">거절</a>
+									</c:if>
+									<c:if test="${reservation.approve == '승인'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalyes">렌탈완료</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
+									</c:if>
+									<c:if test="${reservation.approve == '렌탈완료'}">
+										<a href="#">후기작성</a>
+									</c:if>
+									<a href="/HumanRental/reservationListManagement">목록</a>
 								</div>
 							</c:when>
 						</c:choose>
