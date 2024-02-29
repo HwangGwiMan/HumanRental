@@ -2,7 +2,10 @@ package com.springmvc.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -165,6 +168,11 @@ public class ReservationServiceImpl implements ReservationService{
 		return null;
 	}
 	
+	@Override
+	public List<Reservation> getMonitorReservationStatus() {
+		return reservationrepository.getAllReservation();
+	}
+
 	@Override
 	public void GetReservationInfo(String reservationId, Model model) {
 		

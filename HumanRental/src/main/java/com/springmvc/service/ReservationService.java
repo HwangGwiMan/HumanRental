@@ -1,6 +1,7 @@
 package com.springmvc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.ui.Model;
 
@@ -12,6 +13,7 @@ public interface ReservationService {
 	public Reservation SellingReservationCreate(String sellingId, String date, String content, String memberId, Model model);
 	public List<Reservation> getReservationListById(String memberId, Model model);
 	public List<Reservation> getReservationApprovalListById(String memberId, Model model);
+	public List<Reservation> getMonitorReservationStatus();
 	public void GetReservationInfo(String reservationId, Model model);
 	public void ReservationApproval(String reservationId, String approval);
 }
