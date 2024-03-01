@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS MentorApply(
 CREATE TABLE IF NOT EXISTS MentorProfile(
 mentorId varchar(50) not null,
 memberId varchar(50) not null,
-introduction varchar(1000) not null unique,
+introduction varchar(1000),
 certification varchar(100),
 category varchar(100),
 filename1 varchar(1000),

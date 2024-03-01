@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.cj.protocol.Resultset;
 import com.springmvc.domain.Buying;
-import com.springmvc.domain.Mentee;
 import com.springmvc.domain.Save;
 import com.springmvc.domain.Selling;
 import com.springmvc.util.Utility;
@@ -47,7 +46,6 @@ public class SaveRepositoryImpl implements SaveRepository{
 		
 		SQL = "INSERT INTO save (saveListId, memberId, category, nickname, title, price, content) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		template.update(SQL, save.getSaveListId(), save.getMemberId(), save.getCategory(), save.getNickname(), save.getTitle(), save.getPrice(), save.getContent());
-		System.out.println("SQL구문을 뛰어넘고 여기로 와줭");
 	}
 	@Override
 	public void insertSavelist(Selling selling, String memberId) {
@@ -66,7 +64,6 @@ public class SaveRepositoryImpl implements SaveRepository{
 		
 		SQL = "INSERT INTO save (saveListId, memberId, category, nickname, title, price, content) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		template.update(SQL, save.getSaveListId(), save.getMemberId(), save.getCategory(), save.getNickname(), save.getTitle(), save.getPrice(), save.getContent());
-		System.out.println("SQL구문을 뛰어넘고 여기로 와줭");
 	}
 	
 	
@@ -102,18 +99,6 @@ public class SaveRepositoryImpl implements SaveRepository{
 		String SQL ="delete  from save where saveListId=?";
 		template.update(SQL,savelistid);
 	}
-	@Override
-	public boolean ajaxchecksavelist(String savelistId) {
-	    String SQL = "SELECT COUNT(*) FROM save WHERE saveListId = ?";
-	    int rowCount = 0;
-	    try {
-	        rowCount = template.queryForObject(SQL, new Object[]{savelistId}, Integer.class);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    System.out.println("여긴 오니?");
-	    return rowCount > 0; // '찜' 목록에 하나 이상 존재하면 true 반환
-	};
-	
+
 	
 }

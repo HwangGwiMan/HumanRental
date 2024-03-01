@@ -262,7 +262,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 	}	    
 	
 	///멘토 프로필 조회 함수 select쓸거임 
-	public MentorProfile MentorInformation (String memberId) {
+	public MentorProfile MentorprofileInformation (String memberId) {
 		 System.out.println("데이터베이스에서 정보를 찾는 중...");
 		    String SQL = "select * from MentorProfile where memberId=?";
 		    
@@ -283,6 +283,9 @@ public class MentorRepositroyImpl implements MentorRepository {
 		    }
 	}
 	
+	
+	
+	
 	// 예약 전용
 	@Override
 	public Mentor getMentor2(String mentorId) {
@@ -294,7 +297,17 @@ public class MentorRepositroyImpl implements MentorRepository {
 
 	@Override
 	public void UpdateMentorProfile(MentorProfile mentorprofile, String memberId) {
-		// TODO Auto-generated method stub
+		
+		String SQL = "UPDATE mentorProfile SET introduction = ?, certification = ?, category = ?, filename1 = ?, filename2 = ?, filename3 = ? WHERE mentorId = ? AND memberId = ?";
+
+		try {
+			template.update(SQL, mentorprofile.getIntroduction(),mentorprofile.getCertification(),mentorprofile.getCategory(),mentorprofile.getFilename1(),mentorprofile.getFilename2(),mentorprofile.getFilename3(),mentorprofile.getMentorId(),memberId);
+
+			
+		}catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
+			e.printStackTrace();
+		}
+		
 		
 	}
 

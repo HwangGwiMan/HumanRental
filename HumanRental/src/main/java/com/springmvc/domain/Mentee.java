@@ -1,6 +1,7 @@
 package com.springmvc.domain;
 
 public class Mentee {
+	
 	private String menteeId;
 	private String memberId;
 	private String interest;
@@ -36,8 +37,6 @@ public class Mentee {
 	public void setStarRate(int starRate) {
 		this.starRate = starRate;
 	}
-
-
-
+	
 	
 }

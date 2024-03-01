@@ -54,8 +54,6 @@ public class SaveController {
 		
 		if(a==false) {
 		    if(savelistId.contains("buying")) {
-		        System.out.println("여긴 a값이 0보다 작거나 같을 때");
-		        System.out.println("buying if 문인데 여긴 오고 있을까??");
 		        buyingService.BuyingDetailbyId(model, savelistId);
 		        System.out.println("if문 뒤");  
 		        Buying buying =(Buying)model.getAttribute("buying");
@@ -99,13 +97,5 @@ public class SaveController {
 		
 		return "redirect:/save/saveread";
 	}
-	@GetMapping("/ajaxchecksavelist")
-	
-	public String ajaxchecksavelist(@RequestParam("saveListId") String savelistid) {
-		System.out.println(savelistid);
-	    // saveService.ajaxchecksavelist(savelistid)의 결과에 따라 반환값을 설정합니다.
-	    // JSON 형태 또는 단순 문자열 등 클라이언트가 처리할 수 있는 형태로 반환합니다.
-	    boolean result = saveService.ajaxchecksavelist(savelistid);
-	    return result ? "success" : "fail"; // 예시로 boolean 타입의 결과를 문자열로 반환
-	}
+
 }

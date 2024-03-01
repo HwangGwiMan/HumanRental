@@ -17,13 +17,13 @@ public class MenteeServiceImpl implements MenteeService {
     MenteeRepository MenteeRepository;
 
 	@Override
-	public void registerMentee(Mentee Mentee ,HttpServletRequest request) {
-		MenteeRepository.registerMentee(Mentee,request);
+	public void registerMentee(Mentee Mentee ,String memberId) {
+		MenteeRepository.registerMentee(Mentee, memberId);
 		
 	}
 
 	@Override
-	public int getMentee(String memberId) {
+	public boolean getMentee(String memberId) {
 		return MenteeRepository.getMentee(memberId);
 	}
 
@@ -33,13 +33,9 @@ public class MenteeServiceImpl implements MenteeService {
 	}
 
 	@Override
-	public Mentee UpdateMentee(Mentee Mentee, HttpServletRequest request) {
-		return  MenteeRepository.UpdateMentee(Mentee,request);
+	public Mentee UpdateMentee(Mentee Mentee,String memberId ) {
+		return  MenteeRepository.UpdateMentee(Mentee,memberId);
 	}
 
-	@Override
-	public void deleteMentee(HttpServletRequest request) {
-		 MenteeRepository.deleteMentee(request);
-	}
-	
+		
 }

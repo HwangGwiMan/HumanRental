@@ -116,12 +116,19 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 	
 	//회원탈퇴
-	public void deleteMember(String memberId , String memberPw) {
-		
+	public boolean deleteMember(String memberId , String memberPw) {
 	    String SQL = "delete from member where memberId=? and memberPw=?";
-	     template.update(SQL, memberId,memberPw);
+	    try {
+	        int updatedRows = template.update(SQL, memberId, memberPw);
+	        // 성공적으로 삭제된 행의 수가 0보다 크면 true, 아니면 false를 반환합니다.
+	        return updatedRows > 0;
+	    } catch (Exception e) {
+	        // SQL 실행 오류를 잡습니다.
+	        // 이 경우에는 false를 반환하거나, 필요에 따라 적절한 예외 처리를 수행합니다.
+	        System.out.println("회원 탈퇴 중 오류가 발생했습니다: " + e.getMessage());
+	        return false;
+	    }
 	}
-
 	// 회원 정보 수정
 	@Override
 	public void updateMember(Member member, String memberId) {

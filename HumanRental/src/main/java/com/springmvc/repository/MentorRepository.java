@@ -20,7 +20,7 @@ public interface MentorRepository {
 	public void mentorRefuse(String memberId, String registId);
 	public void mentorProfileRegister(MentorProfile mentorprofile ,String memberId, String mentorId);
 	public int getMentorProfile();
-	public MentorProfile MentorInformation (String memberId);
+	public MentorProfile MentorprofileInformation (String memberId);
 	public Mentor getMentor2(String mentorId);
 	public void	UpdateMentorProfile(MentorProfile mentorprofile,String memberId);
 	public void	DeleteMentorProfile(String memberId);

@@ -18,7 +18,7 @@
 		<!-- jquery -->
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		
-		<script src="<c:url value="/resources/js/myPage.js"/>"></script>
+		<script src="<c:url value="/resources/js/myPage.js?ver=1"/>"></script>
 	</head>
 	<body class="vh-100">
 		<jsp:include page="nav.jsp"/>
@@ -35,7 +35,7 @@
 								<a href="#" class="btn btn-primary" id="profileBtn">프로필 수정</a>
 								<div class="text-center" style="display: none;">
 									<div class="p-1"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn btn-outline-primary text-nowrap">멘토 프로필 조회</a></div>
-									<div class="p-1"><a href="<c:url value="/mentee?mode=menteeProfileRead"/>" class="btn btn-outline-primary text-nowrap">멘티 프로필 조회</a></div>
+									<div class="p-1"><a href="<c:url value="/mentee?mode=menteeProfile"/>" class="btn btn-outline-primary text-nowrap">멘티 프로필 조회</a></div>
 								</div>
 							</div>
 							<div class="row p-3">
@@ -53,7 +53,7 @@
 								</div>
 							</div>
 							<div class="row p-3"><a href="#" class="btn btn-primary">일정 정보</a></div>
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=delete"/>" class="btn btn-primary ">회원 탈퇴</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=deletememberform"/>" class="btn btn-primary ">회원 탈퇴</a></div>
 						</c:when>
 						<c:when test="${ member.memberId eq 'admin' }">
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn btn-primary">마이 페이지</a></div><!-- 기본값 -->
@@ -118,33 +118,33 @@
 									<input onclick="javascript:userCheck()" type="button" value="확인" class="btn btn-outline-primary">
 								</form>
 							</c:when>
-							<c:when test="${ mode == 'delete' }"><!-- 회원 탈퇴 -->
+							<c:when test="${ mode == 'deletememberform' }"><!-- 회원 탈퇴 -->
 	    						<form class="col-4" action="<c:url value="/deleteMember" />" method="post">
-	       							 <div class="row justify-content-center">회원 탈퇴 </div>
+	       							 <div class="row justify-content-center"><h3>회원 탈퇴</h3> </div>
+	       							 <br><br>
 	        						<div class="row justify-content-center">
-	            						<div class="col-4">아이디</div> 
-	            						<div class="col"><input type="text" readonly="readonly" value="${member.memberId}" id="memberId" name="memberId"></div>
+	            						<div class="col-5">아이디</div> 
+	            						<div class="col"><input type="text"  value="${member.memberId}" id="memberId" name="memberId"></div>
 	        						</div> 
 	       							 <div class="row justify-content-center">
-	            						<div class="col-4">비밀번호</div>
+	            						<div class="col-5">비밀번호</div>
 	            						<div class="col"><input type="password" required id="memberPw" name="memberPw"></div>
 	        						</div>
-	        						<input type="hidden" name="mode" value="delete">
-	        						<button type="button" onclick="javascript:deleteMember()">확인</button>
+									<input onclick="javascript:deletemember22()" type="button" value="확인" class="btn btn-outline-primary">
 	    						</form>
 	    					</c:when>
 	    					<c:when test="${ mode == 'mentorFail' }">
 	                           <script type="text/javascript">
 	                                  window.onload = function(){
 	                                    alert("멘토 등록이 필요합니다.");
-	                                    window.history.back();
+	                                    window.location.href = "http://localhost:8080/HumanRental/mentorIntro";
 	                                	}
 	                            </script>
                      		</c:when>         
 							<c:when test="${ mode == 'mentorProfile' }"><!-- 멘토 프로필 -->
 								<div class="col p-5">
 									<div class="row pb-3"><h3>멘토 프로필 등록</h3></div>
-									<form action="<c:url value='/mentorProfileRegister'/>" method="post" enctype="multipart/form-data">
+									<form action="<c:url value='/mentorProfileRegister?mode=111'/>" method="post" enctype="multipart/form-data">
 										<div class="row pb-3">
 											<div class="col-2"><h4>카테고리</h4></div>
 		    								<div class="col">
@@ -200,16 +200,12 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'mentorInformation' }">
-								<center>
-								<div class="col-5">
-									<h3>멘토 프로필 정보 조회 </h3>
-									<br><br>
+								<div>
 										<div class="col-5">
-											<h3>멘토 프로필 정보 조회 </h3>
-											<br><br>
+											<h4>멘토 프로필 조회 </h4>
 											<br><br>
 											<h3>멘토 카테고리</h3>
-											<div>${mentorprofile.category}</div>
+											<div><p>${mentorprofile.category}</p></div>
 											<br><br>
 											<h3>멘토 자격증이당 </h3>
 											<div>${mentorprofile.certification}</div>
@@ -217,14 +213,14 @@
 											<h3>멘토 소개당</h3>
 											<div>${mentorprofile.introduction}</div>
 										</div>
-										<div><a href="<c:url value="/mentor2?mode=mentorProfileUpdate"/>" >멘토프로필 수정 </a></div>
-										<div><a href="<c:url value="/mentor3?mode=mentorProfileDelete"/>" >멘토프로필 삭제 </a></div>
+										<div><a href="<c:url value="/mentorprofileupdate?mode=callupdatementorprofileform"/>">멘토프로필 수정 </a></div>
+								</div>		
 							</c:when>
 							<c:when test="${ mode == 'mentorProfileUpdate' }">
 								<div class="col-4">
 									<h3>멘토 프로필 업데이트</h3>
 									<br><br>
-									<form action="<c:url value='/mentorProfileUpdate'/>" method="post" enctype="multipart/form-data">
+									<form action="<c:url value='/mentorProfileUpdate?mode=updatementorprofile"'/>" method="post" enctype="multipart/form-data">
 											<h2>카테고리</h2>
 	    								<div  style="display: flex;  justify-content:space-between;">
 	        								<label for="checkbox-1">운동</label>
@@ -268,26 +264,29 @@
 	    								<div class="file-uploader-section">
     										<h3 class="fileuploder">자격증 등록</h3>
     										<div class="file-upload-field">
+    										 	<a>${fn:escapeXml(mentorprofile.filename1)}</a>
         										<label for="file1">자격증 파일 1:</label>
-        										<input type="file" id="file1" name="file1" multiple>
+        										<input type="file" id="file1" name="file1" value="${fn:escapeXml(mentorprofile.filename1)}" multiple>
     										</div>
     										<div class="file-upload-field">
+    										    <a>${fn:escapeXml(mentorprofile.filename2)}</a>
         										<label for="file2">자격증 파일 2:</label>
-        										<input type="file" id="file2" name="file2" multiple>
+        										<input type="file" id="file2" name="file2" value="${fn:escapeXml(mentorprofile.filename2)}" multiple>
     										</div>
     										<div class="file-upload-field">
+    											<a>${fn:escapeXml(mentorprofile.filename3)}</a>
         										<label for="file3">자격증 파일 3:</label>
-        										<input type="file" id="file3" name="file3" multiple>
+        										<input type="file" id="file3" name="file3" value="${fn:escapeXml(mentorprofile.filename3)}" multiple>
     										</div>
 										</div>
 										<button type="submit">확인</button>
 									</form>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'menteeProfileRead' }">
+							<c:when test="${ mode == 'menteeProfileRegister' }">
 								<div class="col p-5">
 									<div class="row pb-3"><h3>멘티 프로필 등록</h3></div>
-									<form  action="<c:url value="/mentee"/>" method="post">
+									<form  action="<c:url value='/menteeregisterinsert?mode=11'/>" method="post">
 										<div class="row pb-3 ">
 											<div class="col-2"><h4>카테고리</h4></div>
 		    								<div class="col">
@@ -319,84 +318,14 @@
 									</form>
 								</div>
 							</c:when>	
-							<c:when test="${ mode == 'meteeProfile' }">
-								<div class="col-1"></div>
-								<div class="col-4">
-									<div class="row"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
-								</div>
-								<div class="col-1"></div>
-								<div></div>
-							</c:when>
-							<c:when test="${ mode == 'memberManagement' }"><!-- 멤버 관리 페이지 -->
-								<div>
-									<table class="table table-hover">
-										<tr>
-											<th>번호</th>
-											<th>유저 ID</th>
-											<th>가입일</th>
-											<th>멘토 권한</th>
-											<th>멘토 등록일</th>
-										</tr>
-										<c:forEach var="member" items="${memberList}" varStatus="status">					
-											<tr>		
-												<td>${ status.count }</td>
-												<td>${ member.memberId }</td>
-												<td>${ member.memberJoinDate }</td>
-												<td>
-													<c:if test="${ not empty member.mentorId }">승인</c:if>
-												</td>
-												<td>${ member.mentorRegistDate }</td>
-											</tr>
-										</c:forEach>
-									</table>
-								</div>
-							</c:when>
 							<c:when test="${ mode == 'menteeInformation' }">
 								<div class="col-1"> </div>	
 								<br><br>
 								<div class="col-5">
-									<div class="row p-3">관심분야 :${ Mentee.interest} </div>
-									<div class="row p-3">소개 :${ Mentee.introduction}</div>
+									<div class="row p-3">관심분야 :${ mentee.interest} </div>
+									<div class="row p-3">소개 :${ mentee.introduction}</div>
 									<div><a href="<c:url value="/mentee2?mode=menteeProfileUpdate"/>">멘티 프로필 수정</a></div>
-									<div><a href="<c:url value="/mentee3"/>">멘티 프로필 삭제</a></div>
 								</div>	
-							</c:when>
-							<c:when test="${ mode == 'mentorApplyManagement' }">
-								<div>
-									<div class="row text-center p-3">
-										<div class="col-1"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-outline-info">전체</a></div>
-										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="btn btn-primary">처리된 요청</a></div>
-										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="btn btn-secondary">보류 중인 요청</a></div>
-									</div>
-									<table class="table table-hover ">
-										<tr>
-											<th>번호</th>
-											<th>유저 ID</th>
-											<th>신청일</th>
-											<th>처리결과</th>
-											<th>처리일</th>
-										</tr>
-										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
-											<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }')">
-												<td>${ status.count }</td>
-												<td>${ applyInfo.memberId }</td>
-												<td>${ applyInfo.applyDate }</td>
-												<c:choose>
-													<c:when test="${ applyInfo.state == 'Wait' }">
-														<td><div class="badge bg-secondary">대기중</div></td>
-													</c:when>
-													<c:when test="${ applyInfo.state == 'Accept' }">
-														<td><div class="badge bg-success">승인</div></td>
-													</c:when>
-													<c:when test="${ applyInfo.state == 'Refuse' }">
-														<td><div class="badge bg-danger">거부</div></td>
-													</c:when>
-												</c:choose>
-												<td>${ applyInfo.confirmDate }</td>
-											</tr>
-										</c:forEach>
-									</table>
-								</div>
 							</c:when>
 							<c:when test="${ mode == 'menteeProfileUpdate'}">
 								<div class="col-1"></div>	
@@ -438,6 +367,68 @@
 			    							<button type="submit"> 확인</button>
 										</form>
 								 	</div>		
+							</c:when>
+							
+							<c:when test="${ mode == 'memberManagement' }"><!-- 멤버 관리 페이지 -->
+								<div>
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>유저 ID</th>
+											<th>가입일</th>
+											<th>멘토 권한</th>
+											<th>멘토 등록일</th>
+										</tr>
+										<c:forEach var="member" items="${memberList}" varStatus="status">					
+											<tr>		
+												<td>${ status.count }</td>
+												<td>${ member.memberId }</td>
+												<td>${ member.memberJoinDate }</td>
+												<td>
+													<c:if test="${ not empty member.mentorId }">승인</c:if>
+												</td>
+												<td>${ member.mentorRegistDate }</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'mentorApplyManagement' }">
+								<div>
+									<div class="row text-center p-3">
+										<div class="col-1"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-outline-info">전체</a></div>
+										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="btn btn-primary">처리된 요청</a></div>
+										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="btn btn-secondary">보류 중인 요청</a></div>
+									</div>
+									<table class="table table-hover ">
+										<tr>
+											<th>번호</th>
+											<th>유저 ID</th>
+											<th>신청일</th>
+											<th>처리결과</th>
+											<th>처리일</th>
+										</tr>
+										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
+											<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }')">
+												<td>${ status.count }</td>
+												<td>${ applyInfo.memberId }</td>
+												<td>${ applyInfo.applyDate }</td>
+												<c:choose>
+													<c:when test="${ applyInfo.state == 'Wait' }">
+														<td><div class="badge bg-secondary">대기중</div></td>
+													</c:when>
+													<c:when test="${ applyInfo.state == 'Accept' }">
+														<td><div class="badge bg-success">승인</div></td>
+													</c:when>
+													<c:when test="${ applyInfo.state == 'Refuse' }">
+														<td><div class="badge bg-danger">거부</div></td>
+													</c:when>
+												</c:choose>
+												<td>${ applyInfo.confirmDate }</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
 							</c:when>
 							<c:when test="${ mode == 'applyInfo' }">
 								<div class="col">

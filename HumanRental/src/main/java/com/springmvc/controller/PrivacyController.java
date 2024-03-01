@@ -50,8 +50,9 @@ public class PrivacyController {
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
 								@RequestParam(value = "id", defaultValue = "none") String targetId,
-								@RequestParam(value = "t", defaultValue = "none") String state,								Model model, 
+								@RequestParam(value = "t", defaultValue = "none") String state,Model model, 
 								HttpServletRequest request) {
+		System.out.println("응답하라");
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user") != null) {
 			String memberId = (String) session.getAttribute("user");
@@ -105,7 +106,6 @@ public class PrivacyController {
 					model.addAttribute("isMentor", "YES");
 				}
 			}
-			
 			return "MyPage";
 		} else {
 			return "redirect:/main";
@@ -189,19 +189,21 @@ public class PrivacyController {
 	
 	//회원탈퇴처리
 	@PostMapping("/deleteMember") 
-	public String deleteMember(@RequestParam("mode") String mode, @RequestParam("memberId") String memberId,
+	@ResponseBody
+	public String deleteMember(@RequestParam("memberId") String memberId,
 	        @RequestParam("memberPw") String memberPw, Model model ,HttpServletRequest request) {
-			System.out.println("회원탈퇴컨트롤러");
+	    System.out.println("회원탈퇴컨트롤러");
 	   
-	    memberService.deleteMember(memberId,memberPw);
-	    HttpSession session = request.getSession();
-		session.invalidate();
-	    
-	    return "redirect:main"; // 다른 페이지로 리다이렉트
+	    boolean a= memberService.deleteMember(memberId,memberPw);
+	    System.out.println(a);
+	    if(a==true) {
+	        HttpSession session = request.getSession();
+	        session.invalidate();
+	        return "success";
+	    } else {
+	        return "fail";
+	    }
 	}
-
 	
-	
-
 
 }

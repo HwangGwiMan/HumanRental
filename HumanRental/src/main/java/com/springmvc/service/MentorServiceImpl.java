@@ -73,8 +73,8 @@ public class MentorServiceImpl implements MentorService {
 	}
 
 	@Override
-	public MentorProfile MentorInformation(String memberId) {
-		return mentorRepository.MentorInformation(memberId);
+	public MentorProfile MentorprofileInformation(String memberId) {
+		return mentorRepository.MentorprofileInformation(memberId);
 	}
 	
 	public void UpdateMentorProfile(MentorProfile mentorprofile ,String memberId) {

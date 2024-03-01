@@ -110,13 +110,32 @@ function sendWarning(memberId, type, title, reportId) {
 	});
 }
 
-function deleteMember(){
-	console.log(document.getElementById("memberId"));
-	console.log(document.getElementById("memberPw"));
-	var memberId = document.getElementById("memberId").value;
-	var memberPw = document.getElementById("memberPw").value;
-	
-	console.log("잘뜨고 잇냐?");
+function deletemember22() {
+    var memberId = document.getElementById("memberId").value;
+    var memberPw = document.getElementById("memberPw").value;
+
+    console.log(memberId);
+    console.log(memberPw);
+
+    $.ajax({
+        type: 'POST',
+        url: '/HumanRental/deleteMember',
+        data: { 
+            "memberId": memberId,
+            "memberPw": memberPw,
+        },
+        success: function(response) {
+            if(response === "success") {
+                alert('회원 탈퇴가 성공적으로 완료되었습니다.');
+                location.reload();
+            } else {
+                alert('회원 탈퇴에 실패하였습니다.');
+            }
+        },
+        error: function(request, status, error) {
+            alert('회원 탈퇴 처리 중 오류가 발생했습니다: ' + error);
+        }
+    });
 }
 
 $(function() {
