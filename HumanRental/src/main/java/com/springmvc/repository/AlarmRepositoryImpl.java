@@ -106,7 +106,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		 
 		String SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
 		
-		template.update(SQL, util.createId("ReservationApply"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
+		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
 	}
 
 	// 알람 목록
@@ -127,7 +127,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 					alarm.setSendMemberId(rs.getString(2));
 					alarm.setReceiveMemberId(rs.getString(3));
 //					alarm.setDate(new java.sql.Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
-					alarm.setDate(rs.getTimestamp(4).toLocalDateTime());
+					alarm.setDate(util.outputFormatting(rs.getTimestamp(4)));
 					alarm.setContent(rs.getString(5));
 					return alarm;
 				}
