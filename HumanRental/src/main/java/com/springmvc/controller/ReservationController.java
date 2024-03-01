@@ -23,13 +23,9 @@ public class ReservationController {
 	@Autowired
 	ReservationService reservationservice;
 	
-	//멘티게시글 리스트 페이지
 	@PostMapping("/reservation/buying")
 	public String BuyingReservation(@RequestParam("buyingId") String buyingId, Model model,
 			@RequestParam("date") String date, @RequestParam("content") String content, HttpServletRequest request) {
-		
-//		System.out.println(date);
-//		System.out.println(content);
 		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
@@ -40,7 +36,6 @@ public class ReservationController {
 	}
 	
 
-	//멘티게시글 리스트 페이지
 	@PostMapping("/reservation/selling")
 	public String SellingReservation(@RequestParam("sellingId") String sellingId, Model model,
 			@RequestParam("date") String date, @RequestParam("content") String content, HttpServletRequest request) {

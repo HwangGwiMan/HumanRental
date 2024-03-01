@@ -131,9 +131,10 @@ select * from save;
 -- 후기관리
 -- 팝니다 리뷰 -
 CREATE TABLE IF NOT EXISTS SellingReview(
-sellingReviewId varchar(20) not null primary key,
-memberId varchar(20)not null ,
-sellingId varchar(20)not null,
+sellingReviewId varchar(50) primary key,
+sellingId varchar(50),
+memberId varchar(20),
+title varchar(50),
 content varchar(10000),
 writeDate date,
 starRate int,
@@ -143,9 +144,10 @@ foreign key(sellingId) references Selling(sellingId)
 
 -- 삽니다 리뷰 
 CREATE TABLE IF NOT EXISTS BuyingReview(
-buyingReviewId varchar(20) not null primary key,
+buyingReviewId varchar(50) not null primary key,
+buyingId varchar(50),
 memberId varchar(20) not null,
-buyingId varchar(20) not null,
+title varchar(50),
 content varchar(10000),
 writeDate date,
 starRate int,
