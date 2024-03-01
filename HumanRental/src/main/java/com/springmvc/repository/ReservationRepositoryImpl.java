@@ -101,6 +101,10 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
 			template.update(sql, "렌탈실패", reservationId);
 		}
+		else if(approval.equals("review")) {
+			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
+			template.update(sql, "후기작성", reservationId);
+		}
 		
 	}
 }

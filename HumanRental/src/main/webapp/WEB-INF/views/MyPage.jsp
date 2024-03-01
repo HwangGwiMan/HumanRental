@@ -650,8 +650,8 @@
 											<th>제목</th>
 											<th>구분</th>
 											<th>신청자</th>
-											<th>예약일</th>
-											<th>승인 여부</th>
+											<th>신청일</th>
+											<th>진행 상황</th>
 											<th>정보</th>
 										</tr>
 										<c:forEach var="reservation" items="${reservationlist}" varStatus="status">					
@@ -669,7 +669,7 @@
 														<td>${ reservation.mentorNickname }</td>
 												    </c:when>
 												</c:choose>
-												<td>${ reservation.reservationdate }</td>
+												<td>${ reservation.regist_day }</td>
 												<c:choose>
 												    <c:when test="${ reservation.approve == '대기' }">
 												        <td>대기</td>
@@ -685,6 +685,9 @@
 												    </c:when>
 												    <c:when test="${ reservation.approve == '렌탈실패' }">
 												        <td>렌탈실패</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '후기작성' }">
+												        <td>후기작성</td>
 												    </c:when>
 												</c:choose>
 												<td><a href="/HumanRental/reservationApprovalInfo?reservationId=${ reservation.reservationId }">상세보기</a></td>
@@ -719,7 +722,7 @@
 										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
 									</c:if>
 									<c:if test="${reservation.approve == '렌탈완료'}">
-										<a href="#">후기작성</a>
+										<a href="/HumanRental/ReviewWrite?reservationId=${ reservation.reservationId }">후기작성</a>
 									</c:if>
 									<a href="/HumanRental/reservationApprovalManagement">목록</a>
 								</div>
@@ -733,8 +736,8 @@
 											<th>제목</th>
 											<th>구분</th>
 											<th>신청자</th>
-											<th>예약일</th>
-											<th>승인 여부</th>
+											<th>신청일</th>
+											<th>진행 상황</th>
 											<th>정보</th>
 										</tr>
 										<c:forEach var="reservation" items="${reservationlist}" varStatus="status">					
@@ -752,7 +755,7 @@
 														<td>${ reservation.menteeNickname }</td>
 												    </c:when>
 												</c:choose>
-												<td>${ reservation.reservationdate }</td>
+												<td>${ reservation.regist_day }</td>
 												<c:choose>
 												    <c:when test="${ reservation.approve == '대기' }">
 												        <td>대기</td>
@@ -768,6 +771,9 @@
 												    </c:when>
 												    <c:when test="${ reservation.approve == '렌탈실패' }">
 												        <td>렌탈실패</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '후기작성' }">
+												        <td>후기작성</td>
 												    </c:when>
 												</c:choose>
 												<td><a href="/HumanRental/reservationInfo?reservationId=${ reservation.reservationId }">상세보기</a></td>
@@ -795,7 +801,7 @@
 									</c:choose>
 									예약일 : ${reservation.reservationdate}<br>
 									예약 내용 : ${reservation.reservationcontent}<br>
-									승인 여부 : ${reservation.approve}<br>
+									진행 상황 : ${reservation.approve}<br>
 									승인일 : ${reservation.signdate}
 								</div>
 								<div>
@@ -808,9 +814,89 @@
 										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
 									</c:if>
 									<c:if test="${reservation.approve == '렌탈완료'}">
-										<a href="#">후기작성</a>
+										<a href="/HumanRental/ReviewWrite?reservationId=${ reservation.reservationId }">후기작성</a>
 									</c:if>
 									<a href="/HumanRental/reservationListManagement">목록</a>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'ReviewWrite' }"><!-- 예약 상세 정보 페이지 -->
+								<div><hr><h2>후기 작성</h2><hr></div>
+								<div>
+									<form:form modelAttribute="review" action="./ReviewWrite?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
+										<c:set var="sessionId" value="${sessionScope.user}" />
+										<input name="reservationId" type="hidden" class="form-control" value="${reservationId}">
+										<input name="memberId" type="hidden" class="form-control" value="${sessionId}">
+										<input name="boardId" type="hidden" class="form-control" value="${reservation.boardId}">
+										<div class="form-group row">
+											<label class="col-sm-2 control-label" >수강 클래스</label>
+											<div class="col-sm-3">
+												<input name="#" type="text" class="form-control" value="${reservation.title}" readonly>
+											</div>
+										</div>
+										<div class="form-group row">
+											<c:if test="${reservation.boardId.contains('buy')}">
+												<c:if test="${sessionId eq reservation.memberId}">
+													<label class="col-sm-2 control-label" >멘티</label>
+													<div class="col-sm-3">
+														<input name="#" type="text" class="form-control" value="${reservation.menteeNickname}" readonly>
+													</div>
+												</c:if>
+												<c:if test="${sessionId eq reservation.applicantMemberId}">
+													<label class="col-sm-2 control-label" >멘토</label>
+													<div class="col-sm-3">
+														<input name="#" type="text" class="form-control" value="${reservation.mentorNickname}" readonly>
+													</div>
+												</c:if>
+											</c:if>
+											<c:if test="${reservation.boardId.contains('sell')}">
+												<c:if test="${sessionId eq reservation.memberId}">
+													<label class="col-sm-2 control-label" >멘토</label>
+													<div class="col-sm-3">
+														<input name="#" type="text" class="form-control" value="${reservation.mentorNickname}" readonly>
+													</div>
+												</c:if>
+												<c:if test="${sessionId eq reservation.applicantMemberId}">
+													<label class="col-sm-2 control-label" >멘티</label>
+													<div class="col-sm-3">
+														<input name="#" type="text" class="form-control" value="${reservation.menteeNickname}" readonly>
+													</div>
+												</c:if>
+											</c:if>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 control-label" >별점</label>
+											<div class="col-sm-5">
+												<label id="range" class="star-rate">
+													<input name="starRate" class="star-range" type="range" min="1" max="5" step="1" value="5" required onchange="_(this); function _(e){ e.setAttribute('value', e.value); };" />
+														<div class="stars">
+															<span><i data-star-value="1" class="fa fa-star"></i></span>
+															<span><i data-star-value="2" class="fa fa-star"></i></span>
+															<span><i data-star-value="3" class="fa fa-star"></i></span>
+															<span><i data-star-value="4" class="fa fa-star"></i></span>
+															<span><i data-star-value="5" class="fa fa-star"></i></span>
+														</div>
+												</label>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 control-label" >제목</label>
+											<div class="col-sm-5">
+												<input name="title" type="text" class="form-control" required>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 control-label" >내용</label>
+											<div class="col-sm-8">
+												<textarea name="content" cols="50" rows="5" class="form-control" required></textarea>
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-sm-offset-2 col-sm-10 ">
+												<input type="submit" class="btn btn-primary " value="작성">	
+												<input type="reset" class="btn btn-danger" value="취소" onclick="goBack()">
+											</div>
+										</div>
+									</form:form>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'reservationMonitor' }"><!-- 예약 현황 -->
