@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -60,6 +61,18 @@ public class ReservationRepositoryImpl implements ReservationRepository{
         return list;
 	}
 	
+	@Override
+	public List<Reservation> getAllReservation() {
+		String SQL;
+		
+		try {
+			SQL = "SELECT * FROM reservation";
+			return template.query(SQL, new BeanPropertyRowMapper<Reservation>(Reservation.class));
+		} catch(Exception e) {
+			return null;
+		}
+	}
+
 	@Override
 	public Reservation GetReservationInfo(String reservationId) {
 		String sql = "select * from Reservation where reservationId = ?";

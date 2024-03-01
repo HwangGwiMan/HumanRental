@@ -59,6 +59,7 @@
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn btn-primary">마이 페이지</a></div><!-- 기본값 -->
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=memberManagement"/>" class="btn btn-primary">회원 관리</a></div>
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-primary">멘토 신청 관리</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=reservationMonitor"/>" class="btn btn-primary">예약 현황</a></div>
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=report"/>" class="btn btn-primary">신고 관리</a></div>
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=blackListManagement"/>" class="btn btn-primary">블랙리스트 관리</a></div>
 						</c:when>
@@ -896,6 +897,42 @@
 											</div>
 										</div>
 									</form:form>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'reservationMonitor' }"><!-- 예약 현황 -->
+								<div class="p-5">
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>거래 유형</th>
+											<th>재능명</th>
+											<th>멘토 ID</th>
+											<th>멘티 ID</th>
+											<th>일정</th>
+											<th>상태</th>
+											<th>예약 매칭 날짜</th>
+										</tr>
+										<c:forEach var="reservation" items="${ reservationList }" varStatus="status">
+											<tr>
+												<td>${ status.count }</td>
+												
+												<c:if test="${ fn:contains(reservation.boardId , 'sellingId') }">
+													<td>재능판매</td>
+												</c:if>
+												
+												<td>${ reservation.title }</td>
+												<td>${ reservation.memberId }</td>
+												<td>${ reservation.applicantMemberId }</td>
+												<td>${ reservation.reservationdate }</td>
+												
+												<c:if test="${ reservation.approve eq '대기' }">
+													<td><div class="badge bg-secondary">${ reservation.approve }</div></td>
+												</c:if>
+												
+												<td>${ reservation.completionDate }</td>
+											</tr>
+										</c:forEach>
+									</table>
 								</div>
 							</c:when>
 						</c:choose>

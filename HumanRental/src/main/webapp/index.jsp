@@ -1,6 +1,3 @@
 <html>
-<body>
-<h2>Hello World!</h2>
-<a href="./main">main</a>
-</body>
+	<% response.sendRedirect(request.getContextPath() + "/main"); %>
 </html>

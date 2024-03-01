@@ -2,6 +2,7 @@ package com.springmvc.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Alarm;
 import com.springmvc.domain.ReportType;
+import com.springmvc.domain.Reservation;
 import com.springmvc.util.Utility;
 
 @Repository
@@ -89,7 +91,22 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		} catch (EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 예약 신청 알람(재능 판매) 멘티 -> 멘토
+	@Override
+	public void createReservationApplyAlarm(Reservation reservation) {
+		Alarm alarm = new Alarm();
+		alarm.setSendMemberId(reservation.getApplicantMemberId());
+		alarm.setReceiveMemberId(reservation.getMemberId());
 		
+		if(reservation.getBoardId().contains("sellingId")) {
+			alarm.setContent(reservation.getApplicantMemberId() + "님이 '" + reservation.getTitle() + "' 에 멘티 신청하셨습니다.");
+		}
+		 
+		String SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
+		
+		template.update(SQL, util.createId("ReservationApply"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
 	}
 
 	// 알람 목록
