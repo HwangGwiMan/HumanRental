@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.Reservation;
+import com.springmvc.service.AlarmService;
 import com.springmvc.service.ReservationService;
 
 @Controller
@@ -23,6 +24,10 @@ public class ReservationController {
 	@Autowired
 	ReservationService reservationservice;
 	
+	@Autowired
+	AlarmService alarmService;
+	
+	//멘티게시글 리스트 페이지
 	@PostMapping("/reservation/buying")
 	public String BuyingReservation(@RequestParam("buyingId") String buyingId, Model model,
 			@RequestParam("date") String date, @RequestParam("content") String content, HttpServletRequest request) {
@@ -45,6 +50,9 @@ public class ReservationController {
 		Reservation reservation = reservationservice.SellingReservationCreate(sellingId, date, content, memberId, model);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("mode", "reservation");
+		
+		alarmService.createReservationApplyAlarm(reservation);
+		
 		return "CheckPage"; // 추후 예약 현황 페이지로
 	}
 	

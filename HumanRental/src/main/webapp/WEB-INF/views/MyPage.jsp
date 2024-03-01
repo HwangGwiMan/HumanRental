@@ -928,6 +928,9 @@
 												<c:if test="${ reservation.approve eq '대기' }">
 													<td><div class="badge bg-secondary">${ reservation.approve }</div></td>
 												</c:if>
+												<c:if test="${ reservation.approve eq '승인' }">
+													<td><div class="badge bg-success">${ reservation.approve }</div></td>
+												</c:if>
 												
 												<td>${ reservation.completionDate }</td>
 											</tr>

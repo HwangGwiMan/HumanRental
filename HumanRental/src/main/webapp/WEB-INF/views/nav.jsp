@@ -84,6 +84,10 @@
 															<div class="row">이용 경고 안내</div>
 															<div class="row">${ alarm.content }</div>
 														</c:when>
+														<c:when test="${ fn:contains(alarm.alarmId , 'ReservationApplyAlarm') }">
+															<div class="row">재능 판매 신청 알림</div>
+															<div class="row">${ alarm.content }</div>
+														</c:when>
 													</c:choose>
 													
 													<div class="row">${ alarmTime.get(status.index) } (${ duration.get(status.index) })</div>

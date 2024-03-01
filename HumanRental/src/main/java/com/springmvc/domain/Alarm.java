@@ -6,7 +6,7 @@ public class Alarm {
 	private String alarmId;
 	private String sendMemberId;
 	private String receiveMemberId;
-	private LocalDateTime date;
+	private Object date;
 	protected String content;
 	
 	public Alarm() {
@@ -25,10 +25,10 @@ public class Alarm {
 	public void setSendMemberId(String sendMemberId) {
 		this.sendMemberId = sendMemberId;
 	}
-	public LocalDateTime getDate() {
+	public Object getDate() {
 		return date;
 	}
-	public void setDate(LocalDateTime date) {
+	public void setDate(Object date) {
 		this.date = date;
 	}
 	public String getReceiveMemberId() {
