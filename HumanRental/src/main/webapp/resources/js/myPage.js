@@ -1,3 +1,113 @@
+$(function() {
+	var profileBtn = document.getElementById("profileBtn");
+	var registBtn = document.getElementById("registBtn");
+	var resvBtn = document.getElementById("resvBtn");
+	
+	if(profileBtn !== null) {
+		profileBtn.addEventListener("click", function(event) {
+			var menu = profileBtn.nextElementSibling;
+			if(menu.style.display === "none") {
+				menu.style.display = "block";	
+			} else {
+				menu.style.display = "none";
+			}
+		})
+	}
+	
+	if(registBtn !== null) {
+		registBtn.addEventListener("click", function(event) {
+			var menu = registBtn.nextElementSibling;
+			if(menu.style.display === "none") {
+				menu.style.display = "block";	
+			} else {
+				menu.style.display = "none";
+			}
+		})
+	}
+	
+	if(resvBtn !== null) {
+		resvBtn.addEventListener("click", function(event) {
+			var menu = resvBtn.nextElementSibling;
+			if(menu.style.display === "none") {
+				menu.style.display = "block";	
+			} else {
+				menu.style.display = "none";
+			}
+		})
+	}
+	
+	
+	
+	var thead = document.getElementById("thead").children;
+	var sort;
+	var sortTarget;
+	
+	for(var head of thead) {
+		
+		if(head.innerText === "순번") {
+			continue;
+		} else {
+			for(var icon of head.children) {
+				if(icon.classList.contains("fa-sort")) {
+					icon.addEventListener("click", function(e) {
+						sort = 0;
+						for(var otherCol of e.target.parentNode.parentNode.childNodes) {
+							if(otherCol.nodeName === '#text' || otherCol == e.target.parentNode || otherCol.innerText === "순번") {
+								continue;
+							} else {
+								for(var icon of otherCol.children) {
+									if(icon.classList.contains("fa-sort")) {
+										icon.style.display = "inline";	
+									} else {
+										icon.style.display = "none";
+									}
+								};
+							}
+						}
+						e.target.style.display = "none";
+						e.target.nextSibling.style.display = "inline";
+						
+						sortTarget =  e.target.parentElement.childNodes[0];
+						
+						sort(sort, sortTarget);
+					})
+				} else if(icon.classList.contains("fa-sort-up")) {
+					icon.addEventListener("click", function(e) {
+						sort = 1;						
+						e.target.style.display = "none";
+						e.target.nextSibling.style.display = "inline";
+					});
+				} else {
+					icon.addEventListener("click", function(e) {
+						sort = 2;						
+						e.target.style.display = "none";
+						e.target.previousSibling.previousSibling.style.display = "inline";
+					})
+				}
+			}
+		}
+	}
+	
+	// 어드민 데이터 정렬
+	function sort(sort, sortTarget) {
+	
+		var searchParams = new URLSearchParams(window.location.search);
+	
+	/*	for(const param of searchParams) {
+		  console.log(param);
+		}*/
+		
+		if(searchParams.get("mode") !== null ) {
+			console.log(searchParams.get("mode"))
+		};
+		
+		if(searchParams.get("t") !== null ) {
+			console.log(searchParams.get("t"))
+		};
+	}
+	
+})
+
 function setThumbnail(event) {
 	var reader = new FileReader();
 	
@@ -118,39 +228,6 @@ function deleteMember(){
 	
 	console.log("잘뜨고 잇냐?");
 }
-
-$(function() {
-	var profileBtn = document.getElementById("profileBtn");
-	var registBtn = document.getElementById("registBtn");
-	var resvBtn = document.getElementById("resvBtn");
-	
-	profileBtn.addEventListener("click", function(event) {
-		var menu = profileBtn.nextElementSibling;
-		if(menu.style.display === "none") {
-			menu.style.display = "block";	
-		} else {
-			menu.style.display = "none";
-		}
-	})
-	
-	registBtn.addEventListener("click", function(event) {
-		var menu = registBtn.nextElementSibling;
-		if(menu.style.display === "none") {
-			menu.style.display = "block";	
-		} else {
-			menu.style.display = "none";
-		}
-	})
-	
-	resvBtn.addEventListener("click", function(event) {
-		var menu = resvBtn.nextElementSibling;
-		if(menu.style.display === "none") {
-			menu.style.display = "block";	
-		} else {
-			menu.style.display = "none";
-		}
-	})
-})
 
 function mentorCheck(element) {
     var buyingId = element.getAttribute('data-buying-id');

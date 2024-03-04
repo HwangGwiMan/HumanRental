@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -97,7 +98,7 @@ public class ReportRepositoryImpl implements ReportRepository {
 		String SQL;
 				
 		SQL = "INSERT INTO report VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-		template.update(SQL, util.createId("report"), request.getParameter("memberId"), reporterId, request.getParameter("target"), request.getParameter("boardId"), request.getParameter("type"), "Wait" ,LocalDateTime.now());
+		template.update(SQL, util.createId("report"), request.getParameter("memberId"), reporterId, request.getParameter("target"), request.getParameter("boardId"), request.getParameter("type"), "Wait" ,LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 		
 		SQL = "SELECT reportCount FROM member WHERE memberId = ?";
 		int reportCount = template.queryForObject(SQL, Integer.class, request.getParameter("memberId"));

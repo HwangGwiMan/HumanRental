@@ -67,7 +67,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 			mentorRegistInfo.setRegistId(util.createId("mentorApply"));
 			
 			SQL = "INSERT INTO mentorregistinfo VALUES(?, ?, ?, ?, ?, ?, ?)";
-			template.update(SQL, mentorRegistInfo.getRegistId(), mentorRegistInfo.getMemberId(), mentorRegistInfo.getSpecialty(), mentorRegistInfo.getLocation(), mentorRegistInfo.getReason(), mentorRegistInfo.getEtc(), LocalDateTime.now());
+			template.update(SQL, mentorRegistInfo.getRegistId(), mentorRegistInfo.getMemberId(), mentorRegistInfo.getSpecialty(), mentorRegistInfo.getLocation(), mentorRegistInfo.getReason(), mentorRegistInfo.getEtc(), LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 			
 			SQL = "INSERT INTO mentorapply VALUES(?, ?, ?, ?)";
 			template.update(SQL, mentorRegistInfo.getRegistId(), mentorRegistInfo.getMemberId(), null, "Wait");
@@ -166,7 +166,8 @@ public class MentorRepositroyImpl implements MentorRepository {
 	public List<Map<String, Object>> getMentorListWithMember() {
 		String SQL = "SELECT mentor.mentorId, member.memberId, mentor.registDate, member.joinDate FROM member "
 				+ "LEFT JOIN mentor "
-				+ "ON member.memberId = mentor.memberId";
+				+ "ON member.memberId = mentor.memberId "
+				+ "ORDER BY joinDate DESC";
 		
 		try {
 			return template.query(SQL, new RowMapper<Map<String, Object>>() {
@@ -187,6 +188,38 @@ public class MentorRepositroyImpl implements MentorRepository {
 		}
 	}
 	
+
+	@Override
+	public List<Map<String, Object>> getMentorListWithMember(String state) {
+		if(state.equals("Accept")) {
+			state = "IS NOT NULL ";
+		} else if(state.equals("NotRegist")) {
+			state = "IS NULL ";
+		}
+		String SQL = "SELECT mentor.mentorId, member.memberId, mentor.registDate, member.joinDate FROM member "
+				+ "LEFT JOIN mentor "
+				+ "ON member.memberId = mentor.memberId "
+				+ "WHERE registDate " + state
+				+ "ORDER BY joinDate DESC";
+		try {
+			return template.query(SQL, new RowMapper<Map<String, Object>>() {
+
+				@Override
+				public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Map<String, Object> memberInfo = new HashMap<String, Object>();
+					memberInfo.put("mentorId", rs.getString(1));
+					memberInfo.put("memberId", rs.getString(2));
+					memberInfo.put("mentorRegistDate", rs.getTimestamp(3));
+					memberInfo.put("memberJoinDate", util.outputFormatting(rs.getTimestamp(4)));
+					
+					return memberInfo;
+				}
+			});
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
 	// 멘토 신청 승인
 	@Override
 	public void mentorRegist(String memberId, String registId) {
@@ -194,10 +227,10 @@ public class MentorRepositroyImpl implements MentorRepository {
 		
 		try {
 			SQL = "INSERT INTO mentor VALUES(?, ?, ?)";
-			template.update(SQL, util.createId("mentor"), memberId, LocalDateTime.now());
+			template.update(SQL, util.createId("mentor"), memberId, LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 			
 			SQL = "UPDATE mentorapply SET state = 'Accept', confirmDate = ?  WHERE memberId = ? and registId = ?";
-			template.update(SQL, LocalDateTime.now() , memberId, registId);
+			template.update(SQL, LocalDateTime.now(ZoneId.of("Asia/Seoul")) , memberId, registId);
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
@@ -210,7 +243,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 
 		try {
 			SQL = "UPDATE mentorapply SET state = 'Refuse', confirmDate = ? WHERE memberId = ? and registId = ?";
-			template.update(SQL, LocalDateTime.now(), memberId, registId);
+			template.update(SQL, LocalDateTime.now(ZoneId.of("Asia/Seoul")), memberId, registId);
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}

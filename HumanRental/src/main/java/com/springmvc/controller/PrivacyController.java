@@ -55,8 +55,10 @@ public class PrivacyController {
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
 								@RequestParam(value = "id", defaultValue = "none") String targetId,
-								@RequestParam(value = "t", defaultValue = "none") String state,								Model model, 
+								@RequestParam(value = "t", defaultValue = "none") String state,
+								@RequestParam(value = "sort", defaultValue = "none") String sortTarget,								Model model, 
 								HttpServletRequest request) {
+		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user") != null) {
 			String memberId = (String) session.getAttribute("user");
@@ -74,7 +76,11 @@ public class PrivacyController {
 				
 				if(mode.equals("memberManagement")) {
 					// 멤버 관리
-					model.addAttribute("memberList", mentorService.getMentorListWithMember());
+					if(state.equals("none")) {
+						model.addAttribute("memberList", mentorService.getMentorListWithMember());
+					} else {
+						model.addAttribute("memberList", mentorService.getMentorListWithMember(state));
+					}					
 				} else if(mode.equals("mentorApplyManagement")) {
 					// 멘토 신청 관리
 					if(state.equals("none") ) {
@@ -207,9 +213,4 @@ public class PrivacyController {
 	    
 	    return "redirect:main"; // 다른 페이지로 리다이렉트
 	}
-
-	
-	
-
-
 }

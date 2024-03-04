@@ -1,6 +1,7 @@
 package com.springmvc.domain;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class Alarm {
 	private String alarmId;
@@ -10,7 +11,7 @@ public class Alarm {
 	protected String content;
 	
 	public Alarm() {
-		this.setDate(LocalDateTime.now());
+		this.setDate(LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 	}
 	
 	public String getAlarmId() {

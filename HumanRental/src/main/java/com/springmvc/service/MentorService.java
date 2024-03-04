@@ -13,6 +13,7 @@ public interface MentorService {
 	public List<Map<String, Object>> getMentorApplyList();
 	public List<Map<String, Object>> getMentorApplyList(String state);
 	public List<Map<String, Object>> getMentorListWithMember();
+	public List<Map<String, Object>> getMentorListWithMember(String state);
 	public void mentorRegist(String memberId, String registId);
 	public void mentorRefuse(String memberId, String registId);
 	public Map<String, Object> getMentorApplyState(String memberId);
@@ -22,4 +23,5 @@ public interface MentorService {
 	public void UpdateMentorProfile(MentorProfile mentorprofile,String memberId);
 	public void DeleteMentorProfile(String memberId);
 	public MentorRegistInfo getMentorApplyByRegistId(String registId);
+	
 }

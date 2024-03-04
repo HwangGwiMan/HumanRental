@@ -36,6 +36,12 @@ public class MentorServiceImpl implements MentorService {
 	public List<Map<String, Object>> getMentorListWithMember() {
 		return mentorRepository.getMentorListWithMember();
 	}
+	
+
+	@Override
+	public List<Map<String, Object>> getMentorListWithMember(String state) {
+		return mentorRepository.getMentorListWithMember(state);
+	}
 
 	@Override
 	public List<Map<String, Object>> getMentorApplyList() {
