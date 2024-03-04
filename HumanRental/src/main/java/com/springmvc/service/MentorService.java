@@ -12,8 +12,8 @@ public interface MentorService {
 	public void mentorApply(MentorRegistInfo mentorRegistInfo);
 	public List<Map<String, Object>> getMentorApplyList();
 	public List<Map<String, Object>> getMentorApplyList(String state);
-	public List<Map<String, Object>> getMentorListWithMember();
-	public List<Map<String, Object>> getMentorListWithMember(String state);
+	public List<Map<String, Object>> getMentorListWithMember(String sort, String sortTarget);
+	public List<Map<String, Object>> getMentorListWithMember(String state, String sort, String sortTarget);
 	public void mentorRegist(String memberId, String registId);
 	public void mentorRefuse(String memberId, String registId);
 	public Map<String, Object> getMentorApplyState(String memberId);

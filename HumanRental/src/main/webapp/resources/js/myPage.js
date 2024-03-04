@@ -36,8 +36,6 @@ $(function() {
 		})
 	}
 	
-	
-	
 	var thead = document.getElementById("thead").children;
 	var sort;
 	var sortTarget;
@@ -67,9 +65,8 @@ $(function() {
 						e.target.style.display = "none";
 						e.target.nextSibling.style.display = "inline";
 						
-						sortTarget =  e.target.parentElement.childNodes[0];
-						
-						sort(sort, sortTarget);
+						sortTarget =  e.target.parentElement.childNodes[0].data;
+						sendSortRequest(sort, sortTarget);
 					})
 				} else if(icon.classList.contains("fa-sort-up")) {
 					icon.addEventListener("click", function(e) {
@@ -87,25 +84,6 @@ $(function() {
 			}
 		}
 	}
-	
-	// 어드민 데이터 정렬
-	function sort(sort, sortTarget) {
-	
-		var searchParams = new URLSearchParams(window.location.search);
-	
-	/*	for(const param of searchParams) {
-		  console.log(param);
-		}*/
-		
-		if(searchParams.get("mode") !== null ) {
-			console.log(searchParams.get("mode"))
-		};
-		
-		if(searchParams.get("t") !== null ) {
-			console.log(searchParams.get("t"))
-		};
-	}
-	
 })
 
 function setThumbnail(event) {
@@ -330,6 +308,46 @@ function userCheck() {
             } else {
 				alert("아이디 비밀번호를 다시 확인해주세요.");	
 			}
+        },
+        error: function(request, status, error) {
+            console.log(request);
+        }
+    });
+}
+
+// 어드민 데이터 정렬
+function sendSortRequest(sort, sortTarget) {
+
+	var searchParams = new URLSearchParams(window.location.search);
+
+/*	for(const param of searchParams) {
+	  console.log(param);
+	}*/
+	
+	var data = {};
+	
+	if(searchParams.get("mode") !== null ) {
+		data.mode = searchParams.get("mode");
+	};
+	
+	if(searchParams.get("t") !== null ) {
+		data.t = searchParams.get("t");
+	};
+	
+	data.sort = sort;
+	data.sortTarget = sortTarget;
+	
+	console.log(data);
+	
+	$.ajax({
+        type: 'GET',
+        url: './myInfo',
+		//contentType : "application/json; charset=UTF-8",
+        //dataType : "html",
+        data: data,
+        success: function(result) {
+			typeof result;
+            console.log(result.getElementById("thead"));
         },
         error: function(request, status, error) {
             console.log(request);

@@ -33,14 +33,14 @@ public class MentorServiceImpl implements MentorService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getMentorListWithMember() {
-		return mentorRepository.getMentorListWithMember();
+	public List<Map<String, Object>> getMentorListWithMember(String sort, String sortTarget) {
+		return mentorRepository.getMentorListWithMember(sort, sortTarget);
 	}
 	
 
 	@Override
-	public List<Map<String, Object>> getMentorListWithMember(String state) {
-		return mentorRepository.getMentorListWithMember(state);
+	public List<Map<String, Object>> getMentorListWithMember(String state, String sort, String sortTarget) {
+		return mentorRepository.getMentorListWithMember(state, sort, sortTarget);
 	}
 
 	@Override

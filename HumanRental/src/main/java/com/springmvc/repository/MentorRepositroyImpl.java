@@ -163,12 +163,21 @@ public class MentorRepositroyImpl implements MentorRepository {
 	
 	// 멤버 리스트
 	@Override
-	public List<Map<String, Object>> getMentorListWithMember() {
+	public List<Map<String, Object>> getMentorListWithMember(String sort, String sortTarget) {
 		String SQL = "SELECT mentor.mentorId, member.memberId, mentor.registDate, member.joinDate FROM member "
 				+ "LEFT JOIN mentor "
-				+ "ON member.memberId = mentor.memberId "
-				+ "ORDER BY joinDate DESC";
+				+ "ON member.memberId = mentor.memberId ";
 		
+		if(sortTarget.equals("유저 ID")) {
+			SQL += "ORDER BY memberId " + util.sortType(sort);
+		} else if(sortTarget.equals("가입일")) {
+			SQL += "ORDER BY joinDate " + util.sortType(sort);
+		} else if(sortTarget.equals("멘토 권한")) {
+			SQL += "ORDER BY mentorId " + util.sortType(sort);
+		} else if(sortTarget.equals("멘토 등록일")) {
+			SQL += "ORDER BY registDate " + util.sortType(sort);
+		}
+
 		try {
 			return template.query(SQL, new RowMapper<Map<String, Object>>() {
 
@@ -190,7 +199,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 	
 
 	@Override
-	public List<Map<String, Object>> getMentorListWithMember(String state) {
+	public List<Map<String, Object>> getMentorListWithMember(String state, String sort, String sortTarget) {
 		if(state.equals("Accept")) {
 			state = "IS NOT NULL ";
 		} else if(state.equals("NotRegist")) {

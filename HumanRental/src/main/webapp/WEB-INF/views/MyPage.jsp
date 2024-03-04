@@ -365,10 +365,10 @@
 									<table class="table table-hover">
 										<tr id="thead">
 											<th>순번</th>
-											<th>유저 ID <i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-											<th>가입일 <i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-											<th>멘토 권한 <i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-											<th>멘토 등록일 <i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+											<th>유저 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+											<th>가입일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+											<th>멘토 권한<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+											<th>멘토 등록일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
 										</tr>
 										<c:forEach var="member" items="${memberList}" varStatus="status">					
 											<tr>		
