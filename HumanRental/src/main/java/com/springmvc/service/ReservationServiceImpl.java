@@ -2,7 +2,10 @@ package com.springmvc.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -168,6 +171,11 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	@Override
+	public List<Reservation> getMonitorReservationStatus() {
+		return reservationrepository.getAllReservation();
+	}
+
+	@Override
 	public void GetReservationInfo(String reservationId, Model model) {
 		
 		String menteeNickname;
@@ -177,14 +185,18 @@ public class ReservationServiceImpl implements ReservationService{
 		
 		if(reservation.getBoardId().contains("buy")) {
 			menteeNickname = memberrepository.getMember(reservation.getApplicantMemberId()).getNickName();
+			mentorNickname = memberrepository.getMember(reservation.getMemberId()).getNickName();
 			reservation.setMenteeNickname(menteeNickname);
+			reservation.setMentorNickname(mentorNickname);
 		}
 		else {
+			menteeNickname = memberrepository.getMember(reservation.getMemberId()).getNickName();
 			mentorNickname = memberrepository.getMember(reservation.getApplicantMemberId()).getNickName();
+			reservation.setMenteeNickname(menteeNickname);
 			reservation.setMentorNickname(mentorNickname);
 		}
 		
-		model.addAttribute("reservationinfo", reservation);
+		model.addAttribute("reservation", reservation);
 	}
 
 	@Override

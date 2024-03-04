@@ -61,8 +61,8 @@ function idDuplicateCheck(memberId) {
 	
 }
 
-function readApplyInfo(memberId) {
-	window.location.href="./myInfo?mode=applyInfo&id=" + memberId; 
+function readApplyInfo(memberId, registId) {
+	window.location.href="./myInfo?mode=applyInfo&id=" + registId; 
 }
 
 function readReportInfo(reportId) {
@@ -102,7 +102,7 @@ function sendWarning(memberId, type, title, reportId) {
 			"reportId" : reportId
 		},
 		success : function(result) {
-			
+			alert("경고문구를 전송했습니다.");
 		},
 		error : function(error) {
 			

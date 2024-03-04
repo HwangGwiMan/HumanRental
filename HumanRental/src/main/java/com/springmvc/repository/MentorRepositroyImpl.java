@@ -62,7 +62,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 	@Override
 	public void mentorApply(MentorRegistInfo mentorRegistInfo) {
 		String SQL;
-		
+			
 		try {
 			mentorRegistInfo.setRegistId(util.createId("mentorApply"));
 			
@@ -82,25 +82,20 @@ public class MentorRepositroyImpl implements MentorRepository {
 		String SQL = "SELECT mentorregistinfo.registId, mentorregistinfo.memberId, mentorregistinfo.applyDate, mentorapply.state, mentorapply.confirmDate FROM mentorapply "
 				+ "LEFT JOIN mentorregistinfo "
 				+ "ON mentorapply.registId = mentorregistinfo.registId";
-		
-		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-		
+				
 		try {
 			return template.query(SQL, new RowMapper<Map<String, Object>>() {
 
 				@Override
 				public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Map<String, Object> applyData = new HashMap<String, Object>();
-					applyData.put("registId", rs.getString(1));
-					applyData.put("memberId", rs.getString(2));
-					applyData.put("applyDate", rs.getTimestamp(3));
-					applyData.put("state", rs.getString(4));
-					if(rs.getTimestamp(5) != null) {
-						applyData.put("confirmDate", rs.getTimestamp(5));
-					} else {
-						applyData.put("confirmDate", null);
-					}
-					return applyData;
+					Map<String, Object> applyInfo = new HashMap<String, Object>();
+					applyInfo.put("registId", rs.getString(1));
+					applyInfo.put("memberId", rs.getString(2));
+					applyInfo.put("applyDate", rs.getTimestamp(3));
+					applyInfo.put("state", rs.getString(4));
+					applyInfo.put("confirmDate", rs.getTimestamp(5));
+
+					return applyInfo;
 				}
 				
 			});
@@ -125,17 +120,14 @@ public class MentorRepositroyImpl implements MentorRepository {
 
 				@Override
 				public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Map<String, Object> applyData = new HashMap<String, Object>();
-					applyData.put("registId", rs.getString(1));
-					applyData.put("memberId", rs.getString(2));
-					applyData.put("applyDate", rs.getTimestamp(3));
-					applyData.put("state", rs.getString(4));
-					if(rs.getTimestamp(5) != null) {
-						applyData.put("confirmDate", rs.getTimestamp(5));
-					} else {
-						applyData.put("confirmDate", null);
-					}
-					return applyData;
+					Map<String, Object> applyInfo = new HashMap<String, Object>();
+					applyInfo.put("registId", rs.getString(1));
+					applyInfo.put("memberId", rs.getString(2));
+					applyInfo.put("applyDate", rs.getTimestamp(3));
+					applyInfo.put("state", rs.getString(4));
+					applyInfo.put("confirmDate", rs.getTimestamp(5));
+
+					return applyInfo;
 				}
 				
 			});
@@ -147,10 +139,10 @@ public class MentorRepositroyImpl implements MentorRepository {
 	
 	// 멘토 신청 회원의 정보
 	@Override
-	public MentorRegistInfo getMentorApplyByMemberId(String memberId) {
-		String SQL = "SELECT * FROM mentorregistinfo WHERE memberId = ?";
+	public MentorRegistInfo getMentorApplyByRegistId(String registId) {
+		String SQL = "SELECT * FROM mentorregistinfo WHERE registId = ?";
 		try {
-			return template.query(SQL, new BeanPropertyRowMapper<MentorRegistInfo>(MentorRegistInfo.class), memberId).get(0);
+			return template.query(SQL, new BeanPropertyRowMapper<MentorRegistInfo>(MentorRegistInfo.class), registId).get(0);
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -185,7 +177,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 					memberInfo.put("mentorId", rs.getString(1));
 					memberInfo.put("memberId", rs.getString(2));
 					memberInfo.put("mentorRegistDate", rs.getTimestamp(3));
-					memberInfo.put("memberJoinDate", rs.getTimestamp(4));
+					memberInfo.put("memberJoinDate", util.outputFormatting(rs.getTimestamp(4)));
 					
 					return memberInfo;
 				}
@@ -215,7 +207,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 	@Override
 	public void mentorRefuse(String memberId, String registId) {
 		String SQL;
-		
+
 		try {
 			SQL = "UPDATE mentorapply SET state = 'Refuse', confirmDate = ? WHERE memberId = ? and registId = ?";
 			template.update(SQL, LocalDateTime.now(), memberId, registId);
@@ -224,11 +216,6 @@ public class MentorRepositroyImpl implements MentorRepository {
 		}
 		
 	}
-
-	
-	
-	
-	
 	
 	//멘토프로필 등록 함수 
 	@Override

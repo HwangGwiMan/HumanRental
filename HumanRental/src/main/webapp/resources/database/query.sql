@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS MentorApply(
 CREATE TABLE IF NOT EXISTS MentorProfile(
 mentorId varchar(50) not null,
 memberId varchar(50) not null,
+<<<<<<< HEAD
 introduction varchar(1000),
 certification varchar(100),
 category varchar(100),
@@ -131,9 +132,10 @@ select * from save;
 -- 후기관리
 -- 팝니다 리뷰 -
 CREATE TABLE IF NOT EXISTS SellingReview(
-sellingReviewId varchar(20) not null primary key,
-memberId varchar(20)not null ,
-sellingId varchar(20)not null,
+sellingReviewId varchar(50) primary key,
+sellingId varchar(50),
+memberId varchar(20),
+title varchar(50),
 content varchar(10000),
 writeDate date,
 starRate int,
@@ -143,9 +145,10 @@ foreign key(sellingId) references Selling(sellingId)
 
 -- 삽니다 리뷰 
 CREATE TABLE IF NOT EXISTS BuyingReview(
-buyingReviewId varchar(20) not null primary key,
+buyingReviewId varchar(50) not null primary key,
+buyingId varchar(50),
 memberId varchar(20) not null,
-buyingId varchar(20) not null,
+title varchar(50),
 content varchar(10000),
 writeDate date,
 starRate int,
@@ -167,15 +170,10 @@ signDate datetime,
 memberId varchar(20),
 applicantMemberId varchar(20),
 regist_day datetime,
+completionDate datetime,
 foreign key(menteeId) references  MenteeProfile(menteeId),
 foreign key(mentorId) references  MentorProfile(mentorId)
 );
-
--- 알람 관리  이건 좀 나중에 
--- CREATE TABLE IF NOT EXISTS Alarm(
--- member
-
--- );
 
 -- 일정관리 
 CREATE TABLE IF NOT EXISTS Calendar(
@@ -203,10 +201,6 @@ content varchar(10000) not null,
 writeDate date,
 foreign key(questionId) references Question(questionId)
 );
-
--- 멘토 리스트
-
--- 멘티 리스트
 
 --  커뮤니티 관리 (board1 = 자유게시판, board2 = 공지사항)
 CREATE TABLE IF NOT EXISTS Board(
@@ -310,6 +304,21 @@ insert into board values('Board_003','qwer','김이름','게시글3','내용','2
 insert into board2 values('Board_001','admin','admin','공지사항1','내용','2024-01-01 00:00:00',0);
 insert into board2 values('Board_002','admin','admin','공지사항2','내용','2024-01-02 00:00:00',0);
 insert into board2 values('Board_003','admin','admin','공지사항3','내용','2024-01-03 00:00:00',0);
+
+-- mentor 추가
+insert into mentor values('mentor_001' , 'qwer', '2024-01-01 00:00:00');
+insert into mentor values('mentor_002' , 'admin', '2024-01-01 00:00:00');
+insert into mentor values('mentor_003' , 'asdf', '2024-01-01 00:00:00');
+
+-- menteeprofile 추가
+insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0);
+insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0);
+insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0);
+
+-- mentorprofile 추가
+insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
+insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
+insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
 
 -- buying 내용 추가
 insert into buying values('buyingId_001','qwer','닉네임1','introduction',3.5,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국');

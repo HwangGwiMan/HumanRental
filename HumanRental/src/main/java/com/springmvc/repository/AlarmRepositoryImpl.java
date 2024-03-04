@@ -2,6 +2,7 @@ package com.springmvc.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Alarm;
+import com.springmvc.domain.ReportType;
+import com.springmvc.domain.Reservation;
 import com.springmvc.util.Utility;
 
 @Repository
@@ -52,10 +55,16 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		Alarm alarm = new Alarm();
 		alarm.setSendMemberId("admin");
 		alarm.setReceiveMemberId((String) data.get("memberId"));
-		String content = (String) data.get("type") + " 관련으로 경고가 발생했습니다. 대상 ";
-		if(data.get("title") != null) {
-			content += (String) data.get("title") + " 게시글";
+		String type = (String) data.get("type");
+		
+		String content = "";
+		for(int i = 0; i < ReportType.TYPES.length; i++) {
+			if(type.equals(ReportType.TYPES[i])) {
+				content = ReportType.TYPES_KOR[i] + " 관련으로 경고가 발생했습니다. 대상 "; 
+			}
 		}
+		
+		content += (String) data.get("title") + " 게시글";
 		
 		alarm.setContent(content);
 		
@@ -82,7 +91,22 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		} catch (EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 예약 신청 알람(재능 판매) 멘티 -> 멘토
+	@Override
+	public void createReservationApplyAlarm(Reservation reservation) {
+		Alarm alarm = new Alarm();
+		alarm.setSendMemberId(reservation.getApplicantMemberId());
+		alarm.setReceiveMemberId(reservation.getMemberId());
 		
+		if(reservation.getBoardId().contains("sellingId")) {
+			alarm.setContent(reservation.getApplicantMemberId() + "님이 '" + reservation.getTitle() + "' 에 멘티 신청하셨습니다.");
+		}
+		 
+		String SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
+		
+		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
 	}
 
 	// 알람 목록
@@ -103,7 +127,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 					alarm.setSendMemberId(rs.getString(2));
 					alarm.setReceiveMemberId(rs.getString(3));
 //					alarm.setDate(new java.sql.Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
-					alarm.setDate(rs.getTimestamp(4).toLocalDateTime());
+					alarm.setDate(util.outputFormatting(rs.getTimestamp(4)));
 					alarm.setContent(rs.getString(5));
 					return alarm;
 				}

@@ -2,6 +2,7 @@ package com.springmvc.interceptor;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +41,11 @@ public class AlarmInterceptor extends HandlerInterceptorAdapter{
 			List<String> alarmTime = new ArrayList<String>();
 			List<String> durations = new ArrayList<String>(); 
 			List<Alarm> alarmList = alarmService.selectAlarm(memberId);
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 			for(Alarm alarm : alarmList) {
-				long time = Duration.between(alarm.getDate(), LocalDateTime.now()).getSeconds();
+				long time = Duration.between((LocalDateTime.parse((String)alarm.getDate(), formatter)) , LocalDateTime.now(ZoneId.of("Asia/Seoul"))).getSeconds();
 				if(time >= 86400) {
 					durations.add(String.valueOf(time / 86400) + "일 전");
 				} else if(time >= 3600) {
@@ -51,7 +55,9 @@ public class AlarmInterceptor extends HandlerInterceptorAdapter{
 				} else {
 					durations.add(String.valueOf(time) + "초 전");
 				}
-				alarmTime.add(alarm.getDate().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")));
+				alarmTime.add(
+						(LocalDateTime.parse((String) alarm.getDate(), formatter))
+								.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")));
 			}
 			
 			modelAndView.addObject("alarmList", alarmList);

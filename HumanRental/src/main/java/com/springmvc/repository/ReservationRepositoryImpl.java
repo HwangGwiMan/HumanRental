@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -30,10 +31,11 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 	@Override
 	public void ReservationCreate(Reservation reservation) {
 		
-		String sql = "insert into Reservation values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into Reservation values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		template.update(sql, reservation.getReservationId(), reservation.getBoardId(), reservation.getTitle(), 
 				reservation.getMenteeId(), reservation.getMentorId(), reservation.getReservationdate(), reservation.getReservationcontent(), 
-				reservation.getApprove(), reservation.getSigndate(), reservation.getMemberId(), reservation.getApplicantMemberId(), reservation.getRegist_day());
+				reservation.getApprove(), reservation.getSigndate(), reservation.getMemberId(), reservation.getApplicantMemberId(), 
+				reservation.getRegist_day(), reservation.getCompletionDate());
 	}
 
 	@Override
@@ -60,6 +62,18 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 	}
 	
 	@Override
+	public List<Reservation> getAllReservation() {
+		String SQL;
+		
+		try {
+			SQL = "SELECT * FROM reservation";
+			return template.query(SQL, new BeanPropertyRowMapper<Reservation>(Reservation.class));
+		} catch(Exception e) {
+			return null;
+		}
+	}
+
+	@Override
 	public Reservation GetReservationInfo(String reservationId) {
 		String sql = "select * from Reservation where reservationId = ?";
 		Reservation reservation = template.query(sql, new ReservationRowMapper(), reservationId).get(0);
@@ -75,9 +89,21 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 			sql = "UPDATE reservation SET approve = ?, signdate = ? WHERE reservationId = ?";
 			template.update(sql, "승인", LocalDateTime.now(), reservationId);
 		}
-		else {
+		else if(approval.equals("no")) {
 			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
 			template.update(sql, "거절", reservationId);
+		}
+		else if(approval.equals("rentalyes")) {
+			sql = "UPDATE reservation SET approve = ?, completionDate = ? WHERE reservationId = ?";
+			template.update(sql, "렌탈완료", LocalDateTime.now(), reservationId);
+		}
+		else if(approval.equals("rentalno")) {
+			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
+			template.update(sql, "렌탈실패", reservationId);
+		}
+		else if(approval.equals("review")) {
+			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
+			template.update(sql, "후기작성", reservationId);
 		}
 		
 	}

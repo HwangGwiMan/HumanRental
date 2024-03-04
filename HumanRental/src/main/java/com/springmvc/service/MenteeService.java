@@ -6,7 +6,6 @@ import com.springmvc.domain.Mentee;
 
 
 
-
 public interface MenteeService {
 
 	public void registerMentee(Mentee mentee, String memberId);

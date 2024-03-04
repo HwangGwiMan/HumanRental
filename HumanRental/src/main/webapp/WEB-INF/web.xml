@@ -5,7 +5,7 @@
     
 	<!-- 시작페이지 설정 -->
     <welcome-file-list>
-        <welcome-file>/WEB-INF/views/Main.jsp</welcome-file>
+        <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
     
 	<!-- 한글 깨짐 방지(UTF-8로 자동 인코딩) -->

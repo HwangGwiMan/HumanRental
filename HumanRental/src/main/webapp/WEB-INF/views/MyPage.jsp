@@ -20,7 +20,7 @@
 		
 		<script src="<c:url value="/resources/js/myPage.js?ver=1"/>"></script>
 	</head>
-	<body class="vh-100">
+	<body class="">
 		<jsp:include page="nav.jsp"/>
 		<div class="container h-75">
 			<div class="row pt-5 align-items-start h-75">
@@ -59,6 +59,7 @@
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn btn-primary">마이 페이지</a></div><!-- 기본값 -->
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=memberManagement"/>" class="btn btn-primary">회원 관리</a></div>
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-primary">멘토 신청 관리</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=reservationMonitor"/>" class="btn btn-primary">예약 현황</a></div>
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=report"/>" class="btn btn-primary">신고 관리</a></div>
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=blackListManagement"/>" class="btn btn-primary">블랙리스트 관리</a></div>
 						</c:when>
@@ -89,23 +90,48 @@
 											<div class="row"><input type="file" accept=".jpg, .png" id="fileUpload" class="btn" name="Image" onchange="javascript:setThumbnail(event);"/></div>
 										</div>
 										<div class="col-1"></div>
-										<div class="col-5">
-											<div class="row p-3"><p>아이디 : <input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required"/><a onclick="javascript:idDuplicateCheck(${ member.memberId })" class="btn">중복 확인</a></div>
-											<div class="row p-3"><p>비밀번호 : <input type="password"  value="${ member.memberPw }" name="memberPw" required="required"/></div>
-											<div class="row p-3"><p>이름 : <input type="text"  value="${ member.name }" name="name" required="required"/></div>
-											<div class="row p-3"><p>닉네임 : <input type="text"  value="${ member.nickName }" name="nickName" required="required"/></div>
-											<div class="row p-3"><p>나이 : <input type="text"  value="${ member.age }" name="age" required="required"/></div>
-											<div class="row p-3"><p>성별 : <input type="text"  value="${ member.gender }" name="gender" required="required"/></div>
-											<div class="row p-3"><p>전화번호 : <input type="text"  value="${ member.phone }" name="phone" required="required"/></div>
-											<div class="row p-3"><p>주소 : <input width="100px" type="text"  value="${ member.address }" name="address" required="required"/></div>
-											<input type="submit" class="btn" value="확인" id="submitBtn">
-											<a href="<c:url value="/myInfo?mode=myPage" />" class="btn">취소</a>
+										<div class="col-5 ">
+											<div class="row p-3 flex-nowrap align-items-center">
+												<div class="col-4 ">아이디 :</div>
+												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required"/></div>
+												<div class="col-5"><a onclick="javascript:idDuplicateCheck('${ member.memberId }')" class="btn btn-secondary">중복 확인</a></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">비밀번호 :</div>
+												<div class="col"><input type="password"  value="${ member.memberPw }" name="memberPw" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">이름 :</div>
+												<div class="col"><input type="text"  value="${ member.name }" name="name" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">닉네임 :</div>
+												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">나이 :</div>
+												<div class="col"><input type="text"  value="${ member.age }" name="age" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">성별 :</div>
+												<div class="col"><input type="text"  value="${ member.gender }" name="gender" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">전화번호 :</div>
+												<div class="col"><input type="text"  value="${ member.phone }" name="phone" required="required"/></div>
+											</div>
+											<div class="row p-3 align-items-center">
+												<div class="col-4">주소 :</div>
+												<div class="col"><input width="100px" type="text"  value="${ member.address }" name="address" required="required"/></div>
+											</div>
+											<input type="submit" class="btn btn-outline-primary" value="확인" id="submitBtn">
+											<a href="<c:url value="/myInfo?mode=myPage" />" class="btn btn-outline-dark">취소</a>
 										</div>
 									</div>
 								</form>
 							</c:when>
 							<c:when test="${ mode == 'userCheck' }"><!-- 유저 2차 확인 -->
-								<form class="col p-5 text-center justify-content-center" action="<c:url value="/myInfo" />" method="post">
+								<form class="col p-5 text-center" action="<c:url value="/myInfo" />" method="post">
 									<div class="row"><h2 class="text-nowrap">아이디 비밀번호 확인</h2></div>
 									<div class="row justify-content-center pt-5">
 										<div class="col-2 p-3">아이디 :</div> 
@@ -119,16 +145,15 @@
 								</form>
 							</c:when>
 							<c:when test="${ mode == 'deletememberform' }"><!-- 회원 탈퇴 -->
-	    						<form class="col-4" action="<c:url value="/deleteMember" />" method="post">
-	       							 <div class="row justify-content-center"><h3>회원 탈퇴</h3> </div>
-	       							 <br><br>
-	        						<div class="row justify-content-center">
-	            						<div class="col-5">아이디</div> 
-	            						<div class="col"><input type="text"  value="${member.memberId}" id="memberId" name="memberId"></div>
+	    						<form class="col p-5 text-center" action="<c:url value="/deleteMember" />" method="post">
+	       							<div class="row"><h2>회원 탈퇴</h2></div>
+	        						<div class="row justify-content-center pt-5">
+	            						<div class="col-2 p-3">아이디 :</div> 
+	            						<div class="col-3 p-3"><input type="text" readonly="readonly" value="${member.memberId}" id="memberId" name="memberId"></div>
 	        						</div> 
-	       							 <div class="row justify-content-center">
-	            						<div class="col-5">비밀번호</div>
-	            						<div class="col"><input type="password" required id="memberPw" name="memberPw"></div>
+	       							<div class="row justify-content-center pb-5">
+	            						<div class="col-2 p-3">비밀번호:</div>
+	            						<div class="col-3 p-3"><input type="password" required id="memberPw" name="memberPw"></div>
 	        						</div>
 									<input onclick="javascript:deletemember22()" type="button" value="확인" class="btn btn-outline-primary">
 	    						</form>
@@ -370,7 +395,7 @@
 							</c:when>
 							
 							<c:when test="${ mode == 'memberManagement' }"><!-- 멤버 관리 페이지 -->
-								<div>
+								<div class="p-5">
 									<table class="table table-hover">
 										<tr>
 											<th>번호</th>
@@ -385,7 +410,9 @@
 												<td>${ member.memberId }</td>
 												<td>${ member.memberJoinDate }</td>
 												<td>
-													<c:if test="${ not empty member.mentorId }">승인</c:if>
+													<c:if test="${ not empty member.mentorId }">
+														<div class="badge bg-success">승인</div>
+													</c:if>
 												</td>
 												<td>${ member.mentorRegistDate }</td>
 											</tr>
@@ -394,13 +421,13 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'mentorApplyManagement' }">
-								<div>
-									<div class="row text-center p-3">
-										<div class="col-1"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-outline-info">전체</a></div>
-										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="btn btn-primary">처리된 요청</a></div>
-										<div class="col-2"><a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="btn btn-secondary">보류 중인 요청</a></div>
+								<div class="p-5">
+									<div class="row p-3 text-center">
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="col-1 m-1 btn btn-outline-info">전체</a>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="col-2 m-1  btn btn-primary">처리된 요청</a>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="col-2 m-1 btn btn-secondary">보류 중인 요청</a>
 									</div>
-									<table class="table table-hover ">
+									<table class="table table-hover "><!-- 멘토 신청 관리 -->
 										<tr>
 											<th>번호</th>
 											<th>유저 ID</th>
@@ -409,7 +436,7 @@
 											<th>처리일</th>
 										</tr>
 										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
-											<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }')">
+											<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }', '${ applyInfo.registId }')">
 												<td>${ status.count }</td>
 												<td>${ applyInfo.memberId }</td>
 												<td>${ applyInfo.applyDate }</td>
@@ -431,27 +458,41 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'applyInfo' }">
-								<div class="col">
+								<div class="col p-5">
 									<div class="row">
-										<div class="col">
+										<div class="col m-2">
 											<img width="300" height="200" src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />">
 										</div>
-										<p>신청자 ID : ${ applyInfo.memberId }
-										<p>특기 분야 : ${ applyInfo.specialty }
-										<p>주요 활동 지역 : ${ applyInfo.location }
-										<p>신청 이유 : ${ applyInfo.reason }
-										<p>기타 사항
-										<p>${ applyInfo.etc }
+										<div class="row p-3">
+											<div class="col-2">신청자 ID :</div>
+											<div class="col">${ applyInfo.memberId }</div>
+										</div>
+										<div class="row p-3">
+											<div class="col-2">특기 분야 :</div>
+											<div class="col">${ applyInfo.specialty }</div>
+										</div>
+										<div class="row p-3">
+											<div class="col-2">주요 활동 지역 :</div>
+											<div class="col">${ applyInfo.location }</div>
+										</div>
+										<div class="row p-3">
+											<div class="col-2">신청 이유 :</div>
+											<div class="col">${ applyInfo.reason }</div>
+										</div>
+										<div class="row p-3">
+											<div>기타 사항</div>
+											<div>${ applyInfo.etc }</div>
+										</div>
 									</div>
-									<div>
-										<a href="<c:url value="/mentorRegist?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-success">승인</a>
-										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="btn btn-danger">거절</a>
-										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="btn btn-secondary">목록</a>
+									<div class="row">
+										<a href="<c:url value="/mentorRegist?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 btn btn-success">승인</a>
+										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 btn btn-danger">거절</a>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="col-1 m-1 btn btn-secondary">목록</a>
 									</div>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'report' }"><!-- 신고 관리 페이지 -->
-								<div>
+								<div class="p-5">
 									<table class="table table-hover">
 										<tr>
 											<th>번호</th>
@@ -487,30 +528,47 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'reportInfo' }">
-								<div class="col">
+								<div class="p-5">
 									<c:choose>
 										<c:when test="${ not empty reportInfo.boardId }">
 											<div class="row">
-												<p>신고 대상 ID : ${ reportInfo.boardId } 
-												<p>신고 대상 멤버 ID : ${ reportInfo.memberId }
-												<p>게시글 제목 : ${ reportInfo.title }
-												<p>신고 유형 : ${ reportInfo.type }
-												<p>신고 횟수 : ${ reportInfo.reportCount }
-												<p><a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="btn btn-light">해당 게시글로 이동</a>
+												<div class="row p-3">
+													<div class="col-3">신고 대상 ID :</div>
+													<div class="col">${ reportInfo.boardId }</div>
+												</div> 
+												<div class="row p-3">
+													<div class="col-3">신고 대상 멤버 ID :</div>
+													<div class="col">${ reportInfo.memberId }</div>
+												</div>
+												<div class="row p-3">
+													<div class="col-3">게시글 제목 :</div>
+													<div class="col">${ reportInfo.title }</div>
+												</div>
+												<div class="row p-3">
+													<div class="col-3">신고 유형 :</div>
+													<div class="col">${ reportInfo.type }</div>
+												</div>
+												<div class="row p-3">
+													<div class="col-3">신고 횟수 :</div>
+													<div class="col">${ reportInfo.reportCount } 회</div>
+												</div>
+												<div class="row p-3">
+													<a href="<c:url value="/boardview?boardId=${ reportInfo.boardId }" />" class="col-3 m-1 p-1 btn btn-light">해당 게시글로 이동</a>
+												</div>
 											</div>
 											<div class="row">
-												<p><a onclick="javascript:sendWarning('${ reportInfo.memberId }','${ reportInfo.type }', '${ reportInfo.title }', '${ reportInfo.reportId }')" class="btn btn-warning">경고 전송</a>
+												<a onclick="javascript:sendWarning('${ reportInfo.memberId }','${ reportInfo.type }', '${ reportInfo.title }', '${ reportInfo.reportId }')" class="col-2 m-1 p-1 btn btn-warning">경고 전송</a>
 											</div>
 										</c:when>
 									</c:choose>
-									<div>
-										<div onclick="javascript:registBlack('${ reportInfo.memberId }', '${ reportInfo.reportId }')" class="btn btn-dark">블랙리스트 추가</div>
-										<a href="<c:url value="/myInfo?mode=report" />" class="btn btn-secondary">목록</a>
+									<div class="row">
+										<div onclick="javascript:registBlack('${ reportInfo.memberId }', '${ reportInfo.reportId }')" class="col-2 m-1 p-1 btn btn-dark">블랙리스트 추가</div>
+										<a href="<c:url value="/myInfo?mode=report" />" class="col-1 m-1 p-1 btn btn-secondary">목록</a>
 									</div>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'blackListManagement' }"><!-- 신고 관리 페이지 -->
-								<div>
+								<div class="p-5">
 									<table class="table table-hover">
 										<tr>
 											<th>번호</th>
@@ -583,62 +641,78 @@
 											<th>구분</th>
 											<th>신청자</th>
 											<th>신청일</th>
-											<th>승인 여부</th>
+											<th>진행 상황</th>
 											<th>정보</th>
 										</tr>
-										<c:forEach var="reservationlist" items="${reservationlist}" varStatus="status">					
+										<c:forEach var="reservation" items="${reservationlist}" varStatus="status">					
 											<tr>		
 												<td>${ status.count }</td>
 												<c:choose>
-												    <c:when test="${ reservationlist.boardId.contains('buy') }">
-														<td><a href="/HumanRental/buying/detail?buyingId=${reservationlist.boardId}">${ reservationlist.title }</a></td>
+												    <c:when test="${ reservation.boardId.contains('buy') }">
+														<td><a href="/HumanRental/buying/detail?buyingId=${reservation.boardId}">${ reservation.title }</a></td>
 												        <td>재능구매</td>
-														<td>${ reservationlist.menteeNickname }</td>
+														<td>${ reservation.menteeNickname }</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.boardId.contains('sell') }">
-														<td><a href="/HumanRental/selling/detail?sellingId=${reservationlist.boardId}">${ reservationlist.title }</a></td>
+												    <c:when test="${ reservation.boardId.contains('sell') }">
+														<td><a href="/HumanRental/selling/detail?sellingId=${reservation.boardId}">${ reservation.title }</a></td>
 												        <td>재능판매</td>
-														<td>${ reservationlist.mentorNickname }</td>
+														<td>${ reservation.mentorNickname }</td>
 												    </c:when>
 												</c:choose>
-												<td>${ reservationlist.reservationdate }</td>
+												<td>${ reservation.regist_day }</td>
 												<c:choose>
-												    <c:when test="${ reservationlist.approve == '대기' }">
+												    <c:when test="${ reservation.approve == '대기' }">
 												        <td>대기</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.approve == '승인' }">
+												    <c:when test="${ reservation.approve == '승인' }">
 												        <td>승인</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.approve == '거절' }">
+												    <c:when test="${ reservation.approve == '거절' }">
 												        <td>거절</td>
 												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈완료' }">
+												        <td>렌탈완료</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈실패' }">
+												        <td>렌탈실패</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '후기작성' }">
+												        <td>후기작성</td>
+												    </c:when>
 												</c:choose>
-												<td><a href="/HumanRental/reservationinfo?reservationId=${ reservationlist.reservationId }">상세보기</a></td>
+												<td><a href="/HumanRental/reservationApprovalInfo?reservationId=${ reservation.reservationId }">상세보기</a></td>
 											</tr>
 										</c:forEach>
 									</table>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'reservationInfo' }"><!-- 예약 상세 정보 페이지 -->
+							<c:when test="${ mode == 'reservationApprovalInfo' }"><!-- 예약 상세 정보 페이지 -->
 								<div><hr><h2>예약 상세 정보</h2><hr></div>
 								<div>
 									<c:choose>
-									    <c:when test="${ reservationinfo.boardId.contains('buy') }">
-											게시글 : <a href="/HumanRental/buying/detail?buyingId=${reservationinfo.boardId}">${ reservationinfo.title }</a><br>
-											신청자 : ${reservationinfo.menteeNickname}<br>
+									    <c:when test="${ reservation.boardId.contains('buy') }">
+											게시글 : <a href="/HumanRental/buying/detail?buyingId=${reservation.boardId}">${ reservation.title }</a><br>
+											신청자 : ${reservation.menteeNickname}<br>
 									    </c:when>
-									    <c:when test="${ reservationinfo.boardId.contains('sell') }">
-											게시글 : <a href="/HumanRental/selling/detail?sellingId=${reservationinfo.boardId}">${ reservationinfo.title }</a><br>
-											신청자 : ${reservationinfo.mentorNickname}<br>
+									    <c:when test="${ reservation.boardId.contains('sell') }">
+											게시글 : <a href="/HumanRental/selling/detail?sellingId=${reservation.boardId}">${ reservation.title }</a><br>
+											신청자 : ${reservation.mentorNickname}<br>
 									    </c:when>
 									</c:choose>
-									예약 신청 날짜 : ${reservationinfo.reservationdate}<br>
-									예약 내용 : ${reservationinfo.reservationcontent}<br>
+									예약일 : ${reservation.reservationdate}<br>
+									예약 내용 : ${reservation.reservationcontent}<br>
 								</div>
 								<div>
-									<c:if test="${reservationinfo.approve == '대기'}">
-										<a href="/HumanRental/reservationApproval?reservationId=${ reservationinfo.reservationId }&approval=yes">승인</a>
-										<a href="/HumanRental/reservationApproval?reservationId=${ reservationinfo.reservationId }&approval=no">거절</a>
+									<c:if test="${reservation.approve == '대기'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=yes">승인</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=no">거절</a>
+									</c:if>
+									<c:if test="${reservation.approve == '승인'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalyes">렌탈완료</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
+									</c:if>
+									<c:if test="${reservation.approve == '렌탈완료'}">
+										<a href="/HumanRental/ReviewWrite?reservationId=${ reservation.reservationId }">후기작성</a>
 									</c:if>
 									<a href="/HumanRental/reservationApprovalManagement">목록</a>
 								</div>
@@ -651,40 +725,204 @@
 											<th>번호</th>
 											<th>제목</th>
 											<th>구분</th>
-											<th>멘토</th>
-											<th>멘티</th>
+											<th>신청자</th>
 											<th>신청일</th>
-											<th>승인 여부</th>
-											<th>승인 날짜</th>
+											<th>진행 상황</th>
+											<th>정보</th>
 										</tr>
-										<c:forEach var="reservationlist" items="${reservationlist}" varStatus="status">					
+										<c:forEach var="reservation" items="${reservationlist}" varStatus="status">					
 											<tr>		
 												<td>${ status.count }</td>
 												<c:choose>
-												    <c:when test="${ reservationlist.boardId.contains('buy') }">
-														<td><a href="/HumanRental/buying/detail?buyingId=${reservationlist.boardId}">${ reservationlist.title }</a></td>
+												    <c:when test="${ reservation.boardId.contains('buy') }">
+														<td><a href="/HumanRental/buying/detail?buyingId=${reservation.boardId}">${ reservation.title }</a></td>
 												        <td>재능구매</td>
+														<td>${ reservation.mentorNickname }</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.boardId.contains('sell') }">
-														<td><a href="/HumanRental/selling/detail?sellingId=${reservationlist.boardId}">${ reservationlist.title }</a></td>
+												    <c:when test="${ reservation.boardId.contains('sell') }">
+														<td><a href="/HumanRental/selling/detail?sellingId=${reservation.boardId}">${ reservation.title }</a></td>
 												        <td>재능판매</td>
+														<td>${ reservation.menteeNickname }</td>
 												    </c:when>
 												</c:choose>
-												<td>${ reservationlist.mentorNickname }</td>
-												<td>${ reservationlist.menteeNickname }</td>
-												<td>${ reservationlist.regist_day }</td>
+												<td>${ reservation.regist_day }</td>
 												<c:choose>
-												    <c:when test="${ reservationlist.approve == '대기' }">
+												    <c:when test="${ reservation.approve == '대기' }">
 												        <td>대기</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.approve == '승인' }">
+												    <c:when test="${ reservation.approve == '승인' }">
 												        <td>승인</td>
 												    </c:when>
-												    <c:when test="${ reservationlist.approve == '거절' }">
+												    <c:when test="${ reservation.approve == '거절' }">
 												        <td>거절</td>
 												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈완료' }">
+												        <td>렌탈완료</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '렌탈실패' }">
+												        <td>렌탈실패</td>
+												    </c:when>
+												    <c:when test="${ reservation.approve == '후기작성' }">
+												        <td>후기작성</td>
+												    </c:when>
 												</c:choose>
-												<td>${ reservationlist.signdate }</td>
+												<td><a href="/HumanRental/reservationInfo?reservationId=${ reservation.reservationId }">상세보기</a></td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+								
+							</c:when>
+							<c:when test="${ mode == 'reservationInfo' }"><!-- 예약 상세 정보 페이지 -->
+								<div><hr><h2>예약 상세 정보</h2><hr></div>
+								<div>
+									예약 신청일 : ${reservation.regist_day}<br>
+									<c:choose>
+									    <c:when test="${ reservation.boardId.contains('buy') }">
+											게시글 : <a href="/HumanRental/buying/detail?buyingId=${reservation.boardId}">${ reservation.title }</a><br>
+											멘토 : ${reservation.mentorNickname}<br>
+											멘티 : ${reservation.menteeNickname}<br>
+									    </c:when>
+									    <c:when test="${ reservation.boardId.contains('sell') }">
+											게시글 : <a href="/HumanRental/selling/detail?sellingId=${reservation.boardId}">${ reservation.title }</a><br>
+											멘토 : ${reservation.mentorNickname}<br>
+											멘티 : ${reservation.menteeNickname}<br>
+									    </c:when>
+									</c:choose>
+									예약일 : ${reservation.reservationdate}<br>
+									예약 내용 : ${reservation.reservationcontent}<br>
+									진행 상황 : ${reservation.approve}<br>
+									승인일 : ${reservation.signdate}
+								</div>
+								<div>
+									<c:if test="${reservation.approve == '대기'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=yes">승인</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=no">거절</a>
+									</c:if>
+									<c:if test="${reservation.approve == '승인'}">
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalyes">렌탈완료</a>
+										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
+									</c:if>
+									<c:if test="${reservation.approve == '렌탈완료'}">
+										<a href="/HumanRental/ReviewWrite?reservationId=${ reservation.reservationId }">후기작성</a>
+									</c:if>
+									<a href="/HumanRental/reservationListManagement">목록</a>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'ReviewWrite' }"><!-- 예약 상세 정보 페이지 -->
+								<div><hr><h2>후기 작성</h2><hr></div>
+								<div>
+									<form:form modelAttribute="review" action="./ReviewWrite?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
+										<c:set var="sessionId" value="${sessionScope.user}" />
+										<input name="reservationId" type="hidden" class="form-control" value="${reservationId}">
+										<input name="memberId" type="hidden" class="form-control" value="${sessionId}">
+										<input name="boardId" type="hidden" class="form-control" value="${reservation.boardId}">
+										<div class="form-group row">
+											<label class="col-sm-2 control-label" >수강 클래스</label>
+											<div class="col-sm-3">
+												<input name="#" type="text" class="form-control" value="${reservation.title}" readonly>
+											</div>
+										</div>
+										<div class="form-group row">
+											<c:if test="${reservation.boardId.contains('buy')}">
+												<c:if test="${sessionId eq reservation.memberId}">
+													<label class="col-sm-2 control-label" >멘티</label>
+													<div class="col-sm-3">
+														<input name="#" type="text" class="form-control" value="${reservation.menteeNickname}" readonly>
+													</div>
+												</c:if>
+												<c:if test="${sessionId eq reservation.applicantMemberId}">
+													<label class="col-sm-2 control-label" >멘토</label>
+													<div class="col-sm-3">
+														<input name="#" type="text" class="form-control" value="${reservation.mentorNickname}" readonly>
+													</div>
+												</c:if>
+											</c:if>
+											<c:if test="${reservation.boardId.contains('sell')}">
+												<c:if test="${sessionId eq reservation.memberId}">
+													<label class="col-sm-2 control-label" >멘토</label>
+													<div class="col-sm-3">
+														<input name="#" type="text" class="form-control" value="${reservation.mentorNickname}" readonly>
+													</div>
+												</c:if>
+												<c:if test="${sessionId eq reservation.applicantMemberId}">
+													<label class="col-sm-2 control-label" >멘티</label>
+													<div class="col-sm-3">
+														<input name="#" type="text" class="form-control" value="${reservation.menteeNickname}" readonly>
+													</div>
+												</c:if>
+											</c:if>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 control-label" >별점</label>
+											<div class="col-sm-5">
+												<label id="range" class="star-rate">
+													<input name="starRate" class="star-range" type="range" min="1" max="5" step="1" value="5" required onchange="_(this); function _(e){ e.setAttribute('value', e.value); };" />
+														<div class="stars">
+															<span><i data-star-value="1" class="fa fa-star"></i></span>
+															<span><i data-star-value="2" class="fa fa-star"></i></span>
+															<span><i data-star-value="3" class="fa fa-star"></i></span>
+															<span><i data-star-value="4" class="fa fa-star"></i></span>
+															<span><i data-star-value="5" class="fa fa-star"></i></span>
+														</div>
+												</label>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 control-label" >제목</label>
+											<div class="col-sm-5">
+												<input name="title" type="text" class="form-control" required>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 control-label" >내용</label>
+											<div class="col-sm-8">
+												<textarea name="content" cols="50" rows="5" class="form-control" required></textarea>
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-sm-offset-2 col-sm-10 ">
+												<input type="submit" class="btn btn-primary " value="작성">	
+												<input type="reset" class="btn btn-danger" value="취소" onclick="goBack()">
+											</div>
+										</div>
+									</form:form>
+								</div>
+							</c:when>
+							<c:when test="${ mode == 'reservationMonitor' }"><!-- 예약 현황 -->
+								<div class="p-5">
+									<table class="table table-hover">
+										<tr>
+											<th>번호</th>
+											<th>거래 유형</th>
+											<th>재능명</th>
+											<th>멘토 ID</th>
+											<th>멘티 ID</th>
+											<th>일정</th>
+											<th>상태</th>
+											<th>예약 매칭 날짜</th>
+										</tr>
+										<c:forEach var="reservation" items="${ reservationList }" varStatus="status">
+											<tr>
+												<td>${ status.count }</td>
+												
+												<c:if test="${ fn:contains(reservation.boardId , 'sellingId') }">
+													<td>재능판매</td>
+												</c:if>
+												
+												<td>${ reservation.title }</td>
+												<td>${ reservation.memberId }</td>
+												<td>${ reservation.applicantMemberId }</td>
+												<td>${ reservation.reservationdate }</td>
+												
+												<c:if test="${ reservation.approve eq '대기' }">
+													<td><div class="badge bg-secondary">${ reservation.approve }</div></td>
+												</c:if>
+												<c:if test="${ reservation.approve eq '승인' }">
+													<td><div class="badge bg-success">${ reservation.approve }</div></td>
+												</c:if>
+												
+												<td>${ reservation.completionDate }</td>
 											</tr>
 										</c:forEach>
 									</table>

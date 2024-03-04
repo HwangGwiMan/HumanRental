@@ -25,9 +25,11 @@ import com.springmvc.domain.Member;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorRegistInfo;
 import com.springmvc.repository.BlackRepository;
+import com.springmvc.service.BlackService;
 import com.springmvc.service.MemberService;
 import com.springmvc.service.MentorService;
 import com.springmvc.service.ReportService;
+import com.springmvc.service.ReservationService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,7 +47,10 @@ public class PrivacyController {
 	ReportService reportService;
 	
 	@Autowired
-	BlackRepository blackRepository;
+	BlackService blackService;
+	
+	@Autowired
+	ReservationService reservationService;
 	
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
@@ -80,7 +85,7 @@ public class PrivacyController {
 					}
 				} else if(mode.equals("applyInfo") ) {
 					// 개별 멘토 신청 관리
-					model.addAttribute("applyInfo", mentorService.getMentorApplyByMemberId(targetId));
+					model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistId(targetId));
 				} else if(mode.equals("report")) {
 					// 신고 관리
 					model.addAttribute("reportList", reportService.getReportList());
@@ -89,7 +94,10 @@ public class PrivacyController {
 					model.addAttribute("reportInfo", reportService.getReport(targetId));
 				} else if(mode.equals("blackListManagement")) {
 					// 블랙리스트 관리
-					model.addAttribute("blackList", blackRepository.getBlackList());
+					model.addAttribute("blackList", blackService.getBlackList());
+				} else if(mode.equals("reservationMonitor")) {
+					// 예약 현황
+					model.addAttribute("reservationList", reservationService.getMonitorReservationStatus());
 				}
 
 			} else {// 일반 유저 관련 데이터
