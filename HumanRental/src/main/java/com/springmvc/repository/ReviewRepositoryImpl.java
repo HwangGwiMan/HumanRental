@@ -45,7 +45,36 @@ public class ReviewRepositoryImpl implements ReviewRepository{
 		String sql = "insert into SellingReview values(?,?,?,?,?,?,?)";
 		template.update(sql, util.createId("sellingReview"), review.getBoardId(), review.getMemberId(), review.getTitle(), 
 				review.getContent(), LocalDateTime.now(), review.getStarRate());
+	}
+
+	@Override
+	public Review getReviewByResvId(Reservation reservation, String memberId) {
 		
+		String sql;
+		Review review = new Review();
+		if(reservation.getBoardId().contains("buy")) {
+			sql = "select * from BuyingReview where buyingId = ? and memberId = ?";
+			review = template.query(sql, new ReviewRowMapper(), reservation.getBoardId(), memberId).get(0);
+		}
+		else {
+			sql = "select * from SellingReview where sellingId = ? and memberId = ?";
+			review = template.query(sql, new ReviewRowMapper(), reservation.getBoardId(), memberId).get(0);
+		}
+		return review;
+	}
+
+	@Override
+	public void ReviewCheck(Reservation reservation, String memberId) {
+		
+		String sql;
+		if(reservation.getBoardId().contains("buy")) {
+			sql = "select * from BuyingReview where memberId = ?";
+			template.query(sql, new ReviewRowMapper(), memberId);
+		}
+		else {
+			sql = "select * from SellingReview where memberId = ?";
+			template.query(sql, new ReviewRowMapper(), memberId);
+		}
 	}
 	
 	
