@@ -2,13 +2,16 @@ package com.springmvc.repository;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -31,7 +34,7 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 
 
 	public void registerMentee(Mentee mentee , String memberId) {
-
+		System.out.println("memberID="+memberId);
 		  System.out.println("여기는 insert 구문이 있는 함수다 나와라 ");
 		Utility utility = new Utility();
 	 String utility2 =utility.createId("mentee");
@@ -59,11 +62,12 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 	
 	@Override
 	public Mentee getInformation(String memberId) {
-		Mentee mentee = null;
-		System.out.println("그럼 이거는 데이터 베이스에서 셀렉하는 함수인데 여긴 오니?");
-		String SQL = "select * from MenteeProfile where memberId=?";
-	    mentee = template.queryForObject(SQL, new Object[]{memberId}, new MenteeRowMapper());
-		return mentee;
+	    System.out.println("여긴 오니??");
+	    Mentee mentee = null;
+		System.out.println("memberID="+memberId);
+	    String SQL = "select * from MenteeProfile where memberId=?";
+	     mentee = template.queryForObject(SQL, new Object[]{memberId}, new MenteeRowMapper());
+	    return mentee;
 	}
 	@Override
 	public Mentee UpdateMentee(Mentee Mentee,String memberId) {
@@ -75,14 +79,7 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 		  template.update(SQL,Mentee.getInterest(),Mentee.getIntroduction(),Mentee.getMemberId());
 		return Mentee;
 	}
-//	@Override
-//	public void deleteMentee( HttpServletRequest request) {
-//		System.out.println("이거 데이터베이스에 멘티프로필 삭제하는 함수인데 여긴 오니?");
-//		HttpSession session = request.getSession();
-//		String memberId	= (String)session.getAttribute("user");
-//		String SQL = "delete from MenteeProfile where memberId=?";  
-//		template.update(SQL,memberId);
-//	}
+
 	
 	public Mentee getMentee2(String menteeId) { // 예약 전용
 		Mentee mentee = null;

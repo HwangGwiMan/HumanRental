@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.springmvc.domain.Member;
 import com.springmvc.domain.Mentee;
 
+
 public interface MenteeRepository {
 	public void registerMentee(Mentee Mentee, String memberId);
 	public boolean getMentee(String memberId);

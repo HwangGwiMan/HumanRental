@@ -255,12 +255,11 @@ public class MentorController {
 		
 		mentorService.UpdateMentorProfile(mentorprofile,memberId);
 		MentorProfile mentorProfile = mentorService.MentorprofileInformation(memberId);
-
+	    mode = "mentorInformation";
 		model.addAttribute("mode", mode);
 		model.addAttribute("mentorprofile",mentorProfile);
-	    mode = "mentorInformation";
-		
-        return "redirect:/myinfo";
+	    
+	    return "MyPage";
 
 	}
 	

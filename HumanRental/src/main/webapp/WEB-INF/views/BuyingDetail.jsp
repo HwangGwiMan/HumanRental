@@ -84,7 +84,6 @@
 									    	<input type="submit" value="제출">
 										</form:form>
 									</div>
-							 		<%-- <div class="box2"><a  href="<c:url value="/save/saveinsert?savelistId=${buying.buyingId}"/>"  onclick="saveCheck(event, this)" data-id="${buying.buyingId}">찜하기</a></div>  --%>
 							 		<div class="box2">
     									<a href="javascript:void(0);" onclick="saveCheck(event, this)" data-id="${buying.buyingId}">찜하기</a>
 									</div>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -8,6 +8,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script src="<c:url value="/resources/js/save.js"/>"></script>
 </head>
 <body>
 	<jsp:include page="nav.jsp"/>
@@ -41,7 +42,7 @@
 					</c:if>
             		<td>${savelist.category}</td>
 	        		<td>${savelist.price}</td> 
-	        		<td><a href="">예약</a></td>
+					<td><a href="javascript:void(0);" data-id="${savelist.saveListId}" onclick="callreservationform(this);">예약</a></td>
 	        		<td><a href="<c:url value="/save/deletesavelist?saveListId=${savelist.saveListId}"/>">삭제</a></td>
 	    		</tr>
 			</c:forEach>

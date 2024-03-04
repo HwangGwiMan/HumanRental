@@ -27,15 +27,17 @@ public class ReservationController {
 	@PostMapping("/reservation/buying")
 	public String BuyingReservation(@RequestParam("buyingId") String buyingId, Model model,
 			@RequestParam("date") String date, @RequestParam("content") String content, HttpServletRequest request) {
-		
+		System.out.println("BuyingReservation??");
 //		System.out.println(date);
 //		System.out.println(content);
 		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		Reservation reservation = reservationservice.BuyingReservationCreate(buyingId, date, content, memberId, model);
+		System.out.println("BuyingReservation??222");
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("mode", "reservation");
+		System.out.println("BuyingReservation??3333");
 		return "CheckPage"; // 추후 예약 현황 페이지로
 	}
 	

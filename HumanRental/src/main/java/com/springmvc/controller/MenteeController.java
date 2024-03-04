@@ -18,6 +18,7 @@ import com.springmvc.service.MenteeService;
 import com.springmvc.domain.Member;
 import com.springmvc.domain.Mentee;
 
+
 @Controller
 public class MenteeController {
 	
@@ -41,9 +42,9 @@ public class MenteeController {
 		}else{
 			System.out.println("else 로 오니?");
 			mode="menteeInformation";
-		Mentee mentee =Menteeservice.getInformation(memberId);
-		 model.addAttribute("mode", mode);
-		 model.addAttribute("mentee",mentee);
+			Mentee mentee =Menteeservice.getInformation(memberId);
+			model.addAttribute("mode", mode);
+			model.addAttribute("mentee",mentee);
 			return "MyPage";
 		}
 		
@@ -51,7 +52,7 @@ public class MenteeController {
 	
 	  @PostMapping("/menteeregisterinsert") 
 	  public String MenteeRegister(@ModelAttribute Mentee mentee, Model model,HttpServletRequest request, @RequestParam("mode")  String mode ) {
-		  System.out.println("이건 멘티프로필 등록인데 여기는 오니?");
+		  	System.out.println("이건 멘티프로필 등록인데 여기는 오니?");
 			HttpSession session = request.getSession();
 			String memberId	= (String)session.getAttribute("user");
 			Menteeservice.registerMentee(mentee, memberId);
@@ -63,48 +64,47 @@ public class MenteeController {
 		
 		  }
 	  
-//	 @GetMapping("/mentee2")
-//	 public String MenteeProfileUpdateform(@RequestParam("mode") String mode,Model model ,HttpServletRequest request) {
-//		 System.out.println("111111111");
-//		 HttpSession session = request.getSession();
-//		String memberId	= (String)session.getAttribute("user");
-////		 Mentee mentee = MenteeService.getInformation(memberId);
-//		 System.out.println(mentee.getIntroduction());
-//		 System.out.println(mentee.getInterest());
-//
-//		
-//		 model.addAttribute("mode",mode);
-//		 model.addAttribute("Mentee",mentee);
-//		 System.out.println("22222222222222");
-//		return "MyPage"; 
-//	 }
-//	  @PostMapping("/menteeProfileUpdate") 
-//	  public String MenteeProfileUpdate(@ModelAttribute Mentee Mentee, Model model,HttpServletRequest request) {
-//		  System.out.println("이건 멘티프로필 등록인데 여기는 오니?");
-//		   MenteeService.UpdateMentee(Mentee,request);
-//		  return "redirect:/mentee?mode=menteeProfileRead";
-//	  }
-//	  @GetMapping("/mentee3")
-//	  public String  MenteeProfileDelete(Model model, HttpServletRequest request) {
-//		  MenteeService.deleteMentee(request);
-//		  return "redirect:/myInfo?mode=myPage";
-//	  }
+	 @GetMapping("/callmenteeupdateform")
+	 public  String MenteeProfileUpdateform(@RequestParam("mode") String mode,Model model ,HttpServletRequest request) {
+		 HttpSession session = request.getSession();
+		 String memberId	= (String)session.getAttribute("user");
+		 Mentee mentee = Menteeservice.getInformation(memberId);
+		
+		 mode ="menteeProfileUpdate";
+		 
+		 model.addAttribute("mode",mode);
+		 model.addAttribute("Mentee",mentee);
+		 
+		return "MyPage"; 
+	 }
+	  @PostMapping("/menteeProfileUpdate") 
+	  public String MenteeProfileUpdate(@ModelAttribute Mentee Mentee, Model model,HttpServletRequest request,String mode) {
+		  HttpSession session = request.getSession();
+		  String memberId	= (String)session.getAttribute("user");
+		  Menteeservice.UpdateMentee(Mentee,memberId);
+		  
+		  mode = "menteeInformation";
+		  model.addAttribute("mode",mode);
+		  
+		  return "MyPage"; 
+	  }
+
 	  
-//	  @GetMapping("/menteeprofileCheck")
-//	  @ResponseBody
-//	  	public String MenteeCheck(HttpServletRequest request) {
-//			HttpSession session = request.getSession();
-//			String memberId = (String) session.getAttribute("user");
-//			
-//			if(memberId == null) {
-//				return "notLogin";
-//			}
-//			
-//			int mentee = MenteeService.getMentee(memberId);
-//			if(mentee == 0) {
-//				return "false";
-//			} else {
-//				return "true";
-//			}
-//		}
+	  @GetMapping("/menteeprofileCheck")
+	  @ResponseBody
+	  	public String MenteeCheck(HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			String memberId = (String) session.getAttribute("user");
+			
+			if(memberId == null) {
+				return "notLogin";
+			}
+			
+			boolean mentee = Menteeservice.getMentee(memberId);
+			if(mentee ==false) {
+				return "false";
+			} else {
+				return "true";
+			}
+		}
 }

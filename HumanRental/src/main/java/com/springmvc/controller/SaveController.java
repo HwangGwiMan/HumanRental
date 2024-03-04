@@ -75,14 +75,10 @@ public class SaveController {
 
 	@GetMapping("/saveread")
 	public String moveSavelist(HttpServletRequest request ,Model model) {
-	
-		System.out.println("그럼 무브세이브리스트함수로 와줘");
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		
 		List<Save> saveList = saveService.getsaveinformation(memberId);
-
-	System.out.println("그럼 무브세이브리스트함수로 와줘222");
 
 		model.addAttribute("saveList",saveList);
 		
@@ -90,8 +86,6 @@ public class SaveController {
 	}
 	@GetMapping("/deletesavelist")
 	public String deleteSavelist( @RequestParam("saveListId") String savelistid ,Model model) {
-		System.out.println("일단 여기는 와라 ");
-		System.out.println("ㄳㄳ 와줘서");
 		 saveService.deletesavelist(savelistid);
 		
 		

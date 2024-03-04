@@ -318,13 +318,13 @@
 									</form>
 								</div>
 							</c:when>	
-							<c:when test="${ mode == 'menteeInformation' }">
+							<c:when test="${ mode == 'menteeInformation'}">
 								<div class="col-1"> </div>	
 								<br><br>
 								<div class="col-5">
 									<div class="row p-3">관심분야 :${ mentee.interest} </div>
 									<div class="row p-3">소개 :${ mentee.introduction}</div>
-									<div><a href="<c:url value="/mentee2?mode=menteeProfileUpdate"/>">멘티 프로필 수정</a></div>
+									<div><a href="<c:url value="/callmenteeupdateform?mode=menteeProfileUpdate"/>">멘티 프로필 수정</a></div>
 								</div>	
 							</c:when>
 							<c:when test="${ mode == 'menteeProfileUpdate'}">
@@ -332,7 +332,7 @@
 								<br><br>
 								<div class="col-5">
 									<br><br>
-										<form  action="<c:url value="/menteeProfileUpdate"/>" method="post">
+										<form  action="<c:url value="/menteeProfileUpdate?mode=12"/>" method="post">
 											<h2>카테고리</h2>
 			    							<div  style="display: flex;  justify-content:space-between;">
 			        							<label for="checkbox-1">운동</label>
