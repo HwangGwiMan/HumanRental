@@ -24,6 +24,7 @@ public class BuyingRowMapper implements RowMapper<Buying> {
 		buying.setCategory(rs.getString(9));
 		buying.setPrice(rs.getInt(10));
 		buying.setLocation(rs.getString(11));
+		buying.setStarCount(rs.getInt("starCount"));
 		
 		return buying;
 	}

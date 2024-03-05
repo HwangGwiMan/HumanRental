@@ -733,9 +733,6 @@
 										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalyes">렌탈완료</a>
 										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
 									</c:if>
-									<c:if test="${reservation.approve == '렌탈완료'}">
-										<a href="/HumanRental/ReviewWrite?reservationId=${ reservation.reservationId }">후기작성</a>
-									</c:if>
 									<a href="/HumanRental/reservationApprovalManagement">목록</a>
 								</div>
 							</c:when>
@@ -817,14 +814,6 @@
 									승인일 : ${reservation.signdate}
 								</div>
 								<div>
-									<c:if test="${reservation.approve == '대기'}">
-										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=yes">승인</a>
-										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=no">거절</a>
-									</c:if>
-									<c:if test="${reservation.approve == '승인'}">
-										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalyes">렌탈완료</a>
-										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
-									</c:if>
 									<c:if test="${reservation.approve == '렌탈완료'}">
 										<a reservationId="${reservation.reservationId}" onclick="reviewCheck(this)"> 후기작성</a>
 										<a reservationId="${reservation.reservationId}" onclick="reviewCheck2(this)">후기관리</a>
@@ -833,13 +822,14 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'ReviewPage' }"><!-- 리뷰 페이지 -->
-								<div><hr><h2>후기 작성</h2><hr></div>
+								<div><hr><h2>후기</h2><hr></div>
 								<div>
-									<form:form modelAttribute="review" action="./ReviewWrite?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
+									<form:form modelAttribute="review" action="${reviewmode == 'update' ? './ReviewUpdate' : './ReviewWrite'}?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
 										<c:set var="sessionId" value="${sessionScope.user}" />
-										<input name="reservationId" type="hidden" class="form-control" value="${reservationId}">
-										<input name="memberId" type="hidden" class="form-control" value="${sessionId}">
+										<input name="reservationId" type="hidden" class="form-control" value="${reservation.reservationId}">
 										<input name="boardId" type="hidden" class="form-control" value="${reservation.boardId}">
+										<input name="memberId" type="hidden" class="form-control" value="${sessionId}">
+										<input name="ReviewId" type="hidden" class="form-control" value="${review.getReviewId()}">
 										<div class="form-group row">
 											<label class="col-sm-2 control-label" >수강 클래스</label>
 											<div class="col-sm-3">
@@ -880,7 +870,8 @@
 											<label class="col-sm-2 control-label" >별점</label>
 											<div class="col-sm-5">
 												<label id="range" class="star-rate">
-													<input name="starRate" class="star-range" type="range" min="1" max="5" step="1" value="5" required onchange="_(this); function _(e){ e.setAttribute('value', e.value); };" />
+													<input name="starRate" class="star-range" type="range" min="1" max="5" step="1" value="5" ${reviewmode == 'read' ? 'readonly' : 'required'}
+													onchange="_(this); function _(e){ e.setAttribute('value', e.value); };"/>
 														<div class="stars">
 															<span><i data-star-value="1" class="fa fa-star"></i></span>
 															<span><i data-star-value="2" class="fa fa-star"></i></span>
@@ -916,7 +907,7 @@
 												<c:if test="${reviewmode == 'update'}">
 													<input type="submit" class="btn btn-primary" value="완료">
 												</c:if>
-												<input type="reset" class="btn btn-danger" value="취소" onclick="goBack()">
+												<a href="/HumanRental/reservationListManagement" class="btn btn-danger">목록</a>
 											</div>
 										</div>
 									</form:form>
