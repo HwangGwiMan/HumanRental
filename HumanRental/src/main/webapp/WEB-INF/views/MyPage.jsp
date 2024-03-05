@@ -713,9 +713,6 @@
 										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalyes">렌탈완료</a>
 										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
 									</c:if>
-									<c:if test="${reservation.approve == '렌탈완료'}">
-										<a href="/HumanRental/ReviewWrite?reservationId=${ reservation.reservationId }">후기작성</a>
-									</c:if>
 									<a href="/HumanRental/reservationApprovalManagement">목록</a>
 								</div>
 							</c:when>
@@ -885,7 +882,7 @@
 													<input type="submit" class="btn btn-primary" value="작성">
 												</c:if>
 												<c:if test="${reviewmode == 'read'}">
-													<a href="/HumanRental/ReviewDelete?reservationId=${reservation.reservationId}" class="btn btn-primary">수정</a>
+													<a href="/HumanRental/ReviewUpdate?reservationId=${reservation.reservationId}" class="btn btn-primary">수정</a>
 												</c:if>
 												<c:if test="${reviewmode == 'update'}">
 													<input type="submit" class="btn btn-primary" value="완료">
