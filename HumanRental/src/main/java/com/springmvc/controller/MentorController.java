@@ -1,6 +1,7 @@
 package com.springmvc.controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -157,47 +158,56 @@ public class MentorController {
 			@RequestParam("file2") MultipartFile file2 ,
 			@RequestParam("file3") MultipartFile file3 ,
 			Model model,HttpServletRequest request ,@RequestParam("mode") String mode) {
-		System.out.println("멘토프로필 등록 하는 컨트롤러입니다 ");
+		   System.out.println("멘토프로필 등록 하는 컨트롤러입니다 ");
 
-		mentorprofile.setFilename1(file1.getOriginalFilename());
-		mentorprofile.setFilename2(file2.getOriginalFilename());
-		mentorprofile.setFilename3(file3.getOriginalFilename());
-		
-		HttpSession session = request.getSession();
-		String memberId = (String) session.getAttribute("user");
-		Mentor mentor = mentorService.getMentor(memberId);
-		
-		
-		String mentorId =  mentor.getMentorId();
-		System.out.println("이건 멘토아이디로 하면 됨"+mentorId);		
-		mentorprofile.setMentorId(mentorId);
-		
-		String realfilename1 = "mentorprofile_"+mentorprofile.getMentorId()+mentorprofile.getFilename1();
-		String realfilename2 = "mentorprofile_"+mentorprofile.getMentorId()+mentorprofile.getFilename2();
-		String realfilename3 = "mentorprofile_"+mentorprofile.getMentorId()+mentorprofile.getFilename3();
+		    HttpSession session = request.getSession();
+		    String memberId = (String) session.getAttribute("user");
+		    Mentor mentor = mentorService.getMentor(memberId);
+		    String mentorId =  mentor.getMentorId();
+		    mentorprofile.setMentorId(mentorId);
+		    String realPath = request.getSession().getServletContext().getRealPath("/resources/img/ProfilePicture");
 
-		
-		String realPath = request.getSession().getServletContext().getRealPath("/resources/img/ProfilePicture");
-		File saveFile1 = new File(realPath,realfilename1);
-		File saveFile2 = new File(realPath,realfilename2);
-		File saveFile3 = new File(realPath,realfilename3);
-		
-		mentorprofile.setFilename1(realfilename1);
-		mentorprofile.setFilename2(realfilename2);
-		mentorprofile.setFilename3(realfilename3);
-		
-		System.out.println("saveFile1="+saveFile1);
-		System.out.println("saveFile2="+saveFile2);
-		System.out.println("saveFile3="+saveFile3);
-		
+		    if (!file1.isEmpty()) { 
+		        String realfilename1 = "mentorprofile_"+mentorprofile.getMentorId()+file1.getOriginalFilename();
+		        File saveFile1 = new File(realPath,realfilename1);
+		        mentorprofile.setFilename1(realfilename1);
+		        try {
+		            file1.transferTo(saveFile1);  // 파일 저장
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        System.out.println("saveFile1="+saveFile1);
+		    }
+		    if (!file2.isEmpty()) { 
+		        String realfilename2 = "mentorprofile_"+mentorprofile.getMentorId()+file2.getOriginalFilename();
+		        File saveFile2 = new File(realPath,realfilename2);
+		        mentorprofile.setFilename2(realfilename2);
+		        try {
+		            file1.transferTo(saveFile2);  // 파일 저장
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        
+		        
+		        System.out.println("saveFile2="+saveFile2);
+		    }
+		    if (!file3.isEmpty()) { 
+		        String realfilename3 = "mentorprofile_"+mentorprofile.getMentorId()+file3.getOriginalFilename();
+		        File saveFile3 = new File(realPath,realfilename3);
+		        mentorprofile.setFilename3(realfilename3);
+		        try {
+		            file1.transferTo(saveFile3);  // 파일 저장
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        System.out.println("saveFile3="+saveFile3);
+		    }
 
-		System.out.println("이건 멘토아이디로 하면 됨"+mentorId);
 
-
-		mentorService.mentorProfileRegister(mentorprofile,memberId,mentorId);
-		 mode = "mentorProfile";
-	     model.addAttribute("mode", mode);
-         return "redirect:/mentor";
+		    mentorService.mentorProfileRegister(mentorprofile,memberId,mentorId);
+		    mode = "mentorProfile";
+		    model.addAttribute("mode", mode);
+		    return "redirect:/mentor";
 	}
 	
 	@GetMapping("/mentorprofileupdate")
@@ -221,38 +231,52 @@ public class MentorController {
 			@RequestParam("file2") MultipartFile file2 ,
 			@RequestParam("file3") MultipartFile file3 , Model model , HttpServletRequest request ,@RequestParam("mode") String mode) {
 
-		mentorprofile.setFilename1(file1.getOriginalFilename());
-		mentorprofile.setFilename2(file2.getOriginalFilename());
-		mentorprofile.setFilename3(file3.getOriginalFilename());
-		
-		HttpSession session = request.getSession();
-		String memberId = (String) session.getAttribute("user");
-		Mentor mentor = mentorService.getMentor(memberId);
-		
-		
-		String mentorId =  mentor.getMentorId();
-		System.out.println("이건 멘토아이디로 하면 됨"+mentorId);		
-		mentorprofile.setMentorId(mentorId);
-		
-		String realfilename1 = "mentorprofile_"+mentorprofile.getMentorId()+mentorprofile.getFilename1();
-		String realfilename2 = "mentorprofile_"+mentorprofile.getMentorId()+mentorprofile.getFilename2();
-		String realfilename3 = "mentorprofile_"+mentorprofile.getMentorId()+mentorprofile.getFilename3();
+		   System.out.println("멘토프로필 등록 하는 컨트롤러입니다 ");
 
-		
-		String realPath = request.getSession().getServletContext().getRealPath("/resources/img/ProfilePicture");
-		File saveFile1 = new File(realPath,realfilename1);
-		File saveFile2 = new File(realPath,realfilename2);
-		File saveFile3 = new File(realPath,realfilename3);
-		
-		mentorprofile.setFilename1(realfilename1);
-		mentorprofile.setFilename2(realfilename2);
-		mentorprofile.setFilename3(realfilename3);
-		
-		System.out.println("saveFile1="+saveFile1);
-		System.out.println("saveFile2="+saveFile2);
-		System.out.println("saveFile3="+saveFile3);
-		
-		
+		    HttpSession session = request.getSession();
+		    String memberId = (String) session.getAttribute("user");
+		    Mentor mentor = mentorService.getMentor(memberId);
+		    String mentorId =  mentor.getMentorId();
+		    mentorprofile.setMentorId(mentorId);
+		    String realPath = request.getSession().getServletContext().getRealPath("/resources/img/ProfilePicture");
+
+		    if (!file1.isEmpty()) { 
+		        String realfilename1 = "mentorprofile_"+mentorprofile.getMentorId()+file1.getOriginalFilename();
+		        File saveFile1 = new File(realPath,realfilename1);
+		        mentorprofile.setFilename1(realfilename1);        
+		        try {
+		            file1.transferTo(saveFile1);  // 파일 저장
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        
+		        System.out.println("saveFile1="+saveFile1);
+		    }
+		    if (!file2.isEmpty()) { 
+		        String realfilename2 = "mentorprofile_"+mentorprofile.getMentorId()+file2.getOriginalFilename();
+		        File saveFile2 = new File(realPath,realfilename2);
+		        mentorprofile.setFilename2(realfilename2);
+		        try {
+		            file2.transferTo(saveFile2);  // 파일 저장
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        
+		        System.out.println("saveFile2="+saveFile2);
+		    }
+		    if (!file3.isEmpty()) { 
+		        String realfilename3 = "mentorprofile_"+mentorprofile.getMentorId()+file3.getOriginalFilename();
+		        File saveFile3 = new File(realPath,realfilename3);
+		        mentorprofile.setFilename3(realfilename3);
+		        try {
+		            file3.transferTo(saveFile3);  // 파일 저장
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        
+		        System.out.println("saveFile3="+saveFile3);
+		    }
+
 		mentorService.UpdateMentorProfile(mentorprofile,memberId);
 		MentorProfile mentorProfile = mentorService.MentorprofileInformation(memberId);
 	    mode = "mentorInformation";

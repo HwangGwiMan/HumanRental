@@ -25,43 +25,24 @@ function saveCheck(event, element) {
     });
 }
 
-function callreservationform(element) {
-  let id = encodeURIComponent(element.getAttribute('data-id'));
-  
-  let newWindow = window.open("", "newWindow", "width=500,height=400");
-  newWindow.document.open();
-  newWindow.document.write("<!DOCTYPE html>");
-  newWindow.document.write("<html><head><meta charset='utf-8'><style>body {display: flex;justify-content: center;align-items: center;height: 100vh;}</style></head><body>");
-  newWindow.document.write("<div><h1>예약 화면입니다!</h1>");
-  newWindow.document.write("<form id='reservationForm' method='post' action='/HumanRental/reservation/buying'>"); 
-  newWindow.document.write("<input type='hidden' name='buyingId' value='" + id + "'>");
-  newWindow.document.write("<label for='date'>날짜:</label>");
-  newWindow.document.write("<input type='date' id='date' name='date'><br><br>");
-  newWindow.document.write("<label for='content'>내용:</label><br>");
-  newWindow.document.write("<textarea id='content' name='content' style='width: 300px; height: 200px;'></textarea><br>");
-  newWindow.document.write("<input type='submit' value='예약 제출'>");
-  newWindow.document.write("</form></div>");
-  newWindow.document.write("</body></html>");
-  newWindow.document.close();
-
-  // 폼 제출 이벤트 추가
-  $(newWindow.document).find('#reservationForm').submit(function(e) {
-    e.preventDefault();
-
-    let formData = $(this).serialize();
-    $.ajax({
-      type: 'POST',
-      url: '/HumanRental/reservation/buying',
-      data: formData,
-      success: function(response) {
-        // 서버로부터의 응답을 처리합니다.
-        // 예를 들어, 서버에서 반환한 페이지를 로드합니다.
-        window.location.href = response.redirectUrl;
-      },
-      error: function(error) {
-        // 에러를 처리합니다.
-        console.error(error);
-      }
-    });
-  });
+function callreservationform() {
+	 var calendarForm = document.getElementById('calendarForm');
+	 console.log("여긴 뜨고 잇니1111")
+    calendarForm.style.display = 'block';
+}
+	
+function setFormAction() {
+    var form = document.getElementById('reservationForm');
+    var saveListId = document.getElementsByName('id')[0].value;
+    console.log(saveListId);
+    if (saveListId.includes('buying')) {
+        form.action = "/HumanRental/save/buying?buyingId="+saveListId;
+        console.log("Form action set to: " + form.action);
+    } else if (saveListId.includes('selling')) {
+        form.action = "/HumanRental/save/selling?sellingId="+saveListId;
+        console.log("Form action set to: " + form.action);
+    }
+    
+    
+    
 }

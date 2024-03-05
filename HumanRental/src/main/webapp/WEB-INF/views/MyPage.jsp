@@ -238,6 +238,9 @@
 											<h3>멘토 소개당</h3>
 											<div>${mentorprofile.introduction}</div>
 										</div>
+										<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename1 }" />" id="imageSample1"></div>
+										<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename2 }" />" id="imageSample2"></div>
+										<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename3 }" />" id="imageSample3"></div>
 										<div><a href="<c:url value="/mentorprofileupdate?mode=callupdatementorprofileform"/>">멘토프로필 수정 </a></div>
 								</div>		
 							</c:when>
@@ -267,7 +270,6 @@
 	        								<label for="checkbox-5">기타</label>
 	        								<input type="checkbox" id="checkbox-5" name=category value="기타"
 	        								<c:if test="${mentorprofile.category.trim().toLowerCase().contains('기타')}">checked</c:if>>
-	        								
 	    								</div>
 	    								<br><br>
 	    								<div>

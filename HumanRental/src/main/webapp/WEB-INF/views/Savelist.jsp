@@ -8,7 +8,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<script src="<c:url value="/resources/js/save.js"/>"></script>
+<script src="<c:url value="/resources/js/save.js?ver=1"/>"></script>
 </head>
 <body>
 	<jsp:include page="nav.jsp"/>
@@ -42,7 +42,16 @@
 					</c:if>
             		<td>${savelist.category}</td>
 	        		<td>${savelist.price}</td> 
-					<td><a href="javascript:void(0);" data-id="${savelist.saveListId}" onclick="callreservationform(this);">예약</a></td>
+					<td><a href="javascript:void(0);"  onclick="callreservationform();">예약</a></td>
+					<div id="calendarForm" class="calendarForm" style="display: none;">
+    					<form id="reservationForm" method="post" action="" class="form-horizontal" onsubmit="setFormAction(); return true;">
+    						<input name="id" type="hidden" value="${savelist.saveListId}">
+    						예약일 : <input name="date" type="date" class="date" required>
+    						<br><br>
+    						예약 상세 내용 : <textarea name="content" cols="50" rows="5" class="form-control" required placeholder="오후 7시부터 2시간 예약하고 싶어요"></textarea>
+    						<input type="submit" value="제출">
+						</form>
+					</div>
 	        		<td><a href="<c:url value="/save/deletesavelist?saveListId=${savelist.saveListId}"/>">삭제</a></td>
 	    		</tr>
 			</c:forEach>

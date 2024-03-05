@@ -53,9 +53,8 @@ CREATE TABLE IF NOT EXISTS MentorApply(
 CREATE TABLE IF NOT EXISTS MentorProfile(
 mentorId varchar(50) not null,
 memberId varchar(50) not null,
-<<<<<<< HEAD
 introduction varchar(1000),
-certification varchar(100),
+certification varchar(500),
 category varchar(100),
 filename1 varchar(1000),
 filename2 varchar(1000),
@@ -174,6 +173,7 @@ completionDate datetime,
 foreign key(menteeId) references  MenteeProfile(menteeId),
 foreign key(mentorId) references  MentorProfile(mentorId)
 );
+
 
 -- 일정관리 
 CREATE TABLE IF NOT EXISTS Calendar(
