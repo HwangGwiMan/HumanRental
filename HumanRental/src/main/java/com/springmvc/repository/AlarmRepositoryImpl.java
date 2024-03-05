@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -93,7 +94,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		}
 	}
 	
-	// 예약 신청 알람(재능 판매) 멘티 -> 멘토
+	// 예약 신청 알람(재능 판매) 멘티 -> 멘토, 멘토 -> 멘티
 	@Override
 	public void createReservationApplyAlarm(Reservation reservation) {
 		Alarm alarm = new Alarm();
@@ -102,6 +103,8 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		
 		if(reservation.getBoardId().contains("sellingId")) {
 			alarm.setContent(reservation.getApplicantMemberId() + "님이 '" + reservation.getTitle() + "' 에 멘티 신청하셨습니다.");
+		} else if(reservation.getBoardId().contains("buyingId")) {
+			alarm.setContent(reservation.getApplicantMemberId() + "님이 '" + reservation.getTitle() + "' 에 멘토 신청하셨습니다.");
 		}
 		 
 		String SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?, ?)";
@@ -109,15 +112,28 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), null);
 	}
 	
+	
+	
 	// 예약 검토 알람(승인 및 거절)
 	@Override
 	public void createReservationConfirmAlarm(String reservationId, String approval) {
 		String SQL;
 		
-		SQL = "SELECT * FROM ";
+		SQL = "SELECT * FROM reservation WHERE reservationId = ?";
+		Reservation reservation = template.queryForObject(SQL, new BeanPropertyRowMapper<Reservation>(Reservation.class), reservationId);
+		
+		String targetId = reservation.getBoardId();
 		
 		Alarm alarm = new Alarm();
-		alarm.setSendMemberId(null);
+		
+		if(targetId.contains("sell")) {
+			alarm.setSendMemberId(null);
+		} else if(targetId.contains("buy")) {
+			
+		}
+		
+		
+		
 	}
 
 	// 알람 목록

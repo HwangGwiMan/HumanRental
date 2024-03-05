@@ -92,7 +92,7 @@
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 														<c:when test="${ fn:contains(alarm.alarmId , 'ReservationApplyAlarm') }">
-															<div class="row">재능 판매 신청 알림</div>
+															<div class="row">재능 거래 신청 알림</div>
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 													</c:choose>
