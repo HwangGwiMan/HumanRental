@@ -9,7 +9,7 @@ public interface MemberRepository {
 	public void join(Member member);
 	public boolean idCheck(String memberId);
 	public Member getMember(String memberId);
-	public void deleteMember(String memberId, String memberPw);
+	public boolean deleteMember(String memberId, String memberPw);
 	public void updateMember(Member member, String memberId);
 	public List<Member> getMembers();
 }
