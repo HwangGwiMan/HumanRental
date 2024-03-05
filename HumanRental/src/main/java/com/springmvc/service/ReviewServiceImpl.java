@@ -48,9 +48,10 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void ReviewCheck(String reservationId, Model model, String memberId) {
+	public String ReviewCheck(String reservationId, Model model, String memberId) {
 		Reservation reservation = (Reservation)model.getAttribute("reservation");
-	 	reviewRepository.ReviewCheck(reservation, memberId);
+	 	String check =reviewRepository.ReviewCheck(reservation, memberId);
+	 	return check;
 	}
 
 	@Override

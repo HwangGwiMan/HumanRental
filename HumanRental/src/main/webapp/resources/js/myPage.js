@@ -444,7 +444,7 @@ function reviewCheck2(element) {
     var reservationId = element.getAttribute('reservationId');
     $.ajax({
         type: 'get',
-        url: './ReviewRead',
+        url: './ReviewCheck2',
         data: {"reservationId" : reservationId},
         success: function(result) {
 			console.log(result);
@@ -452,7 +452,7 @@ function reviewCheck2(element) {
                 alert("후기를 작성해주세요.");
             } 
             else {
-				window.location.href = "./ReviewRead?reservationId=" + reservationId;
+				window.location.replace("./ReviewRead?reservationId=" + reservationId);
             }
             
         },
