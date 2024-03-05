@@ -35,8 +35,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void deleteMember(String memberId , String memberPw) {
-	     memberRepository.deleteMember(memberId, memberPw);
+	public  boolean deleteMember(String memberId , String memberPw) {
+		return memberRepository.deleteMember(memberId, memberPw);
 	}
 	
 	public void updateMember(Member member, String memberId) {

@@ -37,11 +37,7 @@ public class SaveServiceImpl implements SaveService{
 	return	saveRepository.checksaveinformation(memberId, savelistId);
 	
 	}
-	@Override
-	public boolean ajaxchecksavelist(String savelistId) {
-	return	saveRepository.ajaxchecksavelist(savelistId);
 
-	}
 	
 	
 }

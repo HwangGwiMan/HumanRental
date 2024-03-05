@@ -19,7 +19,7 @@ public interface MentorService {
 	public Map<String, Object> getMentorApplyState(String memberId);
 	public void mentorProfileRegister(MentorProfile mentorprofile, String memberId, String mentorId);
 	public int getMentorProfile();
-	public MentorProfile MentorInformation (String memberId);
+	public MentorProfile MentorprofileInformation (String memberId);
 	public void UpdateMentorProfile(MentorProfile mentorprofile,String memberId);
 	public void DeleteMentorProfile(String memberId);
 	public MentorRegistInfo getMentorApplyByRegistId(String registId);

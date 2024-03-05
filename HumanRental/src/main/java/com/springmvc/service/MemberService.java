@@ -9,7 +9,7 @@ public interface MemberService {
 	public void join(Member member);
 	boolean idCheck(String memberId);
 	public Member getMember(String memberId);
-	public void deleteMember(String memberId, String memberPw);
+	public boolean deleteMember(String memberId, String memberPw);
 	public void updateMember(Member member, String memberId);
 	public List<Member> getMembers();
 

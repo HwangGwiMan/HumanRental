@@ -3,6 +3,7 @@ package com.springmvc.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MentorProfile {
+	
 	private String mentorId;
 	private String memberId;
 	private String introduction;
@@ -12,6 +13,7 @@ public class MentorProfile {
 	private String filename2;
 	private String filename3;
 	private int starRate;
+	
 	public String getMentorId() {
 		return mentorId;
 	}
