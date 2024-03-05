@@ -14,8 +14,15 @@ public class Selling {
 	private String category;
 	private int price;
 	private String location;
+	private int starCount;
 	
 	
+	public int getStarCount() {
+		return starCount;
+	}
+	public void setStarCount(int starCount) {
+		this.starCount = starCount;
+	}
 	public String getSellingId() {
 		return sellingId;
 	}

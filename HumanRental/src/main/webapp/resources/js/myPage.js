@@ -293,10 +293,10 @@ function reviewCheck(element) {
         success: function(result) {
 			console.log(result);
             if (result === "true") {
-                alert("이미 후기를 작성하셨습니다.");
+				window.location.href = "./ReviewWrite?reservationId=" + reservationId;
             } 
             else if(result === "false") {
-				window.location.href = "./ReviewWrite?reservationId=" + reservationId;
+                alert("이미 후기를 작성하셨습니다.");
             }
             
         },
@@ -310,7 +310,7 @@ function reviewCheck2(element) {
     var reservationId = element.getAttribute('reservationId');
     $.ajax({
         type: 'get',
-        url: './ReviewRead',
+        url: './ReviewCheck2',
         data: {"reservationId" : reservationId},
         success: function(result) {
 			console.log(result);
@@ -318,7 +318,7 @@ function reviewCheck2(element) {
                 alert("후기를 작성해주세요.");
             } 
             else {
-				window.location.href = "./ReviewRead?reservationId=" + reservationId;
+				window.location.replace("./ReviewRead?reservationId=" + reservationId);
             }
             
         },

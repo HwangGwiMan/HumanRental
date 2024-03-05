@@ -34,7 +34,7 @@ public class ReviewController {
 	public String ReviewWrite(@RequestParam String reservationId, Model model) {
 		
 		reservationService.GetReservationInfo(reservationId, model);
-		model.addAttribute("reservationId", reservationId);
+//		model.addAttribute("reservationId", reservationId);
 		model.addAttribute("mode", "ReviewPage");
 		model.addAttribute("reviewmode", "write");
 		return "MyPage";
@@ -69,7 +69,6 @@ public class ReviewController {
 			e.printStackTrace();
 			return "false";
 		}
-		
 		model.addAttribute("mode", "ReviewPage");
 		model.addAttribute("reviewmode", "read");
 		return "MyPage";
@@ -81,11 +80,31 @@ public class ReviewController {
 		
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
-		System.out.println("reservationId="+reservationId);
 		
 		try {
 			reservationService.GetReservationInfo(reservationId, model);
-			reviewService.ReviewCheck(reservationId, model, memberId);
+			String check = reviewService.ReviewCheck(reservationId, model, memberId);
+			if(check=="false") {
+				return "false";
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		return "true";
+	}
+	
+	@GetMapping("/ReviewCheck2")
+	@ResponseBody
+	public String ReviewCheck2(@RequestParam String reservationId, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		
+		try {
+			reservationService.GetReservationInfo(reservationId, model);
+			reviewService.getReviewByResvId(reservationId, model, memberId);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -113,4 +132,12 @@ public class ReviewController {
 		model.addAttribute("reviewmode", "update");
 		return "MyPage";
 	}
+	
+	@PostMapping("/ReviewUpdate")
+	public String ReviewUpdate(@ModelAttribute Review review, @RequestParam String reservationId, Model model) {
+		
+		reviewService.ReviewUpdate(review);
+		return "redirect:/ReviewRead?reservationId="+reservationId;
+	}
+	
 }

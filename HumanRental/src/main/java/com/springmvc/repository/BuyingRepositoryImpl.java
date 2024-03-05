@@ -47,10 +47,10 @@ public class BuyingRepositoryImpl implements BuyingRepository{
 	
 	@Override
 	public void BuyingCreate(Buying buying) {
-		String sql = "insert into buying values(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into buying values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		template.update(sql, buying.getBuyingId(), buying.getMemberId(), buying.getNickname(), buying.getIntroduction(), 
 				buying.getStarRate(), buying.getTitle(), buying.getContent(), buying.getRegist_day(), buying.getCategory(), 
-				buying.getPrice(), buying.getLocation());
+				buying.getPrice(), buying.getLocation(), 0);
 	}
 
 	@Override

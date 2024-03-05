@@ -46,10 +46,10 @@ public class SellingRepositoryImpl implements SellingRepository{
 	
 	@Override
 	public void SellingCreate(Selling selling) {
-		String sql = "insert into selling values(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into selling values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		template.update(sql, selling.getSellingId(), selling.getMemberId(), selling.getNickname(), selling.getIntroduction(), 
 				selling.getStarRate(), selling.getTitle(), selling.getContent(), selling.getRegist_day(), selling.getCategory(), 
-				selling.getPrice(), selling.getLocation());
+				selling.getPrice(), selling.getLocation(), 0);
 	}
 
 	@Override
