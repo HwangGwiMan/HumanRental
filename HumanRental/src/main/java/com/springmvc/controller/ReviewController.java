@@ -83,7 +83,28 @@ public class ReviewController {
 		
 		try {
 			reservationService.GetReservationInfo(reservationId, model);
-			reviewService.ReviewCheck(reservationId, model, memberId);
+			String check = reviewService.ReviewCheck(reservationId, model, memberId);
+			if(check=="false") {
+				return "false";
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		return "true";
+	}
+	
+	@GetMapping("/ReviewCheck2")
+	@ResponseBody
+	public String ReviewCheck2(@RequestParam String reservationId, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		
+		try {
+			reservationService.GetReservationInfo(reservationId, model);
+			reviewService.getReviewByResvId(reservationId, model, memberId);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

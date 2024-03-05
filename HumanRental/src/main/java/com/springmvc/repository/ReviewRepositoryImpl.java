@@ -63,16 +63,21 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	}
 
 	@Override
-	public void ReviewCheck(Reservation reservation, String memberId) {
+	public String ReviewCheck(Reservation reservation, String memberId) {
 
 		String sql;
+		int check;
 		if (reservation.getBoardId().contains("buy")) {
-			sql = "select * from BuyingReview where memberId = ?";
-			template.query(sql, new ReviewRowMapper(), memberId);
+			sql = "select count(*) from BuyingReview where memberId = ? and buyingId = ?";
+			check = template.queryForObject(sql, Integer.class, memberId, reservation.getBoardId());
 		} else {
-			sql = "select * from SellingReview where memberId = ?";
-			template.query(sql, new ReviewRowMapper(), memberId);
+			sql = "select * from SellingReview where memberId = ? and sellingId = ?";
+			check = template.queryForObject(sql, Integer.class, memberId, reservation.getBoardId());
 		}
+		if(check==0) {
+			return "false";
+		}
+		return "true";
 	}
 
 	@Override
