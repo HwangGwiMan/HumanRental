@@ -32,12 +32,13 @@ public class Utility {
 	 * 2 -> 내림차순
 	 */	
 	public String sortType(String sort) {
-		if(sort.equals("none") || sort.equals("0")) {
-			return " "; 
-		} else if(sort.equals("1")) {
+		
+		if(sort.equals("1")) {
 			return "ASC";
-		} else {
+		} else if(sort.equals("2")) {
 			return "DESC";
-		}		
+		} else {
+			return "";
+		}
 	}
 }

@@ -285,6 +285,7 @@ sendMemberId varchar(20) not null,
 receiveMemberId varchar(20) not null,
 date datetime not null,
 content varchar(10000) not null,
+linkId varchar(50),
 foreign key(sendMemberId) references Member(memberId),
 foreign key(receiveMemberId) references Member(memberId)
 );

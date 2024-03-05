@@ -8,8 +8,8 @@ public class Alarm {
 	private String sendMemberId;
 	private String receiveMemberId;
 	private Object date;
-	protected String content;
-	
+	private String content;
+	private String linkId;
 	public Alarm() {
 		this.setDate(LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 	}
@@ -43,5 +43,11 @@ public class Alarm {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getLinkId() {
+		return linkId;
+	}
+	public void setLinkId(String linkId) {
+		this.linkId = linkId;
 	}
 }

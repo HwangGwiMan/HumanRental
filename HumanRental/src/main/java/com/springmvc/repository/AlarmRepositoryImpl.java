@@ -34,7 +34,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 	
 	// 멘토 신청 알람 생성
 	@Override
-	public void createMentoApplyAlarm(String sendMemberId) {
+	public void createMentoApplyAlarm(String sendMemberId, String registId) {
 		Alarm alarm = new Alarm();
 		alarm.setSendMemberId(sendMemberId);
 		alarm.setReceiveMemberId("admin");
@@ -42,8 +42,8 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		String SQL;
 		
 		try {
-			SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
-			template.update(SQL, util.createId("mentorApplyAlarm"),alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
+			SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?, ?)";
+			template.update(SQL, util.createId("mentorApplyAlarm"),alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), registId);
 		} catch (EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
@@ -129,6 +129,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 //					alarm.setDate(new java.sql.Timestamp(rs.getDate(3).getTime()).toLocalDateTime());
 					alarm.setDate(util.outputFormatting(rs.getTimestamp(4)));
 					alarm.setContent(rs.getString(5));
+					alarm.setLinkId(rs.getString(6));
 					return alarm;
 				}
 			}, memberId);

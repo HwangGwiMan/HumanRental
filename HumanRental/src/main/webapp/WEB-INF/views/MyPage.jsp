@@ -370,14 +370,15 @@
 											<th>멘토 권한<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
 											<th>멘토 등록일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
 										</tr>
-										<c:forEach var="member" items="${memberList}" varStatus="status">					
+										<tbody id="tbody">	
+										<c:forEach var="member" items="${memberList}" varStatus="status">
 											<tr>		
 												<td>${ status.count }</td>
 												<td>${ member.memberId }</td>
 												<td>${ member.memberJoinDate }</td>
 												<td>
 													<c:if test="${ not empty member.mentorId }">
-														<div class="badge bg-success">승인</div>
+														<div class="badge bg-primary">승인</div>
 													</c:if>
 													<c:if test="${ empty member.mentorId }">
 														<div class="badge bg-secondary">미승인</div>
@@ -386,6 +387,7 @@
 												<td>${ member.mentorRegistDate }</td>
 											</tr>
 										</c:forEach>
+										</tbody>
 									</table>
 								</div>
 							</c:when>
@@ -409,11 +411,12 @@
 									<table class="table table-hover "><!-- 멘토 신청 관리 -->
 										<tr id="thead">
 											<th>순번</th>
-											<th>유저 ID</th>
-											<th>신청일</th>
-											<th>처리결과</th>
-											<th>처리일</th>
+											<th>유저 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+											<th>신청일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+											<th>처리결과<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+											<th>처리일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
 										</tr>
+										<tbody id="tbody">
 										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
 											<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }', '${ applyInfo.registId }')">
 												<td>${ status.count }</td>
@@ -433,6 +436,7 @@
 												<td>${ applyInfo.confirmDate }</td>
 											</tr>
 										</c:forEach>
+										</tbody>
 									</table>
 								</div>
 							</c:when>
@@ -485,29 +489,37 @@
 										</div>
 										<div class="row p-3">
 											<div class="col-2">신청자 ID :</div>
-											<div class="col">${ applyInfo.memberId }</div>
+											<div class="col">${ applyInfo.info.memberId }</div>
 										</div>
 										<div class="row p-3">
 											<div class="col-2">특기 분야 :</div>
-											<div class="col">${ applyInfo.specialty }</div>
+											<div class="col">${ applyInfo.info.specialty }</div>
 										</div>
 										<div class="row p-3">
 											<div class="col-2">주요 활동 지역 :</div>
-											<div class="col">${ applyInfo.location }</div>
+											<div class="col">${ applyInfo.info.location }</div>
 										</div>
 										<div class="row p-3">
 											<div class="col-2">신청 이유 :</div>
-											<div class="col">${ applyInfo.reason }</div>
+											<div class="col">${ applyInfo.info.reason }</div>
 										</div>
 										<div class="row p-3">
 											<div>기타 사항</div>
-											<div>${ applyInfo.etc }</div>
+											<div>${ applyInfo.info.etc }</div>
 										</div>
 									</div>
-									<div class="row">
-										<a href="<c:url value="/mentorRegist?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 btn btn-success">승인</a>
-										<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 btn btn-danger">거절</a>
-										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="col-1 m-1 btn btn-secondary">목록</a>
+									<div class="row text-center">
+										<c:if test="${applyInfo.state == 'Accept'}">
+											<div class="col-2 m-1 alert alert-success text-center" role="alert">승인됨</div>
+										</c:if>
+										<c:if test="${applyInfo.state == 'Refuse'}">
+											<div class="col-2 m-1 alert alert-danger text-center" role="alert">거부됨</div>
+										</c:if>
+										<c:if test="${applyInfo.state == 'Wait'}">
+											<a href="<c:url value="/mentorRegist?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 alert alert-success btn btn-success">승인</a>
+											<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 alert alert-danger btn btn-danger">거절</a>
+										</c:if>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="col-2 m-1 alert alert-secondary btn btn-secondary">목록</a>
 									</div>
 								</div>
 							</c:when>
@@ -911,6 +923,11 @@
 							</c:when>
 							<c:when test="${ mode == 'reservationMonitor' }"><!-- 예약 현황 -->
 								<div class="p-5">
+									<div class="row p-3 text-center">
+										<a href="<c:url value="/myInfo?mode=reservationMonitor"/>" class="col-1 m-1 btn btn-outline-info">전체</a>
+										<a href="<c:url value="/myInfo?mode=reservationMonitor&t=buy"/> " class="col-2 m-1 btn btn-primary text-nowrap">재능구매</a>
+										<a href="<c:url value="/myInfo?mode=reservationMonitor&t=sell"/>" class="col-2 m-1 btn btn-secondary text-nowrap">재능판매</a>
+									</div>
 									<table class="table table-hover">
 										<tr>
 											<th>번호</th>
@@ -927,7 +944,10 @@
 												<td>${ status.count }</td>
 												
 												<c:if test="${ fn:contains(reservation.boardId , 'sellingId') }">
-													<td>재능판매</td>
+													<td><div class="badge bg-secondary">재능판매</div></td>
+												</c:if>
+												<c:if test="${ fn:contains(reservation.boardId , 'buyingId') }">
+													<td><div class="badge bg-primary">재능구매</div></td>
 												</c:if>
 												
 												<td>${ reservation.title }</td>

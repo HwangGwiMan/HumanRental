@@ -86,13 +86,15 @@ public class PrivacyController {
 				} else if(mode.equals("mentorApplyManagement")) {
 					// 멘토 신청 관리
 					if(state.equals("none") ) {
-						model.addAttribute("applyList", mentorService.getMentorApplyList());
+						model.addAttribute("applyList", mentorService.getMentorApplyList(sort, sortTarget));
 					} else {
-						model.addAttribute("applyList", mentorService.getMentorApplyList(state));
+						model.addAttribute("applyList", mentorService.getMentorApplyList(state, sort, sortTarget));
 					}
 				} else if(mode.equals("applyInfo") ) {
 					// 개별 멘토 신청 관리
-					model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistId(targetId));
+					//model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistId(targetId));
+					
+					model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistIdTEST(targetId));
 				} else if(mode.equals("report")) {
 					// 신고 관리
 					model.addAttribute("reportList", reportService.getReportList());
@@ -104,7 +106,12 @@ public class PrivacyController {
 					model.addAttribute("blackList", blackService.getBlackList());
 				} else if(mode.equals("reservationMonitor")) {
 					// 예약 현황
-					model.addAttribute("reservationList", reservationService.getMonitorReservationStatus());
+					if(state.equals("none")) {
+						model.addAttribute("reservationList", reservationService.getMonitorReservationStatus());
+					} else {
+						model.addAttribute("reservationList", reservationService.getMonitorReservationStatus(state));
+					}
+					
 				}
 
 			} else {// 일반 유저 관련 데이터

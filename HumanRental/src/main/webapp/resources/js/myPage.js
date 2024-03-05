@@ -48,7 +48,7 @@ $(function() {
 			for(var icon of head.children) {
 				if(icon.classList.contains("fa-sort")) {
 					icon.addEventListener("click", function(e) {
-						sort = 0;
+						sort = 1;
 						for(var otherCol of e.target.parentNode.parentNode.childNodes) {
 							if(otherCol.nodeName === '#text' || otherCol == e.target.parentNode || otherCol.innerText === "순번") {
 								continue;
@@ -70,15 +70,21 @@ $(function() {
 					})
 				} else if(icon.classList.contains("fa-sort-up")) {
 					icon.addEventListener("click", function(e) {
-						sort = 1;						
+						sort = 2;						
 						e.target.style.display = "none";
 						e.target.nextSibling.style.display = "inline";
+						
+						sortTarget =  e.target.parentElement.childNodes[0].data;
+						sendSortRequest(sort, sortTarget);
 					});
 				} else {
 					icon.addEventListener("click", function(e) {
-						sort = 2;						
+						sort = 0;						
 						e.target.style.display = "none";
 						e.target.previousSibling.previousSibling.style.display = "inline";
+						
+						sortTarget =  e.target.parentElement.childNodes[0].data;
+						sendSortRequest(sort, sortTarget);
 					})
 				}
 			}
@@ -337,17 +343,17 @@ function sendSortRequest(sort, sortTarget) {
 	data.sort = sort;
 	data.sortTarget = sortTarget;
 	
-	console.log(data);
-	
 	$.ajax({
         type: 'GET',
         url: './myInfo',
 		//contentType : "application/json; charset=UTF-8",
-        //dataType : "html",
+		//dataType : "text/html",
         data: data,
-        success: function(result) {
-			typeof result;
-            console.log(result.getElementById("thead"));
+        success: function(result) {			
+			oldT = document.getElementById("tbody");
+			newT = $(result)[41].getElementsByTagName("tbody")[1];
+
+			oldT.innerHTML = newT.innerHTML;
         },
         error: function(request, status, error) {
             console.log(request);
