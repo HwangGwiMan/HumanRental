@@ -250,7 +250,6 @@ public class MentorRepositroyImpl implements MentorRepository {
 	
 	///멘토 프로필 조회 함수 select쓸거임 
 	public MentorProfile MentorprofileInformation (String memberId) {
-		 System.out.println("데이터베이스에서 정보를 찾는 중...");
 		    String SQL = "select * from MentorProfile where memberId=?";
 		    
 		    // 데이터베이스에서 정보를 찾는 작업
@@ -265,7 +264,6 @@ public class MentorRepositroyImpl implements MentorRepository {
 		        return mentorprofile;
 		    } else {
 		        // 정보가 없다면, null을 반환
-		        System.out.println("조회 결과가 없음");
 		        return null;
 		    }
 	}

@@ -35,7 +35,6 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 
 	public void registerMentee(Mentee mentee , String memberId) {
 		System.out.println("memberID="+memberId);
-		  System.out.println("여기는 insert 구문이 있는 함수다 나와라 ");
 		Utility utility = new Utility();
 	 String utility2 =utility.createId("mentee");
 		String SQL = "INSERT INTO MenteeProfile (menteeId, memberId, interest, introduction) VALUES(?,?,?,?)";
@@ -45,7 +44,6 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 	
 	public boolean getMentee(String memberId) {
 		Mentee mentee = null;
-	    System.out.println("데이터 베이스에서 조회하는 함수인데 여긴 오니?");
 	    System.out.println("memberId: " + memberId);
 	    String SQL = "SELECT * from MenteeProfile where memberId = ?";
 
@@ -62,7 +60,6 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 	
 	@Override
 	public Mentee getInformation(String memberId) {
-	    System.out.println("여긴 오니??");
 	    Mentee mentee = null;
 		System.out.println("memberID="+memberId);
 	    String SQL = "select * from MenteeProfile where memberId=?";
@@ -71,7 +68,6 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 	}
 	@Override
 	public Mentee UpdateMentee(Mentee Mentee,String memberId) {
-		System.out.println("그럼 이거는 데이터 베이스에 업데이트하는 함수인데 여긴 오니?");
 
 		  Mentee.setMemberId(memberId);
 		  System.out.println(memberId);

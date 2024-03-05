@@ -37,7 +37,7 @@
 						<form class="form-inline d-flex mx-auto align-items-center" action="<c:url value='/Search'/>" method="post">
 							<select name="items" class="txt">
 									<option value="title">전체</option>
-									<option value="content">카테고리</option>
+									<option value="content">분야</option>
 									<option value="name">제목</option>
 									<option value="name">멘토</option>
 									<option value="name">멘티</option>
