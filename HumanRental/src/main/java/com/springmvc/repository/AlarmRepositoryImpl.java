@@ -32,7 +32,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		this.template = new JdbcTemplate(dataSource);
 	}
 	
-	// 멘토 신청 알람 생성
+	// 멘토 신청 알람
 	@Override
 	public void createMentoApplyAlarm(String sendMemberId, String registId) {
 		Alarm alarm = new Alarm();
@@ -49,7 +49,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		}
 	}
 	
-	// 경고 알람 생성
+	// 경고 알람
 	@Override
 	public void createWarningAlarm(Map<String, Object> data) {
 		Alarm alarm = new Alarm();
@@ -107,6 +107,12 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		String SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?, ?)";
 		
 		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), null);
+	}
+	
+	@Override
+	public void createReservationConfirmAlarm() {
+		Alarm alarm = new Alarm();
+		alarm.setSendMemberId(null);
 	}
 
 	// 알람 목록

@@ -13,4 +13,5 @@ public interface AlarmRepository {
 	public void deleteAlarm(String memberId, String alarmId);
 	void createWarningAlarm(Map<String, Object> data);
 	void createReservationApplyAlarm(Reservation reservation);
+	void createReservationConfirmAlarm();
 }
