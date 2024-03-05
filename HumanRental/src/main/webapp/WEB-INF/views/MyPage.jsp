@@ -225,13 +225,12 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'mentorInformation' }">
-								<div>
-									<div class="col-5">
-										<h3>멘토 프로필 정보 조회 </h3>
-										<br><br>
+								<div class="col-5">
+									<div>
+										<h4>멘토 프로필 조회 </h4>
 										<br><br>
 										<h3>멘토 카테고리</h3>
-										<div>${mentorprofile.category}</div>
+										<div><p>${mentorprofile.category}</p></div>
 										<br><br>
 										<h3>멘토 자격증이당 </h3>
 										<div>${mentorprofile.certification}</div>
@@ -239,26 +238,10 @@
 										<h3>멘토 소개당</h3>
 										<div>${mentorprofile.introduction}</div>
 									</div>
-									<div><a href="<c:url value="/mentor2?mode=mentorProfileUpdate"/>" >멘토프로필 수정 </a></div>
-									<div><a href="<c:url value="/mentor3?mode=mentorProfileDelete"/>" >멘토프로필 삭제 </a></div>
-								</div>
-								</center>
-										<div class="col-5">
-											<h4>멘토 프로필 조회 </h4>
-											<br><br>
-											<h3>멘토 카테고리</h3>
-											<div><p>${mentorprofile.category}</p></div>
-											<br><br>
-											<h3>멘토 자격증이당 </h3>
-											<div>${mentorprofile.certification}</div>
-											<br><br>
-											<h3>멘토 소개당</h3>
-											<div>${mentorprofile.introduction}</div>
-										</div>
-										<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename1 }" />" id="imageSample1"></div>
-										<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename2 }" />" id="imageSample2"></div>
-										<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename3 }" />" id="imageSample3"></div>
-										<div><a href="<c:url value="/mentorprofileupdate?mode=callupdatementorprofileform"/>">멘토프로필 수정 </a></div>
+									<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename1 }" />" id="imageSample1"></div>
+									<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename2 }" />" id="imageSample2"></div>
+									<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename3 }" />" id="imageSample3"></div>
+									<div><a href="<c:url value="/mentorprofileupdate?mode=callupdatementorprofileform"/>">멘토프로필 수정 </a></div>
 								</div>		
 							</c:when>
 							<c:when test="${ mode == 'mentorProfileUpdate' }">
@@ -523,8 +506,8 @@
 											<div class="col-2 m-1 alert alert-danger text-center" role="alert">거부됨</div>
 										</c:if>
 										<c:if test="${applyInfo.state == 'Wait'}">
-											<a href="<c:url value="/mentorRegist?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 alert alert-success btn btn-success">승인</a>
-											<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.memberId }&rId=${ applyInfo.registId }" />" class="col-1 m-1 alert alert-danger btn btn-danger">거절</a>
+											<a href="<c:url value="/mentorRegist?mId=${ applyInfo.info.memberId }&rId=${ applyInfo.info.registId }" />" class="col-1 m-1 alert alert-success btn btn-success">승인</a>
+											<a href="<c:url value="/mentorApplyRefuse?mId=${ applyInfo.info.memberId }&rId=${ applyInfo.info.registId }" />" class="col-1 m-1 alert alert-danger btn btn-danger">거절</a>
 										</c:if>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement" />" class="col-2 m-1 alert alert-secondary btn btn-secondary">목록</a>
 									</div>

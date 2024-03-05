@@ -2,12 +2,6 @@ package com.springmvc.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,16 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.springmvc.domain.Member;
-import com.springmvc.domain.Mentor;
-import com.springmvc.domain.MentorRegistInfo;
-import com.springmvc.repository.BlackRepository;
+
 import com.springmvc.service.BlackService;
 import com.springmvc.service.MemberService;
 import com.springmvc.service.MentorService;
@@ -32,7 +22,6 @@ import com.springmvc.service.ReportService;
 import com.springmvc.service.ReservationService;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class PrivacyController {
@@ -54,22 +43,13 @@ public class PrivacyController {
 	
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
-<<<<<<< HEAD
 								@RequestParam(value = "id", defaultValue = "none") String targetId, // 상세 정보 용 ID
 								@RequestParam(value = "t", defaultValue = "none") String state, // 출력 정보 분류용 
 								@RequestParam(value = "sort", defaultValue = "none") String sort, // 정렬 유형
 								@RequestParam(value = "sortTarget", defaultValue = "none") String sortTarget, // 정렬 대상 
 								Model model,
-=======
-								@RequestParam(value = "id", defaultValue = "none") String targetId,
-								@RequestParam(value = "t", defaultValue = "none") String state,Model model, 
->>>>>>> refs/heads/main
 								HttpServletRequest request) {
-<<<<<<< HEAD
-		
-=======
-		System.out.println("응답하라");
->>>>>>> refs/heads/main
+
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user") != null) {
 			String memberId = (String) session.getAttribute("user");
@@ -235,9 +215,4 @@ public class PrivacyController {
 	        return "fail";
 	    }
 	}
-<<<<<<< HEAD
-=======
-	
-
->>>>>>> refs/heads/main
 }

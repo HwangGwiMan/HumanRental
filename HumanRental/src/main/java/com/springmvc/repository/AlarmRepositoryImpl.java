@@ -86,8 +86,8 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		String SQL;
 		
 		try {
-			SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
-			template.update(SQL, util.createId("mentorApplyResultAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
+			SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?, ?)";
+			template.update(SQL, util.createId("mentorApplyResultAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), null);
 		} catch (EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
@@ -104,9 +104,9 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 			alarm.setContent(reservation.getApplicantMemberId() + "님이 '" + reservation.getTitle() + "' 에 멘티 신청하셨습니다.");
 		}
 		 
-		String SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?, ?)";
 		
-		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent());
+		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), null);
 	}
 
 	// 알람 목록
