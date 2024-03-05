@@ -278,3 +278,52 @@ function userCheck() {
         }
     });
 }
+
+function goBack() {
+    // 브라우저의 이전 페이지로 이동
+    history.back();
+}
+
+function reviewCheck(element) {
+    var reservationId = element.getAttribute('reservationId');
+    $.ajax({
+        type: 'get',
+        url: './ReviewCheck',
+        data: {"reservationId" : reservationId},
+        success: function(result) {
+			console.log(result);
+            if (result === "true") {
+                alert("이미 후기를 작성하셨습니다.");
+            } 
+            else if(result === "false") {
+				window.location.href = "./ReviewWrite?reservationId=" + reservationId;
+            }
+            
+        },
+        error: function(request, status, error) {
+            console.log(request);
+        }
+    });
+}
+
+function reviewCheck2(element) {
+    var reservationId = element.getAttribute('reservationId');
+    $.ajax({
+        type: 'get',
+        url: './ReviewRead',
+        data: {"reservationId" : reservationId},
+        success: function(result) {
+			console.log(result);
+            if (result === "false") {
+                alert("후기를 작성해주세요.");
+            } 
+            else {
+				window.location.href = "./ReviewRead?reservationId=" + reservationId;
+            }
+            
+        },
+        error: function(request, status, error) {
+            console.log(request);
+        }
+    });
+}
