@@ -38,8 +38,19 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public void SellReviewWrite(Review review) {
 		reviewRepository.SellReviewWrite(review);
-		
 	}
 
+	@Override
+	public void getReviewByResvId(String reservationId, Model model, String memberId) {
+	 	Reservation reservation = (Reservation)model.getAttribute("reservation");
+	 	Review review = reviewRepository.getReviewByResvId(reservation, memberId);
+	 	model.addAttribute("review", review);
+	}
+
+	@Override
+	public void ReviewCheck(String reservationId, Model model, String memberId) {
+		Reservation reservation = (Reservation)model.getAttribute("reservation");
+	 	reviewRepository.ReviewCheck(reservation, memberId);
+	} 
 	
 }
