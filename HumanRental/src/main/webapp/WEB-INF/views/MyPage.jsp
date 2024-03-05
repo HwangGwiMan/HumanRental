@@ -663,7 +663,7 @@
 									</table>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'reservationApprovalManagement' }"><!-- 예약 관리 페이지 -->
+							<c:when test="${ mode == 'reservationApprovalManagement' }"><!-- 예약 승인 페이지 -->
 								<div><hr><h2>예약 승인</h2><hr></div>
 								<div>
 									<table class="table table-hover">
@@ -718,7 +718,7 @@
 									</table>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'reservationApprovalInfo' }"><!-- 예약 상세 정보 페이지 -->
+							<c:when test="${ mode == 'reservationApprovalInfo' }"><!-- 예약 승인 상세 페이지 -->
 								<div><hr><h2>예약 상세 정보</h2><hr></div>
 								<div>
 									<c:choose>
@@ -749,7 +749,7 @@
 									<a href="/HumanRental/reservationApprovalManagement">목록</a>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'reservationListManagement' }"><!-- 예약 관리 페이지 -->
+							<c:when test="${ mode == 'reservationListManagement' }"><!-- 예약 조회 페이지 -->
 								<div><hr><h2>예약 조회</h2><hr></div>
 								<div>
 									<table class="table table-hover">
@@ -836,12 +836,13 @@
 										<a href="/HumanRental/reservationApproval?reservationId=${ reservation.reservationId }&approval=rentalno">렌탈실패</a>
 									</c:if>
 									<c:if test="${reservation.approve == '렌탈완료'}">
-										<a href="/HumanRental/ReviewWrite?reservationId=${ reservation.reservationId }">후기작성</a>
+										<a reservationId="${reservation.reservationId}" onclick="reviewCheck(this)"> 후기작성</a>
+										<a reservationId="${reservation.reservationId}" onclick="reviewCheck2(this)">후기관리</a>
 									</c:if>
 									<a href="/HumanRental/reservationListManagement">목록</a>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'ReviewWrite' }"><!-- 예약 상세 정보 페이지 -->
+							<c:when test="${ mode == 'ReviewPage' }"><!-- 리뷰 페이지 -->
 								<div><hr><h2>후기 작성</h2><hr></div>
 								<div>
 									<form:form modelAttribute="review" action="./ReviewWrite?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
@@ -903,18 +904,28 @@
 										<div class="form-group row">
 											<label class="col-sm-2 control-label" >제목</label>
 											<div class="col-sm-5">
-												<input name="title" type="text" class="form-control" required>
+												<input name="title" type="text" class="form-control" 
+												${reviewmode == 'read' ? 'readonly' : 'required'} 
+												value="${reviewmode == 'write' ? '' : review.title}">
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-2 control-label" >내용</label>
 											<div class="col-sm-8">
-												<textarea name="content" cols="50" rows="5" class="form-control" required></textarea>
+												<textarea name="content" cols="50" rows="5" class="form-control" ${reviewmode == 'read' ? 'readonly' : 'required'}>${review.content}</textarea>
 											</div>
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-offset-2 col-sm-10 ">
-												<input type="submit" class="btn btn-primary " value="작성">	
+												<c:if test="${reviewmode == 'write'}">
+													<input type="submit" class="btn btn-primary" value="작성">
+												</c:if>
+												<c:if test="${reviewmode == 'read'}">
+													<a href="/HumanRental/ReviewUpdate?reservationId=${reservation.reservationId}" class="btn btn-primary">수정</a>
+												</c:if>
+												<c:if test="${reviewmode == 'update'}">
+													<input type="submit" class="btn btn-primary" value="완료">
+												</c:if>
 												<input type="reset" class="btn btn-danger" value="취소" onclick="goBack()">
 											</div>
 										</div>

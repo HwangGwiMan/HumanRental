@@ -213,6 +213,39 @@ function deleteMember(){
 	console.log("잘뜨고 잇냐?");
 }
 
+$(function() {
+	var profileBtn = document.getElementById("profileBtn");
+	var registBtn = document.getElementById("registBtn");
+	var resvBtn = document.getElementById("resvBtn");
+	
+	profileBtn.addEventListener("click", function(event) {
+		var menu = profileBtn.nextElementSibling;
+		if(menu.style.display === "none") {
+			menu.style.display = "block";	
+		} else {
+			menu.style.display = "none";
+		}
+	})
+	
+	registBtn.addEventListener("click", function(event) {
+		var menu = registBtn.nextElementSibling;
+		if(menu.style.display === "none") {
+			menu.style.display = "block";	
+		} else {
+			menu.style.display = "none";
+		}
+	})
+	
+	resvBtn.addEventListener("click", function(event) {
+		var menu = resvBtn.nextElementSibling;
+		if(menu.style.display === "none") {
+			menu.style.display = "block";	
+		} else {
+			menu.style.display = "none";
+		}
+	})
+})
+
 function mentorCheck(element) {
     var buyingId = element.getAttribute('data-buying-id');
     $.ajax({
@@ -354,6 +387,55 @@ function sendSortRequest(sort, sortTarget) {
 			newT = $(result)[41].getElementsByTagName("tbody")[1];
 
 			oldT.innerHTML = newT.innerHTML;
+        },
+        error: function(request, status, error) {
+            console.log(request);
+        }
+    });
+}
+
+function goBack() {
+    // 브라우저의 이전 페이지로 이동
+    history.back();
+}
+
+function reviewCheck(element) {
+    var reservationId = element.getAttribute('reservationId');
+    $.ajax({
+        type: 'get',
+        url: './ReviewCheck',
+        data: {"reservationId" : reservationId},
+        success: function(result) {
+			console.log(result);
+            if (result === "true") {
+                alert("이미 후기를 작성하셨습니다.");
+            } 
+            else if(result === "false") {
+				window.location.href = "./ReviewWrite?reservationId=" + reservationId;
+            }
+            
+        },
+        error: function(request, status, error) {
+            console.log(request);
+        }
+    });
+}
+
+function reviewCheck2(element) {
+    var reservationId = element.getAttribute('reservationId');
+    $.ajax({
+        type: 'get',
+        url: './ReviewRead',
+        data: {"reservationId" : reservationId},
+        success: function(result) {
+			console.log(result);
+            if (result === "false") {
+                alert("후기를 작성해주세요.");
+            } 
+            else {
+				window.location.href = "./ReviewRead?reservationId=" + reservationId;
+            }
+            
         },
         error: function(request, status, error) {
             console.log(request);

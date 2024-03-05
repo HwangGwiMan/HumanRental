@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.domain.Member;
 import com.springmvc.domain.Review;
@@ -30,11 +31,12 @@ public class ReviewController {
 	ReservationService reservationService;
 	
 	@GetMapping("/ReviewWrite")
-	public String ReviewPage(@RequestParam String reservationId, Model model) {
+	public String ReviewWrite(@RequestParam String reservationId, Model model) {
 		
 		reservationService.GetReservationInfo(reservationId, model);
 		model.addAttribute("reservationId", reservationId);
-		model.addAttribute("mode", "ReviewWrite");
+		model.addAttribute("mode", "ReviewPage");
+		model.addAttribute("reviewmode", "write");
 		return "MyPage";
 	}
 	
@@ -51,5 +53,64 @@ public class ReviewController {
 		}
 
 		return "redirect:/reservationListManagement";
+	}
+	
+	@GetMapping("/ReviewRead")
+	public String ReviewRead(@RequestParam String reservationId, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		
+		try {
+			reservationService.GetReservationInfo(reservationId, model);
+			reviewService.getReviewByResvId(reservationId, model, memberId);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		
+		model.addAttribute("mode", "ReviewPage");
+		model.addAttribute("reviewmode", "read");
+		return "MyPage";
+	}
+	
+	@GetMapping("/ReviewCheck")
+	@ResponseBody
+	public String ReviewCheck(@RequestParam String reservationId, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		System.out.println("reservationId="+reservationId);
+		
+		try {
+			reservationService.GetReservationInfo(reservationId, model);
+			reviewService.ReviewCheck(reservationId, model, memberId);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		return "true";
+	}
+	
+	@GetMapping("/ReviewUpdate")
+	public String ReviewUpdate(@RequestParam String reservationId, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		
+		try {
+			reservationService.GetReservationInfo(reservationId, model);
+			reviewService.getReviewByResvId(reservationId, model, memberId);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		
+		model.addAttribute("mode", "ReviewPage");
+		model.addAttribute("reviewmode", "update");
+		return "MyPage";
 	}
 }
