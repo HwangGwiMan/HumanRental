@@ -109,8 +109,13 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), null);
 	}
 	
+	// 예약 검토 알람(승인 및 거절)
 	@Override
-	public void createReservationConfirmAlarm() {
+	public void createReservationConfirmAlarm(String reservationId, String approval) {
+		String SQL;
+		
+		SQL = "SELECT * FROM ";
+		
 		Alarm alarm = new Alarm();
 		alarm.setSendMemberId(null);
 	}
