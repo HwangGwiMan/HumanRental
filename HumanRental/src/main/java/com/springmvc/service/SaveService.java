@@ -13,5 +13,4 @@ public interface SaveService {
 	public List<Save> getsaveinformation(String memberId);
 	public void deletesavelist(String savelistid);
 	public  boolean checksaveinformation(String memberId,String savelistId);
-	public boolean	ajaxchecksavelist(String savelistId);
 }

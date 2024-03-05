@@ -87,7 +87,6 @@
 									<div class="box2">
     									<a href="javascript:void(0);" onclick="saveCheck(event, this)" data-id="${selling.sellingId}">찜하기</a>
 									</div>									
-									<%-- <div class="box2"><a href="<c:url value="/save/saveinsert?savelistId=${selling.sellingId}"/>">찜하기</a></div> --%>
 								</c:otherwise>
 							</c:choose>
 						</div>
