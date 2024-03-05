@@ -51,6 +51,13 @@ public class ReviewServiceImpl implements ReviewService{
 	public void ReviewCheck(String reservationId, Model model, String memberId) {
 		Reservation reservation = (Reservation)model.getAttribute("reservation");
 	 	reviewRepository.ReviewCheck(reservation, memberId);
-	} 
+	}
+
+	@Override
+	public void ReviewUpdate(Review review) {
+		reviewRepository.ReviewUpdate(review);
+		reviewRepository.StarRateUpdate(review, true);;
+	}
+	
 	
 }

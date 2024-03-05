@@ -14,4 +14,5 @@ public interface ReviewService {
 	public void SellReviewWrite(Review review);
 	public void getReviewByResvId(String reservationId, Model model, String memberId);
 	public void ReviewCheck(String reservationId, Model model, String memberId);
+	public void ReviewUpdate(Review review);
 }
