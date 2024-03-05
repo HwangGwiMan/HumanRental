@@ -7,7 +7,7 @@ import com.springmvc.domain.Alarm;
 import com.springmvc.domain.Reservation;
 
 public interface AlarmService {
-	public void createMentoApplyAlarm(String memberId);
+	public void createMentoApplyAlarm(String memberId, String string);
 	public void createMentoApplyResultAlarm(String memberId, String result);
 	public List<Alarm> selectAlarm(String memberId);
 	public void deleteAlarm(String memberId, String alarmId);

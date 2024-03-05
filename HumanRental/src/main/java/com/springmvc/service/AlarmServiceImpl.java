@@ -17,8 +17,8 @@ public class AlarmServiceImpl implements AlarmService{
 	AlarmRepository alarmRepository;
 	
 	@Override
-	public void createMentoApplyAlarm(String memberId) {
-		alarmRepository.createMentoApplyAlarm(memberId);
+	public void createMentoApplyAlarm(String memberId, String registId) {
+		alarmRepository.createMentoApplyAlarm(memberId, registId);
 	}
 
 	@Override

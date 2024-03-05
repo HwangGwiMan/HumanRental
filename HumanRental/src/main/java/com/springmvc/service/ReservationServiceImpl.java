@@ -174,6 +174,12 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<Reservation> getMonitorReservationStatus() {
 		return reservationrepository.getAllReservation();
 	}
+	
+
+	@Override
+	public List<Reservation> getMonitorReservationStatus(String state) {
+		return reservationrepository.getAllReservation(state);
+	}
 
 	@Override
 	public void GetReservationInfo(String reservationId, Model model) {

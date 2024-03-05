@@ -78,7 +78,7 @@
 												<div class="row justify-content-center">
 													<c:choose>
 														<c:when test="${ fn:contains(alarm.alarmId , 'mentorApplyAlarm') }">
-															<a href="<c:url value="/myInfo?mode=applyInfo&id=${ alarm.sendMemberId }"/>" class="row btn">
+															<a href="<c:url value="/myInfo?mode=applyInfo&id=${ alarm.linkId }"/>" class="row btn">
 																<div class="row">멘토 신청 알림</div>
 																<div class="row text-nowrap">${ alarm.content }</div>
 															</a>
@@ -92,7 +92,7 @@
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 														<c:when test="${ fn:contains(alarm.alarmId , 'ReservationApplyAlarm') }">
-															<div class="row">재능 판매 신청 알림</div>
+															<div class="row">재능 거래 신청 알림</div>
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 													</c:choose>

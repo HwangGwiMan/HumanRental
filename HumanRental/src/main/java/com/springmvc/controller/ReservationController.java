@@ -36,6 +36,9 @@ public class ReservationController {
 		Reservation reservation = reservationservice.BuyingReservationCreate(buyingId, date, content, memberId, model);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("mode", "reservation");
+		
+		alarmService.createReservationApplyAlarm(reservation);
+		
 		return "CheckPage"; // 추후 예약 현황 페이지로
 	}
 	

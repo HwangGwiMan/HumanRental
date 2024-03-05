@@ -33,18 +33,24 @@ public class MentorServiceImpl implements MentorService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getMentorListWithMember() {
-		return mentorRepository.getMentorListWithMember();
+	public List<Map<String, Object>> getMentorListWithMember(String sort, String sortTarget) {
+		return mentorRepository.getMentorListWithMember(sort, sortTarget);
+	}
+	
+
+	@Override
+	public List<Map<String, Object>> getMentorListWithMember(String state, String sort, String sortTarget) {
+		return mentorRepository.getMentorListWithMember(state, sort, sortTarget);
 	}
 
 	@Override
-	public List<Map<String, Object>> getMentorApplyList() {
-		return mentorRepository.getMentorApplyList();
+	public List<Map<String, Object>> getMentorApplyList(String sort, String sortTarget) {
+		return mentorRepository.getMentorApplyList(sort, sortTarget);
 	}
 	
 	@Override
-	public List<Map<String, Object>> getMentorApplyList(String state) {
-		return mentorRepository.getMentorApplyList(state);
+	public List<Map<String, Object>> getMentorApplyList(String state, String sort, String sortTarget) {
+		return mentorRepository.getMentorApplyList(state, sort, sortTarget);
 	}
 
 	@Override
@@ -84,7 +90,12 @@ public class MentorServiceImpl implements MentorService {
 	@Override
 	public void DeleteMentorProfile(String memberId) {
 		 mentorRepository.DeleteMentorProfile(memberId);
-		
 	}
+
+	@Override
+	public Map<String, Object> getMentorApplyByRegistIdTEST(String registId) {
+		return mentorRepository.getMentorApplyByRegistIdTEST(registId);
+	}
+	
 
 }
