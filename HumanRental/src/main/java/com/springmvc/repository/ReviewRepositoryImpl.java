@@ -75,9 +75,9 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 			check = template.queryForObject(sql, Integer.class, memberId, reservation.getBoardId());
 		}
 		if(check==0) {
-			return "false";
+			return "true";
 		}
-		return "true";
+		return "false";
 	}
 
 	@Override
