@@ -25,4 +25,20 @@ public class Utility {
 
 		return dateFormat.format(date);
 	}
+	
+	/*
+	 * 0 -> 정렬 안함
+	 * 1 -> 오름차순
+	 * 2 -> 내림차순
+	 */	
+	public String sortType(String sort) {
+		
+		if(sort.equals("1")) {
+			return "ASC";
+		} else if(sort.equals("2")) {
+			return "DESC";
+		} else {
+			return "";
+		}
+	}
 }

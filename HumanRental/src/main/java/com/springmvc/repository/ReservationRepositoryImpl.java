@@ -72,6 +72,23 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 			return null;
 		}
 	}
+	
+	@Override
+	public List<Reservation> getAllReservation(String state) {
+		String SQL = "SELECT * FROM reservation ";
+		
+		if(state.equals("buy")) {
+			SQL += "WHERE boardId like '%buy%'";
+		} else if(state.equals("sell")) {
+			SQL += "WHERE boardId like '%sell%'";
+		}
+
+		try {
+			return template.query(SQL, new BeanPropertyRowMapper<Reservation>(Reservation.class));
+		} catch(Exception e) {
+			return null;
+		}
+	}
 
 	@Override
 	public Reservation GetReservationInfo(String reservationId) {
