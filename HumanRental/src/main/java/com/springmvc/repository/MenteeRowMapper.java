@@ -16,7 +16,8 @@ public class MenteeRowMapper implements RowMapper<Mentee>{
 		mentee.setMemberId(rs.getString("memberId"));
 		mentee.setInterest(rs.getString("interest"));
 		mentee.setIntroduction(rs.getString("introduction"));
-		mentee.setStarRate(rs.getInt("starRate"));
+		mentee.setStarRate(rs.getFloat("starRate"));
+		mentee.setStarCount(rs.getInt("starRate"));
  
 		return mentee;
 		 

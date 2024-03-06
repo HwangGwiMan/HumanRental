@@ -33,6 +33,9 @@ public class ReviewServiceImpl implements ReviewService{
 	
 	@Autowired
 	MentorRepository mentorRepository;
+
+	@Autowired
+	MenteeRepository menteeRepository;
 	
 	@Override
 	public void BuyReviewWrite(Review review) {
@@ -44,6 +47,11 @@ public class ReviewServiceImpl implements ReviewService{
 	public void SellReviewWrite(Review review) {
 		reviewRepository.SellReviewWrite(review);
 		reviewRepository.BoardStarRateUpdate(review, false);;
+	}
+	
+	@Override
+	public void MemberReviewWrite(Review review) {
+		reviewRepository.MemberReviewWrite(review);
 	}
 
 	@Override
@@ -59,6 +67,13 @@ public class ReviewServiceImpl implements ReviewService{
 	 	String check =reviewRepository.ReviewCheck(reservation, memberId);
 	 	return check;
 	}
+	
+	@Override
+	public String ReviewCheck2(String reservationId, Model model, String memberId) {
+	 	Reservation reservation = (Reservation)model.getAttribute("reservation");
+	 	String check = reviewRepository.ReviewCheck2(reservation, memberId);
+	 	return check;
+	}
 
 	@Override
 	public void ReviewUpdate(Review review) {
@@ -67,10 +82,34 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void MentorStarRateUpdate(String memberId, int starRate, boolean duplication) {
-		MentorProfile mentor = mentorRepository.MentorprofileInformation(memberId);
-		reviewRepository.MentorStarRateUpdate(mentor, starRate, duplication);
+	public void MemberReviewUpdate(Review review) {
+		reviewRepository.MemberReviewUpdate(review);
+	}
+
+	@Override
+	public void StarRateUpdate(String memberId, Review review, boolean duplication) {
+		
+		if(review.getBoardId().contains("buy")) {
+			MentorProfile mentor = mentorRepository.MentorprofileInformation(memberId);
+			reviewRepository.MentorStarRateUpdate(mentor, review.getStarRate(), duplication);
+		}
+		else {
+			Mentee mentee =  menteeRepository.getInformation(memberId);
+			reviewRepository.MenteeStarRateUpdate(mentee, review.getStarRate(), duplication);
+		}
 	}
 	
-	
+
+	@Override
+	public void StarRateUpdate2(String applicantMemberId, Review review, boolean duplication) {
+		
+		if(review.getBoardId().contains("buy")) {
+			Mentee mentee =  menteeRepository.getInformation(applicantMemberId);
+			reviewRepository.MenteeStarRateUpdate(mentee, review.getStarRate(), duplication);
+		}
+		else {
+			MentorProfile mentor = mentorRepository.MentorprofileInformation(applicantMemberId);
+			reviewRepository.MentorStarRateUpdate(mentor, review.getStarRate(), duplication);
+		}
+	}
 }

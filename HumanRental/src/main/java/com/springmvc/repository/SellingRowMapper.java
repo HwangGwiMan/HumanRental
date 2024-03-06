@@ -17,7 +17,7 @@ public class SellingRowMapper implements RowMapper<Selling> {
 		selling.setMemberId(rs.getString(2));
 		selling.setNickname(rs.getString(3));
 		selling.setIntroduction(rs.getString(4));
-		selling.setStarRate(rs.getInt(5));
+		selling.setStarRate(rs.getFloat(5));
 		selling.setTitle(rs.getString(6));
 		selling.setContent(rs.getString(7));
 		selling.setRegist_day(rs.getTimestamp(8).toLocalDateTime());

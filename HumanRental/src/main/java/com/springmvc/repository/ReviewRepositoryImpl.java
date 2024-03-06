@@ -7,12 +7,14 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.springmvc.domain.Board;
 import com.springmvc.domain.Buying;
+import com.springmvc.domain.Mentee;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.Reservation;
@@ -48,19 +50,37 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 		template.update(sql, util.createId("sellingReview"), review.getBoardId(), review.getMemberId(), review.getTitle(),
 				review.getContent(), LocalDateTime.now(), review.getStarRate());
 	}
+	
+	@Override
+	public void MemberReviewWrite(Review review) {
+
+		String sql = "insert into MemberReview values(?,?,?,?,?,?,?)";
+		template.update(sql, util.createId("memberReview"), review.getBoardId(), review.getMemberId(), review.getTitle(),
+				review.getContent(), LocalDateTime.now(), review.getStarRate());
+	}
 
 	@Override
 	public Review getReviewByResvId(Reservation reservation, String memberId) {
 
 		String sql;
 		Review review = new Review();
-		if (reservation.getBoardId().contains("buy")) {
-			sql = "select * from BuyingReview where buyingId = ? and memberId = ?";
+		
+		if(memberId.equals(reservation.getMemberId())) {
+	    	sql = "select * from MemberReview where boardId = ? and memberId = ?";
 			review = template.query(sql, new ReviewRowMapper(), reservation.getBoardId(), memberId).get(0);
-		} else {
-			sql = "select * from SellingReview where sellingId = ? and memberId = ?";
-			review = template.query(sql, new ReviewRowMapper(), reservation.getBoardId(), memberId).get(0);
+	    }
+		else {
+			if (reservation.getBoardId().contains("buy")) {
+				System.out.println("바이");
+				sql = "select * from BuyingReview where buyingId = ? and memberId = ?";
+				review = template.query(sql, new ReviewRowMapper(), reservation.getBoardId(), memberId).get(0);
+			} else if(reservation.getBoardId().contains("sell")){
+				System.out.println("셀");
+				sql = "select * from SellingReview where sellingId = ? and memberId = ?";
+				review = template.query(sql, new ReviewRowMapper(), reservation.getBoardId(), memberId).get(0);
+			} 
 		}
+		
 		return review;
 	}
 
@@ -68,18 +88,64 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	public String ReviewCheck(Reservation reservation, String memberId) {
 
 		String sql;
-		int check;
-		if (reservation.getBoardId().contains("buy")) {
-			sql = "select count(*) from BuyingReview where memberId = ? and buyingId = ?";
-			check = template.queryForObject(sql, Integer.class, memberId, reservation.getBoardId());
-		} else {
-			sql = "select * from SellingReview where memberId = ? and sellingId = ?";
-			check = template.queryForObject(sql, Integer.class, memberId, reservation.getBoardId());
+		try {
+		    int check = 0;
+		    if(memberId.equals(reservation.getMemberId())) {
+		    	sql = "select count(*) from MemberReview where memberId = ? and boardId = ?";
+		        check = template.queryForObject(sql, Integer.class, memberId, reservation.getBoardId());
+		        System.out.println("작성자 진입");
+		    }
+		    else {
+			    if (reservation.getBoardId().contains("buy")) {
+			        sql = "select count(*) from BuyingReview where memberId = ? and buyingId = ?";
+			        check = template.queryForObject(sql, Integer.class, memberId, reservation.getBoardId());
+			        System.out.println("buy 진입");
+			    } else{
+			        sql = "select count(*) from SellingReview where memberId = ? and sellingId = ?";
+			        check = template.queryForObject(sql, Integer.class, memberId, reservation.getBoardId());
+			        System.out.println("sell 진입");
+			    } 
+		    }
+		    System.out.println("check="+check);
+		    if (check == 0) {
+		        return "true";
+		    } else {
+		        return "false";
+		    }
+		} catch (DataAccessException e) {
+		    e.printStackTrace();
+		    return "false";
 		}
-		if(check==0) {
-			return "true";
+	}
+	
+	
+	@Override
+	public String ReviewCheck2(Reservation reservation, String memberId) {
+		
+		String sql;
+		Review review = new Review();
+		
+		try {
+			if(memberId.equals(reservation.getMemberId())) {
+		    	sql = "select * from MemberReview where boardId = ? and memberId = ?";
+				review = template.query(sql, new ReviewRowMapper(), reservation.getBoardId(), memberId).get(0);
+		    }
+			else {
+				if (reservation.getBoardId().contains("buy")) {
+					sql = "select * from BuyingReview where buyingId = ? and memberId = ?";
+					review = template.query(sql, new ReviewRowMapper(), reservation.getBoardId(), memberId).get(0);
+				} else if(reservation.getBoardId().contains("sell")){
+					sql = "select * from SellingReview where sellingId = ? and memberId = ?";
+					review = template.query(sql, new ReviewRowMapper(), reservation.getBoardId(), memberId).get(0);
+				} 
+			}
 		}
-		return "false";
+		catch(Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		
+		return "true";
 	}
 
 	@Override
@@ -93,6 +159,13 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 		}
 		template.update(sql, review.getTitle(), review.getContent(), review.getStarRate(), review.getReviewId());
 	}
+	
+	@Override
+	public void MemberReviewUpdate(Review review) {
+
+		String sql = "UPDATE memberreview SET title = ?, content = ?, starRate = ? WHERE memberReviewId = ?";
+		template.update(sql, review.getTitle(), review.getContent(), review.getStarRate(), review.getReviewId());
+	}
 
 	@Override
 	public void BoardStarRateUpdate(Review review, boolean duplication) {
@@ -100,11 +173,11 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 		String sql;
 		Buying buy;
 		Selling sell;
-		int star;
-		int count;
-		int reStar;
-		int newStarRate;
-		int newStarCount;
+		float star;
+		float count;
+		float reStar;
+		float newStarRate;
+		float newStarCount;
 		
 		if (review.getBoardId().contains("buy")) {
 			sql = "select * from Buying where buyingId = ?";
@@ -148,10 +221,10 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	@Override
 	public void MentorStarRateUpdate(MentorProfile mentor, int starRate, boolean duplication) {
 		
-		int menStar = mentor.getStarRate();
-		int menCount = mentor.getStarCount();
-		int newStarRate;
-		int newStarCount;
+		float menStar = mentor.getStarRate();
+		float menCount = mentor.getStarCount();
+		float newStarRate;
+		float newStarCount;
 		
 		if (duplication == false) {
 			newStarRate = ((menStar * menCount) + starRate) / (menCount + 1);
@@ -163,7 +236,26 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 		
 		String sql = "update MentorProfile set starRate = ?, starCount = ? where memberId = ?";
 		template.update(sql, newStarRate, newStarCount, mentor.getMemberId());
+	}
+
+	@Override
+	public void MenteeStarRateUpdate(Mentee mentee, int starRate, boolean duplication) {
+
+		float menStar = mentee.getStarRate();
+		float menCount = mentee.getStarCount();
+		float newStarRate;
+		float newStarCount;
 		
+		if (duplication == false) {
+			newStarRate = ((menStar * menCount) + starRate) / (menCount + 1);
+			newStarCount = menCount + 1;
+		} else {
+			newStarRate = ((menStar * menCount) - menStar + starRate) / menCount;
+			newStarCount = menCount;
+		}
+		
+		String sql = "update MenteeProfile set starRate = ?, starCount = ? where memberId = ?";
+		template.update(sql, newStarRate, newStarCount, mentee.getMemberId());
 	}
 
 	
