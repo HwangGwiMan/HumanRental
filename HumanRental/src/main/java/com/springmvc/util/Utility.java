@@ -29,6 +29,29 @@ public class Utility {
 	public String sortSQL(String sort, String sortTarget) {
 		String orderSQL = new String();
 		
+		// 회원 관리
+		if(sortTarget.equals("유저 ID")) {
+			orderSQL = "ORDER BY memberId ";
+		} else if(sortTarget.equals("가입일")) {
+			orderSQL = "ORDER BY joinDate ";
+		} else if(sortTarget.equals("멘토 권한")) {
+			orderSQL = "ORDER BY mentorId ";
+		} else if(sortTarget.equals("멘토 등록일")) {
+			orderSQL = "ORDER BY registDate ";
+		}
+		
+		// 멘토 신청 관리
+		if(sortTarget.equals("유저 ID")) {
+			orderSQL = "ORDER BY memberId ";
+		} else if(sortTarget.equals("신청일")) {
+			orderSQL = "ORDER BY applyDate ";
+		} else if(sortTarget.equals("처리결과")) {
+			orderSQL = "ORDER BY state ";
+		} else if(sortTarget.equals("처리일")) {
+			orderSQL = "ORDER BY confirmDate ";
+		}
+		
+		// 예약 현황
 		if(sortTarget.equals("거래 유형")) {
 			orderSQL = "ORDER BY boardId ";
 		} else if(sortTarget.equals("재능명")) {
@@ -45,6 +68,7 @@ public class Utility {
 			orderSQL = "ORDER BY signDate ";
 		}
 		
+		// 신고 관리
 		if(sortTarget.equals("신고자 ID")) {
 			orderSQL = "ORDER BY reporterId ";
 		} else if(sortTarget.equals("신고 유형")) {

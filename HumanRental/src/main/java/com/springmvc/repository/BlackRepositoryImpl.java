@@ -49,11 +49,14 @@ public class BlackRepositoryImpl implements BlackRepository {
 	}
 	
 	@Override
-	public List<Black> getBlackList() {
-		String SQL;
+	public List<Black> getBlackList(String sort,String sortTarget) {
+		String SQL = "SELECT * FROM blacklist";
+		
+		if(!(sort.equals("none") || sort.equals("0"))) {
+			SQL += util.sortSQL(sort, sortTarget);
+		}
 		
 		try {
-			SQL = "SELECT * FROM blacklist";
 			return template.query(SQL, new RowMapper<Black>() {
 
 				@Override

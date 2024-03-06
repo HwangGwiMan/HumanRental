@@ -135,6 +135,10 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 		} else if(state.equals("sell")) {
 			SQL += "WHERE boardId like '%sell%'";
 		}
+		
+		if(!(sort.equals("none") || sort.equals("0"))) {
+			SQL += util.sortSQL(sort, sortTarget);
+		}
 
 		try {
 			return template.query(SQL, new BeanPropertyRowMapper<Reservation>(Reservation.class));

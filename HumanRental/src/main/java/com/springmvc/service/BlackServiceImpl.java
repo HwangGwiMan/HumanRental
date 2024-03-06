@@ -22,8 +22,8 @@ public class BlackServiceImpl implements BlackService {
 	}
 
 	@Override
-	public List<Black> getBlackList() {
-		return blackRepository.getBlackList();
+	public List<Black> getBlackList(String sort, String sortTarget) {
+		return blackRepository.getBlackList(sort, sortTarget);
 	}
 
 	@Override

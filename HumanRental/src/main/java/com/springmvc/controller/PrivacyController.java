@@ -92,7 +92,7 @@ public class PrivacyController {
 					model.addAttribute("reportInfo", reportService.getReport(targetId));
 				} else if(mode.equals("blackListManagement")) {
 					// 블랙리스트 관리
-					model.addAttribute("blackList", blackService.getBlackList());
+					model.addAttribute("blackList", blackService.getBlackList(sort, sortTarget));
 				} else if(mode.equals("reservationMonitor")) {
 					// 예약 현황
 					if(state.equals("none")) {

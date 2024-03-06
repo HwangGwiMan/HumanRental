@@ -84,15 +84,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 				+ "ON mentorapply.registId = mentorregistinfo.registId ";
 
 		if(!(sort.equals("none") || sort.equals("0"))) {
-			if(sortTarget.equals("유저 ID")) {
-				SQL += "ORDER BY memberId " + util.sortType(sort);
-			} else if(sortTarget.equals("신청일")) {
-				SQL += "ORDER BY applyDate " + util.sortType(sort);
-			} else if(sortTarget.equals("처리결과")) {
-				SQL += "ORDER BY state " + util.sortType(sort);
-			} else if(sortTarget.equals("처리일")) {
-				SQL += "ORDER BY confirmDate " + util.sortType(sort);
-			}
+			SQL += util.sortSQL(sort, sortTarget);
 		}
 				
 		try {
@@ -128,15 +120,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 		}
 		
 		if(!(sort.equals("none") || sort.equals("0"))) {
-			if(sortTarget.equals("유저 ID")) {
-				SQL += "ORDER BY memberId " + util.sortType(sort);
-			} else if(sortTarget.equals("신청일")) {
-				SQL += "ORDER BY applyDate " + util.sortType(sort);
-			} else if(sortTarget.equals("처리결과")) {
-				SQL += "ORDER BY state " + util.sortType(sort);
-			} else if(sortTarget.equals("처리일")) {
-				SQL += "ORDER BY confirmDate " + util.sortType(sort);
-			}
+			SQL += util.sortSQL(sort, sortTarget);
 		}
 		
 		try {
@@ -226,15 +210,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 				+ "ON member.memberId = mentor.memberId ";
 		
 		if(!(sort.equals("none") || sort.equals("0"))) {
-			if(sortTarget.equals("유저 ID")) {
-				SQL += "ORDER BY memberId " + util.sortType(sort);
-			} else if(sortTarget.equals("가입일")) {
-				SQL += "ORDER BY joinDate " + util.sortType(sort);
-			} else if(sortTarget.equals("멘토 권한")) {
-				SQL += "ORDER BY mentorId " + util.sortType(sort);
-			} else if(sortTarget.equals("멘토 등록일")) {
-				SQL += "ORDER BY registDate " + util.sortType(sort);
-			}
+			SQL += util.sortSQL(sort, sortTarget);
 		}
 		
 
@@ -277,15 +253,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 				+ "WHERE registDate " + state;
 		
 		if(!(sort.equals("none") || sort.equals("0"))) {
-			if(sortTarget.equals("유저 ID")) {
-				SQL += "ORDER BY memberId " + util.sortType(sort);
-			} else if(sortTarget.equals("가입일")) {
-				SQL += "ORDER BY joinDate " + util.sortType(sort);
-			} else if(sortTarget.equals("멘토 권한")) {
-				SQL += "ORDER BY mentorId " + util.sortType(sort);
-			} else if(sortTarget.equals("멘토 등록일")) {
-				SQL += "ORDER BY registDate " + util.sortType(sort);
-			}
+			SQL += util.sortSQL(sort, sortTarget);
 		}
 		
 		try {
