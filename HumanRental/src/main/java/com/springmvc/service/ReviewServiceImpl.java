@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import com.springmvc.domain.Buying;
 import com.springmvc.domain.Mentee;
 import com.springmvc.domain.Mentor;
+import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.Reservation;
 import com.springmvc.domain.Review;
 import com.springmvc.domain.Selling;
@@ -30,14 +31,19 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	ReviewRepository reviewRepository;
 	
+	@Autowired
+	MentorRepository mentorRepository;
+	
 	@Override
 	public void BuyReviewWrite(Review review) {
 		reviewRepository.BuyReviewWrite(review);
+		reviewRepository.BoardStarRateUpdate(review, false);;
 	}
 
 	@Override
 	public void SellReviewWrite(Review review) {
 		reviewRepository.SellReviewWrite(review);
+		reviewRepository.BoardStarRateUpdate(review, false);;
 	}
 
 	@Override
@@ -57,7 +63,13 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public void ReviewUpdate(Review review) {
 		reviewRepository.ReviewUpdate(review);
-		reviewRepository.StarRateUpdate(review, true);;
+		reviewRepository.BoardStarRateUpdate(review, true);;
+	}
+
+	@Override
+	public void MentorStarRateUpdate(String memberId, int starRate, boolean duplication) {
+		MentorProfile mentor = mentorRepository.MentorprofileInformation(memberId);
+		reviewRepository.MentorStarRateUpdate(mentor, starRate, duplication);
 	}
 	
 	

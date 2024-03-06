@@ -15,4 +15,5 @@ public interface ReviewService {
 	public void getReviewByResvId(String reservationId, Model model, String memberId);
 	public String ReviewCheck(String reservationId, Model model, String memberId);
 	public void ReviewUpdate(Review review);
+	public void MentorStarRateUpdate(String memberId, int starRate, boolean duplication);
 }

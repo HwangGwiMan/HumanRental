@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.domain.Member;
+import com.springmvc.domain.Reservation;
 import com.springmvc.domain.Review;
 import com.springmvc.repository.ReservationRepository;
 import com.springmvc.domain.Buying;
@@ -34,24 +35,27 @@ public class ReviewController {
 	public String ReviewWrite(@RequestParam String reservationId, Model model) {
 		
 		reservationService.GetReservationInfo(reservationId, model);
-//		model.addAttribute("reservationId", reservationId);
 		model.addAttribute("mode", "ReviewPage");
 		model.addAttribute("reviewmode", "write");
 		return "MyPage";
 	}
 	
 	@PostMapping("/ReviewWrite")
-	public String ReviewWrite(@ModelAttribute Review review, @RequestParam String reservationId, Model model) {
+	public String ReviewWrite(@ModelAttribute Review review, @RequestParam String reservationId, Model model, HttpServletRequest request) {
 		
-		if(review.getBoardId().contains("buy")) {
-			reviewService.BuyReviewWrite(review);
-			reservationService.ReservationApproval(reservationId, "review");
+		Reservation reservation = reservationService.GetReservationInfo(reservationId, model);
+		String memberId = reservation.getMemberId();
+		
+		if(memberId!=review.getMemberId()) {
+			if(review.getBoardId().contains("buy")) {
+				reviewService.BuyReviewWrite(review);
+				reviewService.MentorStarRateUpdate(memberId, review.getStarRate(), false);
+			}
+			else {
+				reviewService.SellReviewWrite(review);
+			}
 		}
-		else {
-			reviewService.SellReviewWrite(review);
-			reservationService.ReservationApproval(reservationId, "review");
-		}
-
+		
 		return "redirect:/reservationListManagement";
 	}
 	

@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 
 import com.springmvc.domain.Board;
 import com.springmvc.domain.Buying;
+import com.springmvc.domain.Mentor;
+import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.Reservation;
 import com.springmvc.domain.Review;
 import com.springmvc.domain.Selling;
@@ -85,16 +87,15 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
 		String sql;
 		if (review.getBoardId().contains("buy")) {
-			sql = "UPDATE buyingreview SET title = ?, content = ? WHERE buyingReviewId = ?";
+			sql = "UPDATE buyingreview SET title = ?, content = ?, starRate = ? WHERE buyingReviewId = ?";
 		} else {
-			sql = "UPDATE sellingreview SET title = ?, content = ? WHERE sellingReviewId = ?";
+			sql = "UPDATE sellingreview SET title = ?, content = ?, starRate = ? WHERE sellingReviewId = ?";
 		}
-		template.update(sql, review.getTitle(), review.getContent(), review.getReviewId());
-
+		template.update(sql, review.getTitle(), review.getContent(), review.getStarRate(), review.getReviewId());
 	}
 
 	@Override
-	public void StarRateUpdate(Review review, boolean duplication) {
+	public void BoardStarRateUpdate(Review review, boolean duplication) {
 
 		String sql;
 		Buying buy;
@@ -102,13 +103,12 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 		int star;
 		int count;
 		int reStar;
-		int oldReStar;
 		int newStarRate;
 		int newStarCount;
 		
 		if (review.getBoardId().contains("buy")) {
 			sql = "select * from Buying where buyingId = ?";
-			buy = (Buying) template.query(sql, new BuyingRowMapper(), review.getBoardId());
+			buy = template.query(sql, new BuyingRowMapper(), review.getBoardId()).get(0);
 
 			star = buy.getStarRate();
 			count = buy.getStarCount();
@@ -118,18 +118,15 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 				newStarRate = ((star * count) + reStar) / (count + 1);
 				newStarCount = count + 1;
 			} else {
-				sql = "select starRate from buyingreview where buyingReviewId = ?";
-				oldReStar = template.queryForObject(sql, Integer.class, review.getReviewId());
-				newStarRate = ((star * count) + (reStar - oldReStar)) / count;
+				newStarRate = ((star * count) - star + reStar) / count;
 				newStarCount = count;
 			}
-			
-			sql = "UPDATE Buying SET starRate = ?, starCount = ? WHERE buyingReviewId = ?";
-			template.update(sql, newStarRate, newStarCount, review.getReviewId());
+			sql = "UPDATE Buying SET starRate = ?, starCount = ? WHERE buyingId = ?";
+			template.update(sql, newStarRate, newStarCount, review.getBoardId());
 		} 
 		else if (review.getBoardId().contains("sell")) {
 			sql = "select * from Selling where sellingId = ?";
-			sell = (Selling) template.query(sql, new SellingRowMapper(), review.getBoardId());
+			sell = template.query(sql, new SellingRowMapper(), review.getBoardId()).get(0);
 
 			star = sell.getStarRate();
 			count = sell.getStarCount();
@@ -139,16 +136,35 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 				newStarRate = ((star * count) + reStar) / (count + 1);
 				newStarCount = count + 1;
 			} else {
-				sql = "select starRate from sellingreview where sellingReviewId = ?";
-				oldReStar = template.queryForObject(sql, Integer.class, review.getReviewId());
-				newStarRate = ((star * count) + (reStar - oldReStar)) / count;
+				newStarRate = ((star * count) - star + reStar) / count;
 				newStarCount = count;
 			}
-			
-			sql = "UPDATE Selling SET starRate = ?, starCount = ? WHERE sellingReviewId = ?";
-			template.update(sql, newStarRate, newStarCount, review.getReviewId());
+			sql = "UPDATE Selling SET starRate = ?, starCount = ? WHERE sellingId = ?";
+			template.update(sql, newStarRate, newStarCount, review.getBoardId());
 		}
+	}
+	
 
+	@Override
+	public void MentorStarRateUpdate(MentorProfile mentor, int starRate, boolean duplication) {
+		
+		int menStar = mentor.getStarRate();
+		int menCount = mentor.getStarCount();
+		int newStarRate;
+		int newStarCount;
+		
+		if (duplication == false) {
+			newStarRate = ((menStar * menCount) + starRate) / (menCount + 1);
+			newStarCount = menCount + 1;
+		} else {
+			newStarRate = ((menStar * menCount) - menStar + starRate) / menCount;
+			newStarCount = menCount;
+		}
+		
+		String sql = "update MentorProfile set starRate = ?, starCount = ? where memberId = ?";
+		template.update(sql, newStarRate, newStarCount, mentor.getMemberId());
+		
 	}
 
+	
 }

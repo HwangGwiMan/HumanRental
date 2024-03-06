@@ -850,8 +850,10 @@
 											<label class="col-sm-2 control-label" >별점</label>
 											<div class="col-sm-5">
 												<label id="range" class="star-rate">
-													<input name="starRate" class="star-range" type="range" min="1" max="5" step="1" value="5" ${reviewmode == 'read' ? 'readonly' : 'required'}
-													onchange="_(this); function _(e){ e.setAttribute('value', e.value); };"/>
+													<input name="starRate" class="star-range" type="range" min="1" max="5" step="1" 
+													value="${reviewmode == 'write' ? '5' : review.starRate}" 
+													${reviewmode == 'read' ? 'readonly' : 'required'} 
+													${reviewmode == 'read' ? 'onchange="return false;"' : 'onchange="_(this); function _(e){ e.setAttribute(\'value\', e.value); };"'} />
 														<div class="stars">
 															<span><i data-star-value="1" class="fa fa-star"></i></span>
 															<span><i data-star-value="2" class="fa fa-star"></i></span>
@@ -880,14 +882,16 @@
 											<div class="col-sm-offset-2 col-sm-10 ">
 												<c:if test="${reviewmode == 'write'}">
 													<input type="submit" class="btn btn-primary" value="작성">
+													<input type="reset" class="btn btn-danger" onclick="goBack()" value="취소">
 												</c:if>
 												<c:if test="${reviewmode == 'read'}">
 													<a href="/HumanRental/ReviewUpdate?reservationId=${reservation.reservationId}" class="btn btn-primary">수정</a>
+													<a href="/HumanRental/reservationListManagement" class="btn btn-danger">목록</a>
 												</c:if>
 												<c:if test="${reviewmode == 'update'}">
 													<input type="submit" class="btn btn-primary" value="완료">
+													<input type="reset" class="btn btn-danger" onclick="goBack()" value="취소">
 												</c:if>
-												<a href="/HumanRental/reservationListManagement" class="btn btn-danger">목록</a>
 											</div>
 										</div>
 									</form:form>

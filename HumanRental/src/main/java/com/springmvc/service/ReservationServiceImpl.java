@@ -176,7 +176,7 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public void GetReservationInfo(String reservationId, Model model) {
+	public Reservation GetReservationInfo(String reservationId, Model model) {
 		
 		String menteeNickname;
 		String mentorNickname;
@@ -197,6 +197,7 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		
 		model.addAttribute("reservation", reservation);
+		return reservation;
 	}
 
 	@Override
