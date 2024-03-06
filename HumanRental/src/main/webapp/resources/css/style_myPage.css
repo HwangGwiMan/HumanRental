@@ -92,3 +92,8 @@
 .star-check:nth-of-type(5):checked ~ .stars [data-star-value="5"] {
 	color: var(--warn);
 }
+
+/* TableHeader */
+thead th {
+	position: sticky; top: 0px;
+}

@@ -112,9 +112,7 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), null);
 	}
 	
-	
-	
-	// 예약 검토 알람(승인 및 거절)
+	// 예약 검토 알람(승인 및 거절) 
 	@Override
 	public void createReservationConfirmAlarm(String reservationId, String approval) {
 		String SQL;
@@ -122,18 +120,25 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		SQL = "SELECT * FROM reservation WHERE reservationId = ?";
 		Reservation reservation = template.queryForObject(SQL, new BeanPropertyRowMapper<Reservation>(Reservation.class), reservationId);
 		
-		String targetId = reservation.getBoardId();
+		//String targetId = reservation.getBoardId();
 		
 		Alarm alarm = new Alarm();
 		
-		if(targetId.contains("sell")) {
-			alarm.setSendMemberId(null);
-		} else if(targetId.contains("buy")) {
-			
+		alarm.setSendMemberId(reservation.getMemberId());
+		alarm.setReceiveMemberId(reservation.getApplicantMemberId());
+		
+		if(approval.equals("yes")) {
+			alarm.setContent("신청하신 재능 거래가 승인되었습니다. 관련 : " + reservation.getTitle());
+		} else if(approval.equals("no")) {
+			alarm.setContent("신청하신 재능 거래가 거부되었습니다. 관련 : " + reservation.getTitle());
+		} else if(approval.equals("rentalyes")) {
+			alarm.setContent("신청하신 재능 거래가 정상적으로 종료되었습니다. 관련 : " + reservation.getTitle());
+		} else if(approval.equals("rentalno")) {
+			alarm.setContent("신청하신 재능 거래가 실패처리 되었습니다. 관련 : " + reservation.getTitle());
 		}
-		
-		
-		
+
+		SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?, ?)";
+		template.update(SQL, util.createId("ReservationConfirmAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), null);
 	}
 
 	// 알람 목록

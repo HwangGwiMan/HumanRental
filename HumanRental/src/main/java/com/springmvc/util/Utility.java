@@ -26,6 +26,42 @@ public class Utility {
 		return dateFormat.format(date);
 	}
 	
+	public String sortSQL(String sort, String sortTarget) {
+		String orderSQL = new String();
+		
+		if(sortTarget.equals("거래 유형")) {
+			orderSQL = "ORDER BY boardId ";
+		} else if(sortTarget.equals("재능명")) {
+			orderSQL = "ORDER BY title ";
+		} else if(sortTarget.equals("멘토 ID")) {
+			orderSQL = "ORDER BY memberId ";
+		} else if(sortTarget.equals("멘티 ID")) {
+			orderSQL = "ORDER BY applicantMemberId ";
+		} else if(sortTarget.equals("일정")) {
+			orderSQL = "ORDER BY reservationDate ";
+		} else if(sortTarget.equals("상태")) {
+			orderSQL = "ORDER BY approve ";
+		} else if(sortTarget.equals("예약 매칭 날짜")) {
+			orderSQL = "ORDER BY signDate ";
+		}
+		
+		if(sortTarget.equals("신고자 ID")) {
+			orderSQL = "ORDER BY reporterId ";
+		} else if(sortTarget.equals("신고 유형")) {
+			orderSQL = "ORDER BY target ";
+		} else if(sortTarget.equals("신고 대상 ID")) {
+			orderSQL = "ORDER BY targetId ";
+		} else if(sortTarget.equals("신고 내용")) {
+			orderSQL = "ORDER BY type ";
+		} else if(sortTarget.equals("처리 상태")) {
+			orderSQL = "ORDER BY state ";
+		} else if(sortTarget.equals("신고 날짜")) {
+			orderSQL = "ORDER BY createDate ";
+		}
+				
+		return orderSQL + sortType(sort);
+	}
+	
 	/*
 	 * 0 -> 정렬 안함
 	 * 1 -> 오름차순

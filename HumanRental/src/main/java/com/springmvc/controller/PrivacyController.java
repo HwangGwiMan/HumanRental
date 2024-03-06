@@ -86,7 +86,7 @@ public class PrivacyController {
 					model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistIdTEST(targetId));
 				} else if(mode.equals("report")) {
 					// 신고 관리
-					model.addAttribute("reportList", reportService.getReportList());
+					model.addAttribute("reportList", reportService.getReportList(sort, sortTarget));
 				} else if(mode.equals("reportInfo")) {
 					// 개별 신고 관리
 					model.addAttribute("reportInfo", reportService.getReport(targetId));
@@ -96,9 +96,9 @@ public class PrivacyController {
 				} else if(mode.equals("reservationMonitor")) {
 					// 예약 현황
 					if(state.equals("none")) {
-						model.addAttribute("reservationList", reservationService.getMonitorReservationStatus());
+						model.addAttribute("reservationList", reservationService.getMonitorReservationStatus(sort, sortTarget));
 					} else {
-						model.addAttribute("reservationList", reservationService.getMonitorReservationStatus(state));
+						model.addAttribute("reservationList", reservationService.getMonitorReservationStatus(state, sort, sortTarget));
 					}
 					
 				}

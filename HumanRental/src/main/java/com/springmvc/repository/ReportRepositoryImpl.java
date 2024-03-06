@@ -26,8 +26,6 @@ import com.springmvc.util.Utility;
 @Repository
 public class ReportRepositoryImpl implements ReportRepository {
 	
-	
-	
 	Utility util = new Utility();
 	
 	// JDBC
@@ -37,13 +35,16 @@ public class ReportRepositoryImpl implements ReportRepository {
 	public void setJdbcTemplate(DataSource dataSource) {
 		this.template = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Override
-	public List<Report> getReportList() {
-		String SQL;
+	public List<Report> getReportList(String sort, String sortTarget) {
+		String SQL = "SELECT * FROM report ";
+		
+		if(!(sort.equals("none") || sort.equals("0"))) {
+			SQL += util.sortSQL(sort, sortTarget);
+		}
 				
 		try {
-			SQL = "SELECT * FROM report";
 			return template.query(SQL, new RowMapper<Report>() {
 				
 				@Override

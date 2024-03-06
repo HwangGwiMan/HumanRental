@@ -171,14 +171,14 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	@Override
-	public List<Reservation> getMonitorReservationStatus() {
-		return reservationrepository.getAllReservation();
+	public List<Reservation> getMonitorReservationStatus(String sort, String sortTarget) {
+		return reservationrepository.getAllReservation(sort, sortTarget);
 	}
 	
 
 	@Override
-	public List<Reservation> getMonitorReservationStatus(String state) {
-		return reservationrepository.getAllReservation(state);
+	public List<Reservation> getMonitorReservationStatus(String state, String sort, String sortTarget) {
+		return reservationrepository.getAllReservation(state, sort, sortTarget);
 	}
 
 	@Override

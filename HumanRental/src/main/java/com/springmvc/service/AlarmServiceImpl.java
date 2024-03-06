@@ -46,5 +46,8 @@ public class AlarmServiceImpl implements AlarmService{
 		alarmRepository.createReservationApplyAlarm(reservation);
 	}
 	
-	
+	@Override
+	public void createReservationConfirmAlarm(String reservationId, String approval) {
+		alarmRepository.createReservationConfirmAlarm(reservationId, approval);
+	}
 }

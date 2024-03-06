@@ -403,33 +403,37 @@
 										<a href="<c:url value="/myInfo?mode=memberManagement&t=Accept"/> " class="col-2 m-1  btn btn-primary">멘토 승인</a>
 										<a href="<c:url value="/myInfo?mode=memberManagement&t=NotRegist"/>" class="col-2 m-1 btn btn-secondary">멘토 미승인</a>
 									</div>
-									<table class="table table-hover">
-										<tr id="thead">
-											<th>순번</th>
-											<th>유저 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-											<th>가입일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-											<th>멘토 권한<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-											<th>멘토 등록일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-										</tr>
-										<tbody id="tbody">	
-										<c:forEach var="member" items="${memberList}" varStatus="status">
-											<tr>		
-												<td>${ status.count }</td>
-												<td>${ member.memberId }</td>
-												<td>${ member.memberJoinDate }</td>
-												<td>
-													<c:if test="${ not empty member.mentorId }">
-														<div class="badge bg-primary">승인</div>
-													</c:if>
-													<c:if test="${ empty member.mentorId }">
-														<div class="badge bg-secondary">미승인</div>
-													</c:if>
-												</td>
-												<td>${ member.mentorRegistDate }</td>
-											</tr>
-										</c:forEach>
-										</tbody>
-									</table>
+									<div style="overflow-y:scroll; width:auto; height:400px;">
+										<table class="table table-hover" >
+											<thead>
+												<tr id="thead">
+													<th>순번</th>
+													<th>유저 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>가입일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>멘토 권한<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>멘토 등록일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+												</tr>
+											</thead>
+											<tbody id="tbody">	
+											<c:forEach var="member" items="${memberList}" varStatus="status">
+												<tr>		
+													<td>${ status.count }</td>
+													<td>${ member.memberId }</td>
+													<td>${ member.memberJoinDate }</td>
+													<td>
+														<c:if test="${ not empty member.mentorId }">
+															<div class="badge bg-primary">승인</div>
+														</c:if>
+														<c:if test="${ empty member.mentorId }">
+															<div class="badge bg-secondary">미승인</div>
+														</c:if>
+													</td>
+													<td>${ member.mentorRegistDate }</td>
+												</tr>
+											</c:forEach>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'mentorApplyManagement' }">
@@ -439,36 +443,40 @@
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="col-2 m-1  btn btn-primary">처리된 요청</a>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="col-2 m-1 btn btn-secondary">보류 중인 요청</a>
 									</div>
-									<table class="table table-hover "><!-- 멘토 신청 관리 -->
-										<tr id="thead">
-											<th>순번</th>
-											<th>유저 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-											<th>신청일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-											<th>처리결과<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-											<th>처리일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
-										</tr>
-										<tbody id="tbody">
-										<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
-											<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }', '${ applyInfo.registId }')">
-												<td>${ status.count }</td>
-												<td>${ applyInfo.memberId }</td>
-												<td>${ applyInfo.applyDate }</td>
-												<c:choose>
-													<c:when test="${ applyInfo.state == 'Wait' }">
-														<td><div class="badge bg-secondary">대기중</div></td>
-													</c:when>
-													<c:when test="${ applyInfo.state == 'Accept' }">
-														<td><div class="badge bg-success">승인</div></td>
-													</c:when>
-													<c:when test="${ applyInfo.state == 'Refuse' }">
-														<td><div class="badge bg-danger">거부</div></td>
-													</c:when>
-												</c:choose>
-												<td>${ applyInfo.confirmDate }</td>
-											</tr>
-										</c:forEach>
-										</tbody>
-									</table>
+									<div style="overflow-y:scroll; width:auto; height:400px;">
+										<table class="table table-hover "><!-- 멘토 신청 관리 -->
+											<thead>
+												<tr id="thead">
+													<th>순번</th>
+													<th>유저 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>신청일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>처리결과<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>처리일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+												</tr>
+											</thead>
+											<tbody id="tbody">
+											<c:forEach var="applyInfo" items="${applyList}" varStatus="status">
+												<tr onclick="javascript:readApplyInfo('${ applyInfo.memberId }', '${ applyInfo.registId }')">
+													<td>${ status.count }</td>
+													<td>${ applyInfo.memberId }</td>
+													<td>${ applyInfo.applyDate }</td>
+													<c:choose>
+														<c:when test="${ applyInfo.state == 'Wait' }">
+															<td><div class="badge bg-secondary">대기중</div></td>
+														</c:when>
+														<c:when test="${ applyInfo.state == 'Accept' }">
+															<td><div class="badge bg-success">승인</div></td>
+														</c:when>
+														<c:when test="${ applyInfo.state == 'Refuse' }">
+															<td><div class="badge bg-danger">거부</div></td>
+														</c:when>
+													</c:choose>
+													<td>${ applyInfo.confirmDate }</td>
+												</tr>
+											</c:forEach>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'applyInfo' }">
@@ -515,38 +523,44 @@
 							</c:when>
 							<c:when test="${ mode == 'report' }"><!-- 신고 관리 페이지 -->
 								<div class="p-5">
-									<table class="table table-hover">
-										<tr>
-											<th>번호</th>
-											<th>신고자 ID</th>
-											<th>신고 유형</th>
-											<th>신고 대상 ID</th>
-											<th>신고 내용</th>
-											<th>처리 상태</th>
-											<th>신고 날짜</th>
-										</tr>
-										<c:forEach var="report" items="${ reportList }" varStatus="status">
-											<tr onclick="javascript:readReportInfo('${ report.reportId }')">
-												<td>${ status.count }</td>
-												<td>${ report.reporterId }</td>
-												<td>${ report.target }</td>
-												<td>${ report.targetId }</td>
-												<td>${ report.type }</td>
-												<c:choose>
-													<c:when test="${ report.state == 'Wait' }">
-														<td><div class="badge bg-secondary">대기중</div></td>
-													</c:when>
-													<c:when test="${ report.state == 'Warning' }">
-														<td><div class="badge bg-warning">경고 처리</div></td>
-													</c:when>
-													<c:when test="${ report.state == 'Black' }">
-														<td><div class="badge bg-dark">블랙 처리</div></td>
-													</c:when>
-												</c:choose>
-												<td>${ report.createDate }</td>
-											</tr>
-										</c:forEach>
-									</table>
+									<div style="overflow-y:scroll; width:auto; height:400px;">									
+										<table class="table table-hover">
+											<thead>
+												<tr id="thead">
+													<th>순번</th>
+													<th>신고자 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>신고 유형<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>신고 대상 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>신고 내용<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>처리 상태<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>신고 날짜<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+												</tr>
+											</thead>
+											<tbody id="tbody">
+											<c:forEach var="report" items="${ reportList }" varStatus="status">
+												<tr onclick="javascript:readReportInfo('${ report.reportId }')">
+													<td>${ status.count }</td>
+													<td>${ report.reporterId }</td>
+													<td>${ report.target }</td>
+													<td>${ report.targetId }</td>
+													<td>${ report.type }</td>
+													<c:choose>
+														<c:when test="${ report.state == 'Wait' }">
+															<td><div class="badge bg-secondary">대기중</div></td>
+														</c:when>
+														<c:when test="${ report.state == 'Warning' }">
+															<td><div class="badge bg-warning">경고 처리</div></td>
+														</c:when>
+														<c:when test="${ report.state == 'Black' }">
+															<td><div class="badge bg-dark">블랙 처리</div></td>
+														</c:when>
+													</c:choose>
+													<td>${ report.createDate }</td>
+												</tr>
+											</c:forEach>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'reportInfo' }">
@@ -589,26 +603,32 @@
 									</div>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'blackListManagement' }"><!-- 신고 관리 페이지 -->
+							<c:when test="${ mode == 'blackListManagement' }"><!-- 블랙리스트 관리 페이지 -->
 								<div class="p-5">
-									<table class="table table-hover">
-										<tr>
-											<th>번호</th>
-											<th>블랙리스트 ID</th>
-											<th>멤버 ID</th>
-											<th>등록일</th>
-											<th></th>
-										</tr>
-										<c:forEach var="black" items="${ blackList }" varStatus="status">
-											<tr class="align-middle">
-												<td>${ status.count }</td>
-												<td>${ black.blackId }</td>
-												<td>${ black.memberId }</td>
-												<td>${ black.registDate }</td>
-												<td><a href="<c:url value="/removeBlack?id=${ black.blackId }" />" class="btn">해제</a></td>
-											</tr>
-										</c:forEach>
-									</table>
+									<div style="overflow-y:scroll; width:auto; height:400px;">
+										<table class="table table-hover">
+											<thead>
+												<tr id="thead">
+													<th>순번</th>
+													<th>블랙리스트 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>멤버 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>등록일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody id="tbody">
+												<c:forEach var="black" items="${ blackList }" varStatus="status">
+													<tr class="align-middle">
+														<td>${ status.count }</td>
+														<td>${ black.blackId }</td>
+														<td>${ black.memberId }</td>
+														<td>${ black.registDate }</td>
+														<td><a href="<c:url value="/removeBlack?id=${ black.blackId }" />" class="btn">해제</a></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'buyingListManagement' }"><!-- 삽니다 관리 페이지 -->
@@ -636,12 +656,14 @@
 								<div><hr><h2>팝니다 등록 목록</h2><hr></div>
 								<div>
 									<table class="table table-hover">
-										<tr>
-											<th>번호</th>
-											<th>제목</th>
-											<th>카테고리</th>
-											<th>등록일</th>
-										</tr>
+										<thead>
+											<tr>
+												<th>번호</th>
+												<th>제목</th>
+												<th>카테고리</th>
+												<th>등록일</th>
+											</tr>
+										</thead>
 										<c:forEach var="selling" items="${sellinglist}" varStatus="status">					
 											<tr>		
 												<td>${ status.count }</td>
@@ -913,51 +935,57 @@
 									</form:form>
 								</div>
 							</c:when>
-							<c:when test="${ mode == 'reservationMonitor' }"><!-- 예약 현황 -->
+							<c:when test="${ mode == 'reservationMonitor' }"><!-- 예약 현황 페이지 -->
 								<div class="p-5">
 									<div class="row p-3 text-center">
 										<a href="<c:url value="/myInfo?mode=reservationMonitor"/>" class="col-1 m-1 btn btn-outline-info">전체</a>
 										<a href="<c:url value="/myInfo?mode=reservationMonitor&t=buy"/> " class="col-2 m-1 btn btn-primary text-nowrap">재능구매</a>
 										<a href="<c:url value="/myInfo?mode=reservationMonitor&t=sell"/>" class="col-2 m-1 btn btn-secondary text-nowrap">재능판매</a>
 									</div>
-									<table class="table table-hover">
-										<tr>
-											<th>번호</th>
-											<th>거래 유형</th>
-											<th>재능명</th>
-											<th>멘토 ID</th>
-											<th>멘티 ID</th>
-											<th>일정</th>
-											<th>상태</th>
-											<th>예약 매칭 날짜</th>
-										</tr>
-										<c:forEach var="reservation" items="${ reservationList }" varStatus="status">
-											<tr>
-												<td>${ status.count }</td>
-												
-												<c:if test="${ fn:contains(reservation.boardId , 'sellingId') }">
-													<td><div class="badge bg-secondary">재능판매</div></td>
-												</c:if>
-												<c:if test="${ fn:contains(reservation.boardId , 'buyingId') }">
-													<td><div class="badge bg-primary">재능구매</div></td>
-												</c:if>
-												
-												<td>${ reservation.title }</td>
-												<td>${ reservation.memberId }</td>
-												<td>${ reservation.applicantMemberId }</td>
-												<td>${ reservation.reservationdate }</td>
-												
-												<c:if test="${ reservation.approve eq '대기' }">
-													<td><div class="badge bg-secondary">${ reservation.approve }</div></td>
-												</c:if>
-												<c:if test="${ reservation.approve eq '승인' }">
-													<td><div class="badge bg-success">${ reservation.approve }</div></td>
-												</c:if>
-												
-												<td>${ reservation.completionDate }</td>
-											</tr>
-										</c:forEach>
-									</table>
+									<div style="overflow-y:scroll; width:auto; height:400px;">
+										<table class="table table-hover">
+											<thead>
+												<tr id="thead">
+													<th>순번</th>
+													<th>거래 유형<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>재능명<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>멘토 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>멘티 ID<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>일정<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>상태<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+													<th>예약 매칭 날짜<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
+												</tr>
+											</thead>
+											<tbody id="tbody">
+												<c:forEach var="reservation" items="${ reservationList }" varStatus="status">
+													<tr>
+														<td>${ status.count }</td>
+														
+														<c:if test="${ fn:contains(reservation.boardId , 'sellingId') }">
+															<td><div class="badge bg-secondary">재능판매</div></td>
+														</c:if>
+														<c:if test="${ fn:contains(reservation.boardId , 'buyingId') }">
+															<td><div class="badge bg-primary">재능구매</div></td>
+														</c:if>
+														
+														<td>${ reservation.title }</td>
+														<td>${ reservation.memberId }</td>
+														<td>${ reservation.applicantMemberId }</td>
+														<td>${ reservation.reservationdate }</td>
+														
+														<c:if test="${ reservation.approve eq '대기' }">
+															<td><div class="badge bg-secondary">${ reservation.approve }</div></td>
+														</c:if>
+														<c:if test="${ reservation.approve eq '승인' }">
+															<td><div class="badge bg-success">${ reservation.approve }</div></td>
+														</c:if>
+														
+														<td>${ reservation.signdate }</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</c:when>
 						</c:choose>
