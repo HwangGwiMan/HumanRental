@@ -51,9 +51,7 @@ public class ReservationServiceImpl implements ReservationService{
 	public Reservation BuyingReservationCreate(String buyingId, String date, String content, String memberId, Model model) {
 		
 		Buying buying = buyingrepository.BuyingDetailbyId(buyingId);
-		System.out.println("buying.getMemberId()"+buying.getMemberId());
 		Mentee mentee = menteerepository.getInformation(buying.getMemberId());
-		System.out.println("BuyingReservationCreate여긴 오니?");
 		Mentor mentor = mentorrepository.getMentor(memberId);
 		
 		Reservation reservation = new Reservation();
@@ -182,7 +180,7 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public void GetReservationInfo(String reservationId, Model model) {
+	public Reservation GetReservationInfo(String reservationId, Model model) {
 		
 		String menteeNickname;
 		String mentorNickname;
@@ -203,6 +201,7 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		
 		model.addAttribute("reservation", reservation);
+		return reservation;
 	}
 
 	@Override

@@ -395,9 +395,6 @@ public class MentorRepositroyImpl implements MentorRepository {
 		    }
 	}
 	
-	
-	
-	
 	// 예약 전용
 	@Override
 	public Mentor getMentor2(String mentorId) {
@@ -415,12 +412,9 @@ public class MentorRepositroyImpl implements MentorRepository {
 		try {
 			template.update(SQL, mentorprofile.getIntroduction(),mentorprofile.getCertification(),mentorprofile.getCategory(),mentorprofile.getFilename1(),mentorprofile.getFilename2(),mentorprofile.getFilename3(),mentorprofile.getMentorId(),memberId);
 
-			
 		}catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 	@Override

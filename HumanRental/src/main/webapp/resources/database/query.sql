@@ -60,6 +60,7 @@ filename1 varchar(1000),
 filename2 varchar(1000),
 filename3 varchar(1000),
 starRate int ,
+starCount int,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
@@ -73,6 +74,7 @@ memberId varchar(50) not null,
 interest varchar(50),
 introduction varchar(1000),
 starRate int ,
+starCount int,
 foreign key(memberId) references Member(memberId)
 );
 
@@ -324,11 +326,11 @@ insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 
 insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
 
 -- buying 내용 추가
-insert into buying values('buyingId_001','qwer','닉네임1','introduction',3.5,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
-insert into buying values('buyingId_002','admin','admin','introduction',5,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
-insert into buying values('buyingId_003','asdf','닉네임2','introduction',5,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into buying values('buyingId_001','qwer','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
+insert into buying values('buyingId_002','asdf','닉네임2','introduction',0,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
+insert into buying values('buyingId_003','asdf','닉네임2','introduction',0,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
 
 -- selling 내용 추가
-insert into selling values('sellingId_001','qwer','닉네임1','introduction',3.5,'기타 알려드림니다','내용','2024-01-01 00:00:00','music',10000,'한국',0);
-insert into selling values('sellingId_002','admin','admin','introduction',5,'k리그 출신 축구강의','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
-insert into selling values('sellingId_003','asdf','닉네임2','introduction',5,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_001','qwer','닉네임1','introduction',0,'기타 알려드림니다','내용','2024-01-01 00:00:00','music',10000,'한국',0);
+insert into selling values('sellingId_002','qwer','닉네임1','introduction',0,'k리그 출신 축구강의','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
+insert into selling values('sellingId_003','asdf','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);

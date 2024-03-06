@@ -17,7 +17,7 @@ public class BuyingRowMapper implements RowMapper<Buying> {
 		buying.setMemberId(rs.getString(2));
 		buying.setNickname(rs.getString(3));
 		buying.setIntroduction(rs.getString(4));
-		buying.setStarRate(rs.getInt(5));
+		buying.setStarRate(rs.getFloat(5));
 		buying.setTitle(rs.getString(6));
 		buying.setContent(rs.getString(7));
 		buying.setRegist_day(rs.getTimestamp(8).toLocalDateTime());

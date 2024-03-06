@@ -15,6 +15,6 @@ public interface ReservationService {
 	public List<Reservation> getReservationApprovalListById(String memberId, Model model);
 	public List<Reservation> getMonitorReservationStatus();
 	public List<Reservation> getMonitorReservationStatus(String state);
-	public void GetReservationInfo(String reservationId, Model model);
+	public Reservation GetReservationInfo(String reservationId, Model model);
 	public void ReservationApproval(String reservationId, String approval);
 }
