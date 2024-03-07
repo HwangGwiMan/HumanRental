@@ -7,7 +7,7 @@ public class Buying {
 	private String memberId;
 	private String nickname;
 	private String introduction;
-	private int starRate;
+	private float starRate;
 	private String title;
 	private String content;
 	private LocalDateTime regist_day;
@@ -46,10 +46,10 @@ public class Buying {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-	public int getStarRate() {
+	public float getStarRate() {
 		return starRate;
 	}
-	public void setStarRate(int starRate) {
+	public void setStarRate(float starRate) {
 		this.starRate = starRate;
 	}
 	public String getTitle() {

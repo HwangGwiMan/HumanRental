@@ -156,8 +156,6 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 	
 	@Override
 	public void ReservationApproval(String reservationId, String approval) {
-		System.out.println(reservationId);
-		System.out.println(approval);
 		String sql;
 		if(approval.equals("yes")) {
 			sql = "UPDATE reservation SET approve = ?, signdate = ? WHERE reservationId = ?";
@@ -175,10 +173,6 @@ public class ReservationRepositoryImpl implements ReservationRepository{
 			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
 			template.update(sql, "렌탈실패", reservationId);
 		}
-//		else if(approval.equals("review")) {
-//			sql = "UPDATE reservation SET approve = ? WHERE reservationId = ?";
-//			template.update(sql, "후기작성", reservationId);
-//		}
 		
 	}
 }
