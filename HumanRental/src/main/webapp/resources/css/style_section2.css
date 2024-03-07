@@ -1,4 +1,4 @@
-.qqs2 .info{
+/* .qqs2 .info{
   font-size: 50px;
   text-align: center;
 }
@@ -11,10 +11,11 @@
   box-shadow: 0px 0px 10px 1px #212129;
 }
 
-/* .qqs2 img{
-  width: 100%;
-}
-
+  .qqs2 {
+  overflow: hidden;
+} 
+ */
+/*
 .slider {
   position:absolute;
   display:flex;
@@ -30,12 +31,11 @@
 }
 
 
-
 @keyframes sliding {
   0% {
-    transform: translateX(-50%);
+    transform: translateX(-20%);
   }
   100% {
-    transform: translateX(50%);
+    transform: translateX(-140%);
   }
 } */

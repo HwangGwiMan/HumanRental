@@ -13,10 +13,10 @@
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="qqml container">
-        <div>
-            <br>멘토 리스트<br><br><br>
+        <div class="text-center fs-1 p-3">
+            <div class="p-3">멘티 모집</div>
         </div>
-        <div class="category">
+        <div class="category pt-3">
             <div><a href="<c:url value="/SellingList?category=music"/>"><i class="fa-solid fa-guitar"></i></a></div>
             <div><a href="<c:url value="/SellingList?category=sports"/>"><i class="fa-solid fa-person-running"></i></a></div>
             <div><a href="<c:url value="/SellingList?category=game"/>"><i class="fa-solid fa-gamepad"></i></a></div>
@@ -30,13 +30,23 @@
         </div>
         <div class="qq1 row">
 	        <c:forEach items="${sellinglist}" var="selling">
-	            <div class="qq2 col-4">
+	            <div class="qq2 col-3">
 	                <div class="wrapper">
 	                    <div class="image-wrapper">
-	                    	<img src="/HumanRental/resources/image/duke.png"/>
+	                    	<!-- <img src="/HumanRental/resources/image/duke.png"/> -->
+	                    	<c:choose>
+	                    	<c:when test="${selling.category eq 'music'}">
+	                        	<i class="fa-solid fa-guitar fs-1"></i>
+	                        </c:when>
+	                        <c:when test="${selling.category eq 'sports'}">
+	                        	<i class="fa-solid fa-person-running"></i>
+	                        </c:when>
+	                        <c:when test="${selling.category eq 'game'}">
+	                        	<i class="fa-solid fa-gamepad"></i>
+	                        </c:when>
+	                        </c:choose>
 	                        <h1 class="name">${selling.title}</h1>
 	                        <p class="description">${selling.nickname}</p>
-	                        <br>
 	                        <p class="information">간단한 내용(한줄)</p>
 <%-- 	                        <a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a> --%>
 	                        <a onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" class="follow">신청하기</a>

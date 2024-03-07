@@ -21,8 +21,8 @@
 		<script src="<c:url value="/resources/js/nav.js"/>"></script>
 	</head>
 	<body>
-		<nav class="qqnav container">
-			<div class="row d-flex align-items-center justify-content-between">
+		<nav class="qqnav container border-bottom">
+			<div class="row d-flex align-items-center justify-content-between ">
 				<div class="col-5 d-flex align-items-center qq1">
 					<a href="<c:url value="/main"/>"><h4>휴먼렌탈</h4></a>
 					<ul class="nav">

@@ -1,5 +1,7 @@
 package com.springmvc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.springmvc.domain.Selling;
+import com.springmvc.service.BuyingService;
 import com.springmvc.service.SellingService;
 
 @Controller
@@ -15,11 +19,17 @@ public class MainController {
 	@Autowired
 	SellingService sellingService;
 	
+	@Autowired 
+	BuyingService buyingService;
+	
 	// 메인 페이지 호출
 	@GetMapping("/main")
 	public String requestHome1(Model model) {
 		sellingService.SellingList(model, null);
 		
+		List<Selling> sellinglist = (List<Selling>) model.getAttribute("sellinglist");
+		
+		buyingService.BuyingList(model, null);
 		return "Main";
 	}
 
