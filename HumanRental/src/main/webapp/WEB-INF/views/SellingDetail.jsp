@@ -27,9 +27,7 @@
 	<div class="detail container">
 		<div class="row">
 			<div class="top d-flex">
-			
 			<c:set var="selling" value="${selling}" />
-			
 				<div class="left col-6">
 					<div class="img">이미지</div>
 				</div>
@@ -96,50 +94,70 @@
 			<div class="bot col-12">
 				<div class="box1">
 					<h2>
-						후기 <span class="star1">★★★☆☆</span>
+						후기 
+						<span>
+							<c:choose>
+							    <c:when test="${selling.starRate==0}"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+							    <c:when test="${selling.starRate==1}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+							    <c:when test="${selling.starRate==2}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+							    <c:when test="${selling.starRate==3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+							    <c:when test="${selling.starRate==4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+							    <c:when test="${selling.starRate==5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></c:when>
+							    <c:when test="${selling.starRate > 0 && selling.starRate < 1}"><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+							    <c:when test="${selling.starRate > 1 && selling.starRate < 2}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+							    <c:when test="${selling.starRate > 2 && selling.starRate < 3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+							    <c:when test="${selling.starRate > 3 && selling.starRate < 4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i></c:when>
+							    <c:when test="${selling.starRate > 4 && selling.starRate < 5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></c:when>
+								<c:otherwise>
+								<i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+								</c:otherwise>
+							</c:choose>
+						</span>
 					</h2>
 				</div>
+				<c:forEach items="${reviewList}" var="review">
 				<div class="box2">
 					<div class="card-info">
 						<div class="review">
 							<div>
 								<h4>
-									배움의 자세가 좋습니다 <span class="star2">★★★★★</span>
+									${review.title}
+									<span>
+										<c:choose>
+										    <c:when test="${review.starRate==0}"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+										    <c:when test="${review.starRate==1}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+										    <c:when test="${review.starRate==2}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+										    <c:when test="${review.starRate==3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+										    <c:when test="${review.starRate==4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+										    <c:when test="${review.starRate==5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></c:when>
+										    <c:when test="${review.starRate > 0 && review.starRate < 1}"><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+										    <c:when test="${review.starRate > 1 && review.starRate < 2}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+										    <c:when test="${review.starRate > 2 && review.starRate < 3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+										    <c:when test="${review.starRate > 3 && review.starRate < 4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i></c:when>
+										    <c:when test="${review.starRate > 4 && review.starRate < 5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></c:when>
+											<c:otherwise>
+											<i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+											</c:otherwise>
+										</c:choose>
+									</span>
 								</h4>
 							</div>
 						</div>
 						<div class="date">
-							<div>김멘토 | 2024.05.05</div>
+							<div>${review.nickname} | ${review.writeDate}</div>
 						</div>
 					</div>
 					<div>
 						<hr>
 						<div class="content">
 							<p>
-								성실하게 임하는 모습 좋아요
+								${review.content}
 							</p>
 						</div>
 					</div>
 					<div class="line"></div>
-					<div class="card-info">
-						<div class="review">
-							<div>
-								<h4>
-									쓰레기입니다 <span class="star2">★☆☆☆☆</span>
-								</h4>
-							</div>
-						</div>
-						<div class="date">
-							<div>이멘토 | 2024.04.05</div>
-						</div>
-					</div>
-					<div>
-						<hr>
-						<div class="content">
-							<p>배움의 자세가 없음</p>
-						</div>
-					</div>
 				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>

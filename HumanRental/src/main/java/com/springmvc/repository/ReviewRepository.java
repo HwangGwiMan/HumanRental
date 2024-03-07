@@ -24,4 +24,5 @@ public interface ReviewRepository {
 	public void BoardStarRateUpdate(Review review, boolean duplication);
 	public void MentorStarRateUpdate(MentorProfile mentor, int starRate, boolean duplication);
 	public void MenteeStarRateUpdate(Mentee mentee, int starRate, boolean duplication);
+	public List<Review> getReviewList(String boardId);
 	}

@@ -826,8 +826,8 @@
 									    </c:when>
 									    <c:when test="${ reservation.boardId.contains('sell') }">
 											게시글 : <a href="/HumanRental/selling/detail?sellingId=${reservation.boardId}">${ reservation.title }</a><br>
-											멘토 : ${reservation.mentorNickname}<br>
-											멘티 : ${reservation.menteeNickname}<br>
+											멘토 : ${reservation.menteeNickname}<br>
+											멘티 : ${reservation.mentorNickname}<br>
 									    </c:when>
 									</c:choose>
 									예약일 : ${reservation.reservationdate}<br>
@@ -875,13 +875,13 @@
 											</c:if>
 											<c:if test="${reservation.boardId.contains('sell')}">
 												<c:if test="${sessionId eq reservation.memberId}">
-													<label class="col-sm-2 control-label" >멘토</label>
+													<label class="col-sm-2 control-label" >멘티</label>
 													<div class="col-sm-3">
 														<input name="#" type="text" class="form-control" value="${reservation.mentorNickname}" readonly>
 													</div>
 												</c:if>
 												<c:if test="${sessionId eq reservation.applicantMemberId}">
-													<label class="col-sm-2 control-label" >멘티</label>
+													<label class="col-sm-2 control-label" >멘토</label>
 													<div class="col-sm-3">
 														<input name="#" type="text" class="form-control" value="${reservation.menteeNickname}" readonly>
 													</div>

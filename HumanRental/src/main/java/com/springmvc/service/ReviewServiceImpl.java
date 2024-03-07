@@ -36,6 +36,9 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Autowired
 	MenteeRepository menteeRepository;
+
+	@Autowired
+	MemberRepository memberRepository;
 	
 	@Override
 	public void BuyReviewWrite(Review review) {
@@ -90,12 +93,12 @@ public class ReviewServiceImpl implements ReviewService{
 	public void StarRateUpdate(String memberId, Review review, boolean duplication) {
 		
 		if(review.getBoardId().contains("buy")) {
-			MentorProfile mentor = mentorRepository.MentorprofileInformation(memberId);
-			reviewRepository.MentorStarRateUpdate(mentor, review.getStarRate(), duplication);
-		}
-		else {
 			Mentee mentee =  menteeRepository.getInformation(memberId);
 			reviewRepository.MenteeStarRateUpdate(mentee, review.getStarRate(), duplication);
+		}
+		else {
+			MentorProfile mentor = mentorRepository.MentorprofileInformation(memberId);
+			reviewRepository.MentorStarRateUpdate(mentor, review.getStarRate(), duplication);
 		}
 	}
 	
@@ -104,12 +107,20 @@ public class ReviewServiceImpl implements ReviewService{
 	public void StarRateUpdate2(String applicantMemberId, Review review, boolean duplication) {
 		
 		if(review.getBoardId().contains("buy")) {
-			Mentee mentee =  menteeRepository.getInformation(applicantMemberId);
-			reviewRepository.MenteeStarRateUpdate(mentee, review.getStarRate(), duplication);
-		}
-		else {
 			MentorProfile mentor = mentorRepository.MentorprofileInformation(applicantMemberId);
 			reviewRepository.MentorStarRateUpdate(mentor, review.getStarRate(), duplication);
 		}
+		else {
+			Mentee mentee =  menteeRepository.getInformation(applicantMemberId);
+			reviewRepository.MenteeStarRateUpdate(mentee, review.getStarRate(), duplication);
+		}
+	}
+	
+	public List<Review> getReviewList(String boardId) {
+		List<Review> list = reviewRepository.getReviewList(boardId);
+		for(Review review : list) {
+			review.setNickname(memberRepository.getMember(review.getMemberId()).getNickName());
+		}
+		return list;
 	}
 }
