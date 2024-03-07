@@ -8,7 +8,7 @@ import com.springmvc.domain.Report;
 
 public interface ReportService {
 	public void createBoardReport(HttpServletRequest request, String reporterId);
-	public List<Report> getReportList();
+	public List<Report> getReportList(String sort, String sortTarget);
 	public Map<String, Object> getReport(String reportId);
 	void stateUpdate(String reportId, String state);
 }

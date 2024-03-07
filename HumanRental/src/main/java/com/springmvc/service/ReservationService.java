@@ -13,8 +13,8 @@ public interface ReservationService {
 	public Reservation SellingReservationCreate(String sellingId, String date, String content, String memberId, Model model);
 	public List<Reservation> getReservationListById(String memberId, Model model);
 	public List<Reservation> getReservationApprovalListById(String memberId, Model model);
-	public List<Reservation> getMonitorReservationStatus();
-	public List<Reservation> getMonitorReservationStatus(String state);
+	public List<Reservation> getMonitorReservationStatus(String sort, String sortTarget);
+	public List<Reservation> getMonitorReservationStatus(String state, String sort, String sortTarget);
 	public Reservation GetReservationInfo(String reservationId, Model model);
 	public void ReservationApproval(String reservationId, String approval);
 }

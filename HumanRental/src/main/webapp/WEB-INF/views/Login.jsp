@@ -37,7 +37,7 @@
 		    		</div>
 			    	<div class="row justify-content-center">
 			    		<div class="col-2 p-3 align-self-center">비밀번호</div>
-			    		<div class="col-3 p-3"><form:input path="memberPw" name="password" pw="memberPw" class="form-control"/></div>
+			    		<div class="col-3 p-3"><form:input type="password" path="memberPw" name="password" id="memberPw" class="form-control"/></div>
 			    	</div>
 			    	<div class="row">
 			    		<div><input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }"></div>

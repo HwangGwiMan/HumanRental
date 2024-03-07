@@ -395,16 +395,18 @@ function sendSortRequest(sort, sortTarget) {
 	data.sort = sort;
 	data.sortTarget = sortTarget;
 	
+	console.log(sortTarget);
+	
 	$.ajax({
         type: 'GET',
         url: './myInfo',
 		//contentType : "application/json; charset=UTF-8",
 		//dataType : "text/html",
         data: data,
-        success: function(result) {			
+        success: function(result) {		
 			oldT = document.getElementById("tbody");
-			newT = $(result)[41].getElementsByTagName("tbody")[1];
-
+			newT = $(result)[41].getElementsByTagName("tbody")[0];
+						
 			oldT.innerHTML = newT.innerHTML;
         },
         error: function(request, status, error) {

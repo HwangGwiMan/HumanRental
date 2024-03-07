@@ -88,6 +88,9 @@ public class ReservationController {
 	public String ReservationApproval(@RequestParam String reservationId, @RequestParam String approval, Model model) {
 		reservationservice.ReservationApproval(reservationId, approval);
 		model.addAttribute("mode", "reservationApprovalManagement");
+		
+		alarmService.createReservationConfirmAlarm(reservationId, approval);
+		
 		return "redirect:/reservationApprovalManagement";
 	}
 	

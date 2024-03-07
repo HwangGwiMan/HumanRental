@@ -88,11 +88,15 @@
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 														<c:when test="${ fn:contains(alarm.alarmId , 'warningAlarm') }">
-															<div class="row">이용 경고 안내</div>
+															<div class="row">이용 경고 알림</div>
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 														<c:when test="${ fn:contains(alarm.alarmId , 'ReservationApplyAlarm') }">
 															<div class="row">재능 거래 신청 알림</div>
+															<div class="row">${ alarm.content }</div>
+														</c:when>
+														<c:when test="${ fn:contains(alarm.alarmId , 'ReservationConfirmAlarm') }">
+															<div class="row">재능 거래 승인 알림</div>
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 													</c:choose>

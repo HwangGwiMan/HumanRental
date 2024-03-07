@@ -15,9 +15,9 @@
 	        <div class="info">
 	            <br>인기 멘토<br><br>
 	        </div>
-	        <div class="row">
+	        <div class="row flex-nowrap slider">
 	        	<c:forEach var="selling" items="${ sellinglist }">
-		            <div class="col-4 ">
+		            <div class="col-4">
 		                <div class="d-flex justify-content-center qq1">
 		                    <div style="width: 50%;">
 		                        <img src="/HumanRental/resources/image/duke.png" alt="">
