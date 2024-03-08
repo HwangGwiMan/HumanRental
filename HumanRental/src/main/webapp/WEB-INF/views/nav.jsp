@@ -34,17 +34,16 @@
 				</div>
 				<div class="col-4">
 					<div style="width: 100%; height: 38px">
-						<form class="form-inline d-flex mx-auto align-items-center" action="<c:url value='/Search'/>" method="post">
-							<select name="items" class="txt">
-									<option value="title">전체</option>
-									<option value="content">분야</option>
-									<option value="name">제목</option>
-									<option value="name">멘토</option>
-									<option value="name">멘티</option>
-							</select> 
-    						<input class="form-control mr-2" type="text" name="search" placeholder="어떤 멘토,멘티를 찾으세요?">
-    						<button class="btn btn-primary" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
-						</form>
+    					<form id="searchForm" class="form-inline d-flex mx-auto align-items-center" action="<c:url value='/Search'/>" method="post">
+        					<select name="items" class="txt">
+					            <option value="all">전체</option>
+					            <option value="title">제목</option>
+					            <option value="content">내용</option>
+					            <option value="nickname">닉네임</option>
+        					</select> 
+        					<input class="form-control mr-2" type="text" name="search" placeholder="어떤 멘토,멘티를 찾으세요?" required>
+        					<button class="btn btn-primary" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+    					</form>
 					</div>
 				</div>
 				<div class="col-3">

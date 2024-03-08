@@ -14,4 +14,5 @@ public interface SellingRepository {
 	public void SellingDelete(String sellingId);
 	public void SellingUpdate(Selling selling);
 	public List<Selling> getSellingListById(String memberId);
+	public List<Selling>  getSellingFromNickname(String nickname);
 }

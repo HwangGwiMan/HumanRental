@@ -45,7 +45,7 @@
 	                        </c:when>
 	                        </c:choose>
 	                        <h1 class="name">${buying.title}</h1>
-	                        <p class="description">${buying.nickname}</p>
+							<p class="description">${buying.nickname}</p>
 	                        <br>
 <%-- 	                        <a href='<c:url value="/buying/detail?buyingId=${buying.buyingId}"/>' class="follow">신청하기</a> --%>
 	                        <a onclick="mentorCheck(this)" data-buying-id="${buying.buyingId}" class="follow">신청하기</a>

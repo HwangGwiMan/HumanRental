@@ -136,6 +136,16 @@ public class MemberRepositoryImpl implements MemberRepository {
 		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName(), member.getProfileImage(), memberId);
 	}
 	
-	
+	//닉네임으로 회원정보 획득 
+	public Member getMemberFromNickName(String nickname) {
+		String SQL = "SELECT * FROM member WHERE nickname = ?";
+		List<Member> member2;
+		try {
+			member2 = template.query(SQL, new BeanPropertyRowMapper<Member>(Member.class), nickname);
+			return member2.get(0);
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
 }
 

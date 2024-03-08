@@ -35,7 +35,7 @@
 	                    <div class="image-wrapper">
 	                    	<img src="/HumanRental/resources/image/duke.png"/>
 	                        <h1 class="name">${selling.title}</h1>
-	                        <p class="description">${selling.nickname}</p>
+							<a href="<c:url value='/mentorprofilepage?nickname=${selling.nickname}'/>">${selling.nickname}</a>
 	                        <br>
 	                        <p class="information">간단한 내용(한줄)</p>
 <%-- 	                        <a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a> --%>

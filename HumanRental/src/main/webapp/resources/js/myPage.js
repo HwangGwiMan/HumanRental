@@ -279,10 +279,7 @@ function userCheck() {
     });
 }
 
-function goBack() {
-    // 브라우저의 이전 페이지로 이동
-    history.back();
-}
+
 
 function reviewCheck(element) {
     var reservationId = element.getAttribute('reservationId');
