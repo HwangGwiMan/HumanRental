@@ -1,4 +1,4 @@
-/* .qqs2 .info{
+ .qqs2 .info{
   font-size: 50px;
   text-align: center;
 }
@@ -14,9 +14,9 @@
   .qqs2 {
   overflow: hidden;
 } 
- */
-/*
-.slider {
+ 
+
+ .qqs2 .slider {
   position:absolute;
   display:flex;
   flex-wrap:wrap;
@@ -38,4 +38,4 @@
   100% {
     transform: translateX(-140%);
   }
-} */
+} 
