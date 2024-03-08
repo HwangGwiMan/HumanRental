@@ -11,7 +11,6 @@ import com.springmvc.domain.Save;
 public class SaveRowMapper implements RowMapper<Save>{
 
 	public Save mapRow(ResultSet rs, int rowNum) throws SQLException {
-		System.out.println("saverowmapper까지 오는 곳인데 오니?");
 	Save save = new Save();
 	save.setSaveListId(rs.getString(1));
 	save.setMemberId(rs.getString(2));

@@ -25,10 +25,12 @@ function saveCheck(event, element) {
     });
 }
 
-function callreservationform() {
-	 var calendarForm = document.getElementById('calendarForm');
-	 console.log("여긴 뜨고 잇니1111")
+function callreservationform(id, title) {
+    var calendarForm = document.getElementById('calendarForm');
     calendarForm.style.display = 'block';
+
+    document.getElementById('reservationTitle').innerText = title;
+    document.getElementById('reservationId').value = id;
 }
 	
 function setFormAction() {

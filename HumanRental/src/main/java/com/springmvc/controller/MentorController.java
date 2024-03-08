@@ -2,6 +2,7 @@ package com.springmvc.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,11 +18,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mysql.cj.xdevapi.JsonArray;
+import com.springmvc.domain.Member;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.MentorRegistInfo;
+import com.springmvc.domain.Selling;
 import com.springmvc.service.AlarmService;
+import com.springmvc.service.MemberService;
 import com.springmvc.service.MentorService;
+import com.springmvc.service.SellingService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -34,6 +40,13 @@ public class MentorController {
 	
 	@Autowired
 	AlarmService alarmService;
+	
+	@Autowired
+	MemberService memberService;
+	
+	@Autowired
+	SellingService sellingService;
+	
 	
 	@GetMapping("/mentorlist")
 	public String MentorList(Model model) {
@@ -140,12 +153,9 @@ public class MentorController {
 	    
 	    //멘토승인과 멘토프로필에 등록이 완로가 되어서  멘토 프로필 뿌려주는 else
 	    else if(mentor != null && mentorprofile != null ) {
-	    	System.out.println("이제 뿌려주기만 하면 되는데 여기는 올까?;");
-	    System.out.println("멘토 카테고리 "+mentorprofile.getCategory());
 	        mode = "mentorInformation";
 	        model.addAttribute("mode", mode);
 	        model.addAttribute("mentorprofile",mentorprofile);
-	        System.out.println("그럼 여기는?");
 	        
 	        return "MyPage";
 	    }
@@ -214,11 +224,10 @@ public class MentorController {
 	public String UpdateMentorProfileform(Model model,HttpServletRequest request ,@RequestParam("mode") String mode) {
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("user");
-	
+		
 		MentorProfile mentorProfile = mentorService.MentorprofileInformation(memberId);
 	
 		mode="mentorProfileUpdate";
-		
 		model.addAttribute("mode", mode);
 		model.addAttribute("mentorprofile",mentorProfile);
 		
@@ -286,6 +295,22 @@ public class MentorController {
 	    return "MyPage";
 
 	}
+	
+	@GetMapping("mentorprofilepage")
+	public String callMentorProfilepage(@RequestParam("nickname") String nickname, Model model) {
+	   Member member = memberService.getMemberFromNickName(nickname);
+	   System.out.println("member.getNickName()"+member.getNickName());
+	   MentorProfile mentorprofile=mentorService.MentorprofileInformation(member.getMemberId());
+	   List<Selling> listselling = sellingService.getSellingFromNickname(nickname);
+	   
+	    model.addAttribute("listselling",listselling);
+	   	model.addAttribute("member",member);
+	    model.addAttribute("mentorprofile",mentorprofile);
+
+		
+		return "MentorProfilePage";
+	}
+	
 	
 	
 	@GetMapping("/mentorprofileCheck")

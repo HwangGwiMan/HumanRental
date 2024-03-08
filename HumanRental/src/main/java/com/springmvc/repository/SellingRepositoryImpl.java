@@ -81,6 +81,15 @@ public class SellingRepositoryImpl implements SellingRepository{
         list = (ArrayList<Selling>)template.query(sql, new SellingRowMapper(), memberId);
         return list;
 	}
+	//닉네임으로 selling 객체 부르는 함수 
+	@Override
+	public List<Selling> getSellingFromNickname(String nickname) {
+		List<Selling> list = new ArrayList<Selling>();
+		String sql = "select * from selling where nickname = ? ";
+		
+		 list  = template.query(sql, new SellingRowMapper(), nickname);
+		return  list;
+	}
 	
 	
 }

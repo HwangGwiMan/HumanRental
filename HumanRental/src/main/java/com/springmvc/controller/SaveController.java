@@ -55,8 +55,6 @@ public class SaveController {
 	@GetMapping("/saveinsert")
 	@ResponseBody
 	public String insertsavelist(@RequestParam("savelistId") String savelistId, Model model, HttpServletRequest request ) {
-		System.out.println("insertsavelist 있는 함수로 도착 했음 ");
-		System.out.println("savelistId"+savelistId);
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		boolean a = saveService.checksaveinformation(memberId,savelistId);
@@ -65,7 +63,6 @@ public class SaveController {
 		if(a==false) {
 		    if(savelistId.contains("buying")) {
 		        buyingService.BuyingDetailbyId(model, savelistId);
-		        System.out.println("if문 뒤");  
 		        Buying buying =(Buying)model.getAttribute("buying");
 		        saveService.insertSavelist(buying,memberId);
 		    }
@@ -76,7 +73,6 @@ public class SaveController {
 		    }
 		    return "redirect:/save/saveread"; 
 		} else {
-		    System.out.println("여긴 a값이 0보다 클 때 ");
 		    return "false";
 		}
 
@@ -116,16 +112,13 @@ public class SaveController {
 	@PostMapping("/selling")
 	public String SellingReservation(@RequestParam("sellingId") String sellingId, Model model,
 			@RequestParam("date") String date, @RequestParam("content") String content, HttpServletRequest request) {
-		System.out.println("SellingReservation 여기로 오니??");
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		Reservation reservation = reservationService.SellingReservationCreate(sellingId, date, content, memberId, model);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("mode", "reservation");
 		 saveService.deletesavelist(sellingId);
-		 System.out.println("이건 뭔 오류임?");
 		 alarmScrvice.createReservationApplyAlarm(reservation);
-		 System.out.println("이건 뭔 오류임2222?");
 
 		return "CheckPage"; // 추후 예약 현황 페이지로
 	}

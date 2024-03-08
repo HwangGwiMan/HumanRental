@@ -67,5 +67,10 @@ public class SellingServiceImpl implements SellingService{
 	}
 	
 	
+	public List<Selling> getSellingFromNickname( String nickname) {
+		return	sellingrepository.getSellingFromNickname(nickname);
+
+	}
+
 	
 }
