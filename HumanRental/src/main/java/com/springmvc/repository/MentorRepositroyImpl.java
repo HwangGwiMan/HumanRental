@@ -95,9 +95,9 @@ public class MentorRepositroyImpl implements MentorRepository {
 					Map<String, Object> applyInfo = new HashMap<String, Object>();
 					applyInfo.put("registId", rs.getString(1));
 					applyInfo.put("memberId", rs.getString(2));
-					applyInfo.put("applyDate", rs.getTimestamp(3));
+					applyInfo.put("applyDate", util.outputFormatting(rs.getTimestamp(3)));
 					applyInfo.put("state", rs.getString(4));
-					applyInfo.put("confirmDate", rs.getTimestamp(5));
+					applyInfo.put("confirmDate", util.outputFormatting(rs.getTimestamp(5)));
 
 					return applyInfo;
 				}
@@ -131,9 +131,9 @@ public class MentorRepositroyImpl implements MentorRepository {
 					Map<String, Object> applyInfo = new HashMap<String, Object>();
 					applyInfo.put("registId", rs.getString(1));
 					applyInfo.put("memberId", rs.getString(2));
-					applyInfo.put("applyDate", rs.getTimestamp(3));
+					applyInfo.put("applyDate", util.outputFormatting(rs.getTimestamp(3)));
 					applyInfo.put("state", rs.getString(4));
-					applyInfo.put("confirmDate", rs.getTimestamp(5));
+					applyInfo.put("confirmDate", util.outputFormatting(rs.getTimestamp(5)));
 
 					return applyInfo;
 				}

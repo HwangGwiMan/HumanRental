@@ -58,7 +58,7 @@ public class PrivacyController {
 			if(member.getProfileImage() == null) {
 				member.setProfileImage("default.png");
 			}
-			
+
 			model.addAttribute("member", member);
 			model.addAttribute("mode", mode);
 			
