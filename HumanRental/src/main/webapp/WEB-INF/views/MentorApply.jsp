@@ -18,8 +18,9 @@
 	<body>
 		<jsp:include page="nav.jsp"/>
 		<div class="container">
-			<form method="post" action="<c:url value="/mentorApply/submit"/>" class="p-5">
-				<div class="row p-4">
+			<div class="row justify-content-center p-5 fs-1">멘토 신청</div>
+			<form method="post" action="<c:url value="/mentorApply/submit"/>" class="p-3 ">
+				<div class="row p-3">
 					<label class="col-3">
 						<div class="text-center border-end" >멘토로서 활동하고자 하는 분야</div>
 					</label> 
@@ -53,7 +54,7 @@
 						권역
 						<select name="location" id="addressRegion"  required="required"></select>
 					</div>
-					<div class="col-2 px-5">
+					<div class="col-2 px-5 text-nowrap">
 						행정 구역
 				    	<select name="location" id="addressDo"  required="required"></select>
 				    </div>
@@ -86,7 +87,7 @@
 				</div>
 				<hr>
 				<div class="row p-4">
-					<label class="col-2 d-flex align-items-center justify-content-center">기타 사항</label>
+					<label class="col-2 d-flex align-items-center justify-content-center border-end">기타 사항</label>
 					<div class="col">
 						<textarea rows="5" cols="100" name="etc"></textarea>
 					</div>
