@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/style_footer.css"/>">
 </head>
 <body>
-    <div class="foot">
+    <div class="foot border-top">
         <div>
             <span>휴먼렌탈</span>, 세상을 바꾸는 힘.
         </div>

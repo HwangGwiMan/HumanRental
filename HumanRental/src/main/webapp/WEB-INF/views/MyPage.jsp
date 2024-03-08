@@ -24,7 +24,7 @@
 		<jsp:include page="nav.jsp"/>
 		<div class="container h-75">
 			<div class="row pt-5 align-items-start h-75">
-				<div class="col-2 p-3 border border-primary border-2 rounded-5">
+				<div class="col-2 p-3 border border-2 rounded-5">
 					<div class="row p-3"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
 					<div class="row justify-content-center">
 					<c:choose>
@@ -66,7 +66,7 @@
 					</c:choose>
 					</div>
 				</div> 
-				<div class="col ms-5 px-5 border border-2 border-primary rounded-5">
+				<div class="col ms-5 px-5 border border-2 rounded-5">
 					<div class="row justify-content-center ">
 						<c:choose>
 							<c:when test="${ mode == 'myPage' }"><!-- 마이 페이지 -->
@@ -483,7 +483,7 @@
 								<div class="col p-5">
 									<div class="row">
 										<div class="col m-2">
-											<img width="300" height="200" src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />">
+											<img width="300" height="200" src="<c:url value="/resources/img/ProfilePicture/${ applyInfo.profileImage }" />">
 										</div>
 										<div class="row p-3">
 											<div class="col-2">신청자 ID :</div>

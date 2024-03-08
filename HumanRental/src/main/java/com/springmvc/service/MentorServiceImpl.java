@@ -27,10 +27,10 @@ public class MentorServiceImpl implements MentorService {
 		mentorRepository.mentorApply(mentorRegistInfo);
 	}
 
-	@Override
-	public MentorRegistInfo getMentorApplyByRegistId(String registId) {
-		return mentorRepository.getMentorApplyByRegistId(registId);
-	}
+//	@Override
+//	public MentorRegistInfo getMentorApplyByRegistId(String registId) {
+//		return mentorRepository.getMentorApplyByRegistId(registId);
+//	}
 
 	@Override
 	public List<Map<String, Object>> getMentorListWithMember(String sort, String sortTarget) {
@@ -93,8 +93,8 @@ public class MentorServiceImpl implements MentorService {
 	}
 
 	@Override
-	public Map<String, Object> getMentorApplyByRegistIdTEST(String registId) {
-		return mentorRepository.getMentorApplyByRegistIdTEST(registId);
+	public Map<String, Object> getMentorApplyByRegistId(String registId) {
+		return mentorRepository.getMentorApplyByRegistId(registId);
 	}
 	
 

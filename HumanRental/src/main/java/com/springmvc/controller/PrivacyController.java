@@ -58,7 +58,7 @@ public class PrivacyController {
 			if(member.getProfileImage() == null) {
 				member.setProfileImage("default.png");
 			}
-			
+
 			model.addAttribute("member", member);
 			model.addAttribute("mode", mode);
 			
@@ -83,7 +83,7 @@ public class PrivacyController {
 					// 개별 멘토 신청 관리
 					//model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistId(targetId));
 					
-					model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistIdTEST(targetId));
+					model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistId(targetId));
 				} else if(mode.equals("report")) {
 					// 신고 관리
 					model.addAttribute("reportList", reportService.getReportList(sort, sortTarget));

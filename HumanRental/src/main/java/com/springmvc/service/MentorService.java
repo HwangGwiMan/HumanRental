@@ -22,7 +22,7 @@ public interface MentorService {
 	public MentorProfile MentorprofileInformation (String memberId);
 	public void UpdateMentorProfile(MentorProfile mentorprofile,String memberId);
 	public void DeleteMentorProfile(String memberId);
-	public MentorRegistInfo getMentorApplyByRegistId(String registId);
-	public Map<String, Object> getMentorApplyByRegistIdTEST(String registId);
+//	public MentorRegistInfo getMentorApplyByRegistId(String registId);
+	public Map<String, Object> getMentorApplyByRegistId(String registId);
 
 }
