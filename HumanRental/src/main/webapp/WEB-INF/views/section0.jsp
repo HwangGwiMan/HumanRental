@@ -10,9 +10,12 @@
 </head>
 
 <body>
-	<div class="qqs0 container">
+	<div class="qqs0">
 		<div class="row">
-			<div class="info">당신의 재능을 나누세요. + 장황한 말</div>
+			<div class="info">
+				<b>함께 공유하며 더불어 가는 삶.</b>
+				<span><b>HumanRental</b></span>
+			</div>
 		</div>
 	</div>
 </body>

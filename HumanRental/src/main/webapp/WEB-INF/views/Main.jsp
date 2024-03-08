@@ -11,6 +11,7 @@
 	<body>
 		<jsp:include page="nav.jsp" />
 		<jsp:include page="section0.jsp" />
+		<br>
 		<jsp:include page="section1.jsp" />
 		<jsp:include page="section2.jsp" />
 		<jsp:include page="section3.jsp" />
