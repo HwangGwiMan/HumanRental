@@ -10,9 +10,10 @@ import com.springmvc.domain.MentorRegistInfo;
 public interface MentorService {
 	public Mentor getMentor(String memberId);
 	public void mentorApply(MentorRegistInfo mentorRegistInfo);
-	public List<Map<String, Object>> getMentorApplyList();
-	public List<Map<String, Object>> getMentorApplyList(String state);
-	public List<Map<String, Object>> getMentorListWithMember();
+	public List<Map<String, Object>> getMentorApplyList(String sort, String sortTarget);
+	public List<Map<String, Object>> getMentorApplyList(String state, String sort, String sortTarget);
+	public List<Map<String, Object>> getMentorListWithMember(String sort, String sortTarget);
+	public List<Map<String, Object>> getMentorListWithMember(String state, String sort, String sortTarget);
 	public void mentorRegist(String memberId, String registId);
 	public void mentorRefuse(String memberId, String registId);
 	public Map<String, Object> getMentorApplyState(String memberId);
@@ -21,5 +22,7 @@ public interface MentorService {
 	public MentorProfile MentorprofileInformation (String memberId);
 	public void UpdateMentorProfile(MentorProfile mentorprofile,String memberId);
 	public void DeleteMentorProfile(String memberId);
-	public MentorRegistInfo getMentorApplyByRegistId(String registId);
+//	public MentorRegistInfo getMentorApplyByRegistId(String registId);
+	public Map<String, Object> getMentorApplyByRegistId(String registId);
+
 }

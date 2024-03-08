@@ -31,9 +31,6 @@ public class BlackController {
 		
 		reportService.stateUpdate(reportId, "Black");
 		
-		// TODO
-		/* 블랙 리스트 추가시 알람 생성 */
-		
 		try {
 			blackService.registBlack(black);
 			return "RegistrationCompleted";

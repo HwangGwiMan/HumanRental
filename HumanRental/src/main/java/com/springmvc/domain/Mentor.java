@@ -6,6 +6,7 @@ public class Mentor {
 	private String mentorId;
 	private String memberId;
 	private Date registDate;
+	
 	public String getMentorId() {
 		return mentorId;
 	}

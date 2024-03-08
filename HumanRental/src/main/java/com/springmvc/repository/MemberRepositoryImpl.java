@@ -1,6 +1,7 @@
 package com.springmvc.repository;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -48,7 +49,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public void join(Member member) {
 		System.out.println("회원가입");
 		String SQL = "INSERT INTO member (memberId, memberPw, name, age, gender, phone, address, nickName, joinDate, profileImage, reportCount) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName(), LocalDateTime.now() ,"default.png", 0);
+		template.update(SQL, member.getMemberId(), member.getMemberPw(), member.getName(), member.getAge(), member.getGender(), member.getPhone(), member.getAddress(), member.getNickName(), LocalDateTime.now(ZoneId.of("Asia/Seoul")) ,"default.png", 0);
 	}
 	
 	// 아이디 중복 확인

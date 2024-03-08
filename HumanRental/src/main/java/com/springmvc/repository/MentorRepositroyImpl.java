@@ -67,7 +67,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 			mentorRegistInfo.setRegistId(util.createId("mentorApply"));
 			
 			SQL = "INSERT INTO mentorregistinfo VALUES(?, ?, ?, ?, ?, ?, ?)";
-			template.update(SQL, mentorRegistInfo.getRegistId(), mentorRegistInfo.getMemberId(), mentorRegistInfo.getSpecialty(), mentorRegistInfo.getLocation(), mentorRegistInfo.getReason(), mentorRegistInfo.getEtc(), LocalDateTime.now());
+			template.update(SQL, mentorRegistInfo.getRegistId(), mentorRegistInfo.getMemberId(), mentorRegistInfo.getSpecialty(), mentorRegistInfo.getLocation(), mentorRegistInfo.getReason(), mentorRegistInfo.getEtc(), LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 			
 			SQL = "INSERT INTO mentorapply VALUES(?, ?, ?, ?)";
 			template.update(SQL, mentorRegistInfo.getRegistId(), mentorRegistInfo.getMemberId(), null, "Wait");
@@ -78,10 +78,14 @@ public class MentorRepositroyImpl implements MentorRepository {
 	
 	// 멘토 신청 리스트
 	@Override
-	public List<Map<String, Object>> getMentorApplyList() {
+	public List<Map<String, Object>> getMentorApplyList(String sort, String sortTarget) {
 		String SQL = "SELECT mentorregistinfo.registId, mentorregistinfo.memberId, mentorregistinfo.applyDate, mentorapply.state, mentorapply.confirmDate FROM mentorapply "
 				+ "LEFT JOIN mentorregistinfo "
-				+ "ON mentorapply.registId = mentorregistinfo.registId";
+				+ "ON mentorapply.registId = mentorregistinfo.registId ";
+
+		if(!(sort.equals("none") || sort.equals("0"))) {
+			SQL += util.sortSQL(sort, sortTarget);
+		}
 				
 		try {
 			return template.query(SQL, new RowMapper<Map<String, Object>>() {
@@ -91,9 +95,9 @@ public class MentorRepositroyImpl implements MentorRepository {
 					Map<String, Object> applyInfo = new HashMap<String, Object>();
 					applyInfo.put("registId", rs.getString(1));
 					applyInfo.put("memberId", rs.getString(2));
-					applyInfo.put("applyDate", rs.getTimestamp(3));
+					applyInfo.put("applyDate", util.outputFormatting(rs.getTimestamp(3)));
 					applyInfo.put("state", rs.getString(4));
-					applyInfo.put("confirmDate", rs.getTimestamp(5));
+					applyInfo.put("confirmDate", util.outputFormatting(rs.getTimestamp(5)));
 
 					return applyInfo;
 				}
@@ -104,15 +108,19 @@ public class MentorRepositroyImpl implements MentorRepository {
 		}
 	}
 	
-	public List<Map<String, Object>> getMentorApplyList(String state) {
+	public List<Map<String, Object>> getMentorApplyList(String state, String sort, String sortTarget) {
 		String SQL = "SELECT mentorregistinfo.registId, mentorregistinfo.memberId, mentorregistinfo.applyDate, mentorapply.state, mentorapply.confirmDate FROM mentorapply "
 				+ "LEFT JOIN mentorregistinfo "
 				+ "ON mentorapply.registId = mentorregistinfo.registId ";
 		
 		if(state.equals("Confirm")) {
-			SQL = SQL + "WHERE state = 'Accept' or state = 'Refuse'";
+			SQL = SQL + "WHERE state = 'Accept' or state = 'Refuse' ";
 		} else if(state.equals("Wait")) {
-			SQL = SQL + "WHERE state = 'Wait'";			
+			SQL = SQL + "WHERE state = 'Wait' ";			
+		}
+		
+		if(!(sort.equals("none") || sort.equals("0"))) {
+			SQL += util.sortSQL(sort, sortTarget);
 		}
 		
 		try {
@@ -123,9 +131,9 @@ public class MentorRepositroyImpl implements MentorRepository {
 					Map<String, Object> applyInfo = new HashMap<String, Object>();
 					applyInfo.put("registId", rs.getString(1));
 					applyInfo.put("memberId", rs.getString(2));
-					applyInfo.put("applyDate", rs.getTimestamp(3));
+					applyInfo.put("applyDate", util.outputFormatting(rs.getTimestamp(3)));
 					applyInfo.put("state", rs.getString(4));
-					applyInfo.put("confirmDate", rs.getTimestamp(5));
+					applyInfo.put("confirmDate", util.outputFormatting(rs.getTimestamp(5)));
 
 					return applyInfo;
 				}
@@ -138,11 +146,47 @@ public class MentorRepositroyImpl implements MentorRepository {
 	
 	
 	// 멘토 신청 회원의 정보
+//	@Override
+//	public MentorRegistInfo getMentorApplyByRegistId(String registId) {
+//		String SQL = "SELECT * FROM mentorregistinfo WHERE registId = ?";
+//		try {
+//			return template.query(SQL, new BeanPropertyRowMapper<MentorRegistInfo>(MentorRegistInfo.class), registId).get(0);
+//		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+//			return null;
+//		}
+//	}
+	
 	@Override
-	public MentorRegistInfo getMentorApplyByRegistId(String registId) {
-		String SQL = "SELECT * FROM mentorregistinfo WHERE registId = ?";
+	public Map<String, Object> getMentorApplyByRegistId(String registId) {
+		String SQL = "SELECT * FROM mentorregistinfo as mI "
+				+ "LEFT JOIN mentorapply as mA "
+				+ "ON mI.registId = mA.registId "
+				+ "LEFT JOIN member as m "
+				+ "ON mI.memberId = m.memberId "
+				+ "WHERE mI.registId = ?";
 		try {
-			return template.query(SQL, new BeanPropertyRowMapper<MentorRegistInfo>(MentorRegistInfo.class), registId).get(0);
+			return template.query(SQL, new RowMapper<Map<String,Object>>() {
+
+				@Override
+				public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
+					MentorRegistInfo info = new MentorRegistInfo();
+					info.setRegistId(rs.getString("registId"));
+					info.setMemberId(rs.getString("memberId"));
+					info.setSpecialty(rs.getString("specialty"));
+					info.setLocation(rs.getString("location"));
+					info.setReason(rs.getString("reason"));
+					info.setEtc(rs.getString("etc"));
+					info.setApplyDate(util.outputFormatting(rs.getTimestamp("applyDate")));
+					
+					Map<String, Object> data = new HashMap<String, Object>();
+					data.put("info", info);
+					data.put("state", rs.getString("state"));
+					data.put("profileImage", rs.getString("profileImage"));
+					
+					return data;
+				}
+				
+			}, registId).get(0);
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -163,11 +207,16 @@ public class MentorRepositroyImpl implements MentorRepository {
 	
 	// 멤버 리스트
 	@Override
-	public List<Map<String, Object>> getMentorListWithMember() {
+	public List<Map<String, Object>> getMentorListWithMember(String sort, String sortTarget) {
 		String SQL = "SELECT mentor.mentorId, member.memberId, mentor.registDate, member.joinDate FROM member "
 				+ "LEFT JOIN mentor "
-				+ "ON member.memberId = mentor.memberId";
+				+ "ON member.memberId = mentor.memberId ";
 		
+		if(!(sort.equals("none") || sort.equals("0"))) {
+			SQL += util.sortSQL(sort, sortTarget);
+		}
+		
+
 		try {
 			return template.query(SQL, new RowMapper<Map<String, Object>>() {
 
@@ -176,7 +225,13 @@ public class MentorRepositroyImpl implements MentorRepository {
 					Map<String, Object> memberInfo = new HashMap<String, Object>();
 					memberInfo.put("mentorId", rs.getString(1));
 					memberInfo.put("memberId", rs.getString(2));
-					memberInfo.put("mentorRegistDate", rs.getTimestamp(3));
+					
+					if(rs.getTimestamp(3) != null) {
+						memberInfo.put("mentorRegistDate", util.outputFormatting(rs.getTimestamp(3)));
+					} else {
+						memberInfo.put("mentorRegistDate", null);
+					}
+					
 					memberInfo.put("memberJoinDate", util.outputFormatting(rs.getTimestamp(4)));
 					
 					return memberInfo;
@@ -187,6 +242,47 @@ public class MentorRepositroyImpl implements MentorRepository {
 		}
 	}
 	
+
+	@Override
+	public List<Map<String, Object>> getMentorListWithMember(String state, String sort, String sortTarget) {
+		if(state.equals("Accept")) {
+			state = "IS NOT NULL ";
+		} else if(state.equals("NotRegist")) {
+			state = "IS NULL ";
+		}
+		String SQL = "SELECT mentor.mentorId, member.memberId, mentor.registDate, member.joinDate FROM member "
+				+ "LEFT JOIN mentor "
+				+ "ON member.memberId = mentor.memberId "
+				+ "WHERE registDate " + state;
+		
+		if(!(sort.equals("none") || sort.equals("0"))) {
+			SQL += util.sortSQL(sort, sortTarget);
+		}
+		
+		try {
+			return template.query(SQL, new RowMapper<Map<String, Object>>() {
+
+				@Override
+				public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Map<String, Object> memberInfo = new HashMap<String, Object>();
+					memberInfo.put("mentorId", rs.getString(1));
+					memberInfo.put("memberId", rs.getString(2));
+					if(rs.getTimestamp(3) != null) {
+						memberInfo.put("mentorRegistDate", util.outputFormatting(rs.getTimestamp(3)));
+					} else {
+						memberInfo.put("mentorRegistDate", null);
+					}
+					
+					memberInfo.put("memberJoinDate", util.outputFormatting(rs.getTimestamp(4)));
+					
+					return memberInfo;
+				}
+			});
+		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
 	// 멘토 신청 승인
 	@Override
 	public void mentorRegist(String memberId, String registId) {
@@ -194,10 +290,10 @@ public class MentorRepositroyImpl implements MentorRepository {
 		
 		try {
 			SQL = "INSERT INTO mentor VALUES(?, ?, ?)";
-			template.update(SQL, util.createId("mentor"), memberId, LocalDateTime.now());
+			template.update(SQL, util.createId("mentor"), memberId, LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 			
 			SQL = "UPDATE mentorapply SET state = 'Accept', confirmDate = ?  WHERE memberId = ? and registId = ?";
-			template.update(SQL, LocalDateTime.now() , memberId, registId);
+			template.update(SQL, LocalDateTime.now(ZoneId.of("Asia/Seoul")) , memberId, registId);
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
@@ -210,7 +306,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 
 		try {
 			SQL = "UPDATE mentorapply SET state = 'Refuse', confirmDate = ? WHERE memberId = ? and registId = ?";
-			template.update(SQL, LocalDateTime.now(), memberId, registId);
+			template.update(SQL, LocalDateTime.now(ZoneId.of("Asia/Seoul")), memberId, registId);
 		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
@@ -270,9 +366,6 @@ public class MentorRepositroyImpl implements MentorRepository {
 		    }
 	}
 	
-	
-	
-	
 	// 예약 전용
 	@Override
 	public Mentor getMentor2(String mentorId) {
@@ -290,12 +383,9 @@ public class MentorRepositroyImpl implements MentorRepository {
 		try {
 			template.update(SQL, mentorprofile.getIntroduction(),mentorprofile.getCertification(),mentorprofile.getCategory(),mentorprofile.getFilename1(),mentorprofile.getFilename2(),mentorprofile.getFilename3(),mentorprofile.getMentorId(),memberId);
 
-			
 		}catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 	@Override

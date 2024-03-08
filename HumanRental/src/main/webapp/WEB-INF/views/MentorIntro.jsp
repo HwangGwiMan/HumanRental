@@ -18,13 +18,13 @@
 	<body>
 		<jsp:include page="nav.jsp"/>
 		<div class="container pt-5 mt-5">
-			<div class="row justify-content-center p-5">멘토 신청 안내</div>
-			<div class="row justify-content-center p-5">
+			<div class="row justify-content-center p-5 fs-1">멘토 신청 안내</div>
+			<div class="row justify-content-center p-5 fs-3">
 				다양한 분야에서 멘토가 될 수 있는 분들을 모집합니다.<br>
 				자신만의 재능을 유용하게 활용하고 싶은 분들은 멘토가 되어 활동해 보세요.<br>
 			</div>
 			<div class="row justify-content-center p-5">
-				<div class="col-sm-1" onclick="javascript:mentorCheck()">멘토 신청</div>
+				<div class="col-sm-2 btn btn-secondary fs-4 text-nowrap" onclick="javascript:mentorCheck()">멘토 신청</div>
 			</div>
 		</div>
 		<jsp:include page="footer.jsp"/>

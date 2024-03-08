@@ -43,7 +43,7 @@ public class AlarmInterceptor extends HandlerInterceptorAdapter{
 			List<Alarm> alarmList = alarmService.selectAlarm(memberId);
 			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
+			
 			for(Alarm alarm : alarmList) {
 				long time = Duration.between((LocalDateTime.parse((String)alarm.getDate(), formatter)) , LocalDateTime.now(ZoneId.of("Asia/Seoul"))).getSeconds();
 				if(time >= 86400) {

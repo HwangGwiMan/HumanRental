@@ -6,7 +6,9 @@ public class Mentee {
 	private String memberId;
 	private String interest;
 	private String introduction;
-	private int starRate;
+	private float starRate;
+	private int starCount;
+	
 	public String getMenteeId() {
 		return menteeId;
 	}
@@ -31,11 +33,17 @@ public class Mentee {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-	public int getStarRate() {
+	public float getStarRate() {
 		return starRate;
 	}
-	public void setStarRate(int starRate) {
+	public void setStarRate(float starRate) {
 		this.starRate = starRate;
+	}
+	public int getStarCount() {
+		return starCount;
+	}
+	public void setStarCount(int starCount) {
+		this.starCount = starCount;
 	}
 	
 	

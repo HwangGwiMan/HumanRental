@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -25,8 +26,6 @@ import com.springmvc.util.Utility;
 @Repository
 public class ReportRepositoryImpl implements ReportRepository {
 	
-	
-	
 	Utility util = new Utility();
 	
 	// JDBC
@@ -36,13 +35,16 @@ public class ReportRepositoryImpl implements ReportRepository {
 	public void setJdbcTemplate(DataSource dataSource) {
 		this.template = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Override
-	public List<Report> getReportList() {
-		String SQL;
+	public List<Report> getReportList(String sort, String sortTarget) {
+		String SQL = "SELECT * FROM report ";
+		
+		if(!(sort.equals("none") || sort.equals("0"))) {
+			SQL += util.sortSQL(sort, sortTarget);
+		}
 				
 		try {
-			SQL = "SELECT * FROM report";
 			return template.query(SQL, new RowMapper<Report>() {
 				
 				@Override
@@ -97,7 +99,7 @@ public class ReportRepositoryImpl implements ReportRepository {
 		String SQL;
 				
 		SQL = "INSERT INTO report VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-		template.update(SQL, util.createId("report"), request.getParameter("memberId"), reporterId, request.getParameter("target"), request.getParameter("boardId"), request.getParameter("type"), "Wait" ,LocalDateTime.now());
+		template.update(SQL, util.createId("report"), request.getParameter("memberId"), reporterId, request.getParameter("target"), request.getParameter("boardId"), request.getParameter("type"), "Wait" ,LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 		
 		SQL = "SELECT reportCount FROM member WHERE memberId = ?";
 		int reportCount = template.queryForObject(SQL, Integer.class, request.getParameter("memberId"));

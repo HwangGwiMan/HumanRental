@@ -12,7 +12,8 @@ public class MentorProfile {
 	private String filename1;
 	private String filename2;
 	private String filename3;
-	private int starRate;
+	private float starRate;
+	private int starCount;
 	
 	public String getMentorId() {
 		return mentorId;
@@ -62,11 +63,17 @@ public class MentorProfile {
 	public void setFilename3(String filename3) {
 		this.filename3 = filename3;
 	}
-	public int getStarRate() {
+	public float getStarRate() {
 		return starRate;
 	}
-	public void setStarRate(int starRate) {
+	public void setStarRate(float starRate) {
 		this.starRate = starRate;
+	}
+	public int getStarCount() {
+		return starCount;
+	}
+	public void setStarCount(int starCount) {
+		this.starCount = starCount;
 	}
 	
 

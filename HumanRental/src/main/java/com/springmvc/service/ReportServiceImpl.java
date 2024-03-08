@@ -23,8 +23,8 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<Report> getReportList() {
-		return reportRepository.getReportList();
+	public List<Report> getReportList(String sort, String sortTarget) {
+		return reportRepository.getReportList(sort, sortTarget);
 	}
 
 	@Override

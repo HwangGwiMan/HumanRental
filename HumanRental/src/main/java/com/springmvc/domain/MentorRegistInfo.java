@@ -9,11 +9,11 @@ public class MentorRegistInfo {
 	private String location;
 	private String reason;
 	private String etc;
-	private LocalDateTime applyDate;
-	public LocalDateTime getApplyDate() {
+	private Object applyDate;
+	public Object getApplyDate() {
 		return applyDate;
 	}
-	public void setApplyDate(LocalDateTime applyDate) {
+	public void setApplyDate(Object applyDate) {
 		this.applyDate = applyDate;
 	}
 	public String getRegistId() {
