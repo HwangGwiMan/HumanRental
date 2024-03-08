@@ -483,7 +483,7 @@
 								<div class="col p-5">
 									<div class="row">
 										<div class="col m-2">
-											<img width="300" height="200" src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />">
+											<img width="300" height="200" src="<c:url value="/resources/img/ProfilePicture/${ applyInfo.profileImage }" />">
 										</div>
 										<div class="row p-3">
 											<div class="col-2">신청자 ID :</div>

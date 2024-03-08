@@ -146,22 +146,24 @@ public class MentorRepositroyImpl implements MentorRepository {
 	
 	
 	// 멘토 신청 회원의 정보
-	@Override
-	public MentorRegistInfo getMentorApplyByRegistId(String registId) {
-		String SQL = "SELECT * FROM mentorregistinfo WHERE registId = ?";
-		try {
-			return template.query(SQL, new BeanPropertyRowMapper<MentorRegistInfo>(MentorRegistInfo.class), registId).get(0);
-		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
-			return null;
-		}
-	}
+//	@Override
+//	public MentorRegistInfo getMentorApplyByRegistId(String registId) {
+//		String SQL = "SELECT * FROM mentorregistinfo WHERE registId = ?";
+//		try {
+//			return template.query(SQL, new BeanPropertyRowMapper<MentorRegistInfo>(MentorRegistInfo.class), registId).get(0);
+//		} catch(EmptyResultDataAccessException | IndexOutOfBoundsException e) {
+//			return null;
+//		}
+//	}
 	
 	@Override
-	public Map<String, Object> getMentorApplyByRegistIdTEST(String registId) {
+	public Map<String, Object> getMentorApplyByRegistId(String registId) {
 		String SQL = "SELECT * FROM mentorregistinfo as mI "
 				+ "LEFT JOIN mentorapply as mA "
 				+ "ON mI.registId = mA.registId "
-				+ "WHERE mI.registId = ?;";
+				+ "LEFT JOIN member as m "
+				+ "ON mI.memberId = m.memberId "
+				+ "WHERE mI.registId = ?";
 		try {
 			return template.query(SQL, new RowMapper<Map<String,Object>>() {
 
@@ -179,6 +181,7 @@ public class MentorRepositroyImpl implements MentorRepository {
 					Map<String, Object> data = new HashMap<String, Object>();
 					data.put("info", info);
 					data.put("state", rs.getString("state"));
+					data.put("profileImage", rs.getString("profileImage"));
 					
 					return data;
 				}

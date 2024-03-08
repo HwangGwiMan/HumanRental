@@ -12,7 +12,7 @@ phone int not null,
 address varchar(100) not null,
 nickname varchar(20) not null unique,
 joinDate datetime not null,
-profileImage varchar(20),
+profileImage varchar(50),
 reportCount int
 );
 

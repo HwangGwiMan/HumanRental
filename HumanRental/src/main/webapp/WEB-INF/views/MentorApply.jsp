@@ -50,15 +50,15 @@
 					<label class="col-2 border-end">
 						<div class="text-center">주요 활동지</div>
 					</label>
-					<div class="col-2 px-5">
+					<div class="col-3 px-5 text-nowrap">
 						권역
 						<select name="location" id="addressRegion"  required="required"></select>
 					</div>
-					<div class="col-2 px-5 text-nowrap">
+					<div class="col-3 px-5 text-nowrap">
 						행정 구역
 				    	<select name="location" id="addressDo"  required="required"></select>
 				    </div>
-				    <div class="col-2 px-5">
+				    <div class="col-2 px-5 text-nowrap">
 				    	시군구
    						<select name="location" id="addressSiGunGu"  required="required"></select>
    					</div>
