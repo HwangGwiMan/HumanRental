@@ -48,5 +48,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.getMembers();
 	}
 
+	@Override
+	public Member getMemberFromNickName(String nickname) {
+		return memberRepository.getMemberFromNickName(nickname);
+	}
+
 
 }

@@ -43,7 +43,7 @@
 					</div>
 				</c:when>
 			</c:choose>
-			<div style="text-align: center;"><input type="reset" class="btn btn-primary" value="돌아가기" onclick="goBack()"></div>
+            <a href="<c:url value="/main"/>" class="btn btn-secondary">&laquo; 메인페이지 돌아가기</a>
 		</div>
 	</div>
 	<jsp:include page="footer.jsp" />

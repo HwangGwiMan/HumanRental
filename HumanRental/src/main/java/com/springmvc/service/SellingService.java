@@ -1,5 +1,7 @@
 package com.springmvc.service;
 
+import java.util.List;
+
 import org.springframework.ui.Model;
 
 import com.springmvc.domain.Selling;
@@ -11,4 +13,6 @@ public interface SellingService {
 	public void SellingDelete(String sellingId);
 	public void SellingUpdate(Selling selling);
 	public void getSellingListById(Model model, String memberId);
+	public List<Selling> getSellingFromNickname( String nickname);
+
 }

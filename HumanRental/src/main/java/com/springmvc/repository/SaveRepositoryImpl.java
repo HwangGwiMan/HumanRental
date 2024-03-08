@@ -32,7 +32,6 @@ public class SaveRepositoryImpl implements SaveRepository{
 	
 	public void insertSavelist (Buying buying ,String memberId) {
 		
-		System.out.println("buying insert 넣는 sql 구문이 있는곳이다 와줘");
 		Save save = new Save();
 		save.setSaveListId(buying.getBuyingId());
 		save.setMemberId(memberId);
@@ -50,7 +49,6 @@ public class SaveRepositoryImpl implements SaveRepository{
 	@Override
 	public void insertSavelist(Selling selling, String memberId) {
 		
-		System.out.println("여긴 들어오니?");
 		Save save = new Save();
 		save.setSaveListId(selling.getSellingId());
 		save.setMemberId(memberId);
@@ -70,7 +68,6 @@ public class SaveRepositoryImpl implements SaveRepository{
 
 	@Override
 	public List<Save> getsaveinformation(String memberId) {
-	    System.out.println("이거 save sql 셀렉 구문인데  구문인데 여기 까진 오고 있니?");
 	    
 	    String SQL = "select * from save where memberId = ?";
 	    List<Save> savelist = template.query(SQL, new Object[]{memberId}, new SaveRowMapper());
@@ -94,8 +91,6 @@ public class SaveRepositoryImpl implements SaveRepository{
 
 	@Override
 	public void deletesavelist(String savelistid) {
-//		String SQL = "delete from MenteeProfile where memberId=?";  
-//		template.update(SQL,memberId);
 		String SQL ="delete  from save where saveListId=?";
 		template.update(SQL,savelistid);
 	}
