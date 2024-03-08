@@ -18,35 +18,86 @@
 	<body>
 		<jsp:include page="nav.jsp"/>
 		<div class="container">
-			<form method="post" action="<c:url value="/mentorApply/submit"/>">
-				<div class="row p-4">
-					<label class="col-2">특기 분야</label> 
-					운동<input type="checkbox" class="col-sm-1" name="specialty" value="운동">  
-					음악<input type="checkbox" class="col-sm-1" name="specialty" value="음악">
-					게임<input type="checkbox" class="col-sm-1" name="specialty" value="게임">
-					공부<input type="checkbox" class="col-sm-1" name="specialty" value="공부">
-					기타<input type="checkbox" class="col-sm-1" name="specialty" value="기타">
+			<div class="row justify-content-center p-5 fs-1">멘토 신청</div>
+			<form method="post" action="<c:url value="/mentorApply/submit"/>" class="p-3 ">
+				<div class="row p-3">
+					<label class="col-3">
+						<div class="text-center border-end" >멘토로서 활동하고자 하는 분야</div>
+					</label> 
+					<div class="col-sm-1 d-flex">
+						<div class="col">운동</div>
+						<div class="col"><input type="checkbox"  name="specialty" value="운동"></div>
+					</div>  
+					<div class="col-sm-1 d-flex">
+						<div class="col">음악</div>
+						<div class="col"><input type="checkbox"  name="specialty" value="음악"></div>
+					</div>
+					<div class="col-sm-1 d-flex">
+						<div class="col">게임</div>
+						<div class="col"><input type="checkbox" name="specialty" value="게임"></div>
+					</div>
+					<div class="col-sm-1 d-flex">
+						<div class="col">공부</div>
+						<div class="col"><input type="checkbox" name="specialty" value="공부"></div>
+					</div>
+					<div class="col-sm-1 d-flex">
+						<div class="col">기타</div>
+						<div class="col"><input type="checkbox" name="specialty" value="기타"></div>
+					</div>
 				</div>
+				<hr>
 				<div class="row p-4">
-					<label class="col-2">주요 활동지</label>
-					<select name="location" id="addressRegion" class="col-sm-2" required="required"></select>
-				    <select name="location" id="addressDo" class="col-sm-2" required="required"></select>
-   					<select name="location" id="addressSiGunGu" class="col-sm-2" required="required"></select>
+					<label class="col-2 border-end">
+						<div class="text-center">주요 활동지</div>
+					</label>
+					<div class="col-3 px-5 text-nowrap">
+						권역
+						<select name="location" id="addressRegion"  required="required"></select>
+					</div>
+					<div class="col-3 px-5 text-nowrap">
+						행정 구역
+				    	<select name="location" id="addressDo"  required="required"></select>
+				    </div>
+				    <div class="col-2 px-5 text-nowrap">
+				    	시군구
+   						<select name="location" id="addressSiGunGu"  required="required"></select>
+   					</div>
 				</div>
+				<hr>
 				<div class="row p-4">
-					<label class="col-2">신청하게 된 이유</label>
-					여유 시간 활용<input type="checkbox" class="col-sm-1" name="reason" value="여유 시간 활용">
-					사회적 교류<input type="checkbox" class="col-sm-1" name="reason" value="사회적 교류">
-					재능 기부를 통한 만족감<input type="checkbox" class="col-sm-1" name="reason" value="재능 기부를 통한 만족감">
-					자기 발전<input type="checkbox" class="col-sm-1" name="reason" value="자기 발전">
+					<label class="col-2">
+						<div class="text-center border-end">신청하게 된 이유</div>
+					</label>
+					<div class="col-2 d-flex">
+						<div class="col">여유 시간 활용</div>
+						<div class="col-2"><input type="checkbox" name="reason" value="여유 시간 활용"></div>
+					</div>
+					<div class="col-2 d-flex">
+						<div class="col">사회적 교류</div>
+						<div class="col-2"><input type="checkbox" name="reason" value="사회적 교류"></div>
+					</div>
+					<div class="col-3 d-flex">
+						<div class="col">재능 기부를 통한 만족감</div>
+						<div class="col-2"><input type="checkbox" name="reason" value="재능 기부를 통한 만족감"></div>
+					</div>
+					<div class="col-2 d-flex">
+						<div class="col">자기 발전</div>
+						<div class="col-2"><input type="checkbox" name="reason" value="자기 발전"></div>
+					</div>
 				</div>
+				<hr>
 				<div class="row p-4">
-					<label class="col-2">기타 사항</label>
+					<label class="col-2 d-flex align-items-center justify-content-center border-end">기타 사항</label>
 					<div class="col">
 						<textarea rows="5" cols="100" name="etc"></textarea>
 					</div>
 				</div>
-				<input type="submit" value="Submit" />
+				<hr>
+				<div class="row justify-content-center">
+					<div class="col-1">
+						<input type="submit" value="신청하기" class="p-2 btn btn-success"/>
+					</div>
+				</div>
 			</form>
 		</div>
 		<jsp:include page="footer.jsp"/>

@@ -38,6 +38,8 @@ public class BoardServiceImpl implements BoardService{
 		
 		int total_page;
 		
+		
+		
 		if (total_record % limit == 0) {     
 	        total_page = total_record / limit;
 	    } else {

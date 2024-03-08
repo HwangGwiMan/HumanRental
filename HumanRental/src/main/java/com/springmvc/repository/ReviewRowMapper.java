@@ -19,6 +19,7 @@ public class ReviewRowMapper implements RowMapper<Review>{
 		review.setContent(rs.getString(5));
 		review.setWriteDate(rs.getTimestamp(6).toLocalDateTime());
 		review.setStarRate(rs.getInt(7));
+		review.setReservationId(rs.getString("reservationId"));
  
 		return review;
 		 

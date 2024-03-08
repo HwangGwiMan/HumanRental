@@ -13,10 +13,10 @@
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="qqml2 container">
-        <div>
-            <br>멘티 리스트<br><br><br>
+        <div class="text-center fs-1 p-3">
+            <div class="p-3">멘토 모집</div>
         </div>
-        <div class="category">
+        <div class="category pt-3">
             <div><a href="<c:url value="/BuyingList?category=music"/>"><i class="fa-solid fa-guitar"></i></a></div>
             <div><a href="<c:url value="/BuyingList?category=sports"/>"><i class="fa-solid fa-person-running"></i></a></div>
             <div><a href="<c:url value="/BuyingList?category=game"/>"><i class="fa-solid fa-gamepad"></i></a></div>

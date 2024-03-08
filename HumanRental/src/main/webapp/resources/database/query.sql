@@ -1,8 +1,5 @@
 CREATE DATABASE HumanRental DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-
 use HumanRental;
-
-
 
 -- 회원관리
 CREATE TABLE IF NOT EXISTS Member(
@@ -15,7 +12,7 @@ phone int not null,
 address varchar(100) not null,
 nickname varchar(20) not null unique,
 joinDate datetime not null,
-profileImage varchar(20),
+profileImage varchar(50),
 reportCount int
 );
 
@@ -59,12 +56,11 @@ category varchar(100),
 filename1 varchar(1000),
 filename2 varchar(1000),
 filename3 varchar(1000),
-starRate int ,
+starRate float ,
+starCount int,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
-
-select * from MentorProfile;
 
 -- 멘티프로필 관리
 CREATE TABLE IF NOT EXISTS MenteeProfile(
@@ -72,11 +68,10 @@ menteeId varchar(50) not null primary key,
 memberId varchar(50) not null,
 interest varchar(50),
 introduction varchar(1000),
-starRate int ,
+starRate float ,
+starCount int,
 foreign key(memberId) references Member(memberId)
 );
-
-select * from  MenteeProfile;
 
 -- 팝니다 관리 
 CREATE TABLE IF NOT EXISTS Selling (
@@ -84,7 +79,7 @@ CREATE TABLE IF NOT EXISTS Selling (
 	memberId VARCHAR(20),
 	nickname VARCHAR(20),
 	introduction VARCHAR(1000),
-	starRate INT NULL,
+	starRate float NULL,
 	title VARCHAR(20),
 	content TEXT NULL,
 	regist_day datetime,
@@ -102,7 +97,7 @@ CREATE TABLE IF NOT EXISTS Buying (
 	memberId VARCHAR(20),
 	nickname VARCHAR(20),
 	introduction VARCHAR(1000),
-	starRate INT NULL,
+	starRate float NULL,
 	title VARCHAR(20),
 	content TEXT NULL,
 	regist_day datetime,
@@ -113,7 +108,6 @@ CREATE TABLE IF NOT EXISTS Buying (
 	foreign key(memberId) references Member(memberId) ON DELETE CASCADE,
 	foreign key(nickname) references Member(nickname) ON DELETE CASCADE
 );
-select * from buying;
 
 -- 찜목록 
 CREATE TABLE IF NOT EXISTS Save(
@@ -128,8 +122,6 @@ foreign key(memberId) references Member(memberId)
 
 );
 
-select * from save;
-
 -- 후기관리
 -- 팝니다 리뷰 -
 CREATE TABLE IF NOT EXISTS SellingReview(
@@ -139,7 +131,8 @@ memberId varchar(20),
 title varchar(50),
 content varchar(10000),
 writeDate date,
-starRate int,
+starRate float,
+reservationId varchar(50),
 foreign key(memberId) references Member(memberId),
 foreign key(sellingId) references Selling(sellingId)
 );
@@ -152,9 +145,22 @@ memberId varchar(20) not null,
 title varchar(50),
 content varchar(10000),
 writeDate date,
-starRate int,
+starRate float,
+reservationId varchar(50),
 foreign key(memberId) references Member(memberId),
 foreign key(buyingId) references Buying(buyingId)
+);
+
+-- 멤버 리뷰
+CREATE TABLE IF NOT EXISTS MemberReview(
+memberReviewId varchar(50) not null primary key,
+BoardId varchar(50),
+memberId varchar(20),
+title varchar(50),
+content varchar(10000),
+writeDate date,
+starRate float,
+reservationId varchar(50)
 );
 
 -- 예약 관리 
@@ -288,6 +294,7 @@ sendMemberId varchar(20) not null,
 receiveMemberId varchar(20) not null,
 date datetime not null,
 content varchar(10000) not null,
+linkId varchar(50),
 foreign key(sendMemberId) references Member(memberId),
 foreign key(receiveMemberId) references Member(memberId)
 );
@@ -298,6 +305,17 @@ foreign key(receiveMemberId) references Member(memberId)
 INSERT INTO Member VALUES("admin", "admin", "admin", 1, "TEST", 01000000000, "TEST", "admin", "2024-01-01 12:00:00" , "default.png", 0);
 INSERT INTO Member VALUES("qwer", "1234", "김이름", 25, "남", 01000000000, "TEST", "닉네임1", "2024-01-01 12:00:00" , "default.png", 0);
 INSERT INTO Member VALUES("asdf", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임2", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("zxcv", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임3", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("1234", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임4", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("5678", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임5", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("test_1", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임6", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("test_2", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임7", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("test_3", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임8", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("test_4", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임9", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("test_5", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임10", "2024-01-01 12:00:00" , "default.png", 0);
+INSERT INTO Member VALUES("test_6", "1234", "박이름", 25, "남", 01000000000, "TEST", "닉네임11", "2024-01-01 12:00:00" , "default.png", 0);
+
+
 
 -- 자유게시판, 공지사항 내용 추가
 insert into board values('Board_001','admin','admin','게시글1','내용','2024-01-01 00:00:00',0);
@@ -311,23 +329,51 @@ insert into board2 values('Board_003','admin','admin','공지사항3','내용','
 insert into mentor values('mentor_001' , 'qwer', '2024-01-01 00:00:00');
 insert into mentor values('mentor_002' , 'admin', '2024-01-01 00:00:00');
 insert into mentor values('mentor_003' , 'asdf', '2024-01-01 00:00:00');
+insert into mentor values('mentor_004' , 'zxcv', '2024-01-01 00:00:00');
+insert into mentor values('mentor_005' , '1234', '2024-01-01 00:00:00');
+insert into mentor values('mentor_006' , '5678', '2024-01-01 00:00:00');
+
 
 -- menteeprofile 추가
-insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0);
-insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0);
-insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0);
+<<<<<<< HEAD
+insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0, 0);
+insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0, 0);
+insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0, 0);
+=======
+insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1',0,0);
+insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2',0,0);
+insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3',0,0);
+>>>>>>> refs/heads/main
 
 -- mentorprofile 추가
-insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
-insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
-insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0);
+<<<<<<< HEAD
+insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
+insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
+insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
+=======
+insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST',0,0);
+insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST',0,0);
+insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST',0,0);
+>>>>>>> refs/heads/main
 
 -- buying 내용 추가
-insert into buying values('buyingId_001','qwer','닉네임1','introduction',3.5,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
-insert into buying values('buyingId_002','admin','admin','introduction',5,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
-insert into buying values('buyingId_003','asdf','닉네임2','introduction',5,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into buying values('buyingId_001','qwer','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
+insert into buying values('buyingId_002','asdf','닉네임2','introduction',0,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
+insert into buying values('buyingId_003','asdf','닉네임2','introduction',0,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into buying values('buyingId_004','zxcv','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
+insert into buying values('buyingId_005','1234','닉네임2','introduction',0,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
+insert into buying values('buyingId_006','5678','닉네임2','introduction',0,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into buying values('buyingId_007','test_1','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
+insert into buying values('buyingId_008','test_2','닉네임2','introduction',0,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
+insert into buying values('buyingId_009','test_3','닉네임2','introduction',0,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
 
 -- selling 내용 추가
-insert into selling values('sellingId_001','qwer','닉네임1','introduction',3.5,'기타 알려드림니다','내용','2024-01-01 00:00:00','music',10000,'한국',0);
-insert into selling values('sellingId_002','admin','admin','introduction',5,'k리그 출신 축구강의','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
-insert into selling values('sellingId_003','asdf','닉네임2','introduction',5,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_001','qwer','닉네임1','introduction',0,'기타 알려드림니다','내용','2024-01-01 00:00:00','music',10000,'한국',0);
+insert into selling values('sellingId_002','qwer','닉네임1','introduction',0,'k리그 출신 축구강의','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
+insert into selling values('sellingId_003','asdf','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_004','zxcv','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_005','1234','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_006','5678','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_007','test_1','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_008','test_2','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_009','test_3','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);

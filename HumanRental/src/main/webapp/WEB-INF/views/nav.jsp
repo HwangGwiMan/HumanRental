@@ -21,8 +21,8 @@
 		<script src="<c:url value="/resources/js/nav.js"/>"></script>
 	</head>
 	<body>
-		<nav class="qqnav container">
-			<div class="row d-flex align-items-center justify-content-between">
+		<nav class="qqnav container border-bottom">
+			<div class="row d-flex align-items-center justify-content-between ">
 				<div class="col-5 d-flex align-items-center qq1">
 					<a href="<c:url value="/main"/>"><h4>휴먼렌탈</h4></a>
 					<ul class="nav">
@@ -77,7 +77,7 @@
 												<div class="row justify-content-center">
 													<c:choose>
 														<c:when test="${ fn:contains(alarm.alarmId , 'mentorApplyAlarm') }">
-															<a href="<c:url value="/myInfo?mode=applyInfo&id=${ alarm.sendMemberId }"/>" class="row btn">
+															<a href="<c:url value="/myInfo?mode=applyInfo&id=${ alarm.linkId }"/>" class="row btn">
 																<div class="row">멘토 신청 알림</div>
 																<div class="row text-nowrap">${ alarm.content }</div>
 															</a>
@@ -87,11 +87,15 @@
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 														<c:when test="${ fn:contains(alarm.alarmId , 'warningAlarm') }">
-															<div class="row">이용 경고 안내</div>
+															<div class="row">이용 경고 알림</div>
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 														<c:when test="${ fn:contains(alarm.alarmId , 'ReservationApplyAlarm') }">
-															<div class="row">재능 판매 신청 알림</div>
+															<div class="row">재능 거래 신청 알림</div>
+															<div class="row">${ alarm.content }</div>
+														</c:when>
+														<c:when test="${ fn:contains(alarm.alarmId , 'ReservationConfirmAlarm') }">
+															<div class="row">재능 거래 승인 알림</div>
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 													</c:choose>

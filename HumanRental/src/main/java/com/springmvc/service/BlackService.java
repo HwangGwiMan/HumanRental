@@ -8,6 +8,6 @@ import com.springmvc.domain.Black;
 
 public interface BlackService {
 	public void registBlack(Black black) throws DataIntegrityViolationException;
-	public List<Black> getBlackList();
+	public List<Black> getBlackList(String sort, String sortTarget);
 	void removeBlack(String blackId);
 }

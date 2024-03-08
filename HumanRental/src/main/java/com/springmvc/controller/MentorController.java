@@ -101,7 +101,7 @@ public class MentorController {
 			
 		mentorService.mentorApply(mentorRegistInfo);
 		
-		alarmService.createMentoApplyAlarm(memberId);
+		alarmService.createMentoApplyAlarm(memberId, mentorRegistInfo.getRegistId());
 		
 		return "redirect:/main";
 	}	

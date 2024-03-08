@@ -1,16 +1,17 @@
 package com.springmvc.domain;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class Alarm {
 	private String alarmId;
 	private String sendMemberId;
 	private String receiveMemberId;
 	private Object date;
-	protected String content;
-	
+	private String content;
+	private String linkId;
 	public Alarm() {
-		this.setDate(LocalDateTime.now());
+		this.setDate(LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 	}
 	
 	public String getAlarmId() {
@@ -42,5 +43,11 @@ public class Alarm {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getLinkId() {
+		return linkId;
+	}
+	public void setLinkId(String linkId) {
+		this.linkId = linkId;
 	}
 }

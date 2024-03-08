@@ -2,12 +2,6 @@ package com.springmvc.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,16 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.springmvc.domain.Member;
-import com.springmvc.domain.Mentor;
-import com.springmvc.domain.MentorRegistInfo;
-import com.springmvc.repository.BlackRepository;
+
 import com.springmvc.service.BlackService;
 import com.springmvc.service.MemberService;
 import com.springmvc.service.MentorService;
@@ -32,7 +22,6 @@ import com.springmvc.service.ReportService;
 import com.springmvc.service.ReservationService;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class PrivacyController {
@@ -54,10 +43,13 @@ public class PrivacyController {
 	
 	@GetMapping("/myInfo")
 	public String requestMyPage(@RequestParam("mode") String mode,
-								@RequestParam(value = "id", defaultValue = "none") String targetId,
-								@RequestParam(value = "t", defaultValue = "none") String state,Model model, 
+								@RequestParam(value = "id", defaultValue = "none") String targetId, // 상세 정보 용 ID
+								@RequestParam(value = "t", defaultValue = "none") String state, // 출력 정보 분류용 
+								@RequestParam(value = "sort", defaultValue = "none") String sort, // 정렬 유형
+								@RequestParam(value = "sortTarget", defaultValue = "none") String sortTarget, // 정렬 대상 
+								Model model,
 								HttpServletRequest request) {
-		System.out.println("응답하라");
+
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user") != null) {
 			String memberId = (String) session.getAttribute("user");
@@ -66,7 +58,7 @@ public class PrivacyController {
 			if(member.getProfileImage() == null) {
 				member.setProfileImage("default.png");
 			}
-			
+
 			model.addAttribute("member", member);
 			model.addAttribute("mode", mode);
 			
@@ -75,29 +67,40 @@ public class PrivacyController {
 				
 				if(mode.equals("memberManagement")) {
 					// 멤버 관리
-					model.addAttribute("memberList", mentorService.getMentorListWithMember());
+					if(state.equals("none")) {
+						model.addAttribute("memberList", mentorService.getMentorListWithMember(sort, sortTarget));
+					} else {
+						model.addAttribute("memberList", mentorService.getMentorListWithMember(state, sort, sortTarget));
+					}					
 				} else if(mode.equals("mentorApplyManagement")) {
 					// 멘토 신청 관리
 					if(state.equals("none") ) {
-						model.addAttribute("applyList", mentorService.getMentorApplyList());
+						model.addAttribute("applyList", mentorService.getMentorApplyList(sort, sortTarget));
 					} else {
-						model.addAttribute("applyList", mentorService.getMentorApplyList(state));
+						model.addAttribute("applyList", mentorService.getMentorApplyList(state, sort, sortTarget));
 					}
 				} else if(mode.equals("applyInfo") ) {
 					// 개별 멘토 신청 관리
+					//model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistId(targetId));
+					
 					model.addAttribute("applyInfo", mentorService.getMentorApplyByRegistId(targetId));
 				} else if(mode.equals("report")) {
 					// 신고 관리
-					model.addAttribute("reportList", reportService.getReportList());
+					model.addAttribute("reportList", reportService.getReportList(sort, sortTarget));
 				} else if(mode.equals("reportInfo")) {
 					// 개별 신고 관리
 					model.addAttribute("reportInfo", reportService.getReport(targetId));
 				} else if(mode.equals("blackListManagement")) {
 					// 블랙리스트 관리
-					model.addAttribute("blackList", blackService.getBlackList());
+					model.addAttribute("blackList", blackService.getBlackList(sort, sortTarget));
 				} else if(mode.equals("reservationMonitor")) {
 					// 예약 현황
-					model.addAttribute("reservationList", reservationService.getMonitorReservationStatus());
+					if(state.equals("none")) {
+						model.addAttribute("reservationList", reservationService.getMonitorReservationStatus(sort, sortTarget));
+					} else {
+						model.addAttribute("reservationList", reservationService.getMonitorReservationStatus(state, sort, sortTarget));
+					}
+					
 				}
 
 			} else {// 일반 유저 관련 데이터
@@ -212,6 +215,4 @@ public class PrivacyController {
 	        return "fail";
 	    }
 	}
-	
-
 }

@@ -2,6 +2,7 @@ package com.springmvc.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -36,7 +37,7 @@ public class BlackRepositoryImpl implements BlackRepository {
 		
 		black.setBlackId(util.createId("black"));
 		SQL = "INSERT INTO blacklist VALUES(?, ?, ?)";
-		template.update(SQL,  black.getBlackId(), black.getMemberId(), LocalDateTime.now());
+		template.update(SQL,  black.getBlackId(), black.getMemberId(), LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 	}
 	
 	@Override
@@ -48,11 +49,14 @@ public class BlackRepositoryImpl implements BlackRepository {
 	}
 	
 	@Override
-	public List<Black> getBlackList() {
-		String SQL;
+	public List<Black> getBlackList(String sort,String sortTarget) {
+		String SQL = "SELECT * FROM blacklist";
+		
+		if(!(sort.equals("none") || sort.equals("0"))) {
+			SQL += util.sortSQL(sort, sortTarget);
+		}
 		
 		try {
-			SQL = "SELECT * FROM blacklist";
 			return template.query(SQL, new RowMapper<Black>() {
 
 				@Override
