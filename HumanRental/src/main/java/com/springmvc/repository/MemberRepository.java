@@ -12,4 +12,5 @@ public interface MemberRepository {
 	public boolean deleteMember(String memberId, String memberPw);
 	public void updateMember(Member member, String memberId);
 	public List<Member> getMembers();
+	public Member getMemberFromNickName(String nickname);
 }
