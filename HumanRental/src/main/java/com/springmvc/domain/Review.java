@@ -10,8 +10,22 @@ public class Review {
 	private String content;
 	private LocalDateTime writeDate;
 	private int starRate;
+	private String reservationId;
+	private String nickname;
 	
 	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getReservationId() {
+		return reservationId;
+	}
+	public void setReservationId(String reservationId) {
+		this.reservationId = reservationId;
+	}
 	public String getReviewId() {
 		return ReviewId;
 	}

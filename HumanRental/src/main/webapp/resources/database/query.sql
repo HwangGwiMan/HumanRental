@@ -56,7 +56,7 @@ category varchar(100),
 filename1 varchar(1000),
 filename2 varchar(1000),
 filename3 varchar(1000),
-starRate int ,
+starRate float ,
 starCount int,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
@@ -68,7 +68,7 @@ menteeId varchar(50) not null primary key,
 memberId varchar(50) not null,
 interest varchar(50),
 introduction varchar(1000),
-starRate int ,
+starRate float ,
 starCount int,
 foreign key(memberId) references Member(memberId)
 );
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS Selling (
 	memberId VARCHAR(20),
 	nickname VARCHAR(20),
 	introduction VARCHAR(1000),
-	starRate INT NULL,
+	starRate float NULL,
 	title VARCHAR(20),
 	content TEXT NULL,
 	regist_day datetime,
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS Buying (
 	memberId VARCHAR(20),
 	nickname VARCHAR(20),
 	introduction VARCHAR(1000),
-	starRate INT NULL,
+	starRate float NULL,
 	title VARCHAR(20),
 	content TEXT NULL,
 	regist_day datetime,
@@ -131,7 +131,8 @@ memberId varchar(20),
 title varchar(50),
 content varchar(10000),
 writeDate date,
-starRate int,
+starRate float,
+reservationId varchar(50),
 foreign key(memberId) references Member(memberId),
 foreign key(sellingId) references Selling(sellingId)
 );
@@ -144,9 +145,22 @@ memberId varchar(20) not null,
 title varchar(50),
 content varchar(10000),
 writeDate date,
-starRate int,
+starRate float,
+reservationId varchar(50),
 foreign key(memberId) references Member(memberId),
 foreign key(buyingId) references Buying(buyingId)
+);
+
+-- 멤버 리뷰
+CREATE TABLE IF NOT EXISTS MemberReview(
+memberReviewId varchar(50) not null primary key,
+BoardId varchar(50),
+memberId varchar(20),
+title varchar(50),
+content varchar(10000),
+writeDate date,
+starRate float,
+reservationId varchar(50)
 );
 
 -- 예약 관리 
@@ -321,14 +335,26 @@ insert into mentor values('mentor_006' , '5678', '2024-01-01 00:00:00');
 
 
 -- menteeprofile 추가
+<<<<<<< HEAD
 insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0, 0);
 insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0, 0);
 insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0, 0);
+=======
+insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1',0,0);
+insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2',0,0);
+insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3',0,0);
+>>>>>>> refs/heads/main
 
 -- mentorprofile 추가
+<<<<<<< HEAD
 insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
 insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
 insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
+=======
+insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST',0,0);
+insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST',0,0);
+insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST',0,0);
+>>>>>>> refs/heads/main
 
 -- buying 내용 추가
 insert into buying values('buyingId_001','qwer','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);

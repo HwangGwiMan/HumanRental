@@ -46,6 +46,8 @@ public class ReviewController {
 		Reservation reservation = reservationService.GetReservationInfo(reservationId, model);
 		String memberId = reservation.getMemberId();
 		String applicantMemberId = reservation.getApplicantMemberId();
+		review.setReservationId(reservationId);
+		
 		System.out.println("포스트 리뷰");
 		System.out.println("memberId"+memberId);
 		System.out.println("review.getMemberId()"+review.getMemberId());

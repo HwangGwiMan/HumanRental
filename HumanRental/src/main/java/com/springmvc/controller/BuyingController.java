@@ -1,5 +1,7 @@
 package com.springmvc.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.Member;
+import com.springmvc.domain.Review;
 import com.springmvc.domain.Buying;
 import com.springmvc.service.MemberService;
+import com.springmvc.service.ReviewService;
 import com.springmvc.service.BuyingService;
 
 @Controller
@@ -24,6 +28,9 @@ public class BuyingController {
 	
 	@Autowired
 	MemberService memberService;
+
+	@Autowired
+	ReviewService reviewService;
 	
 	//멘티게시글 리스트 페이지
 	@GetMapping("/BuyingList")
@@ -37,6 +44,8 @@ public class BuyingController {
 	@GetMapping("/buying/detail")
 	public String BuyingDetail(@RequestParam("buyingId") String buyingId, Model model) {
 		buyingservice.BuyingDetailbyId(model, buyingId);
+		List<Review> list = reviewService.getReviewList(buyingId);
+		model.addAttribute("reviewList",list);
 		return "BuyingDetail";
 	}
 	

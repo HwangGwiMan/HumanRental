@@ -11,6 +11,7 @@
 	</head>
 	<body>
 		<jsp:include page="nav.jsp" />
+<<<<<<< HEAD
 		<div class="container pt-3">
 			<div class="row">
 				<div class="info">당신의 재능을 나누세요. + 장황한 말</div>
@@ -119,6 +120,13 @@
 		        </div>
 	        </div>
     	</div>
+=======
+		<jsp:include page="section0.jsp" />
+		<br>
+		<jsp:include page="section1.jsp" />
+		<jsp:include page="section2.jsp" />
+		<jsp:include page="section3.jsp" />
+>>>>>>> refs/heads/main
 		<jsp:include page="footer.jsp" />
 	</body>
 </html>
