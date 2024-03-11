@@ -32,7 +32,7 @@
    			    	<div class="row justify-content-center">
 			    		<div class="col-1 p-2 align-self-center">아이디</div>
 			    		<div class="col-3 p-2"><form:input path="memberId" name="username" id="memberId" class="form-control"/></div>
-			    		<div class="col-1 p-1 align-self-center"><a onclick="javascript:idDuplicateCheck()" class="btn">중복 확인</a></div>
+			    		<div class="col-1 p-1 align-self-center"><a class="btn DupChkBtn">중복 확인</a></div>
 		    		</div>
 	 			    <div class="row justify-content-center">
 			    		<div class="col-1 p-2 align-self-center">비밀번호</div>
@@ -44,7 +44,8 @@
 			    	</div>
 					<div class="row justify-content-center">
 			    		<div class="col-1 p-2 align-self-center">닉네임</div>
-			    		<div class="col-4 p-2"><form:input path="nickName" class="form-control"/></div>
+			    		<div class="col-3 p-2"><form:input path="nickName" class="form-control"/></div>
+			    		<div class="col-1 p-1 align-self-center"><a class="btn DupChkBtn">중복 확인</a></div>
 			    	</div>
 			    	<div class="row justify-content-center">
 			    		<div class="col-1 p-2 align-self-center">나이</div>

@@ -28,6 +28,11 @@ public class MemberServiceImpl implements MemberService {
 	public boolean idCheck(String memberId) {
 		return memberRepository.idCheck(memberId); 
 	}
+	
+	@Override
+	public boolean nickCheck(String nickName) {
+		return memberRepository.nickCheck(nickName);
+	}
 
 	@Override
 	public Member getMember(String memberId) {

@@ -56,7 +56,7 @@
 						<% } %>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/save/saveread"/>">찜목록</a></li>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/mentorIntro"/>">멘토신청</a></li>
-						<li class="nav-item">
+						<li class="nav-item d-flex flex-column justify-content-center">
 							<a class="nav-link" href="#" id="alarmBtn">
 								<i class="fa-regular fa-bell position-relative">
 									<c:if test="${ not empty alarmList }">

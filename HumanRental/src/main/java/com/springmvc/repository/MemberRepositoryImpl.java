@@ -85,6 +85,19 @@ public class MemberRepositoryImpl implements MemberRepository {
 //	}
 	}
 	
+	// 닉네임 중복 확인
+	@Override
+	public boolean nickCheck(String nickName) {
+		String SQL = "SELECT * FROM member WHERE nickname = ?";
+		
+		try {
+			template.queryForMap(SQL, nickName);
+			return false;
+		} catch(EmptyResultDataAccessException e) {
+			return true;
+		}
+	}
+
 	// 회원 정보 획득
 	@Override
 	public Member getMember(String memberId) {
