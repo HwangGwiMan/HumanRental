@@ -1,18 +1,36 @@
- .qqs3 .info{
-  font-size: 50px;
-  text-align: center;
+.qqs3 .box2 {
+	height: 22vh;
+	width: 30%;
+/*	border: 1px solid black;*/
+	margin-top: 10px;
+	padding: 0 10px;
+	box-shadow: 3px 3px 25px 0px rgba(46,61,73,0.5);
 }
 
-.qqs3 .qq1{
-  border: 2px solid black;
-  border-radius: 40px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  height: 200px;
-  text-align: center;
-  box-shadow: 0px 0px 10px 1px #212129;
+.qqs3 .card-info {
+	display: flex;
+	height: 35%;
+	justify-content: space-between;
+	padding: 10px 10px 0;
+	margin: auto;
 }
 
-.qqs3 .classname{
-  font-size: 30px;
- }
+.qqs3 .date {
+	margin: auto 0;
+}
+
+.qqs3 span {
+	color: yellow;
+	text-shadow: -1px 0px orange, 0px 1px orange, 1px 0px orange, 0px -1px orange;
+}
+
+.qqs3 .content {
+	width: 100%;
+	height: 9vh;
+	padding: 0 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+}

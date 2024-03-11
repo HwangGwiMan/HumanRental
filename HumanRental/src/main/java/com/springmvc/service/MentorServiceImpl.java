@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.springmvc.domain.Mentor;
 import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.MentorRegistInfo;
+import com.springmvc.repository.MemberRepository;
 import com.springmvc.repository.MentorRepository;
 
 @Service
@@ -16,6 +17,9 @@ public class MentorServiceImpl implements MentorService {
 	
 	@Autowired
 	MentorRepository mentorRepository;
+
+	@Autowired
+	MemberRepository memberRepository;
 	
 	@Override
 	public Mentor getMentor(String memberId) {
@@ -96,6 +100,15 @@ public class MentorServiceImpl implements MentorService {
 	public Map<String, Object> getMentorApplyByRegistId(String registId) {
 		return mentorRepository.getMentorApplyByRegistId(registId);
 	}
-	
 
+	@Override
+	public List<MentorProfile> getBestMentorList() {
+		List<MentorProfile> list = mentorRepository.getBestMentorList();
+		for(MentorProfile mentor : list) {
+			mentor.setNickname(memberRepository.getMember(mentor.getMemberId()).getNickName()); 
+		}
+		return list;
+	}
+
+	
 }

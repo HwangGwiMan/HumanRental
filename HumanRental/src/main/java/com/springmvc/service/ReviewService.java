@@ -21,5 +21,6 @@ public interface ReviewService {
 	public void StarRateUpdate(String memberId, Review review, boolean duplication);
 	public void StarRateUpdate2(String applicantMemberId, Review review, boolean duplication);
 	public List<Review> getReviewList(String boardId);
+	public List<Review> getBestReviewList();
 
 }
