@@ -123,4 +123,13 @@ public class ReviewServiceImpl implements ReviewService{
 		}
 		return list;
 	}
+
+	@Override
+	public List<Review> getBestReviewList() {
+		List<Review> list = reviewRepository.getBestReviewList();
+		for(Review review : list) {
+			review.setNickname(memberRepository.getMember(review.getMemberId()).getNickName());
+		}
+		return list;
+	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 
 <head>
@@ -12,25 +13,32 @@
 </head>
 
 <body>
-	<div class="qqs1 container">
-        <div class="qqs2 row justify-content-center">
-	        <div class="info text-center fs-1 p-5">
-	            <div class="p-5">인기 멘토</div>
+	<div class="qqs2 container">
+        <div class="row justify-content-center p-5">
+	        <div class="info text-center">
+	            <div class="p-5 fw-semibold">Best Mentor</div>
 	        </div>
 	        <div class="row">
-				<c:forEach var="selling" items="${ sellinglist }">
-		            <div class="col-4">
-		                <div class="d-flex justify-content-center qq1">
-		                    <div style="width: 50%;">
-		                        <img src="/HumanRental/resources/image/duke.png" alt="">
-		                    </div>
-		                    <div class="align-self-center" style="width: 50%;">
-		                        <h4>${ selling.nickname }</h4>
-		                        <div>${ selling.title }</div>
-		                    </div>
-		                </div>
-		            </div>
-	            </c:forEach>
+		        <div class="qq0">
+				<c:forEach var="mentor" items="${mentorlist}" varStatus="loop">
+				    <c:if test="${loop.index < 3}">
+			            <div class="qq1 text-bg-light">
+							<div class="top text-center">
+								<img src="/HumanRental/resources/img/Main/teacher1.png" alt=""
+									class="img-fluid">
+							</div>
+							<div class="bot text-center">
+			                    <div class="nickname">${mentor.nickname}</div>
+			                    <div class="category">
+				                    <c:forEach var="category" items="${fn:split(mentor.category, ',')}">
+										<span class="badge text-bg-primary">${category}</span>
+									</c:forEach>
+			                    </div>
+			                </div>
+			            </div>
+				    </c:if>
+				</c:forEach>
+				</div>
 	        </div>
     	</div>
     </div>
