@@ -81,7 +81,7 @@
 								</div>
 							</c:when>
 							<c:when test="${ mode == 'myPageEdit' }"><!-- 회원 정보 수정 -->
-								<form class="col p-5" action="<c:url value="/myPageEdit" />" method="post" encType="multipart/form-data">
+								<form class="col p-5" action="<c:url value="/myPageEdit" />" method="post" encType="multipart/form-data" id="editForm">
 									<div class="row">
 										<div class="col-1"></div>
 										<div class="col-4">
@@ -92,40 +92,40 @@
 										<div class="col-1"></div>
 										<div class="col-5 ">
 											<div class="row p-3 flex-nowrap align-items-center">
-												<div class="col-4 ">아이디 :</div>
+												<div class="col-4 ">아이디</div>
 												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required"/></div>
 												<div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div>
 											</div>
 											<div class="row p-3 align-items-center">
-												<div class="col-4">비밀번호 :</div>
+												<div class="col-4">비밀번호</div>
 												<div class="col"><input type="password"  value="${ member.memberPw }" name="memberPw" required="required"/></div>
 											</div>
 											<div class="row p-3 align-items-center">
-												<div class="col-4">이름 :</div>
+												<div class="col-4">이름</div>
 												<div class="col"><input type="text"  value="${ member.name }" name="name" required="required"/></div>
 											</div>
 											<div class="row p-3 flex-nowrap align-items-center">
-												<div class="col-4">닉네임 :</div>
+												<div class="col-4">닉네임</div>
 												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required"/></div>
 												<div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div>
 											</div>
 											<div class="row p-3 align-items-center">
-												<div class="col-4">나이 :</div>
+												<div class="col-4">나이</div>
 												<div class="col"><input type="text"  value="${ member.age }" name="age" required="required"/></div>
 											</div>
 											<div class="row p-3 align-items-center">
-												<div class="col-4">성별 :</div>
+												<div class="col-4">성별</div>
 												<div class="col"><input type="text"  value="${ member.gender }" name="gender" required="required"/></div>
 											</div>
 											<div class="row p-3 align-items-center">
-												<div class="col-4">전화번호 :</div>
+												<div class="col-4">전화번호</div>
 												<div class="col"><input type="text"  value="${ member.phone }" name="phone" required="required"/></div>
 											</div>
 											<div class="row p-3 align-items-center">
-												<div class="col-4">주소 :</div>
+												<div class="col-4">주소</div>
 												<div class="col"><input width="100px" type="text"  value="${ member.address }" name="address" required="required"/></div>
 											</div>
-											<input type="submit" class="btn btn-outline-primary" value="확인" id="submitBtn">
+											<a onclick="javascript:formSubmit()" class="btn btn-outline-primary" id="submitBtn">확인</a>
 											<a href="<c:url value="/myInfo?mode=myPage" />" class="btn btn-outline-dark">취소</a>
 										</div>
 									</div>

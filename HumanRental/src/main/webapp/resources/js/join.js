@@ -11,10 +11,6 @@ $(function() {
 			
 			var targetData = event.target.parentElement.parentElement.children[1].children[0].value;
 			
-			console.log(targetLabel);
-			
-			console.log(targetData);
-			
 			if(targetLabel == "아이디" && targetData == "") {
 				alert("아이디를 입력해주세요.");
 				return;
@@ -39,7 +35,7 @@ $(function() {
 						isIdCheck = true;
 						alert("사용 가능한 아이디 입니다.");
 					} else if(targetLabel === "아이디" && result === "false") {
-						isNickCheck = false;
+						isIdCheck = false;
 						alert("이미 사용중인 아이디 입니다.");
 					}
 					
