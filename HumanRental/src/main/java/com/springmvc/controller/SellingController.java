@@ -34,9 +34,11 @@ public class SellingController {
 	
 	//멘티게시글 리스트 페이지
 	@GetMapping("/SellingList")
-	public String MentorList(@RequestParam(name = "category", required = false) String category, Model model) {
+	public String MentorList(@RequestParam(name = "category", required = false) String category,
+						     @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, 
+						     Model model) {
 //		System.out.println("category : "+category);
-		sellingservice.SellingList(model, category);
+		sellingservice.SellingList(model, category, pageNum);
 		return "SellingList";
 	}
 	

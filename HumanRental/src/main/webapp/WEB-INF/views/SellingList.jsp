@@ -7,7 +7,11 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 		<script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="<c:url value="/resources/css/style_mentorlist.css"/>">
-		<script src="<c:url value="/resources/js/myPage.js"/>"></script>
+		<%-- <script src="<c:url value="/resources/js/myPage.js"/>"></script> --%>
+		<script src="<c:url value="/resources/js/sellingList.js"/>"></script>
+		
+		<!-- Jquery -->
+		<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 	</head>
 	
 	<body>
@@ -31,8 +35,8 @@
 	        <div class="qq1 row">
 		        <c:forEach items="${sellinglist}" var="selling">
 		            <div class="qq2 col-3">
-		                <div class="wrapper border" onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}">
-		                    <div class="image-wrapper">
+		                <div class="wrapper border" onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" style="height: 18vh;">
+		                    <div class="image-wrapper h-100 d-flex flex-column justify-content-between">
 		                    	<!-- <img src="/HumanRental/resources/image/duke.png"/> -->
 		                    	<div>
 		                    	<c:choose>
@@ -64,6 +68,17 @@
 		                </div>
 		            </div>
 		         </c:forEach>
+		         <div class="row justify-content-center pt-5" id="pageMove">
+		         	<div class="col-1"><i class="fa-solid fa-angles-left" style="line-height: 24px;"></i></div>
+			        <div class="col-1"><i class="fa-solid fa-chevron-left" style="line-height: 24px;"></i></div>
+			        <div class="col-1" style="line-height: 24px;">
+			        	<c:forEach var="page" items="${ totalPageNum }">
+			        		<a href="/HumanRental/SellingList?pageNum=${ page }" class="text-decoration-none"> ${ page } </a>
+			        	</c:forEach>
+			        </div>
+			        <div class="col-1"><i class="fa-solid fa-chevron-right" style="line-height: 24px;"></i></div>
+			        <div class="col-1"><i class="fa-solid fa-angles-right" style="line-height: 24px;"></i></div>
+		         </div> 
 	        </div>
 	    </div>
 		<jsp:include page="footer.jsp" />
