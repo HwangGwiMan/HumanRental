@@ -12,27 +12,49 @@
 
 <body>
 	<jsp:include page="nav.jsp" />
-	<div class="container">
+	<div class="container text-center" style="line-height: 38px">
 		<c:choose>
 			<c:when test="${type=='view'}">
 		       	<form:form modelAttribute="selling" action="/HumanRental/selling?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
-		       		<input type="hidden" name="memberId" value="${ member.memberId }">
+ 		       		<input type="hidden" name="memberId" value="${ member.memberId }">
 		       		<input type="hidden" name="nickname" value="${ member.nickName }">
-		       		제목 : <input type="text" name="title">
-		       		<br>
-		       		내용 : <textarea name="content" cols="50" rows="5"></textarea>
-		       		<br>
-		       		가격 : 시간당 <input type="number" name="price"> 원
-		       		<br>
-		       		위치 : <input type="text" name="location">
-		       		<br>
-		       		카테고리 : <select name="category" class="txt">
+		       		<div class="row p-5 fs-3">재능 판매 등록</div>
+		       		<div class="row p-3">
+		       			<div class="col-1">제목</div> 
+		       			<div class="col-4"><input type="text" name="title" class="form-control" required="required" maxlength=20></div>
+		       			<div class="col-3 form-text">제목은 20자 이내로 작성해주십시오.</div>
+		       		</div>
+		       		<div class="row p-3">
+		       			<div class="col-1">내용</div> 
+		       			<div class="col"><textarea name="content" cols="50" rows="5" class="form-control form-control-sm" required="required"></textarea></div>
+		       		</div>
+		       		<div class="row p-3">
+		       			<div class="col-1">가격</div> 
+		       			<div class="col-3">
+		       				<div class="row">
+		       					<div class="col">시간당</div>
+		       					<div class="col-5"><input type="number" name="price" class="form-control" required="required"></div>
+		       					<div class="col">원</div>
+		       				</div>
+		       			</div>
+		       		</div>
+		       		<div class="row p-3">
+		       			<div class="col-1">위치</div> 
+		       			<div class="col-4"><input type="text" name="location" class="form-control"></div>
+		       		</div>
+		       		<div class="row p-3">
+		       			<div class="col-1">카테고리</div>
+		       			<div class="col-1"> 
+				       		<select name="category" class="txt form-select">
 								<option value="music">음악</option>
 								<option value="sports">스포츠</option>
 								<option value="game">게임</option>
-							</select> 
-					<br>
-					<input type="submit" value="제출">
+	   						</select>
+   						</div> 
+					</div>
+					<div>
+						<input type="submit" value="제출" class="btn btn-success">
+					</div>
 		       	</form:form>
 	       	</c:when>
 			<c:when test="${type=='update'}">
