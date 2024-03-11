@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.content {
+	
+	height : 80vh;
+    position: relative;
+    
+    font-weight:bold;
+}
+
+.content::before{	
+	content: "";
+	
+	width: 100%;
+    height: 100%;
+    
+	background-image: url(/HumanRental/resources/img/mentorIntro/background.jpg);
+	background-size: cover;
+	opacity: 0.9;
+	
+	position: absolute;
+	
+	top: 0px;
+}
+
+.content .text {
+	position: relative;
+}
+
+.foot{
+    display: flex;
+    justify-content: space-around;
+    /* margin: 100px 0 0 0; */
+    /* background-color: black; */
+    /* color: white; */
+    height: 70px;
+    line-height: 70px;
+}
