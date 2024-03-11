@@ -270,39 +270,6 @@ function deletemember22() {
     });
 }
 
-$(function() {
-	var profileBtn = document.getElementById("profileBtn");
-	var registBtn = document.getElementById("registBtn");
-	var resvBtn = document.getElementById("resvBtn");
-	
-	profileBtn.addEventListener("click", function(event) {
-		var menu = profileBtn.nextElementSibling;
-		if(menu.style.display === "none") {
-			menu.style.display = "block";	
-		} else {
-			menu.style.display = "none";
-		}
-	})
-	
-	registBtn.addEventListener("click", function(event) {
-		var menu = registBtn.nextElementSibling;
-		if(menu.style.display === "none") {
-			menu.style.display = "block";	
-		} else {
-			menu.style.display = "none";
-		}
-	})
-	
-	resvBtn.addEventListener("click", function(event) {
-		var menu = resvBtn.nextElementSibling;
-		if(menu.style.display === "none") {
-			menu.style.display = "block";	
-		} else {
-			menu.style.display = "none";
-		}
-	})
-})
-
 function mentorCheck(element) {
     var buyingId = element.getAttribute('data-buying-id');
     $.ajax({
