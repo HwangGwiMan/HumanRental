@@ -90,6 +90,10 @@ $(function() {
 			}
 		}
 	}
+	
+	var DupChkBtn = document.getElementsByClassName("DupChkBtn");
+	
+	console.log(DupChkBtn);	
 })
 
 function setThumbnail(event) {

@@ -97,7 +97,12 @@ public class MentorRepositroyImpl implements MentorRepository {
 					applyInfo.put("memberId", rs.getString(2));
 					applyInfo.put("applyDate", util.outputFormatting(rs.getTimestamp(3)));
 					applyInfo.put("state", rs.getString(4));
-					applyInfo.put("confirmDate", util.outputFormatting(rs.getTimestamp(5)));
+					if(rs.getTimestamp(5) != null) {
+						applyInfo.put("confirmDate", util.outputFormatting(rs.getTimestamp(5)));
+					} else {
+						applyInfo.put("confirmDate", null);
+					}
+					
 
 					return applyInfo;
 				}
@@ -133,8 +138,11 @@ public class MentorRepositroyImpl implements MentorRepository {
 					applyInfo.put("memberId", rs.getString(2));
 					applyInfo.put("applyDate", util.outputFormatting(rs.getTimestamp(3)));
 					applyInfo.put("state", rs.getString(4));
-					applyInfo.put("confirmDate", util.outputFormatting(rs.getTimestamp(5)));
-
+					if(rs.getTimestamp(5) != null) {
+						applyInfo.put("confirmDate", util.outputFormatting(rs.getTimestamp(5)));
+					} else {
+						applyInfo.put("confirmDate", null);
+					}
 					return applyInfo;
 				}
 				

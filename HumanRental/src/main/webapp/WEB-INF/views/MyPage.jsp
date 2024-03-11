@@ -94,7 +94,7 @@
 											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4 ">아이디 :</div>
 												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required"/></div>
-												<div class="col-5"><a onclick="javascript:idDuplicateCheck('${ member.memberId }')" class="btn btn-secondary">중복 확인</a></div>
+												<div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div>
 											</div>
 											<div class="row p-3 align-items-center">
 												<div class="col-4">비밀번호 :</div>
@@ -104,9 +104,10 @@
 												<div class="col-4">이름 :</div>
 												<div class="col"><input type="text"  value="${ member.name }" name="name" required="required"/></div>
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">닉네임 :</div>
 												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required"/></div>
+												<div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div>
 											</div>
 											<div class="row p-3 align-items-center">
 												<div class="col-4">나이 :</div>
