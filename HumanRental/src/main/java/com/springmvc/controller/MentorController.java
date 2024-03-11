@@ -176,7 +176,7 @@ public class MentorController {
 		    String mentorId =  mentor.getMentorId();
 		    mentorprofile.setMentorId(mentorId);
 		    String realPath = request.getSession().getServletContext().getRealPath("/resources/img/ProfilePicture");
-
+		    System.out.println(realPath);
 		    if (!file1.isEmpty()) { 
 		        String realfilename1 = "mentorprofile_"+mentorprofile.getMentorId()+file1.getOriginalFilename();
 		        File saveFile1 = new File(realPath,realfilename1);
@@ -299,10 +299,11 @@ public class MentorController {
 	@GetMapping("mentorprofilepage")
 	public String callMentorProfilepage(@RequestParam("nickname") String nickname, Model model) {
 	   Member member = memberService.getMemberFromNickName(nickname);
+	   System.out.println("member 이미지 : " + member.getProfileImage());
 	   System.out.println("member.getNickName()"+member.getNickName());
 	   MentorProfile mentorprofile=mentorService.MentorprofileInformation(member.getMemberId());
 	   List<Selling> listselling = sellingService.getSellingFromNickname(nickname);
-	   
+	   System.out.println("member.getProfileImage()="+member.getProfileImage());
 	    model.addAttribute("listselling",listselling);
 	   	model.addAttribute("member",member);
 	    model.addAttribute("mentorprofile",mentorprofile);

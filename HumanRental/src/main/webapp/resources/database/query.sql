@@ -1,6 +1,7 @@
 CREATE DATABASE HumanRental DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 use HumanRental;
 
+
 -- 회원관리
 CREATE TABLE IF NOT EXISTS Member(
 memberId varchar(20) not null primary key,
@@ -15,7 +16,7 @@ joinDate datetime not null,
 profileImage varchar(50),
 reportCount int
 );
-
+select * from member;
 -- 멘토 테이블
 CREATE TABLE mentor(
 	mentorId varchar(50) primary key,
@@ -23,7 +24,7 @@ CREATE TABLE mentor(
     registDate datetime not null,
     foreign key(memberId) references Member(memberId)
 );
-
+select * from mentor;
 -- 멘토 신청 정보 테이블
 CREATE TABLE IF NOT EXISTS MentorRegistInfo(
 	registId varchar(50) not null primary key,
@@ -56,11 +57,14 @@ category varchar(100),
 filename1 varchar(1000),
 filename2 varchar(1000),
 filename3 varchar(1000),
+
 starRate float ,
 starCount int,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
+select * from MentorProfile;
+
 
 -- 멘티프로필 관리
 CREATE TABLE IF NOT EXISTS MenteeProfile(
@@ -91,6 +95,7 @@ CREATE TABLE IF NOT EXISTS Selling (
 	foreign key(nickname) references Member(nickname) ON DELETE CASCADE
 );
 
+select * from Selling;
 -- 삽니다 관리 
 CREATE TABLE IF NOT EXISTS Buying (
 	buyingId VARCHAR(50) primary key,
@@ -335,26 +340,15 @@ insert into mentor values('mentor_006' , '5678', '2024-01-01 00:00:00');
 
 
 -- menteeprofile 추가
-<<<<<<< HEAD
 insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0, 0);
 insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0, 0);
 insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0, 0);
-=======
-insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1',0,0);
-insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2',0,0);
-insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3',0,0);
->>>>>>> refs/heads/main
 
 -- mentorprofile 추가
-<<<<<<< HEAD
 insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
 insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
 insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-=======
-insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST',0,0);
-insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST',0,0);
-insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST',0,0);
->>>>>>> refs/heads/main
+
 
 -- buying 내용 추가
 insert into buying values('buyingId_001','qwer','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);

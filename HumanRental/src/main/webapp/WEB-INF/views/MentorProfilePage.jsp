@@ -21,12 +21,11 @@
                             <!-- Instructor image START -->
                             <div class="card shadow p-2 mb-4 text-center">
                                 <div class="rounded-3" style="margin-top:10px;">
-    								<div><h3>닉네임:${member.getNickName()}</h3></div>
+    								<div><h3>${member.getNickName()}님</h3></div>
                                     <div style="padding:10px;"></div>
-                                    <div class=""><a href="#" class="chaos-modal-link"><img
-                                                src="/storage/profileImage/profile_ojaki486.png" width="240"
-                                                height="179.00237529691" style="cursor:hand;border-radius:10px;"
-                                                class="zz_image"></a></div>
+                                    <div class="">
+										<img src='<c:url value="/resources/img/ProfilePicture/${member.getProfileImage()}"/>' width="240" height="179.00237529691" style="cursor:hand;border-radius:10px;" class="zz_image"/>
+                                    </div>                                    
                                 </div>
                                 <br><br>
                             </div>
@@ -81,14 +80,14 @@
                                     </div>
                                     <!-- Education END -->
                                     <!-- Education item -->
-                                    <div class="d-flex align-items-center col-lg-6 mb-4">
+                                <%--     <div class="d-flex align-items-center col-lg-6 mb-4">
                                         <span class="icon-md text-dark mb-0 bg-light rounded-3"><i
                                                 class="bi bi-mortarboard-fill fs-5 text-primary"></i></span>
                                         <div class="ms-3">
                                             <h6 class="mb-0">자격증</h6>
-                                            <p class="mb-0 small"></p>
+                                            <p class="mb-0 small">${mentorprofile.getCertification()}</p>
                                         </div>
-                                    </div>
+                                    </div> --%>
                                     <!-- Education END -->
                                     <!-- Education item -->
                                     <div class="d-flex align-items-center col-lg-6 mb-4">
@@ -108,7 +107,20 @@
         </div>                           
     </section>
     <div class="container">
-        <!-- Title -->
+        <div class="mt-4 border border-2 border-dashed rounded  fw-light"
+            style="background-color:#ffffff !important;padding:20px;">
+            <div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+                <div>
+                    <h4>자격증</h4>
+                </div>
+            </div>
+            <div style="padding:10px;"></div>
+            <div class="p-2 mb-2">
+					${mentorprofile.getCertification()}
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="mt-4 border border-2 border-dashed rounded  fw-light"
             style="background-color:#ffffff !important;padding:20px;">
             <div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
@@ -123,7 +135,6 @@
         </div>
     </div>
     <div class="container">
-        <!-- Title -->
         <div class="mt-4 border border-2 border-dashed rounded  fw-light"
             style="background-color:#ffffff !important;padding:20px;">
             <div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
@@ -134,7 +145,7 @@
             <div style="padding:10px;"></div>
             <div class="p-2 mb-2">
 			     <div class="qq1 row">
-
+						
 			     </div>
             </div>
         </div>
