@@ -344,30 +344,37 @@ insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0
 insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0, 0);
 insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0, 0);
 
+insert into menteeprofile values('mentee_004', 'zxcv', 'TEST4', 'TEST_INTRO4', 0, 0);
+insert into menteeprofile values('mentee_005', '1234', 'TEST5', 'TEST_INTRO5', 0, 0);
+insert into menteeprofile values('mentee_006', '5678', 'TEST6', 'TEST_INTRO6', 0, 0);
+
 -- mentorprofile 추가
 insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
 insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
 insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
+insert into mentorprofile values('mentor_004' , 'zxcv', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
+insert into mentorprofile values('mentor_005' , '1234', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
+insert into mentorprofile values('mentor_006' , '5678', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
 
 
 -- buying 내용 추가
 insert into buying values('buyingId_001','qwer','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
 insert into buying values('buyingId_002','asdf','닉네임2','introduction',0,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
 insert into buying values('buyingId_003','asdf','닉네임2','introduction',0,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
-insert into buying values('buyingId_004','zxcv','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
-insert into buying values('buyingId_005','1234','닉네임2','introduction',0,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
-insert into buying values('buyingId_006','5678','닉네임2','introduction',0,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
-insert into buying values('buyingId_007','test_1','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
-insert into buying values('buyingId_008','test_2','닉네임2','introduction',0,'같이 공찰 사람','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
-insert into buying values('buyingId_009','test_3','닉네임2','introduction',0,'롤 듀오 구함니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into buying values('buyingId_004','zxcv','닉네임3','introduction',0,'기타 알려주실 분','내용','2024-01-04 00:00:00','music',10000,'한국',0);
+insert into buying values('buyingId_005','1234','닉네임4','introduction',0,'같이 공찰 사람','내용','2024-01-05 00:00:00','sports',20000,'한국',0);
+insert into buying values('buyingId_006','5678','닉네임5','introduction',0,'롤 듀오 구함니다','내용','2024-01-06 00:00:00','game',5000,'한국',0);
+insert into buying values('buyingId_007','test_1','닉네임6','introduction',0,'기타 알려주실 분','내용','2024-01-07 00:00:00','music',10000,'한국',0);
+insert into buying values('buyingId_008','test_2','닉네임7','introduction',0,'같이 공찰 사람','내용','2024-01-08 00:00:00','sports',20000,'한국',0);
+insert into buying values('buyingId_009','test_3','닉네임8','introduction',0,'롤 듀오 구함니다','내용','2024-01-09 00:00:00','game',5000,'한국',0);
 
 -- selling 내용 추가
 insert into selling values('sellingId_001','qwer','닉네임1','introduction',0,'기타 알려드림니다','내용','2024-01-01 00:00:00','music',10000,'한국',0);
 insert into selling values('sellingId_002','qwer','닉네임1','introduction',0,'k리그 출신 축구강의','내용','2024-01-02 00:00:00','sports',20000,'한국',0);
 insert into selling values('sellingId_003','asdf','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
-insert into selling values('sellingId_004','zxcv','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
-insert into selling values('sellingId_005','1234','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
-insert into selling values('sellingId_006','5678','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
-insert into selling values('sellingId_007','test_1','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
-insert into selling values('sellingId_008','test_2','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
-insert into selling values('sellingId_009','test_3','닉네임2','introduction',0,'롤 제자 구합니다','내용','2024-01-03 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_004','zxcv','닉네임3','introduction',0,'롤 제자 구합니다','내용','2024-01-04 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_005','1234','닉네임4','introduction',0,'롤 제자 구합니다','내용','2024-01-05 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_006','5678','닉네임5','introduction',0,'롤 제자 구합니다','내용','2024-01-06 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_007','test_1','닉네임6','introduction',0,'롤 제자 구합니다','내용','2024-01-07 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_008','test_2','닉네임7','introduction',0,'롤 제자 구합니다','내용','2024-01-08 00:00:00','game',5000,'한국',0);
+insert into selling values('sellingId_009','test_3','닉네임8','introduction',0,'롤 제자 구합니다','내용','2024-01-09 00:00:00','game',5000,'한국',0);

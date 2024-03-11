@@ -4,7 +4,7 @@
     width: 100%;
     height: 100%;
 
-    background-image: url(/HumanRental/resources/image/01.jpg);
+/*    background-image: url(/HumanRental/resources/image/01.jpg);*/
     background-size: cover;
 
     text-align: center;
@@ -21,7 +21,7 @@
 .qqs1 .slide{
     width: 100%;
     height: 100%;
-    background-image: url(/HumanRental/resources/image/0dc8c8ac44e0ff31987ee4e25cc345a5.png);
+/*    background-image: url(/HumanRental/resources/image/0dc8c8ac44e0ff31987ee4e25cc345a5.png);*/
     background-size: cover;
 
     color: white;
