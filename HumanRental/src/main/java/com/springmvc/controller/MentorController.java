@@ -125,7 +125,6 @@ public class MentorController {
 	
 	@GetMapping("/mentor")
 	public String mentorprofileform(@RequestParam("mode") String mode, Model model,HttpServletRequest request ) {
-	    System.out.println("멘토프로필 양식 폼인데 여긴 오니?");
 
 	    //세션 에서 아이디 불러옴 
 	    HttpSession session = request.getSession();

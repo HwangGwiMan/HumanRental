@@ -124,14 +124,21 @@
         <div class="mt-4 border border-2 border-dashed rounded  fw-light"
             style="background-color:#ffffff !important;padding:20px;">
             <div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
-                <div>
+     <%--            <div>
                     <h4>소개글</h4>
                 </div>
             </div>
             <div style="padding:10px;"></div>
             <div class="p-2 mb-2">
 					${mentorprofile.getIntroduction()}
-            </div>
+            </div> --%>
+            
+            <div class="form-group row">
+				<label class="col-sm-1 control-label" >내용</label>
+				<div class="col-sm-8">
+					<textarea name="content" cols="50" rows="5" class="form-control" required></textarea>
+				</div>
+			</div>
         </div>
     </div>
     <div class="container">
