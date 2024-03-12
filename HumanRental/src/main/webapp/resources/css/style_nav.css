@@ -18,7 +18,7 @@
     margin: auto 20px auto 20px;
 }
 
-.nav{
+.qqnav .nav{
     padding: 0 !important;
     --bs-nav-link-padding-x: 10px !important;
     --bs-nav-link-padding-y: 5px !important;
@@ -34,4 +34,14 @@
 
 .qqnav .col-3{
 	width: 28% !important;
+}
+
+.qqnav .txt{
+	position: absolute;
+	border: 0;
+	margin-left: 0.1vh;
+}
+
+.qqnav .search{
+	padding-left: 8vh;
 }

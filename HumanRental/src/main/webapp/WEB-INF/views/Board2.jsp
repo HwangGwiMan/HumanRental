@@ -22,10 +22,9 @@
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="container">
-		<hr>
-		<div class="row align-items-end">
+		<div class="row align-items-end p-5">
 			<a href="<c:url value="/board2"/>" class="text-decoration-none fw-bold fs-1 col-3 text-center text-dark">공지사항</a>
-			<a href="<c:url value="/board"/>" class="text-decoration-none col-1 text-left text-dark">자유 게시판</a>
+			<a href="<c:url value="/board"/>" class="text-decoration-none fs-5 col-2 text-left text-dark">자유 게시판</a>
 		</div>
 		<hr>
 	</div>
