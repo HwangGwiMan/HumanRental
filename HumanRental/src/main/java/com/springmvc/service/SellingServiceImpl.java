@@ -49,13 +49,15 @@ public class SellingServiceImpl implements SellingService{
 		
 		
 		int totalPageNum = sellinglist.size() / 16 + 1;
-		int[] pageNums = new int[totalPageNum];
+		/*
+		 * int[] pageNums = new int[totalPageNum];
+		 * 
+		 * for(int i = 1; i < totalPageNum + 1; i++) { pageNums[i - 1] = i; }
+		 */
 		
-		for(int i = 1; i < totalPageNum + 1; i++) {
-			pageNums[i - 1] = i;
-		}
 		
-		model.addAttribute("totalPageNum", pageNums);
+		
+		model.addAttribute("totalPageNum", totalPageNum);
 	}
 	
 	@Override
