@@ -22,7 +22,7 @@
 		       		<div class="row p-3">
 		       			<div class="col-1">제목</div> 
 		       			<div class="col-4"><input type="text" name="title" class="form-control" required="required" maxlength=20></div>
-		       			<div class="col-3 form-text">제목은 20자 이내로 작성해주십시오.</div>
+		       			<div class="col-3 form-text">제목은 20자 이내로만 작성할 수 있습니다.</div>
 		       		</div>
 		       		<div class="row p-3">
 		       			<div class="col-1">내용</div> 
@@ -60,21 +60,42 @@
 			<c:when test="${type=='update'}">
 		       	<form:form modelAttribute="selling" action="/HumanRental/selling/update?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
 		       		<input type="hidden" name="sellingId" value="${ selling.sellingId }">
-		       		제목 : <input type="text" name="title" value="${ selling.title }">
-		       		<br>
-		       		내용 : <textarea name="content" cols="50" rows="5">${ selling.content }</textarea>
-		       		<br>
-		       		가격 : 시간당 <input type="number" name="price" value="${ selling.price }"> 원
-		       		<br>
-		       		위치 : <input type="text" name="location" value="${ selling.location }">
-		       		<br>
-		       		카테고리 : <select name="category" class="txt">
-								  <option value="music" ${selling.category == 'music' ? 'selected' : ''}>음악</option>
-								  <option value="sports" ${selling.category == 'sports' ? 'selected' : ''}>스포츠</option>
-								  <option value="game" ${selling.category == 'game' ? 'selected' : ''}>게임</option>
-								</select>
-					<br>
-					<input type="submit" value="제출">
+		       		<div class="row p-3">
+		       			<div class="col-1">제목</div> 
+		       			<div class="col-4"><input type="text" name="title" value="${ selling.title }" required="required" maxlength=20></div>
+		       			<div class="col-3 form-text">제목은 20자 이내로만 작성할 수 있습니다.</div>
+		       		</div>
+		       		<div class="row p-3">
+		       			<div class="col-1">내용</div> 
+		       			<div class="col"><textarea name="content" cols="50" rows="5" class="form-control form-control-sm" required="required">${ selling.content }</textarea></div>
+		       		</div>
+		       		<div class="row p-3">
+		       			<div class="col-1">가격</div> 
+		       			<div class="col-3">
+		       				<div class="row">
+		       					<div class="col">시간당</div>
+		       					<div class="col-5"><input type="number" name="price" value="${ selling.price } class="form-control" required="required"></div>
+		       					<div class="col">원</div>
+		       				</div>
+		       			</div>
+		       		</div>
+		       		<div class="row p-3">
+		       			<div class="col-1">위치</div> 
+		       			<div class="col-4"><input type="text" name="location" value="${ selling.location } class="form-control"></div>
+		       		</div>
+		       		<div class="row p-3">
+		       			<div class="col-1">카테고리</div>
+		       			<div class="col-1"> 
+				       		<select name="category" class="txt form-select">
+								<option value="music" ${selling.category == 'music' ? 'selected' : ''}>음악</option>
+								<option value="sports" ${selling.category == 'sports' ? 'selected' : ''}>스포츠</option>
+								<option value="game" ${selling.category == 'game' ? 'selected' : ''}>게임</option>
+	   						</select>
+   						</div> 
+					</div>
+					<div>
+						<input type="submit" value="제출" class="btn btn-success">
+					</div>
 		       	</form:form>
 	       	</c:when>
        	</c:choose>
