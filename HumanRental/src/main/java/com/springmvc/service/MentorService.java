@@ -24,5 +24,6 @@ public interface MentorService {
 	public void DeleteMentorProfile(String memberId);
 //	public MentorRegistInfo getMentorApplyByRegistId(String registId);
 	public Map<String, Object> getMentorApplyByRegistId(String registId);
+	public List<MentorProfile> getBestMentorList();
 
 }

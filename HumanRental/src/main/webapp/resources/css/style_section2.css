@@ -1,41 +1,87 @@
-.qqs2 .info{
-  font-size: 50px;
-  text-align: center;
-}
-
-.qqs2 .qq1{
-  border: 2px solid black;
-  border-radius: 40px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  box-shadow: 0px 0px 10px 1px #212129;
-}
-
 .qqs2 {
-  overflow: hidden;
-} 
- 
+	overflow: hidden;
+	height: auto;
+}
 
-.qqs2 .slider {
-  position:absolute;
-  display:flex;
-  flex-wrap:wrap;
-  width:200px;
-  
-  animation-iteration-count: infinite;
-  animation-duration: 5s;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-  
-  animation-name : sliding;
+.qqs2 .info {
+	font-size: 50px;
+}
+
+.qqs2 .qq0 {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.qqs2 .qq1 {
+	height: 45vh;
+	width: 30%;
+/*	border: 2px solid black;*/
+	border-radius: 5%;
+	overflow: hidden;
+	margin-top: 15px;
+	margin-bottom: 35px;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 3px 3px 25px 0px rgba(46,61,73,0.5);
+	transition: 0.5s;
+}
+
+.qqs2 .qq1:hover{
+	box-shadow: 3px 3px 25px 0px rgb(128, 128, 255);
+	height: 46vh;
+	width: 31%;
+}
+
+.qqs2 .top{
+	width: 30vh;
+	height: 30vh;
+/*	border: 1px solid rgb(192, 192, 192);*/
+	border-radius: 5%;
+	margin: 20px auto 10px;
+}
+
+.qqs2 img{
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.qqs2 .bot{
+	height: 20%;
+}
+
+.qqs2 .nickname{
+	font-size: 3.5vh;
+	font-weight: 600;
+}
+
+.qqs2 .category{
+	font-size: 2vh;
 }
 
 
-@keyframes sliding {
-  0% {
-    transform: translateX(-20%);
-  }
-  100% {
-    transform: translateX(-140%);
-  }
-} 
+/*.qqs2 .slider {*/
+/*	position: absolute;*/
+/*	display: flex;*/
+/*	flex-wrap: wrap;*/
+/*	width: 200px;*/
+
+/*	animation-iteration-count: infinite;*/
+/*	animation-duration: 5s;*/
+/*	animation-timing-function: linear;*/
+/*	animation-fill-mode: forwards;*/
+
+/*	animation-name: sliding;*/
+/*}*/
+
+
+/*@keyframes sliding {*/
+/*	0% {*/
+/*		transform: translateX(-20%);*/
+/*	}*/
+
+/*	100% {*/
+/*		transform: translateX(-140%);*/
+/*	}*/
+/*}*/

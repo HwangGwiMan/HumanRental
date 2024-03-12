@@ -1,35 +1,32 @@
 package com.springmvc.controller;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.springmvc.domain.Selling;
-import com.springmvc.service.BuyingService;
-import com.springmvc.service.SellingService;
+import com.springmvc.service.MentorService;
+import com.springmvc.service.ReviewService;
 
 @Controller
 public class MainController {
 	
 	@Autowired
-	SellingService sellingService;
+	MentorService mentorService;
 	
 	@Autowired 
-	BuyingService buyingService;
+	ReviewService reviewService;
 	
 	// 메인 페이지 호출
 	@GetMapping("/main")
-	public String requestHome1(Model model) {
-		sellingService.SellingList(model, null);
+	public String requestHome1(Model model, HttpServletRequest request) {
 		
-		List<Selling> sellinglist = (List<Selling>) model.getAttribute("sellinglist");
+		model.addAttribute("mentorlist", mentorService.getBestMentorList());
+		model.addAttribute("reviewlist", reviewService.getBestReviewList());
 		
-		buyingService.BuyingList(model, null);
 		return "Main";
 	}
 
