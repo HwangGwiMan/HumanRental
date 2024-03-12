@@ -1,3 +1,4 @@
+<%@page import="org.springframework.web.context.annotation.RequestScope"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -69,15 +70,84 @@
 		            </div>
 		         </c:forEach>
 		         <div class="row justify-content-center pt-5" id="pageMove">
-		         	<div class="col-1"><i class="fa-solid fa-angles-left" style="line-height: 24px;"></i></div>
-			        <div class="col-1"><i class="fa-solid fa-chevron-left" style="line-height: 24px;"></i></div>
-			        <div class="col-1" style="line-height: 24px;">
-			        	<c:forEach var="page" items="${ totalPageNum }">
-			        		<a href="/HumanRental/SellingList?pageNum=${ page }" class="text-decoration-none"> ${ page } </a>
-			        	</c:forEach>
+		         	<%-- <div class="col-1">
+		         		<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) - 10 %>">
+		         			<i class="fa-solid fa-angles-left" style="line-height: 24px;"></i>
+	         			</a>
+         			</div> --%>
+			        <div class="col-1">
+			        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) - 1 %>">
+			        		<i class="fa-solid fa-chevron-left" style="line-height: 24px;"></i>
+		        		</a>
+	        		</div>
+			        	<%-- <c:forEach var="page" items="${ totalPageNum }"> --%>
+			        	<% 
+			        		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			        		int totalPageNum = (int) request.getAttribute("totalPageNum");
+			        		if(pageNum - 5 <= 0) {
+			        			if(totalPageNum > pageNum + 6) { 
+					        		%>
+						        		<div class="col-3" style="line-height: 24px;">
+					        		<% 
+				        				for(int i = 1; i < pageNum + 6; i++) {
+			        				%>
+			        						<a href="/HumanRental/SellingList?pageNum=<%= i %>" class="text-decoration-none"> <%= i %> </a>
+			        				<%			
+				        				}
+					        		%>
+				        				</div>
+					        		<%
+			        			} else {
+					        		%>
+						        		<div class="col-3" style="line-height: 24px;">
+					        		<% 
+				        				for(int i = 1; i < totalPageNum + 1; i++) {
+			        				%>
+			        						<a href="/HumanRental/SellingList?pageNum=<%= i %>" class="text-decoration-none"> <%= i %> </a>
+			        				<%			
+				        				}
+					        		%>
+				        				</div>
+					        		<%
+			        			}
+			        		} else if(pageNum - 5 > 0) {
+			        			if(totalPageNum > pageNum + 6) {
+					        		%>
+						        		<div class="col-3" style="line-height: 24px;">
+					        		<% 
+				        				for(int i = pageNum - 5; i < pageNum + 6; i++) {
+			        				%>
+			        						<a href="/HumanRental/SellingList?pageNum=<%= i %>" class="text-decoration-none"> <%= i %> </a>
+			        				<%			
+			  		      				}
+					        		%>
+				        				</div>
+					        		<%
+			        			} else { 
+					        		%>
+						        		<div class="col-3" style="line-height: 24px;">
+					        		<% 
+				        				for(int i = pageNum - 5; i < totalPageNum + 1; i++) {
+			        				%>
+			        						<a href="/HumanRental/SellingList?pageNum=<%= i %>" class="text-decoration-none"> <%= i %> </a>
+			        				<%			
+			  		      				}
+					        		%>
+				        				</div>
+					        		<%
+			        			}
+			        		}
+			        	%>
+			        <div class="col-1">
+			        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) + 1 %>">
+			        		<i class="fa-solid fa-chevron-right" style="line-height: 24px;"></i>
+		        		</a>
 			        </div>
-			        <div class="col-1"><i class="fa-solid fa-chevron-right" style="line-height: 24px;"></i></div>
-			        <div class="col-1"><i class="fa-solid fa-angles-right" style="line-height: 24px;"></i></div>
+			        <%-- <div class="col-1">
+			        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) + 10 %>">
+			        		<i class="fa-solid fa-angles-right" style="line-height: 24px;"></i>
+		        		</a>
+		        	</div> --%>
 		         </div> 
 	        </div>
 	    </div>
