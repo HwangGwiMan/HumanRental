@@ -1,4 +1,3 @@
-<%@page import="org.springframework.web.context.annotation.RequestScope"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -10,9 +9,6 @@
 		<link rel="stylesheet" href="<c:url value="/resources/css/style_mentorlist.css"/>">
 		<%-- <script src="<c:url value="/resources/js/myPage.js"/>"></script> --%>
 		<script src="<c:url value="/resources/js/sellingList.js"/>"></script>
-		
-		<!-- Jquery -->
-		<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 	</head>
 	
 	<body>
@@ -29,7 +25,7 @@
 	            <div class="btn btn-light fs-1"><i class="fa-solid fa-car"></i></div>
 	<!--             <div><i class="fa-solid fa-hammer"></i></div> -->
 	            <div class="btn btn-light fs-1"><i class="fa-solid fa-book-open"></i></div>
-	            <div class="btn btn-light"><a href="<c:url value="/SellingList"/>" class="fs-4 text-decoration-none">전체</a></div>
+	            <div class="btn btn-light"><a href="<c:url value="/SellingList?pageNum=1"/>" class="fs-4 text-decoration-none">전체</a></div>
 	            <div class="btn fs-1"><a onclick="mentorCheck2()" class="fs-4 text-decoration-none">쓰기</a></div>
 	            
 	        </div>
@@ -40,17 +36,17 @@
 		                    <div class="image-wrapper h-100 d-flex flex-column justify-content-between">
 		                    	<!-- <img src="/HumanRental/resources/image/duke.png"/> -->
 		                    	<div>
-		                    	<c:choose>
-		                    	<c:when test="${selling.category eq 'music'}">
-		                        	<i class="fa-solid fa-guitar fs-1"></i>
-		                        </c:when>
-		                        <c:when test="${selling.category eq 'sports'}">
-		                        	<i class="fa-solid fa-person-running fs-1"></i>
-		                        </c:when>
-		                        <c:when test="${selling.category eq 'game'}">
-		                        	<i class="fa-solid fa-gamepad fs-1"></i>
-		                        </c:when>
-		                        </c:choose>
+			                    	<c:choose>
+				                    	<c:when test="${selling.category eq 'music'}">
+				                        	<i class="fa-solid fa-guitar fs-1"></i>
+				                        </c:when>
+				                        <c:when test="${selling.category eq 'sports'}">
+				                        	<i class="fa-solid fa-person-running fs-1"></i>
+				                        </c:when>
+				                        <c:when test="${selling.category eq 'game'}">
+				                        	<i class="fa-solid fa-gamepad fs-1"></i>
+				                        </c:when>
+			                        </c:choose>
 		                        </div>
 		                        <div>
 		                        	<h1 class="name fs-5">${selling.title}</h1>
@@ -61,10 +57,10 @@
 								<!-- <div>
 		                        	<p class="information">간단한 내용(한줄)</p>
 		                        </div> -->
-		                        <div>
-	<%-- 	                        <a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a> --%>
-		                        	<%-- <a onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" class="follow btn btn-secondary">신청하기</a> --%>
-		                        </div>
+		                        <%-- <div>
+									<a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a>
+		                        	<a onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" class="follow btn btn-secondary">신청하기</a>
+		                        </div> --%>
 		                    </div>
 		                </div>
 		            </div>
@@ -80,9 +76,9 @@
 			        		<i class="fa-solid fa-chevron-left" style="line-height: 24px;"></i>
 		        		</a>
 	        		</div>
-			        	<%-- <c:forEach var="page" items="${ totalPageNum }"> --%>
 			        	<% 
 			        		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			        		
 			        		int totalPageNum = (int) request.getAttribute("totalPageNum");
 			        		if(pageNum - 5 <= 0) {
 			        			if(totalPageNum > pageNum + 6) { 

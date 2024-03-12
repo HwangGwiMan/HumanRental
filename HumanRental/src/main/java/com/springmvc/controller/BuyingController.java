@@ -34,9 +34,11 @@ public class BuyingController {
 	
 	//멘티게시글 리스트 페이지
 	@GetMapping("/BuyingList")
-	public String MentorList(@RequestParam(name = "category", required = false) String category, Model model) {
+	public String MentorList(@RequestParam(name = "category", required = false) String category, 
+							 @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, 
+							 Model model) {
 //		System.out.println("category : "+category);
-		buyingservice.BuyingList(model, category);
+		buyingservice.BuyingList(model, category, pageNum);
 		return "BuyingList";
 	}
 	

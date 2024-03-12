@@ -27,8 +27,8 @@
 					<a href="<c:url value="/main"/>"><h4>휴먼렌탈</h4></a>
 					<ul class="nav">
 						<li class="nav-item"><a class="nav-link" href="#">재능기부</a></li>
-						<li class="nav-item"><a class="nav-link" href="<c:url value="/BuyingList"/>">재능구매</a></li>
-						<li class="nav-item"><a class="nav-link" href="<c:url value="/SellingList"/>">재능판매</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value="/BuyingList?pageNum=1"/>">재능구매</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value="/SellingList?pageNum=1"/>">재능판매</a></li>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/board"/>">커뮤니티</a></li>
 					</ul>
 				</div>
