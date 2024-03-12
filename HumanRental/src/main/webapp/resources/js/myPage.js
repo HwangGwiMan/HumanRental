@@ -270,52 +270,6 @@ function deletemember22() {
     });
 }
 
-function mentorCheck(element) {
-    var buyingId = element.getAttribute('data-buying-id');
-    $.ajax({
-        type: 'get',
-        url: './mentorprofileCheck',
-        success: function(result) {
-            if (result === "true") {
-                window.location.href = "./buying/detail?buyingId=" + buyingId;
-            } else if (result === "notLogin"){
-            	alert("로그인이 필요합니다.");
-            }
-            else {
-                alert("멘토 프로필을 등록한 회원만 조회 가능합니다.");
-            }
-            
-        },
-        error: function(request, status, error) {
-            console.log(request);
-        }
-    });
-}
-
-
-
-
-
-
-function menteeCheck2() {
-    $.ajax({
-        type: 'get',
-        url: './menteeprofileCheck',
-        success: function(result) {
-            if (result === "true") {
-                window.location.href = "./buying";
-            } else if (result === "notLogin"){
-            	alert("로그인이 필요합니다.");
-            } else {
-                alert("멘티 프로필을 등록한 회원만 등록 가능합니다.");
-            }
-        },
-        error: function(request, status, error) {
-            console.log(request);
-        }
-    });
-}
-
 function userCheck() {
 	var memberId = document.getElementsByName("memberId")[0].value;
 	var memberPw = document.getElementsByName("memberPw")[0].value;
