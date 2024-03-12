@@ -22,7 +22,7 @@
 		        <div class="qq0">
 				<c:forEach var="mentor" items="${mentorlist}" varStatus="loop">
 				    <c:if test="${loop.index < 3}">
-			            <div class="qq1 text-bg-light">
+			            <div class="qq1 text-bg-light" nickname="${mentor.nickname}" onclick="goMentorProfile(this)">
 							<div class="top text-center">
 								<img src="/HumanRental/resources/img/Main/teacher1.png" alt=""
 									class="img-fluid">
