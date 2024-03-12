@@ -60,6 +60,7 @@
 			<c:when test="${type=='update'}">
 		       	<form:form modelAttribute="selling" action="/HumanRental/selling/update?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
 		       		<input type="hidden" name="sellingId" value="${ selling.sellingId }">
+		       		<div class="row p-5 fs-3">재능 판매 수정</div>
 		       		<div class="row p-3">
 		       			<div class="col-1">제목</div> 
 		       			<div class="col-4"><input type="text" name="title" value="${ selling.title }" required="required" maxlength=20></div>
