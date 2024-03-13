@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./src/logo.png" width="600" alt="Weights & Biases" />
+  <img src="./src/logo.png" alt="Weights & Biases" />
 </p>
 
 
@@ -29,3 +29,5 @@
 5. 멘토/멘티와 소통하고 요청사항을 해결하기 위한 만남의 장소를 탐색해보세요.
 
 ## Views
+- 메인 페이지
+<img src="./src/main.png" width="600">
