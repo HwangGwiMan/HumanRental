@@ -7,16 +7,17 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/style_section3.css"/>">
+<script src="<c:url value="/resources/js/main.js"/>"></script>
  </head>
 
 <body>
 	<div class="qqs3 container">
-        <div class="info text-center fs-1 p-5">
-            <div class="fw-semibold">최신 리뷰</div>
+        <div class="info text-center p-5">
+            <div class="fw-semibold">Recent Review</div>
         </div>
         <div class="row d-flex justify-content-evenly">
         <c:forEach var="review" items="${reviewlist}">
-	        <div class="box2 rounded-3">
+	        <div class="box2 rounded-3" board="${review.boardId}" onclick="goBoard(this)">
 				<div class="card-info">
 					<div class="review">
 						<div>

@@ -53,7 +53,7 @@ public class BuyingController {
 	
 	@GetMapping("/buying")
 	public String Buying(@ModelAttribute Buying buying, Model model, HttpServletRequest request) {
-		System.out.println("셀링 겟 접근");
+//		System.out.println("셀링 겟 접근");
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		Member member = memberService.getMember(memberId);

@@ -371,3 +371,14 @@ insert into selling values('sellingId_006','5678','닉네임5','introduction',0,
 insert into selling values('sellingId_007','test_1','닉네임6','introduction',0,'롤 제자 구합니다','내용','2024-01-07 00:00:00','game',5000,'한국',0);
 insert into selling values('sellingId_008','test_2','닉네임7','introduction',0,'롤 제자 구합니다','내용','2024-01-08 00:00:00','game',5000,'한국',0);
 insert into selling values('sellingId_009','test_3','닉네임8','introduction',0,'롤 제자 구합니다','내용','2024-01-09 00:00:00','game',5000,'한국',0);
+
+-- reservation, review 추가
+INSERT INTO reservation VALUES ('Reservation_001', 'buyingId_002', 'TEST', 'mentee_003', 'mentor_001', '2024-01-01', 'TEST', '렌탈완료', '2024-01-01 00:00:00', 'asdf', 'qwer', '2024-01-01 00:00:00', '2024-01-01 00:00:00');
+INSERT INTO reservation VALUES ('Reservation_002', 'buyingId_002', 'TEST', 'mentee_003', 'mentor_001', '2024-01-02', 'TEST', '렌탈완료', '2024-01-02 00:00:00', 'asdf', 'qwer', '2024-01-02 00:00:00', '2024-01-02 00:00:00');
+INSERT INTO reservation VALUES ('Reservation_003', 'sellingId_001', 'TEST', 'mentee_003', 'mentor_001', '2024-01-03', 'TEST', '렌탈완료', '2024-01-03 00:00:00', 'asdf', 'qwer', '2024-01-03 00:00:00', '2024-01-03 00:00:00');
+INSERT INTO buyingreview VALUES ('buyingReview_001', 'buyingId_002', 'qwer', 'TEST', 'TEST', '2024-01-01 00:00:00', '5', 'Reservation_001');
+INSERT INTO buyingreview VALUES ('buyingReview_002', 'buyingId_002', 'qwer', 'TEST', 'TEST', '2024-01-02 00:00:00', '4', 'Reservation_002');
+INSERT INTO sellingreview VALUES ('sellingReview_003', 'sellingId_001', 'qwer', 'TEST', 'TEST', '2024-01-03 00:00:00', '4', 'Reservation_003');
+INSERT INTO memberreview VALUES ('memberReview_001', 'buyingId_002', 'asdf', 'TEST', 'TEST', '2024-03-12', '2', 'Reservation_001');
+INSERT INTO memberreview VALUES ('memberReview_002', 'buyingId_002', 'asdf', 'TEST', 'TEST', '2024-03-13', '1', 'Reservation_002');
+INSERT INTO memberreview VALUES ('memberReview_003', 'sellingId_001', 'asdf', 'TEST', 'TEST', '2024-03-13', '4', 'Reservation_003');

@@ -1,6 +1,7 @@
 .qqs2 {
 	overflow: hidden;
 	height: auto;
+	margin-top: 5vh;
 }
 
 .qqs2 .info {
@@ -25,12 +26,14 @@
 	flex-direction: column;
 	box-shadow: 3px 3px 25px 0px rgba(46,61,73,0.5);
 	transition: 0.5s;
+    cursor: pointer;
 }
 
 .qqs2 .qq1:hover{
-	box-shadow: 3px 3px 25px 0px rgb(128, 128, 255);
-	height: 46vh;
-	width: 31%;
+	box-shadow: 5px 5px 30px 0px rgba(46,61,73,1);
+/*	height: 46vh;*/
+/*	width: 31%;*/
+	padding: 10px;
 }
 
 .qqs2 .top{

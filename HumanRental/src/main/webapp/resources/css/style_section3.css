@@ -1,3 +1,11 @@
+.qqs3{
+	margin-top: 10vh;
+}
+
+.qqs3 .info {
+	font-size: 50px;
+}
+
 .qqs3 .box2 {
 	height: 22vh;
 	width: 30%;
@@ -5,6 +13,13 @@
 	margin-top: 10px;
 	padding: 0 10px;
 	box-shadow: 3px 3px 25px 0px rgba(46,61,73,0.5);
+	transition: 1s;
+    cursor: pointer;
+}
+
+.qqs3 .box2:hover{
+	background-color: black;
+	color: white;
 }
 
 .qqs3 .card-info {
