@@ -18,9 +18,9 @@
 	            <div class="p-3">멘티 모집</div>
 	        </div>
 	        <div class="category pt-3">
-	            <div class="btn btn-light fs-1"><a href="<c:url value="/SellingList?category=music"/>"><i class="fa-solid fa-guitar"></i></a></div>
-	            <div class="btn btn-light fs-1"><a href="<c:url value="/SellingList?category=sports"/>"><i class="fa-solid fa-person-running"></i></a></div>
-	            <div class="btn btn-light fs-1"><a href="<c:url value="/SellingList?category=game"/>"><i class="fa-solid fa-gamepad"></i></a></div>
+	            <div class="btn btn-light fs-1"><a href="<c:url value="/SellingList?pageNum=1&category=music"/>"><i class="fa-solid fa-guitar"></i></a></div>
+	            <div class="btn btn-light fs-1"><a href="<c:url value="/SellingList?pageNum=1&category=sports"/>"><i class="fa-solid fa-person-running"></i></a></div>
+	            <div class="btn btn-light fs-1"><a href="<c:url value="/SellingList?pageNum=1&category=game"/>"><i class="fa-solid fa-gamepad"></i></a></div>
 	            <div class="btn btn-light fs-1"><i class="fa-solid fa-comments"></i></div>
 	            <div class="btn btn-light fs-1"><i class="fa-solid fa-car"></i></div>
 	<!--             <div><i class="fa-solid fa-hammer"></i></div> -->
@@ -71,12 +71,26 @@
 		         			<i class="fa-solid fa-angles-left" style="line-height: 24px;"></i>
 	         			</a>
          			</div> --%>
+         			<%
+	        			if(request.getParameter("category") == null) {
+         			%>
 			        <div class="col-1">
 			        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) - 1 %>">
 			        		<i class="fa-solid fa-chevron-left" style="line-height: 24px;"></i>
 		        		</a>
 	        		</div>
-			        	<% 
+	        		<%
+	        			} else {
+	        		%>
+			        <div class="col-1">
+			        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) - 1 %>&category=<%= request.getParameter("category") %>">
+			        		<i class="fa-solid fa-chevron-left" style="line-height: 24px;"></i>
+		        		</a>
+			        </div>
+			        <%
+        				}	
+			        %>
+		        		<% 
 			        		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 			        		
 			        		int totalPageNum = (int) request.getAttribute("totalPageNum");
@@ -133,12 +147,25 @@
 					        		<%
 			        			}
 			        		}
-			        	%>
-			        <div class="col-1">
-			        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) + 1 %>">
-			        		<i class="fa-solid fa-chevron-right" style="line-height: 24px;"></i>
-		        		</a>
-			        </div>
+			        		
+			        		if(request.getParameter("category") == null) {
+		        			%>
+					        <div class="col-1">
+					        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) + 1 %>">
+					        		<i class="fa-solid fa-chevron-right" style="line-height: 24px;"></i>
+				        		</a>
+					        </div>
+		        			<%
+			        		} else {
+		        			%>
+					        <div class="col-1">
+					        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) + 1 %>&category=<%= request.getParameter("category") %>">
+					        		<i class="fa-solid fa-chevron-right" style="line-height: 24px;"></i>
+				        		</a>
+					        </div>
+		        			<%
+			        		}
+		        			%>
 			        <%-- <div class="col-1">
 			        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) + 10 %>">
 			        		<i class="fa-solid fa-angles-right" style="line-height: 24px;"></i>
