@@ -15,6 +15,7 @@ public class MentorProfile {
 	private String filename3;
 	private float starRate;
 	private int starCount;
+	private String nickname;
 	
 	public String getMentorprofileaddress() {
 		return mentorprofileaddress;
@@ -81,6 +82,12 @@ public class MentorProfile {
 	}
 	public void setStarCount(int starCount) {
 		this.starCount = starCount;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 

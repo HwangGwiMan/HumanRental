@@ -34,9 +34,11 @@ public class SellingController {
 	
 	//멘티게시글 리스트 페이지
 	@GetMapping("/SellingList")
-	public String MentorList(@RequestParam(name = "category", required = false) String category, Model model) {
+	public String MentorList(@RequestParam(name = "category", required = false) String category,
+						     @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, 
+						     Model model) {
 //		System.out.println("category : "+category);
-		sellingservice.SellingList(model, category);
+		sellingservice.SellingList(model, category, pageNum);
 		return "SellingList";
 	}
 	
@@ -64,14 +66,14 @@ public class SellingController {
 	public String SellingCreate(@ModelAttribute Selling selling, Model model, HttpServletRequest request) {
 //		System.out.println("셀링 포스트 접근");
 		sellingservice.SellingCreate(selling);
-		return "redirect:/SellingList";
+		return "redirect:/SellingList?pageNum=1";
 	}
 	
 	@GetMapping("/selling/delete")
 	public String SellingDelete(@RequestParam("sellingId") String sellingId) {
 //		System.out.println("셀링 딜리트 접근");
 		sellingservice.SellingDelete(sellingId);
-		return "redirect:/SellingList";
+		return "redirect:/SellingList?pageNum=1";
 	}
 	
 	@GetMapping("/selling/update")
@@ -87,7 +89,7 @@ public class SellingController {
 //		System.out.println("셀링 업데이트 포스트 접근");
 		sellingservice.SellingUpdate(selling);
 		model.addAttribute("type", "view");
-		return "redirect:/SellingList";
+		return "redirect:/SellingList?pageNum=1";
 	}
 	
 	@GetMapping("/sellingListManagement")

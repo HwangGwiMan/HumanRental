@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import com.springmvc.domain.Buying;
 
 public interface BuyingService {
+	public void BuyingList(Model model, String category, int pageNum);
 	public void BuyingList(Model model, String category);
 	public void BuyingCreate(Buying buying);
 	public void BuyingDetailbyId(Model model, String buyingId);

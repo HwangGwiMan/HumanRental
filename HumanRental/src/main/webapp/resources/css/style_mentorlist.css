@@ -26,24 +26,24 @@
 	border-radius: 30px;
 	width: 100px;
 	height: 100px;
-	box-shadow: 0px 0px 10px 1px #212129;
+	/* box-shadow: 0px 0px 10px 1px #212129; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .qqml .qq2 {
-	margin-bottom: 50px;
+	/* margin-bottom: 50px; */
 }
 
 .qqml .wrapper {
 	position: relative;
-	background: linear-gradient(to left, #306bac, #141b41);
-	color: #fff;
+	/* background: linear-gradient(to left, #306bac, #141b41); */
+	/* color: #fff; */
 	margin: 10px;
 	padding: 30px;
 	border-radius: 20px;
-	box-shadow: 0px 0px 10px 1px #212129;
+	/* box-shadow: 0px 0px 10px 1px #212129; */
 }
 
 .qqml .wrapper .image-wrapper {
@@ -66,7 +66,7 @@
 }
 
 .qqml .wrapper .description {
-	color: #a1a2ad;
+	/* color: #a1a2ad; */
 	text-transform: uppercase;
 	margin-top: 5px;
 	width: 80%;
@@ -89,12 +89,12 @@
 } */
 
 .qqml .wrapper .social-media a i:hover {
-	color: #a1a2ad;
+	/* color: #a1a2ad; */
 	transition: 300ms;
 }
 
 .qqml .wrapper .follow {
-	background: #fff;
+	/* background: #fff; */
 	color: #212129;
 	text-transform: uppercase;
 	font-size: 1.2em;
@@ -110,14 +110,14 @@
 	text-decoration: none;
 }
 
-.qqml .wrapper .follow:hover {
+/* .qqml .wrapper .follow:hover {
 	background: #212129;
 	color: #fff;
 	transition: 300ms;
 }
-
-.qqml .category div:hover {
+ */
+/* .qqml .category div:hover {
 	background: #212129;
 	color: #fff;
-	/* transition: 300ms; */
-}
+	transition: 300ms;
+} */

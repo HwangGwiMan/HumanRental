@@ -1,0 +1,89 @@
+.service{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.service .left{
+    /* border: 1px solid red; */
+    text-align: center;
+}
+
+.service .left h1{
+    font-size: 50px;
+    margin: 20px 0 0;
+}
+
+.service .right{
+    display: flex;
+    justify-content: space-around;
+    flex-basis: 50%;
+    flex-wrap: wrap;
+    /* border: 1px solid black; */
+/*    margin: 30px 200px 0;*/
+    color: black;
+    width: 70%;
+}
+
+.service .right div{
+    /* border: 1px solid blue; */
+    border-radius: 20px;
+    width: 30vh;
+    text-align: center;
+    transition: 0.7s !important;
+	box-shadow: 3px 3px 25px 0px rgba(46,61,73,0.5);
+	padding-bottom: 2vh;
+}
+
+.service .right div i{
+    margin-top: 30px;
+    font-size: 110px;
+    /* border: 1px solid black; */
+}
+
+.service .right div h4{
+    margin: 20px 0 0;
+    font-size: 3vh;
+    font-weight: bold;
+    /* border: 1px solid red; */
+}
+
+.service .right div p{
+    font-size: 1.5vh;
+    margin-top: 25px;
+    padding: 0 10px;
+    word-break: keep-all;
+    /* border: 1px solid green; */
+}
+
+.service .right div a{
+    display: inline-block;
+    font-size: 1.6vh;
+    padding: 7px 20px;
+    border-radius: 50px;
+    background-color: black;
+    color: white;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.service .right div:hover{
+    background-color: black;
+    color: white;
+}
+
+.service .right div:hover i{
+/*    color: black !important;*/
+}
+
+.service .right div:hover a{
+    background-color: white;
+    color: black;
+}
+
+.service .right div a:link, .service .right div a:visited {
+/*    color: white;*/
+    text-decoration: inherit;
+}

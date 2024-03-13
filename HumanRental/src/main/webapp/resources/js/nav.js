@@ -35,3 +35,7 @@ function updateAlarm(message) {
 		alarmLight.style.display = "none";
 	} 
 }
+
+function goMain() {
+	window.location.href = "/HumanRental";
+}

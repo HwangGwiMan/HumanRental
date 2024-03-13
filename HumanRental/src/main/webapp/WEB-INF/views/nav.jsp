@@ -21,28 +21,28 @@
 		<script src="<c:url value="/resources/js/nav.js"/>"></script>
 	</head>
 	<body>
-		<nav class="qqnav container border-bottom">
-			<div class="row d-flex align-items-center justify-content-between ">
+		<nav class="qqnav border-bottom">
+			<div class="d-flex align-items-center justify-content-center">
 				<div class="col-5 d-flex align-items-center qq1">
-					<a href="<c:url value="/main"/>"><h4>휴먼렌탈</h4></a>
+					<div class="logo" onclick="goMain()"></div>
 					<ul class="nav">
 						<li class="nav-item"><a class="nav-link" href="#">재능기부</a></li>
-						<li class="nav-item"><a class="nav-link" href="<c:url value="/BuyingList"/>">재능구매</a></li>
-						<li class="nav-item"><a class="nav-link" href="<c:url value="/SellingList"/>">재능판매</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value="/BuyingList?pageNum=1"/>">재능구매</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value="/SellingList?pageNum=1"/>">재능판매</a></li>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/board"/>">커뮤니티</a></li>
 					</ul>
 				</div>
 				<div class="col-4">
 					<div style="width: 100%; height: 38px">
     					<form id="searchForm" class="form-inline d-flex mx-auto align-items-center" action="<c:url value='/Search'/>" method="post">
-        					<select name="items" class="txt">
+        					<select name="items" class="txt border-end">
 					            <option value="all">전체</option>
 					            <option value="title">제목</option>
 					            <option value="content">내용</option>
 					            <option value="nickname">닉네임</option>
         					</select> 
-        					<input class="form-control mr-2" type="text" name="search" placeholder="어떤 멘토,멘티를 찾으세요?" required>
-        					<button class="btn btn-primary" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+        					<input class="form-control mr-2 search" type="text" name="search" placeholder="어떤 멘토,멘티를 찾으세요?" required>
+        					<button class="btn btn-primary ms-1" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
     					</form>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
 						<% } %>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/save/saveread"/>">찜목록</a></li>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/mentorIntro"/>">멘토신청</a></li>
-						<li class="nav-item">
+						<li class="nav-item d-flex flex-column justify-content-center">
 							<a class="nav-link" href="#" id="alarmBtn">
 								<i class="fa-regular fa-bell position-relative">
 									<c:if test="${ not empty alarmList }">
@@ -66,7 +66,7 @@
 									</c:if>
 								</i>
 							</a>
-							<div class="z-3 position-absolute end-0 alert alert-primary col" style="display: none; width: 300px;">
+							<div class="z-3 position-absolute top-100 end-0 alert alert-primary col" style="display: none; width: 300px;">
 								<c:choose>
 									<c:when test="${ empty alarmList }">
 										알람이 없습니다.
