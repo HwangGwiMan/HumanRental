@@ -133,6 +133,8 @@ public class MentorController {
 	    //멘토프로필데이터베이스에 조회되는가 체크 
 	    Mentor mentor = mentorService.getMentor(memberId);
 	    MentorProfile mentorprofile	=mentorService.MentorprofileInformation(memberId);
+	    Member member =memberService.getMember(memberId);
+	    
 	    
 	    //멘토에 등록이 안되어 있으면 멘토센청으로 가게 하는 로직
 	    if(mentor == null) {	
@@ -155,7 +157,7 @@ public class MentorController {
 	        mode = "mentorInformation";
 	        model.addAttribute("mode", mode);
 	        model.addAttribute("mentorprofile",mentorprofile);
-	        
+	        model.addAttribute("member",member);
 	        return "MyPage";
 	    }
 	     return "redirect:/myInfo";
@@ -169,13 +171,17 @@ public class MentorController {
 			Model model,HttpServletRequest request ,@RequestParam("mode") String mode) {
 		   System.out.println("멘토프로필 등록 하는 컨트롤러입니다 ");
 
+		   //세션에서 멤버id , 멤버 id를 통해서 멘토 객체 획득 , 멘토 객채에서 멘토아이디 획득 , 멘토프로필에 멘토아이디넣어줌
 		    HttpSession session = request.getSession();
 		    String memberId = (String) session.getAttribute("user");
 		    Mentor mentor = mentorService.getMentor(memberId);
 		    String mentorId =  mentor.getMentorId();
 		    mentorprofile.setMentorId(mentorId);
+		    
+		    // 파일 넣을 경로 지정 
 		    String realPath = request.getSession().getServletContext().getRealPath("/resources/img/ProfilePicture");
 		    System.out.println(realPath);
+		    
 		    if (!file1.isEmpty()) { 
 		        String realfilename1 = "mentorprofile_"+mentorprofile.getMentorId()+file1.getOriginalFilename();
 		        File saveFile1 = new File(realPath,realfilename1);
@@ -192,7 +198,7 @@ public class MentorController {
 		        File saveFile2 = new File(realPath,realfilename2);
 		        mentorprofile.setFilename2(realfilename2);
 		        try {
-		            file1.transferTo(saveFile2);  // 파일 저장
+		            file2.transferTo(saveFile2);  // 파일 저장
 		        } catch (IOException e) {
 		            e.printStackTrace();
 		        }
@@ -205,13 +211,12 @@ public class MentorController {
 		        File saveFile3 = new File(realPath,realfilename3);
 		        mentorprofile.setFilename3(realfilename3);
 		        try {
-		            file1.transferTo(saveFile3);  // 파일 저장
+		            file3.transferTo(saveFile3);  // 파일 저장
 		        } catch (IOException e) {
 		            e.printStackTrace();
 		        }
 		        System.out.println("saveFile3="+saveFile3);
 		    }
-
 
 		    mentorService.mentorProfileRegister(mentorprofile,memberId,mentorId);
 		    mode = "mentorProfile";
@@ -219,17 +224,20 @@ public class MentorController {
 		    return "redirect:/mentor";
 	}
 	
-	@GetMapping("/mentorprofileupdate")
+	@GetMapping("/callmentorprofileupdate")
 	public String UpdateMentorProfileform(Model model,HttpServletRequest request ,@RequestParam("mode") String mode) {
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("user");
-		
+							
 		MentorProfile mentorProfile = mentorService.MentorprofileInformation(memberId);
-	
+		Member member =memberService.getMember(memberId);
+		
+		
 		mode="mentorProfileUpdate";
 		model.addAttribute("mode", mode);
 		model.addAttribute("mentorprofile",mentorProfile);
-		
+		model.addAttribute("member",member);
+
         return "MyPage";
 	
 	}
@@ -239,7 +247,7 @@ public class MentorController {
 			@RequestParam("file2") MultipartFile file2 ,
 			@RequestParam("file3") MultipartFile file3 , Model model , HttpServletRequest request ,@RequestParam("mode") String mode) {
 
-		   System.out.println("멘토프로필 등록 하는 컨트롤러입니다 ");
+		   System.out.println("멘토프로필 업데이트하는 하는 컨트롤러입니다 ");
 
 		    HttpSession session = request.getSession();
 		    String memberId = (String) session.getAttribute("user");
@@ -281,16 +289,18 @@ public class MentorController {
 		        } catch (IOException e) {
 		            e.printStackTrace();
 		        }
-		        
 		        System.out.println("saveFile3="+saveFile3);
 		    }
+
+		  
 
 		mentorService.UpdateMentorProfile(mentorprofile,memberId);
 		MentorProfile mentorProfile = mentorService.MentorprofileInformation(memberId);
 	    mode = "mentorInformation";
 		model.addAttribute("mode", mode);
 		model.addAttribute("mentorprofile",mentorProfile);
-	    
+		   System.out.println("여기 지금 오고 있니??");
+
 	    return "MyPage";
 
 	}

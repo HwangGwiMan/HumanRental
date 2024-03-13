@@ -463,3 +463,48 @@ function reviewCheck2(element) {
         }
     });
 }
+//멘토프로필 자격증 파일 업로드용 함수 3개 시리즈
+function setThumbnail11(event) {
+	var reader = new FileReader();
+	
+	reader.onload = function(event) {
+		console.log(event);		
+		var img = document.getElementById("imageSample11");
+		img.setAttribute("src", event.target.result);
+		
+	};
+	
+	reader.readAsDataURL(event.target.files[0]);
+}
+
+function setThumbnail22(event) {
+	var reader = new FileReader();
+	
+	reader.onload = function(event) {
+		console.log(event);		
+		var img = document.getElementById("imageSample22");
+		img.setAttribute("src", event.target.result);
+		
+	};
+	
+	reader.readAsDataURL(event.target.files[0]);
+}
+
+function setThumbnail33(event) {
+	var reader = new FileReader();
+	
+	reader.onload = function(event) {
+		console.log(event);		
+		var img = document.getElementById("imageSample33");
+		img.setAttribute("src", event.target.result);
+		
+	};
+	
+	reader.readAsDataURL(event.target.files[0]);
+}
+
+//이미지 누르면 이미지 팝업창 보여주는 함수
+function openImagePopup(src) {
+    // 팝업창에서 이미지를 열기
+    window.open(src, 'ImagePopup', 'width=600,height=600');
+}

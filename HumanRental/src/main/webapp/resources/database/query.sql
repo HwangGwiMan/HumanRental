@@ -16,7 +16,7 @@ joinDate datetime not null,
 profileImage varchar(50),
 reportCount int
 );
-select * from member;
+
 -- 멘토 테이블
 CREATE TABLE mentor(
 	mentorId varchar(50) primary key,
@@ -24,7 +24,7 @@ CREATE TABLE mentor(
     registDate datetime not null,
     foreign key(memberId) references Member(memberId)
 );
-select * from mentor;
+
 -- 멘토 신청 정보 테이블
 CREATE TABLE IF NOT EXISTS MentorRegistInfo(
 	registId varchar(50) not null primary key,
@@ -57,13 +57,13 @@ category varchar(100),
 filename1 varchar(1000),
 filename2 varchar(1000),
 filename3 varchar(1000),
-
+mentorprofileaddress varchar(100),
 starRate float ,
 starCount int,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
-select * from MentorProfile;
+
 
 
 -- 멘티프로필 관리
@@ -349,12 +349,12 @@ insert into menteeprofile values('mentee_005', '1234', 'TEST5', 'TEST_INTRO5', 0
 insert into menteeprofile values('mentee_006', '5678', 'TEST6', 'TEST_INTRO6', 0, 0);
 
 -- mentorprofile 추가
-insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_004' , 'zxcv', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_005' , '1234', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_006' , '5678', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
+insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', '서울',0, 0);
+insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
+insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
+insert into mentorprofile values('mentor_004' , 'zxcv', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
+insert into mentorprofile values('mentor_005' , '1234', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
+insert into mentorprofile values('mentor_006' , '5678', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
 
 
 -- buying 내용 추가
@@ -378,3 +378,4 @@ insert into selling values('sellingId_006','5678','닉네임5','introduction',0,
 insert into selling values('sellingId_007','test_1','닉네임6','introduction',0,'롤 제자 구합니다','내용','2024-01-07 00:00:00','game',5000,'한국',0);
 insert into selling values('sellingId_008','test_2','닉네임7','introduction',0,'롤 제자 구합니다','내용','2024-01-08 00:00:00','game',5000,'한국',0);
 insert into selling values('sellingId_009','test_3','닉네임8','introduction',0,'롤 제자 구합니다','내용','2024-01-09 00:00:00','game',5000,'한국',0);
+

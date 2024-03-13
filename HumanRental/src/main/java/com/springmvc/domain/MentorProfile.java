@@ -9,12 +9,19 @@ public class MentorProfile {
 	private String introduction;
 	private String category;
 	private String certification;
+	private String mentorprofileaddress;
 	private String filename1;
 	private String filename2;
 	private String filename3;
 	private float starRate;
 	private int starCount;
 	
+	public String getMentorprofileaddress() {
+		return mentorprofileaddress;
+	}
+	public void setMentorprofileaddress(String mentorprofileaddress) {
+		this.mentorprofileaddress = mentorprofileaddress;
+	}
 	public String getMentorId() {
 		return mentorId;
 	}
