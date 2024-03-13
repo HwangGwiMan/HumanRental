@@ -1,8 +1,14 @@
+*{
+	margin: 0;
+	padding: 0;
+    box-sizing: border-box !important;
+}
+
 .qqnav{
     background-color: white;
     color: black;
     height: 10vh;
-    box-sizing: border-box;
+    width: 100%;
 }
 
 .qqnav a{
@@ -16,6 +22,7 @@
 
 .qqnav .qq1 h4{
     margin: auto 20px auto 20px;
+    text-align: center;
 }
 
 .qqnav .nav{
@@ -29,11 +36,11 @@
 }
 
 .qqnav .col-4{
-	width: 32% !important;
+	width: 30% !important;
 }
 
 .qqnav .col-3{
-	width: 28% !important;
+	width: 20% !important;
 }
 
 .qqnav .txt{
@@ -44,4 +51,18 @@
 
 .qqnav .search{
 	padding-left: 8vh;
+}
+
+.qqnav select{
+    border: none;
+    outline: none;
+}
+
+.qqnav .logo{
+    width: 30vh;
+    height: 6vh;
+    background-image: url(/HumanRental/resources/img/Main/logo.png);
+    background-size: cover;
+    margin: 0 2vh 0 3vh;
+    cursor: pointer;
 }
