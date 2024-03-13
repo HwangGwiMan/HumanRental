@@ -1,6 +1,7 @@
 package com.springmvc.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,45 @@ public class SellingServiceImpl implements SellingService{
 	SellingRepository sellingrepository;
 	
 	Utility util = new Utility();
+	
+	@Override
+	public void SellingList(Model model, String category, int pageNum) {
+		List<Selling> sellinglist = sellingrepository.SellingList(category);
+		
+		List<Selling> targetlist = new ArrayList<Selling>();
+		
+		int startIdx = (pageNum - 1) * 16;
+		int j = 0;
+		for(int i = startIdx; i < sellinglist.size(); i++) {
+			
+			if(j >= 16) {
+				break;
+			}
+			j++;
+			
+			try {
+				targetlist.add(sellinglist.get(i));
+			} catch(IndexOutOfBoundsException e) {
+				break;
+			}
+			
+			
+		}
+		
+		model.addAttribute("sellinglist",targetlist);
+		
+		
+		int totalPageNum = sellinglist.size() / 16 + 1;
+		/*
+		 * int[] pageNums = new int[totalPageNum];
+		 * 
+		 * for(int i = 1; i < totalPageNum + 1; i++) { pageNums[i - 1] = i; }
+		 */
+		
+		
+		
+		model.addAttribute("totalPageNum", totalPageNum);
+	}
 	
 	@Override
 	public void SellingList(Model model, String category) {

@@ -48,10 +48,10 @@ public class ReviewController {
 		String applicantMemberId = reservation.getApplicantMemberId();
 		review.setReservationId(reservationId);
 		
-		System.out.println("포스트 리뷰");
-		System.out.println("memberId"+memberId);
-		System.out.println("review.getMemberId()"+review.getMemberId());
-		System.out.println("테스트"+memberId==review.getMemberId());
+//		System.out.println("포스트 리뷰");
+//		System.out.println("memberId"+memberId);
+//		System.out.println("review.getMemberId()"+review.getMemberId());
+//		System.out.println("테스트"+memberId==review.getMemberId());
 		
 		if(memberId.equals(review.getMemberId())) {
 				reviewService.MemberReviewWrite(review);
@@ -117,7 +117,7 @@ public class ReviewController {
 		try {
 			reservationService.GetReservationInfo(reservationId, model);
 			check = reviewService.ReviewCheck2(reservationId, model, memberId);
-			System.out.println("check="+check);
+//			System.out.println("check="+check);
 			if(check=="false") {
 				return "false";
 			}

@@ -34,9 +34,11 @@ public class BuyingController {
 	
 	//멘티게시글 리스트 페이지
 	@GetMapping("/BuyingList")
-	public String MentorList(@RequestParam(name = "category", required = false) String category, Model model) {
+	public String MentorList(@RequestParam(name = "category", required = false) String category, 
+							 @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, 
+							 Model model) {
 //		System.out.println("category : "+category);
-		buyingservice.BuyingList(model, category);
+		buyingservice.BuyingList(model, category, pageNum);
 		return "BuyingList";
 	}
 	
@@ -51,7 +53,7 @@ public class BuyingController {
 	
 	@GetMapping("/buying")
 	public String Buying(@ModelAttribute Buying buying, Model model, HttpServletRequest request) {
-		System.out.println("셀링 겟 접근");
+//		System.out.println("셀링 겟 접근");
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("user");
 		Member member = memberService.getMember(memberId);
@@ -64,14 +66,14 @@ public class BuyingController {
 	public String BuyingCreate(@ModelAttribute Buying buying, Model model, HttpServletRequest request) {
 //		System.out.println("셀링 포스트 접근");
 		buyingservice.BuyingCreate(buying);
-		return "redirect:/BuyingList";
+		return "redirect:/BuyingList?pageNum=1";
 	}
 	
 	@GetMapping("/buying/delete")
 	public String BuyingDelete(@RequestParam("buyingId") String buyingId) {
 //		System.out.println("셀링 딜리트 접근");
 		buyingservice.BuyingDelete(buyingId);
-		return "redirect:/BuyingList";
+		return "redirect:/BuyingList?pageNum=1";
 	}
 	
 	@GetMapping("/buying/update")
@@ -87,7 +89,7 @@ public class BuyingController {
 //		System.out.println("셀링 업데이트 포스트 접근");
 		buyingservice.BuyingUpdate(buying);
 		model.addAttribute("type", "view");
-		return "redirect:/BuyingList";
+		return "redirect:/BuyingList?pageNum=1";
 	}
 	
 	@GetMapping("/buyingListManagement")

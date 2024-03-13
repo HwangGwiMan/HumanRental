@@ -281,5 +281,36 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 		
 		return list;
 	}
+
+	@Override
+	public List<Review> getBestReviewList() {
+		
+		String sql;
+		List<Review> list = new ArrayList();
+		
+		try {
+			sql = "select * from buyingreview order by writeDate desc limit 0, 1";
+			list.add(template.query(sql, new ReviewRowMapper()).get(0));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		try {
+			sql = "select * from sellingreview order by writeDate desc limit 0, 1";
+			list.add(template.query(sql, new ReviewRowMapper()).get(0));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		try {
+			sql = "select * from memberreview order by writeDate desc limit 0, 1";
+			list.add(template.query(sql, new ReviewRowMapper()).get(0));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return list;
+	}
+	
 	
 }

@@ -18,7 +18,7 @@ public class JoinController {
 	
 	@Autowired
 	MemberService memberService;
-	
+		
 	@GetMapping("/join")
 	public String requestJoinPage(@ModelAttribute Member member) {
 		return "Join";
@@ -30,13 +30,28 @@ public class JoinController {
 		return "redirect:/login";
 	}
 	
-	@GetMapping(value = "/join/idCheck", produces = "application/json; charset=UTF-8")
+	@GetMapping(value = "/join/DupCheck", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String idCheck(@RequestParam("memberId") String userName) {
-		if(memberService.idCheck(userName)) {
-			return "true";
-		} else {
-			return "false";
+	public String idCheck(@RequestParam("targetData") String targetData,
+						  @RequestParam("targetLabel") String targetLabel) {
+		
+		if(targetLabel.equals("아이디")) {
+			if(memberService.idCheck(targetData)) {
+				return "true";
+			} else {
+				return "false";
+			}
 		}
+		
+		if(targetLabel.equals("닉네임")) {
+			if(memberService.nickCheck(targetData)) {
+				return "true";
+			} else {
+				return "false";
+			}
+		}
+		
+		return "false";
+		
 	}
 }

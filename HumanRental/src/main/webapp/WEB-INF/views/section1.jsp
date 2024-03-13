@@ -28,12 +28,8 @@
 			<section class="slide slide-one">
 				<div class="info">
 					<div class="left">
-						<h1>
-							<b>재능 구매</b>
-						</h1>
-						<p>
-							"열정적인 학습자들을 위한 지식의 문이 열립니다.<br> 새로운 세계를 탐험하고, 무한한 배움의 가능성을
-							찾아보세요."
+						<h1>재능 구매</h1>
+						<p>"열정적인 학습자들을 위한 지식의 문이 열립니다.<br> 새로운 세계를 탐험하고, 무한한 배움의 가능성을찾아보세요."
 						</p>
 					</div>
 					<div class="right">
@@ -45,12 +41,8 @@
 			<section class="slide slide-two">
 				<div class="info">
 					<div class="left">
-						<h1>
-							<b>재능 판매</b>
-						</h1>
-						<p>
-							"내가 가진 지식과 경험을 나누어 보세요.<br> 다른 이들에게 가르침과 영감을 전달해보세요."
-						</p>
+						<h1>재능 판매</h1>
+						<p>"내가 가진 지식과 경험을 나누어 보세요.<br> 다른 이들에게 가르침과 영감을 전달해보세요."</p>
 					</div>
 					<div class="right">
 						<div class="img2"></div>
@@ -61,12 +53,8 @@
 			<section class="slide slide-three">
 				<div class="info">
 					<div class="left">
-						<h1>
-							<b>재능 기부</b>
-						</h1>
-						<p>
-							"나눔의 소중함을 느끼고,<br> 함께 세상을 더 아름답게 만들어 나가는 데 동참해 주세요."
-						</p>
+						<h1>재능 기부</h1>
+						<p>"나눔의 소중함을 느끼고,<br> 함께 세상을 더 아름답게 만들어 나가는 데 동참해 주세요."</p>
 					</div>
 					<div class="right">
 						<div class="img3"></div>
