@@ -7,7 +7,10 @@
 
 - Java Spring
 - HTML
-- CSS
-- Javascript
+- CSS (Bootstrap)
+- JavaScript 
 
-## Views
+## WHAT IS HUMANRENTAL
+
+휴먼 렌탈은 
+
