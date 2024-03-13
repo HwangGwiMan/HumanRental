@@ -23,7 +23,7 @@ public class MentorProfileMapper implements RowMapper<MentorProfile> {
 		mentorprofile.setMentorId(rs.getString("mentorId"));
 		mentorprofile.setStarRate(rs.getFloat("starRate"));
 		mentorprofile.setStarCount(rs.getInt("starCount"));
-		
+		mentorprofile.setMentorprofileaddress(rs.getString("mentorprofileaddress"));
 		 return mentorprofile;
 	}
 	

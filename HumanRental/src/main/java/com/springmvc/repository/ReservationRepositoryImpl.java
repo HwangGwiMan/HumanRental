@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
+import com.springmvc.domain.Mentor;
 import com.springmvc.domain.Board;
 import com.springmvc.domain.Buying;
 import com.springmvc.domain.Reservation;

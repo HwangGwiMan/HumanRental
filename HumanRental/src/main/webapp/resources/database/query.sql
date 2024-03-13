@@ -1,6 +1,7 @@
 CREATE DATABASE HumanRental DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 use HumanRental;
 
+
 -- 회원관리
 CREATE TABLE IF NOT EXISTS Member(
 memberId varchar(20) not null primary key,
@@ -56,11 +57,14 @@ category varchar(100),
 filename1 varchar(1000),
 filename2 varchar(1000),
 filename3 varchar(1000),
+mentorprofileaddress varchar(100),
 starRate float ,
 starCount int,
 foreign key(memberId) references Member(memberId),
 foreign key(mentorId) references mentor(mentorId)
 );
+
+
 
 -- 멘티프로필 관리
 CREATE TABLE IF NOT EXISTS MenteeProfile(
@@ -91,6 +95,7 @@ CREATE TABLE IF NOT EXISTS Selling (
 	foreign key(nickname) references Member(nickname) ON DELETE CASCADE
 );
 
+select * from Selling;
 -- 삽니다 관리 
 CREATE TABLE IF NOT EXISTS Buying (
 	buyingId VARCHAR(50) primary key,
@@ -338,17 +343,19 @@ insert into mentor values('mentor_006' , '5678', '2024-01-01 00:00:00');
 insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0, 0);
 insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0, 0);
 insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0, 0);
+
 insert into menteeprofile values('mentee_004', 'zxcv', 'TEST4', 'TEST_INTRO4', 0, 0);
 insert into menteeprofile values('mentee_005', '1234', 'TEST5', 'TEST_INTRO5', 0, 0);
 insert into menteeprofile values('mentee_006', '5678', 'TEST6', 'TEST_INTRO6', 0, 0);
 
 -- mentorprofile 추가
-insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_004' , 'zxcv', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_005' , '1234', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
-insert into mentorprofile values('mentor_006' , '5678', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', 0, 0);
+insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', '서울',0, 0);
+insert into mentorprofile values('mentor_002' , 'admin', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
+insert into mentorprofile values('mentor_003' , 'asdf', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
+insert into mentorprofile values('mentor_004' , 'zxcv', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
+insert into mentorprofile values('mentor_005' , '1234', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
+insert into mentorprofile values('mentor_006' , '5678', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST','서울', 0, 0);
+
 
 -- buying 내용 추가
 insert into buying values('buyingId_001','qwer','닉네임1','introduction',0,'기타 알려주실 분','내용','2024-01-01 00:00:00','music',10000,'한국',0);
@@ -372,6 +379,8 @@ insert into selling values('sellingId_007','test_1','닉네임6','introduction',
 insert into selling values('sellingId_008','test_2','닉네임7','introduction',0,'롤 제자 구합니다','내용','2024-01-08 00:00:00','game',5000,'한국',0);
 insert into selling values('sellingId_009','test_3','닉네임8','introduction',0,'롤 제자 구합니다','내용','2024-01-09 00:00:00','game',5000,'한국',0);
 
+<<<<<<< HEAD
+=======
 -- reservation, review 추가
 INSERT INTO reservation VALUES ('Reservation_001', 'buyingId_002', 'TEST', 'mentee_003', 'mentor_001', '2024-01-01', 'TEST', '렌탈완료', '2024-01-01 00:00:00', 'asdf', 'qwer', '2024-01-01 00:00:00', '2024-01-01 00:00:00');
 INSERT INTO reservation VALUES ('Reservation_002', 'buyingId_002', 'TEST', 'mentee_003', 'mentor_001', '2024-01-02', 'TEST', '렌탈완료', '2024-01-02 00:00:00', 'asdf', 'qwer', '2024-01-02 00:00:00', '2024-01-02 00:00:00');
@@ -382,3 +391,4 @@ INSERT INTO sellingreview VALUES ('sellingReview_003', 'sellingId_001', 'qwer', 
 INSERT INTO memberreview VALUES ('memberReview_001', 'buyingId_002', 'asdf', 'TEST', 'TEST', '2024-03-12', '2', 'Reservation_001');
 INSERT INTO memberreview VALUES ('memberReview_002', 'buyingId_002', 'asdf', 'TEST', 'TEST', '2024-03-13', '1', 'Reservation_002');
 INSERT INTO memberreview VALUES ('memberReview_003', 'sellingId_001', 'asdf', 'TEST', 'TEST', '2024-03-13', '4', 'Reservation_003');
+>>>>>>> refs/heads/main
