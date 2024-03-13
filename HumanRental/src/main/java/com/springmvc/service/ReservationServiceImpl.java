@@ -83,6 +83,7 @@ public class ReservationServiceImpl implements ReservationService{
 		Selling selling = sellingrepository.SellingDetailbyId(sellingId);
 		Mentee mentee = menteerepository.getInformation(memberId);
 		Mentor mentor = mentorrepository.getMentor(selling.getMemberId());
+		System.out.println("mentor.getMentorId()="+mentor.getMentorId());
 		
 		Reservation reservation = new Reservation();
 		reservation.setReservationId(util.createId("Reservation"));
