@@ -31,15 +31,16 @@
     --bs-nav-link-padding-y: 5px !important;
 }
 
-.qqnav .col-5{
+.qqnav .left{
 	width: 40% !important;
 }
 
-.qqnav .col-4{
-	width: 30% !important;
+.qqnav .cen{
+	width: 20% !important;
+/*	margin: 0 2vh 0 5vh;*/
 }
 
-.qqnav .col-3{
+.qqnav .right{
 	width: 20% !important;
 }
 
@@ -63,6 +64,11 @@
     height: 6vh;
     background-image: url(/HumanRental/resources/img/Main/logo.png);
     background-size: cover;
-    margin: 0 2vh 0 3vh;
+    margin: 0 2vh 0 0;
     cursor: pointer;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
 }

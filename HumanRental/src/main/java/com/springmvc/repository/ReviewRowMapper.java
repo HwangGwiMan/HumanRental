@@ -6,10 +6,13 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.springmvc.domain.Review;
+import com.springmvc.util.Utility;
 
 public class ReviewRowMapper implements RowMapper<Review>{
 	
 	public Review mapRow(ResultSet rs, int rowNum) throws SQLException {
+		
+		Utility util = new Utility();
 		
 		Review review = new Review(); 
 		review.setReviewId(rs.getString(1));
@@ -17,7 +20,7 @@ public class ReviewRowMapper implements RowMapper<Review>{
 		review.setMemberId(rs.getString(3));
 		review.setTitle(rs.getString(4));
 		review.setContent(rs.getString(5));
-		review.setWriteDate(rs.getTimestamp(6).toLocalDateTime());
+		review.setWriteDate(util.outputFormatting(rs.getTimestamp(6)));
 		review.setStarRate(rs.getInt(7));
 		review.setReservationId(rs.getString("reservationId"));
  
