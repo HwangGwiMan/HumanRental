@@ -1,5 +1,5 @@
-var isIdCheck = false; 
-var isNickCheck = false;
+//var isIdCheck = false; 
+//var isNickCheck = false;
 
 $(function() {
 	var profileBtn = document.getElementById("profileBtn");
@@ -157,9 +157,9 @@ $(function() {
 })
 
 function formSubmit() {
-	var ipValue = document.getElementById("memberId").value;
+	//var ipValue = document.getElementById("memberId").value;
 	
-	if(ipValue == "") {
+	/*if(ipValue == "") {
 		alert("아이디를 확인해주세요.");
 		return;
 	}
@@ -172,7 +172,7 @@ function formSubmit() {
 	if(!isNickCheck) {
 		alert("닉네임 중복 확인을 해주십시오.");
 		return;
-	}
+	}*/
 	
 	document.getElementById("editForm").submit();	
 }
