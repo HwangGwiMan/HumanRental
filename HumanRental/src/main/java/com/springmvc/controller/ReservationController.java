@@ -101,9 +101,19 @@ public class ReservationController {
 	}
 
 	@GetMapping("/reservationApproval")
-	public String ReservationApproval(@RequestParam String reservationId, @RequestParam String approval, Model model) {
+	public String ReservationApproval(@RequestParam String reservationId, @RequestParam String approval, Model model, HttpServletRequest request) {
 		reservationservice.ReservationApproval(reservationId, approval);
 		model.addAttribute("mode", "reservationApprovalManagement");
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		Member member = memberService.getMember(memberId);
+		if(member.getProfileImage() == null) {
+			member.setProfileImage("default.png");
+		}
+
+		model.addAttribute("member", member);
+		
 		
 		alarmService.createReservationConfirmAlarm(reservationId, approval);
 		
@@ -111,9 +121,18 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/reservationInfo")
-	public String ReservationInfo(@RequestParam String reservationId, Model model) {
+	public String ReservationInfo(@RequestParam String reservationId, Model model, HttpServletRequest request) {
 		reservationservice.GetReservationInfo(reservationId, model);
 		model.addAttribute("mode", "reservationInfo");
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		Member member = memberService.getMember(memberId);
+		if(member.getProfileImage() == null) {
+			member.setProfileImage("default.png");
+		}
+
+		model.addAttribute("member", member);
 		return "MyPage";
 	}
 }
