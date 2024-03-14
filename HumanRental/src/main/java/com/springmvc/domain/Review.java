@@ -8,7 +8,7 @@ public class Review {
 	private String memberId;
 	private String title;
 	private String content;
-	private LocalDateTime writeDate;
+	private String writeDate;
 	private int starRate;
 	private String reservationId;
 	private String nickname;
@@ -56,10 +56,10 @@ public class Review {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public LocalDateTime getWriteDate() {
+	public String getWriteDate() {
 		return writeDate;
 	}
-	public void setWriteDate(LocalDateTime writeDate) {
+	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
 	public int getStarRate() {

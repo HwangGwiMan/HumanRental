@@ -7,14 +7,13 @@
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/style_board.css"/>">
 <title>Board</title>
 </head>
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="container">
-		<hr>
-		<div class="row align-items-end">
+		<div class="row align-items-end pt-5">
 			<a href="<c:url value="/board"/>" class="text-decoration-none fw-bold fs-1 col-3 text-center text-dark">자유 게시판</a>
 			<a href="<c:url value="/board2"/>" class="text-decoration-none col-1 text-left text-dark">공지사항</a>
 		</div>
@@ -22,27 +21,23 @@
 	</div>
 
 	<c:set var="board" value="${board}" />
-	<div class="container" style="margin-top: 50px">
-		<div class="form-group row">
-			<label class="col-sm-1 control-label">닉네임</label>
-			<div class="col-sm-3">
-				<input name="name" class="form-control" value="${board.name}" readonly>
+	<div class="container board" style="margin-top: 50px">
+		<div class="container mt-5">
+			<div class="row">
+				<div class="col-12 mx-auto">
+					<div class="post">
+						<h2 class="post-title">${board.title}</h2>
+						<p class="post-info">작성자: ${board.name} <span style="float: right">작성일: ${board.regist_day} | 조회수: ${board.hit}</span></p>
+						<hr>
+						<div class="post-content">
+							<pre>${board.content}</pre>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="form-group row">
-			<label class="col-sm-1 control-label">제목</label>
-			<div class="col-sm-5">
-				<input name="subject" class="form-control" value="${board.title}" readonly>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-sm-1 control-label">내용</label>
-			<div class="col-sm-8" style="word-break: break-all;">
-				<textarea name="content" class="form-control" cols="50" rows="5" readonly>${board.content}</textarea>
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-sm-offset-2 col-sm-10 ">
+		<div class="form-group row mt-2">
+			<div class="col-sm-offset-2">
 				<c:set var="sessionId" value="${sessionScope.user}" />
 				<c:set var="pageNum" value="${pageNum}" />
 				<c:choose>
@@ -63,5 +58,3 @@
 	<jsp:include page="footer.jsp" />
 </body>
 </html>
-
-

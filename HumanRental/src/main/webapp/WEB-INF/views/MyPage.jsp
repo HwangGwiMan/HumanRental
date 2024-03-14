@@ -39,14 +39,15 @@
 								</div>
 							</div>
 							<div class="row p-3">
-								<a href="#" class="btn btn-primary" id="registBtn">등록 목록</a>
+								<a href="#" class="btn btn-primary" id="registBtn">작성글 관리</a>
 								<div class="text-center" style="display: none;">
-									<div class="p-1"><a href="<c:url value="/buyingListManagement"/>" class="btn btn-outline-primary">삽니다 목록</a></div>
-									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-primary">팝니다 목록</a></div>
+									<div class="p-1"><a href="<c:url value="/buyingListManagement"/>" class="btn btn-outline-primary">재능구매 목록</a></div>
+									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-primary">재능판매 목록</a></div>
+									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-primary">게시판 목록</a></div>
 								</div>
 							</div>
 							<div class="row p-3">
-								<a href="#" class="btn btn-primary" id="resvBtn">예약 목록</a>
+								<a href="#" class="btn btn-primary" id="resvBtn">예약 관리</a>
 								<div class="text-center" style="display: none;">
 									<div class="p-1"><a href="<c:url value="/reservationApprovalManagement"/>" class="btn btn-outline-primary">예약 승인</a></div>
 									<div class="p-1"><a href="<c:url value="/reservationListManagement"/>" class="btn btn-outline-primary">예약 조회</a></div>

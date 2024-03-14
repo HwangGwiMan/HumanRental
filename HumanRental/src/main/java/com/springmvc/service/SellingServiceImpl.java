@@ -69,14 +69,7 @@ public class SellingServiceImpl implements SellingService{
 
 	@Override
 	public void SellingCreate(Selling selling) {
-
-		//테스트코드
-		selling.setStarRate(5);
-		//
-		
-		selling.setRegist_day(LocalDateTime.now());
 		selling.setSellingId(util.createId("sellingId"));
-		
 		sellingrepository.SellingCreate(selling);
 	}
 
