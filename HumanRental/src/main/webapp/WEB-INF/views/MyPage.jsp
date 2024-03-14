@@ -29,31 +29,31 @@
 					<div class="row justify-content-center">
 					<c:choose>
 						<c:when test="${ member.memberId != 'admin' }">
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn btn-primary ">마이 페이지</a></div><!-- 기본값 -->
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn btn-primary">회원 정보 수정</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn btn-dark">마이 페이지</a></div><!-- 기본값 -->
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=userCheck"/>" class="btn btn-dark">회원 정보 수정</a></div>
 							<div class="row p-3 justify-content-center">
-								<a href="#" class="btn btn-primary" id="profileBtn">프로필 수정</a>
+								<a href="#" class="btn btn-dark" id="profileBtn">프로필 수정</a>
 								<div class="text-center" style="display: none;">
-									<div class="p-1"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn btn-outline-primary text-nowrap">멘토 프로필 조회</a></div>
-									<div class="p-1"><a href="<c:url value="/mentee?mode=menteeProfile"/>" class="btn btn-outline-primary text-nowrap">멘티 프로필 조회</a></div>
+									<div class="p-1"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn btn-outline-dark text-nowrap">멘토 프로필 조회</a></div>
+									<div class="p-1"><a href="<c:url value="/mentee?mode=menteeProfile"/>" class="btn btn-outline-dark text-nowrap">멘티 프로필 조회</a></div>
 								</div>
 							</div>
 							<div class="row p-3">
-								<a href="#" class="btn btn-primary" id="registBtn">등록 목록</a>
+								<a href="#" class="btn btn-dark" id="registBtn">등록 목록</a>
 								<div class="text-center" style="display: none;">
-									<div class="p-1"><a href="<c:url value="/buyingListManagement"/>" class="btn btn-outline-primary">삽니다 목록</a></div>
-									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-primary">팝니다 목록</a></div>
+									<div class="p-1"><a href="<c:url value="/buyingListManagement"/>" class="btn btn-outline-dark">삽니다 목록</a></div>
+									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-dark">팝니다 목록</a></div>
 								</div>
 							</div>
 							<div class="row p-3">
-								<a href="#" class="btn btn-primary" id="resvBtn">예약 목록</a>
+								<a href="#" class="btn btn-dark" id="resvBtn">예약 목록</a>
 								<div class="text-center" style="display: none;">
-									<div class="p-1"><a href="<c:url value="/reservationApprovalManagement"/>" class="btn btn-outline-primary">예약 승인</a></div>
-									<div class="p-1"><a href="<c:url value="/reservationListManagement"/>" class="btn btn-outline-primary">예약 조회</a></div>
+									<div class="p-1"><a href="<c:url value="/reservationApprovalManagement"/>" class="btn btn-outline-dark">예약 승인</a></div>
+									<div class="p-1"><a href="<c:url value="/reservationListManagement"/>" class="btn btn-outline-dark">예약 조회</a></div>
 								</div>
 							</div>
-							<div class="row p-3"><a href="#" class="btn btn-primary">일정 정보</a></div>
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=deletememberform"/>" class="btn btn-primary ">회원 탈퇴</a></div>
+							<div class="row p-3"><a href="#" class="btn btn-dark">일정 정보</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=deletememberform"/>" class="btn btn-dark">회원 탈퇴</a></div>
 						</c:when>
 						<c:when test="${ member.memberId eq 'admin' }">
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn btn-primary">마이 페이지</a></div><!-- 기본값 -->
@@ -93,7 +93,7 @@
 										<div class="col-5 ">
 											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4 ">아이디</div>
-												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required" readonly="readonly"/></div>
+												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required" readonly="readonly" disabled/></div>
 												<!-- <div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div> -->
 											</div>
 											<div class="row p-3 flex-nowrap align-items-center">
@@ -106,7 +106,7 @@
 											</div>
 											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">닉네임</div>
-												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required" readonly="readonly"/></div>
+												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required" readonly="readonly" disabled/></div>
 												<!-- <div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div> -->
 											</div>
 											<div class="row p-3 flex-nowrap align-items-center">
@@ -125,8 +125,8 @@
 												<div class="col-4">주소</div>
 												<div class="col"><input width="100px" type="text"  value="${ member.address }" name="address" required="required"/></div>
 											</div>
-											<a onclick="javascript:formSubmit()" class="btn btn-outline-primary" id="submitBtn">확인</a>
-											<a href="<c:url value="/myInfo?mode=myPage" />" class="btn btn-outline-dark">취소</a>
+											<a onclick="javascript:formSubmit()" class="btn btn-outline-dark" id="submitBtn">확인</a>
+											<a href="<c:url value="/myInfo?mode=myPage" />" class="btn btn-light">취소</a>
 										</div>
 									</div>
 								</form>
@@ -142,7 +142,7 @@
 										<div class="col-2 p-3">비밀번호 :</div>
 										<div class="col-3 p-3"><input type="password"  name="memberPw"></div>
 									</div>
-									<input onclick="javascript:userCheck()" type="button" value="확인" class="btn btn-outline-primary">
+									<input onclick="javascript:userCheck()" type="button" value="확인" class="btn btn-outline-dark">
 								</form>
 							</c:when>
 							<c:when test="${ mode == 'deletememberform' }"><!-- 회원 탈퇴 -->
