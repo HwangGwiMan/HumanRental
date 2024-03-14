@@ -24,7 +24,7 @@
 		<jsp:include page="nav.jsp"/>
 		<div class="container h-75">
 			<div class="row pt-5 align-items-start h-75">
-				<div class="col-2 p-3 border border-2 rounded-5">
+				<div class="col-2 p-3 border border-2 rounded-5 border-dark">
 					<div class="row p-3"><img src="<c:url value="/resources/img/ProfilePicture/${ member.profileImage }" />"></div>
 					<div class="row justify-content-center">
 					<c:choose>
@@ -56,17 +56,17 @@
 							<div class="row p-3"><a href="<c:url value="/myInfo?mode=deletememberform"/>" class="btn btn-dark">회원 탈퇴</a></div>
 						</c:when>
 						<c:when test="${ member.memberId eq 'admin' }">
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn btn-primary">마이 페이지</a></div><!-- 기본값 -->
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=memberManagement"/>" class="btn btn-primary">회원 관리</a></div>
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-primary">멘토 신청 관리</a></div>
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=reservationMonitor"/>" class="btn btn-primary">예약 현황</a></div>
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=report"/>" class="btn btn-primary">신고 관리</a></div>
-							<div class="row p-3"><a href="<c:url value="/myInfo?mode=blackListManagement"/>" class="btn btn-primary">블랙리스트 관리</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=myPage"/>" class="btn btn-dark">마이 페이지</a></div><!-- 기본값 -->
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=memberManagement"/>" class="btn btn-dark">회원 관리</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="btn btn-dark">멘토 신청 관리</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=reservationMonitor"/>" class="btn btn-dark">예약 현황</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=report"/>" class="btn btn-dark">신고 관리</a></div>
+							<div class="row p-3"><a href="<c:url value="/myInfo?mode=blackListManagement"/>" class="btn btn-dark">블랙리스트 관리</a></div>
 						</c:when>
 					</c:choose>
 					</div>
 				</div> 
-				<div class="col ms-5 px-5 border border-2 rounded-5">
+				<div class="col ms-5 px-5 border border-2 rounded-5 border-dark">
 					<div class="row justify-content-center ">
 						<c:choose>
 							<c:when test="${ mode == 'myPage' }"><!-- 마이 페이지 -->
@@ -713,7 +713,7 @@
 							<c:when test="${ mode == 'memberManagement' }"><!-- 멤버 관리 페이지 -->
 								<div class="p-5">
 									<div class="row p-3 text-center">
-										<a href="<c:url value="/myInfo?mode=memberManagement"/>" class="col-1 m-1 btn btn-outline-info">전체</a>
+										<a href="<c:url value="/myInfo?mode=memberManagement"/>" class="col-1 m-1 btn btn-outline-dark">전체</a>
 										<a href="<c:url value="/myInfo?mode=memberManagement&t=Accept"/> " class="col-2 m-1  btn btn-primary">멘토 승인</a>
 										<a href="<c:url value="/myInfo?mode=memberManagement&t=NotRegist"/>" class="col-2 m-1 btn btn-secondary">멘토 미승인</a>
 									</div>
@@ -753,7 +753,7 @@
 							<c:when test="${ mode == 'mentorApplyManagement' }">
 								<div class="p-5">
 									<div class="row p-3 text-center">
-										<a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="col-1 m-1 btn btn-outline-info">전체</a>
+										<a href="<c:url value="/myInfo?mode=mentorApplyManagement"/>" class="col-1 m-1 btn btn-outline-dark">전체</a>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Confirm"/> " class="col-2 m-1  btn btn-primary">처리된 요청</a>
 										<a href="<c:url value="/myInfo?mode=mentorApplyManagement&t=Wait"/>" class="col-2 m-1 btn btn-secondary">보류 중인 요청</a>
 									</div>
@@ -1256,7 +1256,7 @@
 							<c:when test="${ mode == 'reservationMonitor' }"><!-- 예약 현황 페이지 -->
 								<div class="p-5">
 									<div class="row p-3 text-center">
-										<a href="<c:url value="/myInfo?mode=reservationMonitor"/>" class="col-1 m-1 btn btn-outline-info">전체</a>
+										<a href="<c:url value="/myInfo?mode=reservationMonitor"/>" class="col-1 m-1 btn btn-outline-dark">전체</a>
 										<a href="<c:url value="/myInfo?mode=reservationMonitor&t=buy"/> " class="col-2 m-1 btn btn-primary text-nowrap">재능구매</a>
 										<a href="<c:url value="/myInfo?mode=reservationMonitor&t=sell"/>" class="col-2 m-1 btn btn-secondary text-nowrap">재능판매</a>
 									</div>
@@ -1290,12 +1290,17 @@
 														<td>${ reservation.memberId }</td>
 														<td>${ reservation.applicantMemberId }</td>
 														<td>${ reservation.reservationdate }</td>
-														
 														<c:if test="${ reservation.approve eq '대기' }">
 															<td><div class="badge bg-secondary">${ reservation.approve }</div></td>
 														</c:if>
 														<c:if test="${ reservation.approve eq '승인' }">
+															<td><div class="badge bg-primary">${ reservation.approve }</div></td>
+														</c:if>
+														<c:if test="${ reservation.approve eq '렌탈완료' }">
 															<td><div class="badge bg-success">${ reservation.approve }</div></td>
+														</c:if>
+														<c:if test="${ reservation.approve eq '렌탈실패' }">
+															<td><div class="badge bg-danger">${ reservation.approve }</div></td>
 														</c:if>
 														
 														<td>${ reservation.signdate }</td>
