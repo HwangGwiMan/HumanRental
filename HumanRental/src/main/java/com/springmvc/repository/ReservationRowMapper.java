@@ -5,11 +5,10 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.springmvc.domain.Board;
 import com.springmvc.domain.Reservation;
 
 public class ReservationRowMapper implements RowMapper<Reservation> {
-
+	
 	public Reservation mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Reservation reservation = new Reservation();
 		reservation.setReservationId(rs.getString(1));

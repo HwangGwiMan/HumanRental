@@ -2,6 +2,7 @@ package com.springmvc.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +83,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 	@Override
 	public void insertBoard(Board board) {
 		String sql = "insert into board values(?,?,?,?,?,?,?)";
-		template.update(sql, board.getBoardId(), board.getMemberId(), board.getName(), board.getTitle(), board.getContent(), board.getRegist_day(), board.getHit());
+		template.update(sql, board.getBoardId(), board.getMemberId(), board.getName(), board.getTitle(), board.getContent(), LocalDateTime.now(), board.getHit());
 	}
 
 	@Override

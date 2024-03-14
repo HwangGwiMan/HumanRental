@@ -381,7 +381,6 @@ insert into selling values('sellingId_007','test_1','닉네임6','introduction',
 insert into selling values('sellingId_008','test_2','닉네임7','introduction',0,'롤 제자 구합니다','내용','2024-01-08 00:00:00','game',5000,'한국',0);
 insert into selling values('sellingId_009','test_3','닉네임8','introduction',0,'롤 제자 구합니다','내용','2024-01-09 00:00:00','game',5000,'한국',0);
 
-
 -- reservation, review 추가
 INSERT INTO reservation VALUES ('Reservation_001', 'buyingId_002', 'TEST', 'mentee_003', 'mentor_001', '2024-01-01', 'TEST', '렌탈완료', '2024-01-01 00:00:00', 'asdf', 'qwer', '2024-01-01 00:00:00', '2024-01-01 00:00:00');
 INSERT INTO reservation VALUES ('Reservation_002', 'buyingId_002', 'TEST', 'mentee_003', 'mentor_001', '2024-01-02', 'TEST', '렌탈완료', '2024-01-02 00:00:00', 'asdf', 'qwer', '2024-01-02 00:00:00', '2024-01-02 00:00:00');

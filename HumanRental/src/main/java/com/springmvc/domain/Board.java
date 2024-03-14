@@ -8,7 +8,7 @@ public class Board {
 	private String name;
 	private String title;
 	private String content;
-	private LocalDateTime regist_day;
+	private String regist_day;
 	private int hit;
 	
 	public String getBoardId() {
@@ -42,10 +42,10 @@ public class Board {
 		this.content = content;
 	}
 	
-	public LocalDateTime getRegist_day() {
+	public String getRegist_day() {
 		return regist_day;
 	}
-	public void setRegist_day(LocalDateTime regist_day) {
+	public void setRegist_day(String regist_day) {
 		this.regist_day = regist_day;
 	}
 	public int getHit() {
