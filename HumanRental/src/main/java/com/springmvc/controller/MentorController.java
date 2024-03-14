@@ -305,6 +305,7 @@ public class MentorController {
 
 	}
 	
+	//닉네임 검색으로 매핑 
 	@GetMapping("mentorprofilepage")
 	public String callMentorProfilepage(@RequestParam("nickname") String nickname, Model model) {
 	   Member member = memberService.getMemberFromNickName(nickname);
@@ -315,7 +316,7 @@ public class MentorController {
 	   System.out.println("member.getProfileImage()="+member.getProfileImage());
 	    model.addAttribute("listselling",listselling);
 	   	model.addAttribute("member",member);
-	    model.addAttribute("mentorprofile",mentorprofile);
+	    model.addAttribute("mentorprofile",mentorprofile); 
 
 		
 		return "MentorProfilePage";

@@ -37,7 +37,7 @@
 							<h2>${selling.title}</h2>
 							<h5>${selling.regist_day}</h5>
 							<br>
-							<h4>${selling.nickname} 
+							<h4><a href="<c:url value='/mentorprofilepage?nickname=${selling.nickname}'/>">${selling.nickname}</a>
 							<span>
 								<c:choose>
 								    <c:when test="${selling.starRate==0}"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>

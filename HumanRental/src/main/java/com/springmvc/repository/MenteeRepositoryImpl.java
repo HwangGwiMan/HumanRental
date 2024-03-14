@@ -28,7 +28,9 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 				Resultset resultset;
 	@Autowired
 	public void setJdbcTemplate(DataSource dataSource) {
+		
 		this.template = new JdbcTemplate(dataSource);
+		
 	}
 
 
@@ -37,8 +39,8 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 		System.out.println("memberID="+memberId);
 		Utility utility = new Utility();
 	 String utility2 =utility.createId("mentee");
-		String SQL = "INSERT INTO MenteeProfile (menteeId, memberId, interest, introduction) VALUES(?,?,?,?)";
-		template.update(SQL, utility2,memberId,mentee.getInterest(),mentee.getIntroduction());	
+		String SQL = "INSERT INTO MenteeProfile (menteeId, memberId, interest, introduction, menteeprofileaddress) VALUES(?,?,?,?,?)";
+		template.update(SQL, utility2,memberId,mentee.getInterest(),mentee.getIntroduction(),mentee.getMenteeprofileaddress());	
 	}
 
 	

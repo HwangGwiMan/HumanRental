@@ -1,11 +1,13 @@
 package com.springmvc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springmvc.domain.Buying;
+import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.Selling;
 import com.springmvc.repository.SearchRepository;
 
@@ -25,6 +27,14 @@ public class SearchServiceImpl implements  SearchService {
 		return searchrepository.getAllSellingInformation(search);
 
 	}
+	
+	public List<Map<String, Object>>getAllMentorProfileInformaiton(String search){
+		
+		return searchrepository.getAllMentorProfileInformaiton(search);
+	}
+
+	
+	
 	
 	//제목으로 검색할때 쓰는 함수 
 	public List<Buying> getTitleBuyingInformation(String search){

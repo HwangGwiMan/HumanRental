@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +8,8 @@
     <meta charset="utf-8">
     <title>Insert title here</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="<c:url value="/resources/css/style_mentorlist.css"/>">
 </head>
 
 <body>
@@ -14,11 +17,9 @@
       <section class="pt-5 pb-0">
         <div class="container">
             <div class="row g-0 g-lg-5">
-                <!-- Left sidebar START -->
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-4">
-                            <!-- Instructor image START -->
                             <div class="card shadow p-2 mb-4 text-center">
                                 <div class="rounded-3" style="margin-top:10px;">
     								<div><h3>${member.getNickName()}님</h3></div>
@@ -78,18 +79,6 @@
                                             <p class="mb-0 small">${member.getAge()}</p>
                                         </div>
                                     </div>
-                                    <!-- Education END -->
-                                    <!-- Education item -->
-                                <%--     <div class="d-flex align-items-center col-lg-6 mb-4">
-                                        <span class="icon-md text-dark mb-0 bg-light rounded-3"><i
-                                                class="bi bi-mortarboard-fill fs-5 text-primary"></i></span>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0">자격증</h6>
-                                            <p class="mb-0 small">${mentorprofile.getCertification()}</p>
-                                        </div>
-                                    </div> --%>
-                                    <!-- Education END -->
-                                    <!-- Education item -->
                                     <div class="d-flex align-items-center col-lg-6 mb-4">
                                         <span class="icon-md text-dark mb-0 bg-light rounded-3"><i
                                                 class="bi bi-geo-fill fs-4 text-primary"></i></span>
@@ -107,37 +96,32 @@
         </div>                           
     </section>
     <div class="container">
-        <div class="mt-4 border border-2 border-dashed rounded  fw-light"
-            style="background-color:#ffffff !important;padding:20px;">
+        <div class="mt-4 border border-2 border-dashed rounded  fw-light" style="background-color:#ffffff !important;padding:20px;">
             <div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
                 <div>
                     <h4>자격증</h4>
                 </div>
             </div>
-            <div style="padding:10px;"></div>
-            <div class="p-2 mb-2">
-					${mentorprofile.getCertification()}
-            </div>
-        </div>
-    </div>
-      <div class="container">
-        <div class="mt-4 border border-2 border-dashed rounded  fw-light"
-            style="background-color:#ffffff !important;padding:20px;">
+	        <div style="padding:10px;"></div>
+	        <div class="p-2 mb-2">
+				${mentorprofile.getCertification()}
+	        </div>
+	     </div>
+	  </div>	   
+ 	  <div class="container">
+      	<div class="mt-4 border border-2 border-dashed rounded  fw-light" style="background-color:#ffffff !important;padding:20px;">
             <div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
                 <div>
-                    <h4>소개글</h4>
+                    <h4>자격증</h4>
                 </div>
             </div>
-            <br>
-            <div class="form-group row">
-				<div class="col-sm-8">
-					${mentorprofile.getintroduction()}
-				</div>
-			</div>
-        </div>
-        </div>
-    </div>
-    <div class="container">
+	        <div style="padding:10px;"></div>
+	        <div class="p-2 mb-2">
+				${mentorprofile.getCertification()}
+	        </div>
+	     </div>
+	  </div>	      
+    <div class="container"> 	
         <div class="mt-4 border border-2 border-dashed rounded  fw-light"
             style="background-color:#ffffff !important;padding:20px;">
             <div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
@@ -146,14 +130,40 @@
                 </div>
             </div>
             <div style="padding:10px;"></div>
-            <div class="p-2 mb-2">
-			     <div class="qq1 row">
-						
-			     </div>
+			 <div class="p-2 mb-2">
+				 <div class="qq1 row">
+			        <c:forEach items="${listselling}" var="listselling">
+			            <div class="qq2 col-3">
+			                <div class="wrapper border" onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" style="height: 18vh;">
+			                    <div class="image-wrapper h-100 d-flex flex-column justify-content-between">
+			                    	<!-- <img src="/HumanRental/resources/image/duke.png"/> -->
+			                    	<div>
+				                    	<c:choose>
+					                    	<c:when test="${listselling.category eq 'music'}">
+					                        	<i class="fa-solid fa-guitar fs-1"></i>
+					                        </c:when>
+					                        <c:when test="${listselling.category eq 'sports'}">
+					                        	<i class="fa-solid fa-person-running fs-1"></i>
+					                        </c:when>
+					                        <c:when test="${listselling.category eq 'game'}">
+					                        	<i class="fa-solid fa-gamepad fs-1"></i>
+					                        </c:when>
+				                        </c:choose>
+			                        </div>
+			                        <div>
+			                        	<h1 class="name fs-5">${listselling.title}</h1>
+			                        </div>
+			                        <div>
+										<a href="<c:url value='/mentorprofilepage?nickname=${listselling.nickname}'/>" class="text-decoration-none">${listselling.nickname}</a>
+									</div>
+			                    </div>
+			                </div>
+			            </div>
+			         </c:forEach>
+		        </div>
+			</div>
             </div>
         </div>
-    </div>
     <jsp:include page="footer.jsp" />
 </body>
-
 </html>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 
 <head>
@@ -54,7 +56,7 @@
 	</div>	
 		<div class="search container">
 			<div class="qqml mentor">
-				<div class="top">멘토 리스트</div>
+				<div class="top">재능 판매</div>
 				<hr>
 				<div class="row">
 					<c:forEach var="selling" items="${selling}" varStatus="status">
@@ -75,7 +77,7 @@
 			</div>
 			<br><br>
 			<div class="qqml2 mentee">
-				<div class="top">멘티 리스트</div>
+				<div class="top">재능 구매</div>
 				<hr>
 				<div class="row">
 					<c:forEach var="buying" items="${buying}" varStatus="status">
@@ -99,7 +101,38 @@
 					</div>			
 				</div>
 			</div>
-		</div>
+			<div class="qqml2 mentee">
+				<div class="top">멘토</div>
+				<hr>
+				<c:forEach var="mentorprofileAll" items="${mentorprofileAll}" varStatus="status">
+					<section class="post-area section-gap" style="border: solid 1px black; border-radius: 10px;">
+						<div class="container">
+							<div class="row justify-content-center d-flex">
+								<div class="col-lg-12 post-list">
+									<div class="single-post d-flex flex-row"style="cursor;" >
+										<div class="thumb">
+											<img src='<c:url value="/resources/img/ProfilePicture/${member.getProfileImage()}"/>' width="200" height="179.00237529691" style="cursor:hand;border-radius:10px;" class="zz_image"/>								
+										</div>
+										<div class="details">
+											<div class="title d-flex flex-row justify-content-between">
+												<div class="titles">
+													<h4>${mentorprofileAll.nickname}님</h4>
+													<br>
+													<h6>분야 :${mentorprofileAll.category} </h6>			
+												</div>
+											</div>
+											<p>
+												${fn:substring(mentorprofileAll.introduction, 0, 100)}...
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>		
+						</div>
+					</section>	
+				</c:forEach>
+				</div>
+			</div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

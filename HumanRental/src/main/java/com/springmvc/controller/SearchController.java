@@ -3,6 +3,7 @@ package com.springmvc.controller;
 import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.Buying;
+import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.Save;
 import com.springmvc.domain.Selling;
+import com.springmvc.service.MemberService;
 import com.springmvc.service.SearchService;
 
 
@@ -24,6 +27,8 @@ public class SearchController {
 	@Autowired
 	SearchService searchservice;
 
+	@Autowired
+	MemberService memberservice;
 		
 	@PostMapping("/Search")
 	public String getSearch(@RequestParam("search") String search, @RequestParam("items") String items, @RequestParam(value = "page", defaultValue = "1") int page,
@@ -37,11 +42,13 @@ public class SearchController {
 	        case "all":
 	            List<Buying> buyingAll = searchservice.getAllBuyingInformation(search, page, pageSize);
 	            List<Selling> sellingAll = searchservice.getAllSellingInformation(search);
+	            List<Map<String,Object>>mentorprofileAll=searchservice.getAllMentorProfileInformaiton(search);
 
 	            model.addAttribute("page", page);
 	            model.addAttribute("totalPages", totalPages);
 	            model.addAttribute("buying", buyingAll);
 	            model.addAttribute("selling", sellingAll);
+	            model.addAttribute("mentorprofileAll",mentorprofileAll);
 	            break;
 	        // ...
 	        case "title":

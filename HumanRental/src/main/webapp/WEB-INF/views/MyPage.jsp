@@ -258,7 +258,7 @@
 															<div class="ms-3">
 																<h6 class="mb-0">주요 활동지</h6>
 																<p class="mb-0 small">
-																<textarea name="mentorprofileaddress" cols="70" rows="1" class="form-control" required></textarea>
+																<textarea name="menteeprofileaddress" cols="70" rows="1" class="form-control" required></textarea>
 																</p>
 															</div>
 														</div>
@@ -625,91 +625,345 @@
 							</div>			
 							</c:when>
 							<c:when test="${ mode == 'menteeProfileRegister' }">
-								<div class="col p-5">
-									<div class="row pb-3"><h3>멘티 프로필 등록</h3></div>
-									<form  action="<c:url value='/menteeregisterinsert?mode=11'/>" method="post">
-										<div class="row pb-3 ">
-											<div class="col-2"><h4>카테고리</h4></div>
-		    								<div class="col">
-		        								<label for="checkbox-1">운동</label>
-		        								<input type="checkbox" id="checkbox-1" name=interest value="운동">
-		
-		        								<label for="checkbox-2">음악</label>
-		        								<input type="checkbox" id="checkbox-2" name=interest value="음악">
-		
-		        								<label for="checkbox-3">게임</label>
-		        								<input type="checkbox" id="checkbox-3" name=interest value="게임">
-		
-		        								<label for="checkbox-4">공부</label>
-		        								<input type="checkbox" id="checkbox-4" name=interest value="공부">
-		        								
-		        								<label for="checkbox-5">기타</label>
-		        								<input type="checkbox" id="checkbox-5" name=interest value="기타">
-		    								</div>
-	    								</div>
-	    								<div class="row pb-3">
-	    									<div>
-	    										<h4>자기 소개</h4>
-	    									</div>
-	    									<div>
-	        									<input name="introduction" style="width:400px;height:200px;font-size:20px;"></input>
-	        								</div>
-	    								</div>
-									<input type="submit" class="btn btn-primary " value="작성">	
-							</form>
+								<div class="col-lg-12">
+									<br>
+									<div class="row pb-3" style="text-align:center;">
+										<h3>멘티 프로필 등록</h3>
+									</div>
+									<div class="row">
+										<div class="col-lg-4">
+										</div>
+										<div class="col-lg-12">
+											<div class="card card-body shadow p-4 mb-4">
+											<form  action="<c:url value='/menteeregisterinsert?mode=11'/>" method="post">
+												<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+														<h3>기본정보</h3>
+													</div>
+													<div class="row" style="padding-top:30px;">
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-emoji-laughing fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">닉네임</h6>
+																<p class="mb-0 small">
+																	${member.getNickName()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-building fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">분야</h6>
+																<div>
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-1">운동</label>
+																        <input type="checkbox" id="checkbox-1" name="interest" value="운동">
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-2">음악</label>
+																        <input type="checkbox" id="checkbox-2" name="interest" value="음악">
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-3">게임</label>
+																        <input type="checkbox" id="checkbox-3" name="interest" value="게임">
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-4">공부</label>
+																        <input type="checkbox" id="checkbox-4" name="interest" value="공부">
+																    </div>
+																    
+																    <div style="display: inline-block;">
+																        <label for="checkbox-5">기타</label>
+																        <input type="checkbox" id="checkbox-5" name="interest" value="기타">
+																    </div>
+																</div>
+															</div>
+														</div>
+														<!-- Education END -->
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3">
+															<i class="bi bi-gender-female fs-5 text-primary"></i>
+															</span>
+															<div class="ms-3">
+																<h6 class="mb-0">성별</h6>
+																<p class="mb-0 small">
+																	${member.getGender()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-person-badge-fill fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">나이</h6>
+																<p class="mb-0 small">
+																	${member.getAge()}
+																</p>
+															</div>
+														</div>
+														<!-- Education END -->
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-geo-fill fs-4 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">주요 활동지</h6>
+																<p class="mb-0 small">
+																<textarea name="menteeprofileaddress" cols="70" rows="1" class="form-control" required></textarea>
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
+								<div class="container">
+									<div class="mt-4 border border-2 border-dashed rounded fw-light" style="background-color:#ffffff !important;padding:20px;">
+										<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+											<div>
+												<h4>소개글</h4>
+											</div>
+										</div>
+										<br>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<textarea name="introduction" rows="5" class="form-control" required style="width: 100%;"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+									<br>
+									<div style="text-align: center;">
+		    							<input type="submit" class="btn btn-primary" value="등록">
+									</div>
+								</form>
 							</c:when>	
 							<c:when test="${ mode == 'menteeInformation'}">
-								<div class="col-1"> </div>	
-								<br><br>
-								<div class="col-5">
-									<div class="row p-3">관심분야 :${ mentee.interest} </div>
-									<div class="row p-3">소개 :${ mentee.introduction}</div>
-									<div><a href="<c:url value="/callmenteeupdateform?mode=menteeProfileUpdate"/>">멘티 프로필 수정</a></div>
-								</div>	
+								<div class="col-lg-12">
+									<br>
+									<div class="row pb-3" style="text-align:center;">
+										<h3>멘티 프로필 조회</h3>
+									</div>
+									<div class="row">
+										<div class="col-lg-4">
+										</div>
+										<div class="col-lg-12">
+											<div class="card card-body shadow p-4 mb-4">
+												<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+														<h3>기본정보</h3>
+													</div>
+													<div class="row" style="padding-top:30px;">
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-emoji-laughing fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">닉네임</h6>
+																<p class="mb-0 small">
+																	${member.getNickName()}
+																</p>
+															</div>
+														</div>
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-emoji-laughing fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">분야</h6>
+																<p class="mb-0 small">
+																	${mentee.getInterest()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3">
+															<i class="bi bi-gender-female fs-5 text-primary"></i>
+															</span>
+															<div class="ms-3">
+																<h6 class="mb-0">성별</h6>
+																<p class="mb-0 small">
+																	${member.getGender()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-person-badge-fill fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">나이</h6>
+																<p class="mb-0 small">
+																	${member.getAge()}
+																</p>
+															</div>
+														</div>
+														<!-- Education END -->
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-geo-fill fs-4 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">주요 활동지</h6>
+																<p class="mb-0 small">
+																<textarea name="mentorprofileaddress" cols="70" rows="1" class="form-control"  readonly required>${mentee.getMenteeprofileaddress()}</textarea>
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="container">
+									<div class="mt-4 border border-2 border-dashed rounded fw-light" style="background-color:#ffffff !important;padding:20px;">
+										<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+											<div>
+												<h4>소개글</h4>
+											</div>
+										</div>
+										<br>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<textarea name="introduction" rows="5" class="form-control" required readonly style="width: 100%;">${mentee.introduction}</textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+									<br>
+									<div style="text-align: center;">
+		    							<a href="<c:url value="/callmenteeupdateform?mode=menteeProfileUpdate"/>" class="btn btn-primary">수정</a>
+									</div>
 							</c:when>
 							<c:when test="${ mode == 'menteeProfileUpdate'}">
-								<div class="col-1"></div>	
-								<br><br>
-								<div class="col-5">
-									<br><br>
-										<form  action="<c:url value="/menteeProfileUpdate?mode=12"/>" method="post">
-											<h2>카테고리</h2>
-			    							<div  style="display: flex;  justify-content:space-between;">
-			        							<label for="checkbox-1">운동</label>
-			        							<input type="checkbox" id="checkbox-1" name=interest value="운동"
-			        							<c:if test="${Mentee.interest.trim().toLowerCase().contains('운동')}">checked</c:if>>
-			        									
-			        							<label for="checkbox-2">음악</label>
-			        							<input type="checkbox" id="checkbox-2" name=interest value="음악"
-			        							<c:if test="${Mentee.interest.trim().toLowerCase().contains('음악')}">checked</c:if>>
-			        								
-			        							<label for="checkbox-3">게임</label>
-			        							<input type="checkbox" id="checkbox-3" name=interest value="게임"
-			        							<c:if test="${Mentee.interest.trim().toLowerCase().contains('게임')}">checked</c:if>>
-			        									
-			        							<label for="checkbox-4">공부</label>
-			        							<input type="checkbox" id="checkbox-4" name=interest value="공부"
-			        							<c:if test="${Mentee.interest.trim().toLowerCase().contains('공부')}">checked</c:if>>
-			        								
-			        							<label for="checkbox-5">기타</label>
-			        							<input type="checkbox" id="checkbox-5" name=interest value="기타"
-			        							<c:if test="${Mentee.interest.trim().toLowerCase().contains('기타')}">checked</c:if>>			
-			    							</div>
-			    								<br><br>
-			    							<div>
-			    								<div>
-			    									<h3>자기 소개</h3>
-			    								</div>
-			    								<div>
-			        								<input type ="text" name="introduction" value=${ Mentee.introduction} style="width:400px;height:200px;font-size:20px;"></input>
-			    								</div>
-			    							</div>
-			    							<button type="submit"> 확인</button>
-										</form>
-								 	</div>		
+								<div class="col-lg-12">
+									<br>
+									<div class="row pb-3" style="text-align:center;">
+										<h3>멘티 프로필 업데이트</h3>
+									</div>
+									<div class="row">
+										<div class="col-lg-4">
+										</div>
+										<div class="col-lg-12">
+											<div class="card card-body shadow p-4 mb-4">
+											<form  action="<c:url value='/menteeProfileUpdate?mode=11'/>" method="post">
+												<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+														<h3>기본정보</h3>
+													</div>
+													<div class="row" style="padding-top:30px;">
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-emoji-laughing fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">닉네임</h6>
+																<p class="mb-0 small">
+																	${member.getNickName()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-building fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">분야</h6>
+																<div>
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-1">운동</label>
+																        <input type="checkbox" id="checkbox-1" name="interest" value="운동"
+																      	<c:if test="${Mentee.interest.trim().toLowerCase().contains('운동')}">checked</c:if>>
+																        
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-2">음악</label>
+																        <input type="checkbox" id="checkbox-2" name="interest" value="음악"
+																        <c:if test="${Mentee.interest.trim().toLowerCase().contains('음악')}">checked</c:if>>
+																        
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-3">게임</label>
+																        <input type="checkbox" id="checkbox-3" name="interest" value="게임"
+																        <c:if test="${Mentee.interest.trim().toLowerCase().contains('게임')}">checked</c:if>>
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-4">공부</label>
+																        <input type="checkbox" id="checkbox-4" name="interest" value="공부"
+																        <c:if test="${Mentee.interest.trim().toLowerCase().contains('공부')}">checked</c:if>>															        
+																    </div>
+																    
+																    <div style="display: inline-block;">
+																        <label for="checkbox-5">기타</label>
+																        <input type="checkbox" id="checkbox-5" name="interest" value="기타"
+																        <c:if test="${Mentee.interest.trim().toLowerCase().contains('기타')}">checked</c:if>>			
+																    </div>
+																</div>
+															</div>
+														</div>
+														<!-- Education END -->
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3">
+															<i class="bi bi-gender-female fs-5 text-primary"></i>
+															</span>
+															<div class="ms-3">
+																<h6 class="mb-0">성별</h6>
+																<p class="mb-0 small">
+																	${member.getGender()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-person-badge-fill fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">나이</h6>
+																<p class="mb-0 small">
+																	${member.getAge()}
+																</p>
+															</div>
+														</div>
+														<!-- Education END -->
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-geo-fill fs-4 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">주요 활동지</h6>
+																<p class="mb-0 small">
+																<textarea name="menteeprofileaddress" cols="70" rows="1" class="form-control" required>${Mentee.getMenteeprofileaddress()}</textarea>
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="container">
+									<div class="mt-4 border border-2 border-dashed rounded fw-light" style="background-color:#ffffff !important;padding:20px;">
+										<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+											<div>
+												<h4>소개글</h4>
+											</div>
+										</div>
+										<br>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<textarea name="introduction" rows="5" class="form-control" required style="width: 100%;">${Mentee.introduction}</textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+									<br>
+									<div style="text-align: center;">
+		    							<input type="submit" class="btn btn-primary" value="등록">
+									</div>
+								</form>	
 							</c:when>
-							
 							<c:when test="${ mode == 'memberManagement' }"><!-- 멤버 관리 페이지 -->
 								<div class="p-5">
 									<div class="row p-3 text-center">

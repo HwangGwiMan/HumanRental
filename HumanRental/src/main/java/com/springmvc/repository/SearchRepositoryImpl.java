@@ -1,16 +1,22 @@
 package com.springmvc.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.mysql.cj.protocol.Resultset;
 import com.springmvc.domain.Buying;
+import com.springmvc.domain.MentorProfile;
 import com.springmvc.domain.Save;
 import com.springmvc.domain.Selling;
 
@@ -53,6 +59,37 @@ public class SearchRepositoryImpl implements SearchRepository {
 	    return buyingList;
 	}
 
+	@Override
+	public List<Map<String, Object>> getAllMentorProfileInformaiton(String search) {
+	    String SQL = "SELECT member.nickname, mentorprofile.category, mentorprofile.introduction " +
+                "FROM member " +
+                "JOIN mentor ON member.memberId = mentor.memberId " +
+                "JOIN mentorprofile ON mentor.mentorId = mentorprofile.mentorId " +
+                "WHERE member.nickname LIKE ?";
+   
+   String searchPattern = "%" + search + "%";
+   Object[] params = {searchPattern};
+   
+   List<Map<String, Object>> mentorProfileList = template.query(SQL, new RowMapper<Map<String, Object>>() {
+       @Override
+       public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
+           Map<String, Object> map = new HashMap<>();
+           map.put("nickname", rs.getString("nickname"));
+           map.put("category", rs.getString("category"));
+           map.put("introduction", rs.getString("introduction"));
+           return map;
+       }
+   }, params);
+   
+   System.out.println("dddd");
+   return mentorProfileList;
+	}
+
+
+	    
+	
+
+
 	public  int  CountGetAllBuyingInformation(String search){
 		String SQL = "SELECT COUNT(*) FROM buying WHERE introduction LIKE ? OR title LIKE ? OR content LIKE ? OR category LIKE ? OR location LIKE ? OR nickname LIKE ?";
 		// '?' 자리에 들어갈 값들을 배열로 생성
@@ -61,6 +98,15 @@ public class SearchRepositoryImpl implements SearchRepository {
 
 		return totalcount;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
