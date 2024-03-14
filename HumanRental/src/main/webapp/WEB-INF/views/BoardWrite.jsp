@@ -34,7 +34,6 @@
 			<div class="form-group row">
 				<label class="col-sm-1 control-label" >제목</label>
 				<div class="col-sm-5">
-
 					<input name="title" type="text" class="form-control" required>
 				</div>
 			</div>

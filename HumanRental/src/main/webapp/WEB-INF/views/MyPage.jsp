@@ -18,7 +18,7 @@
 		<!-- jquery -->
 	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		
-		<script src="<c:url value="/resources/js/myPage.js?ver=1"/>"></script>
+		<script src="<c:url value="/resources/js/myPage.js?ver=2"/>"></script>
 	</head>
 	<body class="">
 		<jsp:include page="nav.jsp"/>
@@ -94,35 +94,35 @@
 										<div class="col-5 ">
 											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4 ">아이디</div>
-												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required"/></div>
-												<div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div>
+												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required" readonly="readonly"/></div>
+												<!-- <div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div> -->
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">비밀번호</div>
 												<div class="col"><input type="password"  value="${ member.memberPw }" name="memberPw" required="required"/></div>
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">이름</div>
 												<div class="col"><input type="text"  value="${ member.name }" name="name" required="required"/></div>
 											</div>
 											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">닉네임</div>
-												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required"/></div>
-												<div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div>
+												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required" readonly="readonly"/></div>
+												<!-- <div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div> -->
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">나이</div>
 												<div class="col"><input type="text"  value="${ member.age }" name="age" required="required"/></div>
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">성별</div>
 												<div class="col"><input type="text"  value="${ member.gender }" name="gender" required="required"/></div>
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">전화번호</div>
 												<div class="col"><input type="text"  value="${ member.phone }" name="phone" required="required"/></div>
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">주소</div>
 												<div class="col"><input width="100px" type="text"  value="${ member.address }" name="address" required="required"/></div>
 											</div>
@@ -168,149 +168,462 @@
 	                                	}
 	                            </script>
                      		</c:when>         
-							<c:when test="${ mode == 'mentorProfile' }"><!-- 멘토 프로필 -->
-								<div class="col p-5">
-									<div class="row pb-3"><h3>멘토 프로필 등록</h3></div>
-									<form action="<c:url value='/mentorProfileRegister?mode=111'/>" method="post" enctype="multipart/form-data">
-										<div class="row pb-3">
-											<div class="col-2"><h4>카테고리</h4></div>
-		    								<div class="col">
-		        								<label for="checkbox-1">운동</label>
-		        								<input type="checkbox" id="checkbox-1" name=category value="운동">
-		
-		        								<label for="checkbox-2">음악</label>
-		        								<input type="checkbox" id="checkbox-2" name=category value="음악">
-		
-		        								<label for="checkbox-3">게임</label>
-		        								<input type="checkbox" id="checkbox-3" name=category value="게임">
-		
-		        								<label for="checkbox-4">공부</label>
-		        								<input type="checkbox" id="checkbox-4" name=category value="공부">
-		        								
-		        								<label for="checkbox-5">기타</label>
-		        								<input type="checkbox" id="checkbox-5" name=category value="기타">
-		    								</div>
-	    								</div>
-	    								<div class="row pb-3">
-	    									<div>
-	    										<h4>자기 소개</h4>
-	    									</div>
-	    									<div>
-	        									<input type="text" name="introduction" style="width:400px;height:200px;font-size:20px;"></input>
-	        								</div>
-	    								</div>
-	    								<div class="row pb-3">
-	    									<div>
-	    										<h4>보유하신 자격증을 입력해주세요.</h4>
-	    									</div>
-	    									<div>
-	    										<input type=text name="certification" style="width:400px;height:100px;font-size:20px;" ></input>
-	    									</div>
-	    								</div>
-	    								<div class="file-uploader-section pb-3">
-    										<h4 class="fileuploder">자격증 등록</h4>
-    										<div class="file-upload-field">
-        										<label for="file1">자격증 파일 1:</label>
-        										<input type="file" id="file1" name="file1" multiple>
-    										</div>
-    										<div class="file-upload-field">
-        										<label for="file2">자격증 파일 2:</label>
-        										<input type="file" id="file2" name="file2" multiple>
-    										</div>
-    										<div class="file-upload-field">
-        										<label for="file3">자격증 파일 3:</label>
-        										<input type="file" id="file3" name="file3" multiple>
-    										</div>
+							<c:when test="${ mode == 'mentorProfile' }"><!-- 멘토 프로필 -->			
+								<div class="col-lg-12">
+									<br>
+									<div class="row pb-3" style="text-align:center;">
+										<h3>멘토 프로필 등록</h3>
+									</div>
+									<div class="row">
+										<div class="col-lg-4">
 										</div>
-										<button type="submit" class="btn btn-primary">확인</button>
-									</form>
+										<div class="col-lg-12">
+											<div class="card card-body shadow p-4 mb-4">
+												<!-- Education START -->
+												<!-- Title -->
+											<form action="<c:url value='/mentorProfileRegister?mode=111'/>" method="post" enctype="multipart/form-data">
+												<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+														<h3>기본정보</h3>
+													</div>
+													<div class="row" style="padding-top:30px;">
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-emoji-laughing fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">닉네임</h6>
+																<p class="mb-0 small">
+																	${member.getNickName()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-building fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">분야</h6>
+																<div>
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-1">운동</label>
+																        <input type="checkbox" id="checkbox-1" name="category" value="운동">
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-2">음악</label>
+																        <input type="checkbox" id="checkbox-2" name="category" value="음악">
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-3">게임</label>
+																        <input type="checkbox" id="checkbox-3" name="category" value="게임">
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-4">공부</label>
+																        <input type="checkbox" id="checkbox-4" name="category" value="공부">
+																    </div>
+																    
+																    <div style="display: inline-block;">
+																        <label for="checkbox-5">기타</label>
+																        <input type="checkbox" id="checkbox-5" name="category" value="기타">
+																    </div>
+																</div>
+															</div>
+														</div>
+														<!-- Education END -->
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3">
+															<i class="bi bi-gender-female fs-5 text-primary"></i>
+															</span>
+															<div class="ms-3">
+																<h6 class="mb-0">성별</h6>
+																<p class="mb-0 small">
+																	${member.getGender()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-person-badge-fill fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">나이</h6>
+																<p class="mb-0 small">
+																	${member.getAge()}
+																</p>
+															</div>
+														</div>
+														<!-- Education END -->
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-geo-fill fs-4 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">주요 활동지</h6>
+																<p class="mb-0 small">
+																<textarea name="mentorprofileaddress" cols="70" rows="1" class="form-control" required></textarea>
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
+								<div class="container">
+									<div class="mt-4 border border-2 border-dashed rounded fw-light" style="background-color:#ffffff !important;padding:20px;">
+										<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+											<div>
+												<h4>자격증</h4>
+											</div>
+										</div>
+										<div style="padding:10px;">
+										</div>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<textarea name="certification" rows="5" class="form-control" required style="width: 100%;"></textarea>
+											</div>
+										</div>
+										<br>
+										<div class="file-uploader-section pb-3">
+											<h4 class="fileuploder">자격증 파일 등록</h4>
+											<div class="file-upload-field">
+												<label for="file1">파일 1:</label>
+												<input type="file" id="file1" name="file1" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail11(event);"  multiple onclick="openImagePopup(this.src)" style="cursor:pointer;">
+												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/No_image.png" id="imageSample11">
+											</div>
+											<br>
+											<div class="file-upload-field">
+												<label for="file2">파일 2:</label>
+												<input type="file" id="file2" name="file2" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail22(event);"  multiple onclick="openImagePopup(this.src)" style="cursor:pointer;">
+												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/No_image.png" id="imageSample22">
+											</div>
+											<br>
+											<div class="file-upload-field">
+												<label for="file3">파일 3:</label>
+												<input type="file" id="file3" name="file3" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail33(event);"  multiple onclick="openImagePopup(this.src)" style="cursor:pointer;">
+												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/No_image.png" id="imageSample33">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="container">
+									<div class="mt-4 border border-2 border-dashed rounded fw-light" style="background-color:#ffffff !important;padding:20px;">
+										<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+											<div>
+												<h4>소개글</h4>
+											</div>
+										</div>
+										<br>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<textarea name="introduction" rows="5" class="form-control" required style="width: 100%;"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+									<br>
+									<div style="text-align: center;">
+		    							<input type="submit" class="btn btn-primary" value="등록">
+									</div>
+								</form>
+							</div>
 							</c:when>
 							<c:when test="${ mode == 'mentorInformation' }">
-								<div class="col-5">
-									<div>
-										<h4>멘토 프로필 조회 </h4>
-										<br><br>
-										<h3>멘토 카테고리</h3>
-										<div><p>${mentorprofile.category}</p></div>
-										<br><br>
-										<h3>멘토 자격증이당 </h3>
-										<div>${mentorprofile.certification}</div>
-										<br><br>
-										<h3>멘토 소개당</h3>
-										<div>${mentorprofile.introduction}</div>
-									</div>
-									<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename1 }" />" id="imageSample1"></div>
-									<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename2 }" />" id="imageSample2"></div>
-									<div class="row"><img width="50" height="50" src="<c:url value="/resources/img/ProfilePicture/${ mentorprofile.filename3 }" />" id="imageSample3"></div>
-									<div><a href="<c:url value="/mentorprofileupdate?mode=callupdatementorprofileform"/>">멘토프로필 수정 </a></div>
-								</div>		
+							   <div class="col-lg-12">
+							        <br>
+							        <div class="row pb-3" style="text-align:center;">
+							            <h3>멘토 프로필 조회</h3>
+							        </div>
+							        <div class="row">
+							            <div class="col-lg-4"></div>
+							            <div class="col-lg-12">
+							                <div class="card card-body shadow p-4 mb-4">
+							                    <!-- Education START -->
+							                    <!-- Title -->
+							                    <div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+							                        <h3>기본정보</h3>
+							                    </div>
+							                    <div class="row" style="padding-top:30px;">
+							                        <!-- Education item -->
+							                        <div class="d-flex align-items-center col-lg-6 mb-4">
+							                            <span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-emoji-laughing fs-5 text-primary"></i></span>
+							                            <div class="ms-3">
+							                                <h6 class="mb-0">닉네임</h6>
+							                                <p class="mb-0 small">
+							                                    ${member.getNickName()}
+							                                </p>
+							                            </div>
+							                        </div>
+							                        <!-- Education item -->
+							                        <div class="d-flex align-items-center col-lg-6 mb-4">
+							                            <span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-building fs-5 text-primary"></i></span>
+							                            <div class="ms-3">
+							                                <h6 class="mb-0">분야</h6>
+							                                <p class="mb-0 small">
+							                                    ${mentorprofile.category}
+							                                </p>
+							                            </div>
+							                        </div>
+							                        <!-- Education END -->
+							                        <!-- Education item -->
+							                        <div class="d-flex align-items-center col-lg-6 mb-4">
+							                            <span class="icon-md text-dark mb-0 bg-light rounded-3">
+							                            <i class="bi bi-gender-female fs-5 text-primary"></i>
+							                            </span>
+							                            <div class="ms-3">
+							                                <h6 class="mb-0">성별</h6>
+							                                <p class="mb-0 small">
+							                                    ${member.getGender()}
+							                                </p>
+							                            </div>
+							                        </div>
+							                        <!-- Education item -->
+							                        <div class="d-flex align-items-center col-lg-6 mb-4">
+							                            <span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-person-badge-fill fs-5 text-primary"></i></span>
+							                            <div class="ms-3">
+							                                <h6 class="mb-0">나이</h6>
+							                                <p class="mb-0 small">
+							                                    ${member.getAge()}
+							                                </p>
+							                            </div>
+							                        </div>
+							                        <!-- Education END -->
+							                        <!-- Education item -->
+							                        <div class="d-flex align-items-center col-lg-6 mb-4">
+							                            <span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-geo-fill fs-4 text-primary"></i></span>
+							                            <div class="ms-3">
+							                                <h6 class="mb-0">주요 활동지</h6>
+							                                <p class="mb-0 small">
+							                                    <textarea name="mentorprofileaddress" cols="70" rows="1" class="form-control" required readonly>${mentorprofile.mentorprofileaddress}</textarea>
+							                                </p>
+							                            </div>
+							                        </div>
+							                    </div>
+							                </div>
+							            </div>
+							        </div>
+							    </div>
+							    <div class="middle">
+							        <div class="mt-4 border border-2 border-dashed rounded fw-light" style="background-color:#ffffff !important; padding:20px;">
+							            <div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+							                <div>
+							                    <h4>자격증</h4>
+							                </div>
+							            </div>
+							            <br>
+							            <div style="padding:10px;">
+							                <!-- 자격증 정보 동적 표시 -->
+							                <div class="form-group row">
+							                    <div class="col-sm-12">
+							                        <div class="col-sm-12">
+							                            <textarea name="certification" rows="5" class="form-control" required readonly style="width: 100%;">${mentorprofile.certification}</textarea>
+							                        </div>
+							                    </div>
+							                </div>
+							            </div>
+							            <br>
+							            <!-- 이미지 경로 동적 설정 -->
+										<div style="display:flex; justify-content: space-around">
+										    <div>
+										        <h5>파일1</h5>   
+										        <img width="170" height="170" src="<c:url value='/resources/img/ProfilePicture/${mentorprofile.filename1}'/>" id="imageSample1" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
+										    </div>
+										    <div>
+										        <h5>파일2</h5>   
+										        <img width="170" height="170" src="<c:url value='/resources/img/ProfilePicture/${mentorprofile.filename2}'/>" id="imageSample2" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
+										    </div>
+										    <div>
+										        <h5>파일3</h5>   
+										        <img width="170" height="170" src="<c:url value='/resources/img/ProfilePicture/${mentorprofile.filename3}'/>" id="imageSample3" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
+										    </div>
+										</div>
+							        </div>
+							    </div>    
+							    <div class="botton">
+							        <div class="mt-4 border border-2 border-dashed rounded fw-light" style="background-color:#ffffff !important;padding:20px;">
+							            <div  class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+							                <div>
+							                    <h4>소개글</h4>
+							                </div>
+							            </div>
+							            <br>
+							            <div class="form-group row">
+							                <div class="col-sm-12">
+							                    <div class="col-sm-12">
+							                        <textarea name="introduction" rows="5" class="form-control"  readonly required style="width: 100%;">${mentorprofile.introduction}</textarea>
+							                    </div>
+							                </div>
+							            </div>
+							        </div>
+							        <br>
+							        <div style="text-align: center;">
+							            <div>
+							                <a href="<c:url value="/callmentorprofileupdate?mode=callupdatementorprofileform"/>" class="btn btn-primary" > 수정 </a>
+							            </div>
+							        </div>
+							    </div>
+							</div>				
 							</c:when>
 							<c:when test="${ mode == 'mentorProfileUpdate' }">
-								<div class="col-4">
-									<h3>멘토 프로필 업데이트</h3>
-									<br><br>
-									<form action="<c:url value='/mentorProfileUpdate?mode=updatementorprofile"'/>" method="post" enctype="multipart/form-data">
-											<h2>카테고리</h2>
-	    								<div  style="display: flex;  justify-content:space-between;">
-	        								<label for="checkbox-1">운동</label>
-	        								<input type="checkbox" id="checkbox-1" name=category value="운동"
-											<c:if test="${mentorprofile.category.trim().toLowerCase().contains('운동')}">checked</c:if>>
-											
-	        								<label for="checkbox-2">음악</label>
-	        								<input type="checkbox" id="checkbox-2" name=category value="음악"
-											<c:if test="${mentorprofile.category.trim().toLowerCase().contains('음악')}">checked</c:if>>
-											
-	        								<label for="checkbox-3">게임</label>
-	        								<input type="checkbox" id="checkbox-3" name=category value="게임"
-											<c:if test="${mentorprofile.category.trim().toLowerCase().contains('게임')}">checked</c:if>>
-											
-	        								<label for="checkbox-4">공부</label>
-	        								<input type="checkbox" id="checkbox-4" name=category value="공부"
-	        								<c:if test="${mentorprofile.category.trim().toLowerCase().contains('공부')}">checked</c:if>>
-	        								
-	        								<label for="checkbox-5">기타</label>
-	        								<input type="checkbox" id="checkbox-5" name=category value="기타"
-	        								<c:if test="${mentorprofile.category.trim().toLowerCase().contains('기타')}">checked</c:if>>
-	    								</div>
-	    								<br><br>
-	    								<div>
-	    									<div>
-	    										<h3>자기 소개</h3>
-	    									</div>
-	    									<div>
-												<input type="text" name="introduction" style="width:400px;height:200px;font-size:20px;" value="${fn:escapeXml(mentorprofile.introduction)}"></input>
-	        								</div>
-	    								</div>
-	    								<br><br>
-	    								<div>
-	    									<h2>너의 자격증을 적어랑</h2>
-	    								</div>
-	    								<div>
-	    									<input type=text name="certification" style="width:400px;height:100px;font-size:20px;" value="${fn:escapeXml(mentorprofile.introduction)}" ></input>
-	    								</div>
-	    								<br><br>
-	    								<div class="file-uploader-section">
-    										<h3 class="fileuploder">자격증 등록</h3>
-    										<div class="file-upload-field">
-    										 	<a>${fn:escapeXml(mentorprofile.filename1)}</a>
-        										<label for="file1">자격증 파일 1:</label>
-        										<input type="file" id="file1" name="file1" value="${fn:escapeXml(mentorprofile.filename1)}" multiple>
-    										</div>
-    										<div class="file-upload-field">
-    										    <a>${fn:escapeXml(mentorprofile.filename2)}</a>
-        										<label for="file2">자격증 파일 2:</label>
-        										<input type="file" id="file2" name="file2" value="${fn:escapeXml(mentorprofile.filename2)}" multiple>
-    										</div>
-    										<div class="file-upload-field">
-    											<a>${fn:escapeXml(mentorprofile.filename3)}</a>
-        										<label for="file3">자격증 파일 3:</label>
-        										<input type="file" id="file3" name="file3" value="${fn:escapeXml(mentorprofile.filename3)}" multiple>
-    										</div>
+								<div class="col-lg-12">
+									<br>
+									<div class="row pb-3" style="text-align:center;">
+										<h3>멘토 프로필 업데이트</h3>
+									</div>
+									<div class="row">
+										<div class="col-lg-4">
 										</div>
-										<button type="submit">확인</button>
-									</form>
+										<div class="col-lg-12">
+											<div class="card card-body shadow p-4 mb-4">
+											<form action="<c:url value='/mentorProfileUpdate?mode=updatementorprofile"'/>" method="post" enctype="multipart/form-data">
+												<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+														<h3>기본정보</h3>
+													</div>
+													<div class="row" style="padding-top:30px;">
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-emoji-laughing fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">닉네임</h6>
+																<p class="mb-0 small">
+																	${member.getNickName()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-building fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">분야</h6>
+																<div>
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-1">운동</label>
+																        <input type="checkbox" id="checkbox-1" name="category" value="운동"
+																        <c:if test="${mentorprofile.category.trim().toLowerCase().contains('운동')}">checked</c:if>>
+																    </div>
+															
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-2">음악</label>
+																        <input type="checkbox" id="checkbox-2" name="category" value="음악"
+																        <c:if test="${mentorprofile.category.trim().toLowerCase().contains('음악')}">checked</c:if>>																        
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-3">게임</label>
+																        <input type="checkbox" id="checkbox-3" name="category" value="게임"
+																        <c:if test="${mentorprofile.category.trim().toLowerCase().contains('게임')}">checked</c:if>>																        
+																    </div>
+																    
+																    <div style="margin-right: 20px; display: inline-block;">
+																        <label for="checkbox-4">공부</label>
+																        <input type="checkbox" id="checkbox-4" name="category" value="공부"
+																       	<c:if test="${mentorprofile.category.trim().toLowerCase().contains('공부')}">checked</c:if>>																        
+																    </div>
+																    
+																    <div style="display: inline-block;">
+																        <label for="checkbox-5">기타</label>
+																        <input type="checkbox" id="checkbox-5" name="category" value="기타"
+																       	<c:if test="${mentorprofile.category.trim().toLowerCase().contains('기타')}">checked</c:if>>
+																    </div>
+																</div>
+															</div>
+														</div>
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3">
+															<i class="bi bi-gender-female fs-5 text-primary"></i>
+															</span>
+															<div class="ms-3">
+																<h6 class="mb-0">성별</h6>
+																<p class="mb-0 small">
+																	${member.getGender()}
+																</p>
+															</div>
+														</div>
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-person-badge-fill fs-5 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">나이</h6>
+																<p class="mb-0 small">
+																	${member.getAge()}
+																</p>
+															</div>
+														</div>
+														<!-- Education END -->
+														<!-- Education item -->
+														<div class="d-flex align-items-center col-lg-6 mb-4">
+															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-geo-fill fs-4 text-primary"></i></span>
+															<div class="ms-3">
+																<h6 class="mb-0">주요 활동지</h6>
+																<p class="mb-0 small">
+																<textarea name="mentorprofileaddress" cols="70" rows="1" class="form-control" required>${mentorprofile.mentorprofileaddress}</textarea>
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
+								<div class="container">
+									<div class="mt-4 border border-2 border-dashed rounded fw-light" style="background-color:#ffffff !important;padding:20px;">
+										<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+											<div>
+												<h4>자격증</h4>
+											</div>
+										</div>
+										<div style="padding:10px;">
+										</div>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<textarea name="certification" rows="5" class="form-control" required style="width: 100%;">${mentorprofile.certification}</textarea>
+											</div>
+										</div>
+										<br>
+										<div class="file-uploader-section pb-3">
+											<h4 class="fileuploder">자격증 파일 등록</h4>
+											<div class="file-upload-field">
+												<label for="file1">파일 1:</label>
+												<input type="file" id="file1" name="file1" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail11(event);"  multiple>
+												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/${mentorprofile.filename1}" id="imageSample11" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
+											</div>
+											<br>
+											<div class="file-upload-field">
+												<label for="file2">파일 2:</label>
+												<input type="file" id="file2" name="file2" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail22(event);"  multiple>
+												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/${mentorprofile.filename2}" id="imageSample22" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
+											</div>
+											<br>
+											<div class="file-upload-field">
+												<label for="file3">파일 3</label>
+												<input type="file" id="file3" name="file3" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail33(event);"  multiple >
+												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/${mentorprofile.filename3}" id="imageSample33" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="container">
+									<div class="mt-4 border border-2 border-dashed rounded fw-light" style="background-color:#ffffff !important;padding:20px;">
+										<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
+											<div>
+												<h4>소개글</h4>
+											</div>
+										</div>
+										<br>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<textarea name="introduction" rows="5" class="form-control" required style="width: 100%;">${mentorprofile.introduction}</textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+									<br>
+									<div style="text-align: center;">
+		    							<input type="submit" class="btn btn-primary" value="등록">
+									</div>
+								</form>
+							</div>			
 							</c:when>
 							<c:when test="${ mode == 'menteeProfileRegister' }">
 								<div class="col p-5">
@@ -343,8 +656,8 @@
 	        									<input name="introduction" style="width:400px;height:200px;font-size:20px;"></input>
 	        								</div>
 	    								</div>
-	    								<button type="submit" class="btn btn-primary">확인</button>
-									</form>
+									<input type="submit" class="btn btn-primary " value="작성">	
+							</form>
 								</div>
 							</c:when>	
 							<c:when test="${ mode == 'menteeInformation'}">

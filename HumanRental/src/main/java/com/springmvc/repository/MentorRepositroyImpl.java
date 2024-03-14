@@ -326,14 +326,10 @@ public class MentorRepositroyImpl implements MentorRepository {
 	@Override
 	public void mentorProfileRegister(MentorProfile mentorprofile ,String memberId, String mentorId) {
 		String SQL;
-//		String SQL = "INSERT INTO MenteeProfile (menteeId,memberId,interest,introduction) VALUES(?,?,?,?)";
-//		template.update(SQL, utility2,Mentee.getMemberId(),Mentee.getInterest(),Mentee.getIntroduction());
-		
-		 String a ="mentorprofile_" + mentorprofile.getMentorId();
-		 System.out.println(a);
+
 		try {
-			SQL ="insert into  mentorProfile(mentorId,memberId,introduction,certification,category,filename1,filename2,filename3)VALUES(?,?,?,?,?,?,?,?)";
-			template.update(SQL, mentorId, memberId, mentorprofile.getIntroduction(),mentorprofile.getCertification(),mentorprofile.getCategory(),mentorprofile.getFilename1(),mentorprofile.getFilename2(),mentorprofile.getFilename3());
+			SQL ="insert into  mentorProfile(mentorId,memberId,introduction,certification,category,filename1,filename2,filename3,mentorprofileaddress)VALUES(?,?,?,?,?,?,?,?,?)";
+			template.update(SQL, mentorId, memberId, mentorprofile.getIntroduction(),mentorprofile.getCertification(),mentorprofile.getCategory(),mentorprofile.getFilename1(),mentorprofile.getFilename2(),mentorprofile.getFilename3(),mentorprofile.getMentorprofileaddress());
 			
 		}catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
 			e.printStackTrace();

@@ -102,11 +102,25 @@
 		         			<i class="fa-solid fa-angles-left" style="line-height: 24px;"></i>
 	         			</a>
          			</div> --%>
+         			<%
+	        			if(request.getParameter("category") == null) {
+         			%>
 			        <div class="col-1">
 			        	<a href="/HumanRental/BuyingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) - 1 %>">
 			        		<i class="fa-solid fa-chevron-left" style="line-height: 24px;"></i>
 		        		</a>
 	        		</div>
+	        		<%
+	        			} else {
+	        		%>
+			        <div class="col-1">
+			        	<a href="/HumanRental/BuyingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) - 1 %>&category=<%= request.getParameter("category") %>">
+			        		<i class="fa-solid fa-chevron-left" style="line-height: 24px;"></i>
+		        		</a>
+			        </div>
+			        <%
+        				}	
+			        %>
 			        	<% 
 			        		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 			        		int totalPageNum = (int) request.getAttribute("totalPageNum");
@@ -164,12 +178,24 @@
 					        		<%
 			        			}
 			        		}
-			        	%>
+		        		if(request.getParameter("category") == null) {
+        			%>
 			        <div class="col-1">
 			        	<a href="/HumanRental/BuyingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) + 1 %>">
 			        		<i class="fa-solid fa-chevron-right" style="line-height: 24px;"></i>
 		        		</a>
 			        </div>
+        			<%
+	        		} else {
+        			%>
+			        <div class="col-1">
+			        	<a href="/HumanRental/BuyingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) + 1 %>&category=<%= request.getParameter("category") %>">
+			        		<i class="fa-solid fa-chevron-right" style="line-height: 24px;"></i>
+		        		</a>
+			        </div>
+        			<%
+	        		}
+        			%>
 			        <%-- <div class="col-1">
 			        	<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) + 10 %>">
 			        		<i class="fa-solid fa-angles-right" style="line-height: 24px;"></i>
