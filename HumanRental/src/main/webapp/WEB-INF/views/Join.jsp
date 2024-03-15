@@ -27,6 +27,7 @@
 	<body>
 	    <jsp:include page="nav.jsp" />
    	    <div class="container vh-100 justify-content-center text-center d-flex flex-column align-items-center">
+   	    	<div class="row"><h1>로그인</h1></div>
 			<div class="row">
 			    <form:form modelAttribute="member" method="post" id="joinForm" class="row justify-content-center" >
    			    	<div class="row justify-content-center">
@@ -65,7 +66,7 @@
 			    	</div>
 					<div class="col">
 				    	<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
-				    	<a onclick="javascript:formSubmit()" class="btn">제출</a>
+				    	<a onclick="javascript:formSubmit()" class="btn btn-dark">제출</a>
 			    	</div>
 			    </form:form>
 		    </div>
