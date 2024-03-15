@@ -1,5 +1,6 @@
 package com.springmvc.repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class BuyingRepositoryImpl implements BuyingRepository{
 	public void BuyingCreate(Buying buying) {
 		String sql = "insert into buying values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		template.update(sql, buying.getBuyingId(), buying.getMemberId(), buying.getNickname(), buying.getIntroduction(), 
-				buying.getStarRate(), buying.getTitle(), buying.getContent(), buying.getRegist_day(), buying.getCategory(), 
+				buying.getStarRate(), buying.getTitle(), buying.getContent(), LocalDateTime.now(), buying.getCategory(), 
 				buying.getPrice(), buying.getLocation(), 0);
 	}
 

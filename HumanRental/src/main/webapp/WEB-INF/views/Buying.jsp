@@ -49,6 +49,7 @@
 								<option value="music">음악</option>
 								<option value="sports">스포츠</option>
 								<option value="game">게임</option>
+								<option value="study">공부</option>
 	   						</select>
    						</div> 
 					</div>
@@ -91,6 +92,7 @@
 								<option value="music" ${buying.category == 'music' ? 'selected' : ''}>음악</option>
 								<option value="sports" ${buying.category == 'sports' ? 'selected' : ''}>스포츠</option>
 								<option value="game" ${buying.category == 'game' ? 'selected' : ''}>게임</option>
+								<option value="study" ${buying.category == 'study' ? 'selected' : ''}>공부</option>
 	   						</select>
    						</div> 
 					</div>

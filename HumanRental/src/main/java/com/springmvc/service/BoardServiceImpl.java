@@ -59,7 +59,6 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoardId(util.createId("Board"));
 		board.setMemberId(memberId);
 		board.setHit(0);
-		board.setRegist_day(LocalDateTime.now());
 		boardRepository.insertBoard(board);
 	}
 
@@ -116,7 +115,6 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoardId(util.createId("Board2"));
 		board.setMemberId(memberId);
 		board.setHit(0);
-		board.setRegist_day(LocalDateTime.now());
 		boardRepository.insertBoard2(board);
 	}
 

@@ -24,13 +24,12 @@
 		return false;
 	}
 </script>
-<style type=""></style>
 <title>Board</title>
 </head>
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="container">
-		<div class="row align-items-end p-5">
+		<div class="row align-items-end pt-5">
 			<a href="<c:url value="/board"/>" class="text-decoration-none fw-bold fs-1 col-3 text-center text-dark">자유 게시판</a>
 			<a href="<c:url value="/board2"/>" class="text-decoration-none fs-5 col-2 text-left text-dark">공지사항</a>
 		</div>
@@ -43,7 +42,7 @@
 					<span class="badge text-bg-success">전체 ${total_record}건</span>
 				</div>
 			</div>
-			<div style="padding-top: 50px">
+			<div>
 				<table class="table table-hover">
 					<tr>
 						<th class="col-1">번호</th>

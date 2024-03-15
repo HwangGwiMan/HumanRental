@@ -39,14 +39,15 @@
 								</div>
 							</div>
 							<div class="row p-3">
-								<a href="#" class="btn btn-primary" id="registBtn">등록 목록</a>
+								<a href="#" class="btn btn-primary" id="registBtn">작성글 관리</a>
 								<div class="text-center" style="display: none;">
-									<div class="p-1"><a href="<c:url value="/buyingListManagement"/>" class="btn btn-outline-primary">삽니다 목록</a></div>
-									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-primary">팝니다 목록</a></div>
+									<div class="p-1"><a href="<c:url value="/buyingListManagement"/>" class="btn btn-outline-primary">재능구매 목록</a></div>
+									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-primary">재능판매 목록</a></div>
+									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-primary">게시판 목록</a></div>
 								</div>
 							</div>
 							<div class="row p-3">
-								<a href="#" class="btn btn-primary" id="resvBtn">예약 목록</a>
+								<a href="#" class="btn btn-primary" id="resvBtn">예약 관리</a>
 								<div class="text-center" style="display: none;">
 									<div class="p-1"><a href="<c:url value="/reservationApprovalManagement"/>" class="btn btn-outline-primary">예약 승인</a></div>
 									<div class="p-1"><a href="<c:url value="/reservationListManagement"/>" class="btn btn-outline-primary">예약 조회</a></div>
@@ -93,35 +94,35 @@
 										<div class="col-5 ">
 											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4 ">아이디</div>
-												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required"/></div>
-												<div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div>
+												<div class="col"><input type="text"  value="${ member.memberId }" name="memberId" id="memberId" required="required" readonly="readonly"/></div>
+												<!-- <div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div> -->
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">비밀번호</div>
 												<div class="col"><input type="password"  value="${ member.memberPw }" name="memberPw" required="required"/></div>
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">이름</div>
 												<div class="col"><input type="text"  value="${ member.name }" name="name" required="required"/></div>
 											</div>
 											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">닉네임</div>
-												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required"/></div>
-												<div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div>
+												<div class="col"><input type="text"  value="${ member.nickName }" name="nickName" required="required" readonly="readonly"/></div>
+												<!-- <div class="col-5"><a class="btn btn-secondary DupChkBtn">중복 확인</a></div> -->
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">나이</div>
 												<div class="col"><input type="text"  value="${ member.age }" name="age" required="required"/></div>
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">성별</div>
 												<div class="col"><input type="text"  value="${ member.gender }" name="gender" required="required"/></div>
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">전화번호</div>
 												<div class="col"><input type="text"  value="${ member.phone }" name="phone" required="required"/></div>
 											</div>
-											<div class="row p-3 align-items-center">
+											<div class="row p-3 flex-nowrap align-items-center">
 												<div class="col-4">주소</div>
 												<div class="col"><input width="100px" type="text"  value="${ member.address }" name="address" required="required"/></div>
 											</div>

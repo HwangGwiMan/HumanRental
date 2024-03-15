@@ -23,7 +23,7 @@
 		</div>
 		<div class="right">
 			<div>
-				<i class="fa-solid fa-guitar"></i>
+				<i class="fa-solid fa-music"></i>
 				<h4>Music</h4>
 				<p>음악은 우리의 삶을 더욱 풍요롭게 만들어줍니다.</p>
 				<a href="#" category="music" onclick="goSelling(this)">Read More</a>
@@ -41,7 +41,7 @@
 				<a href="#" category="game" onclick="goSelling(this)">Read More</a>
 			</div>
 			<div>
-				<i class="fa-solid fa-comments"></i>
+				<i class="fa-solid fa-book-open"></i>
 				<h4>Study</h4>
 				<p>지식을 나누며 성장할 수 있는 특별한 기회를 찾아보세요.</p>
 				<a href="#" category="study" onclick="goSelling(this)">Read More</a>
