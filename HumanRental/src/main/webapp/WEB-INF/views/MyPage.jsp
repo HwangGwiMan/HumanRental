@@ -729,7 +729,7 @@
 													<th>멘토 등록일<i class="fa-solid fa-sort"></i><i class="fa-solid fa-sort-up" style="display: none;"></i><i class="fa-solid fa-sort-down" style="display: none;"></i></th>
 												</tr>
 											</thead>
-											<tbody id="tbody">	
+											<tbody id="tbody" >	
 											<c:forEach var="member" items="${memberList}" varStatus="status">
 												<tr>		
 													<td>${ status.count }</td>

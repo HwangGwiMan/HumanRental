@@ -106,10 +106,12 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		} else if(reservation.getBoardId().contains("buyingId")) {
 			alarm.setContent(reservation.getApplicantMemberId() + "님이 '" + reservation.getTitle() + "' 에 멘토 신청하셨습니다.");
 		}
-		 
+		
+		alarm.setLinkId(reservation.getReservationId());
+		
 		String SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?, ?)";
 		
-		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), null);
+		template.update(SQL, util.createId("ReservationApplyAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), alarm.getLinkId());
 	}
 	
 	// 예약 검토 알람(승인 및 거절) 
@@ -136,9 +138,11 @@ public class AlarmRepositoryImpl implements AlarmRepository {
 		} else if(approval.equals("rentalno")) {
 			alarm.setContent("신청하신 재능 거래가 실패처리 되었습니다. 관련 : " + reservation.getTitle());
 		}
+		
+		alarm.setLinkId(reservationId);
 
 		SQL = "INSERT INTO alarm VALUES(?, ?, ?, ?, ?, ?)";
-		template.update(SQL, util.createId("ReservationConfirmAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), null);
+		template.update(SQL, util.createId("ReservationConfirmAlarm"), alarm.getSendMemberId(), alarm.getReceiveMemberId(), alarm.getDate(), alarm.getContent(), alarm.getLinkId());
 	}
 
 	// 알람 목록
