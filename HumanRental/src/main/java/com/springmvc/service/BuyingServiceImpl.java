@@ -23,8 +23,8 @@ public class BuyingServiceImpl implements BuyingService{
 
 	@Override
 	public void BuyingList(Model model, String category, int pageNum) {
-		List<Buying> buyinglist = buyingrepository.BuyingList(category);
 		
+		List<Buying> buyinglist = buyingrepository.BuyingList(category);
 		List<Buying> targetlist = new ArrayList<Buying>();
 		
 		int startIdx = (pageNum - 1) * 16;
@@ -41,12 +41,9 @@ public class BuyingServiceImpl implements BuyingService{
 			} catch(IndexOutOfBoundsException e) {
 				break;
 			}
-			
-			
 		}
 		
 		model.addAttribute("buyinglist",targetlist);
-		
 		
 		int totalPageNum = buyinglist.size() / 16 + 1;
 		/*
@@ -68,14 +65,7 @@ public class BuyingServiceImpl implements BuyingService{
 
 	@Override
 	public void BuyingCreate(Buying buying) {
-
-		//테스트코드
-		buying.setStarRate(5);
-		//
-		
-		buying.setRegist_day(LocalDateTime.now());
 		buying.setBuyingId(util.createId("buyingId"));
-		
 		buyingrepository.BuyingCreate(buying);
 	}
 

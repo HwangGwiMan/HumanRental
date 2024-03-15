@@ -7,10 +7,13 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.springmvc.domain.Board;
 import com.springmvc.domain.Selling;
+import com.springmvc.util.Utility;
 
 public class SellingRowMapper implements RowMapper<Selling> {
 
 	public Selling mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+		Utility util = new Utility();
 		
 		Selling selling = new Selling();
 		selling.setSellingId(rs.getString(1));
@@ -20,7 +23,7 @@ public class SellingRowMapper implements RowMapper<Selling> {
 		selling.setStarRate(rs.getFloat(5));
 		selling.setTitle(rs.getString(6));
 		selling.setContent(rs.getString(7));
-		selling.setRegist_day(rs.getTimestamp(8).toLocalDateTime());
+		selling.setRegist_day(util.outputFormatting(rs.getTimestamp(8)));
 		selling.setCategory(rs.getString(9));
 		selling.setPrice(rs.getInt(10));
 		selling.setLocation(rs.getString(11));

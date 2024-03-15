@@ -10,7 +10,7 @@ public class Selling {
 	private float starRate;
 	private String title;
 	private String content;
-	private LocalDateTime regist_day;
+	private String regist_day;
 	private String category;
 	private int price;
 	private String location;
@@ -65,10 +65,10 @@ public class Selling {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public LocalDateTime getRegist_day() {
+	public String getRegist_day() {
 		return regist_day;
 	}
-	public void setRegist_day(LocalDateTime regist_day) {
+	public void setRegist_day(String regist_day) {
 		this.regist_day = regist_day;
 	}
 	public String getCategory() {
