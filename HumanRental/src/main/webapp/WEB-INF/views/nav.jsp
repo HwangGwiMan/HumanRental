@@ -74,7 +74,7 @@
 									</c:if>
 								</i>
 							</a>
-							<div class="z-3 position-absolute top-100 end-0 alert alert-primary col" style="display: none; width: 300px;">
+							<div class="z-3 position-absolute top-100 end-0 alert alert-dark col" style="display: none; width: 300px;">
 								<c:choose>
 									<c:when test="${ empty alarmList }">
 										알람이 없습니다.
