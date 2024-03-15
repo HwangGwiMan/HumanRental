@@ -98,6 +98,14 @@ public class BuyingController {
 		String memberId = (String)session.getAttribute("user");
 		buyingservice.getBuyingListById(model, memberId);
 		model.addAttribute("mode", "buyingListManagement");
+		
+		Member member = memberService.getMember(memberId);
+		if(member.getProfileImage() == null) {
+			member.setProfileImage("default.png");
+		}
+
+		model.addAttribute("member", member);
+		
 		return "MyPage";
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.domain.Mentor;
+import com.springmvc.service.MemberService;
 import com.springmvc.service.MenteeService;
 import com.springmvc.domain.Member;
 import com.springmvc.domain.Mentee;
@@ -24,6 +25,9 @@ public class MenteeController {
 	
 	@Autowired
 	MenteeService Menteeservice;
+	
+	@Autowired
+	MemberService memberService;
 		
 	@GetMapping("/mentee")
 	public String Menteeread(@RequestParam("mode") String mode,Model model, HttpServletRequest request) {
@@ -45,6 +49,14 @@ public class MenteeController {
 			Mentee mentee =Menteeservice.getInformation(memberId);
 			model.addAttribute("mode", mode);
 			model.addAttribute("mentee",mentee);
+			
+			Member member = memberService.getMember(memberId);
+			if(member.getProfileImage() == null) {
+				member.setProfileImage("default.png");
+			}
+
+			model.addAttribute("member", member);
+			
 			return "MyPage";
 		}
 		
@@ -66,16 +78,23 @@ public class MenteeController {
 	  
 	 @GetMapping("/callmenteeupdateform")
 	 public  String MenteeProfileUpdateform(@RequestParam("mode") String mode,Model model ,HttpServletRequest request) {
-		 HttpSession session = request.getSession();
-		 String memberId	= (String)session.getAttribute("user");
-		 Mentee mentee = Menteeservice.getInformation(memberId);
+		HttpSession session = request.getSession();
+		String memberId	= (String)session.getAttribute("user");
+		Mentee mentee = Menteeservice.getInformation(memberId);
 		
-		 mode ="menteeProfileUpdate";
+		mode ="menteeProfileUpdate";
 		 
-		 model.addAttribute("mode",mode);
-		 model.addAttribute("Mentee",mentee);
+		model.addAttribute("mode",mode);
+		model.addAttribute("Mentee",mentee);
 		 
-		return "MyPage"; 
+		Member member = memberService.getMember(memberId);
+		if(member.getProfileImage() == null) {
+			member.setProfileImage("default.png");
+		}
+
+		model.addAttribute("member", member);
+	 
+		 return "MyPage"; 
 	 }
 	  @PostMapping("/menteeProfileUpdate") 
 	  public String MenteeProfileUpdate(@ModelAttribute Mentee Mentee, Model model,HttpServletRequest request,String mode) {

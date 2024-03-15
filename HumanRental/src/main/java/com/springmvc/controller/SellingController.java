@@ -98,6 +98,14 @@ public class SellingController {
 		String memberId = (String)session.getAttribute("user");
 		sellingservice.getSellingListById(model, memberId);
 		model.addAttribute("mode", "sellingListManagement");
+		
+		Member member = memberService.getMember(memberId);
+		if(member.getProfileImage() == null) {
+			member.setProfileImage("default.png");
+		}
+
+		model.addAttribute("member", member);
+		
 		return "MyPage";
 	}
 }
