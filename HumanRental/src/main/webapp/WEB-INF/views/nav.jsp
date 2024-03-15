@@ -20,6 +20,7 @@
 	    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 	    
 		<script src="<c:url value="/resources/js/nav.js"/>"></script>
+		<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 	</head>
 	<body>
 		<nav class="qqnav border-bottom">

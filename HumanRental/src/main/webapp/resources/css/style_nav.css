@@ -2,6 +2,11 @@
 	margin: 0;
 	padding: 0;
     box-sizing: border-box !important;
+	font-family: 'NanumBarunGothic';
+}
+
+* i{
+	font-family: "Font Awesome 6 Free";
 }
 
 .qqnav{

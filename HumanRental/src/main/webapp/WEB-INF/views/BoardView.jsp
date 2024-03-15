@@ -40,17 +40,17 @@
 			<div class="col-sm-offset-2">
 				<c:set var="sessionId" value="${sessionScope.user}" />
 				<c:set var="pageNum" value="${pageNum}" />
+				<p>
+				<a href="<c:url value="/board?pageNum=${pageNum}"/>" class="btn btn-primary">목록</a>
 				<c:choose>
 					<c:when test="${sessionId==board.memberId}">
-						<p>
-							<a href="./boarddelete?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-danger">삭제</a> 
 							<a href="./boardupdate?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-success">수정</a>
+							<a href="./boarddelete?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-danger">삭제</a> 
 					</c:when>
 					<c:when test="${sessionId!=board.memberId}">
 							<button onclick="window.open('./boardreport?boardId=${board.boardId}', 'window_name','width=430,height=500,location=no,status=no,scrollbars=no')" class="btn btn-warning">신고</button>
 					</c:when>
 				</c:choose>
-				<a href="<c:url value="/board?pageNum=${pageNum}"/>" class="btn btn-primary">목록</a>
 			</div>
 		</div>
 		<hr>
