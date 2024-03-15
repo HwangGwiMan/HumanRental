@@ -34,23 +34,23 @@
 							<div class="row p-3 justify-content-center">
 								<a href="#" class="btn btn-dark" id="profileBtn">프로필 수정</a>
 								<div class="text-center" style="display: none;">
-									<div class="p-1"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn btn-outline-dark text-nowrap">멘토 프로필 조회</a></div>
-									<div class="p-1"><a href="<c:url value="/mentee?mode=menteeProfile"/>" class="btn btn-outline-dark text-nowrap">멘티 프로필 조회</a></div>
+									<div class="py-1"><a href="<c:url value="/mentor?mode=mentorProfile"/>" class="btn btn-outline-dark text-nowrap w-100">멘토 프로필 조회</a></div>
+									<div class="py-1"><a href="<c:url value="/mentee?mode=menteeProfile"/>" class="btn btn-outline-dark text-nowrap w-100">멘티 프로필 조회</a></div>
 								</div>
 							</div>
 							<div class="row p-3">
 								<a href="#" class="btn btn-dark" id="registBtn">등록 목록</a>
 								<div class="text-center" style="display: none;">
-									<div class="p-1"><a href="<c:url value="/buyingListManagement"/>" class="btn btn-outline-primary">재능구매 목록</a></div>
-									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-primary">재능판매 목록</a></div>
-									<div class="p-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-primary">게시판 목록</a></div>
+									<div class="py-1"><a href="<c:url value="/buyingListManagement"/>" class="btn btn-outline-dark w-100">재능구매 목록</a></div>
+									<div class="py-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-dark w-100">재능판매 목록</a></div>
+									<div class="py-1"><a href="<c:url value="/sellingListManagement"/>" class="btn btn-outline-dark w-100">게시판 목록</a></div>
 								</div>
 							</div>
 							<div class="row p-3">
 								<a href="#" class="btn btn-dark" id="resvBtn">예약 목록</a>
 								<div class="text-center" style="display: none;">
-									<div class="p-1"><a href="<c:url value="/reservationApprovalManagement"/>" class="btn btn-outline-dark">예약 승인</a></div>
-									<div class="p-1"><a href="<c:url value="/reservationListManagement"/>" class="btn btn-outline-dark">예약 조회</a></div>
+									<div class="py-1"><a href="<c:url value="/reservationApprovalManagement"/>" class="btn btn-outline-dark w-100">예약 승인</a></div>
+									<div class="py-1"><a href="<c:url value="/reservationListManagement"/>" class="btn btn-outline-dark w-100">예약 조회</a></div>
 								</div>
 							</div>
 							<div class="row p-3"><a href="#" class="btn btn-dark">일정 정보</a></div>
