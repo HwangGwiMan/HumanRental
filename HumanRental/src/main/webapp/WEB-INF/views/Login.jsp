@@ -53,7 +53,7 @@
 				    		<a href="#" class="col-sm-2 btn btn-outline-success">네이버 로그인</a>
 			    		</div> -->
 				    	<div class="row p-3 justify-content-center">
-				    		<a href="<c:url value="/join" />" class="col-sm-2 btn btn-outline-info">회원 가입</a>
+				    		<a href="<c:url value="/join" />" class="col-sm-2 btn btn-dark">회원 가입</a>
 			    		</div>
 			    	</div> 
 			    </form:form>

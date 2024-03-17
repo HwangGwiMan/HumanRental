@@ -40,12 +40,12 @@
 			<div class="col-sm-offset-2 col-sm-10 ">
 				<c:set var="sessionId" value="${sessionScope.user}" />
 				<c:set var="pageNum" value="${pageNum}" />
-				<c:if test="${sessionId eq 'admin'}">
-					<p>
-						<a href="./boarddelete2?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-danger">삭제</a> 
-						<a href="./boardupdate2?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-success">수정</a>
-				</c:if>
+				<p>
 				<a href="<c:url value="/board2?page=${pageNum}"/>" class="btn btn-primary">목록</a>
+				<c:if test="${sessionId eq 'admin'}">
+						<a href="./boardupdate2?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-success">수정</a>
+						<a href="./boarddelete2?boardId=${board.boardId}&pageNum=${pageNum}" class="btn btn-danger">삭제</a> 
+				</c:if>
 			</div>
 		</div>
 		<hr>

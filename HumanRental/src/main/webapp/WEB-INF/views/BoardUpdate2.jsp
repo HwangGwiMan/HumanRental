@@ -31,18 +31,21 @@
 					<input name="name" type="text" class="form-control" value="${board.name}" readonly>
 				</div>
 			</div>
+			<br>
 			<div class="form-group row">
 				<label class="col-sm-1 control-label" >제목</label>
 				<div class="col-sm-5">
 					<input name="title" type="text" class="form-control" value="${board.title}">
 				</div>
 			</div>
+			<br>
 			<div class="form-group row">
 				<label class="col-sm-1 control-label" >내용</label>
 				<div class="col-sm-8">
 					<textarea name="content" cols="50" rows="5" class="form-control">${board.content}</textarea>
 				</div>
 			</div>
+			<br>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10 ">
 					<input type="submit" class="btn btn-primary " value="수정">	
