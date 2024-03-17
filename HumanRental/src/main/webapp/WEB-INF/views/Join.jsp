@@ -27,7 +27,7 @@
 	<body>
 	    <jsp:include page="nav.jsp" />
    	    <div class="container vh-100 justify-content-center text-center d-flex flex-column align-items-center">
-   	    	<div class="row"><h1>로그인</h1></div>
+   	    	<div class="row"><h1>회원가입</h1></div>
 			<div class="row">
 			    <form:form modelAttribute="member" method="post" id="joinForm" class="row justify-content-center" >
    			    	<div class="row justify-content-center">
