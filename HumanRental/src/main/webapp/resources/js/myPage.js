@@ -432,3 +432,19 @@ function openImagePopup(src) {
     // 팝업창에서 이미지를 열기
     window.open(src, 'ImagePopup', 'width=600,height=600');
 }
+
+
+//멘토 멘티 체크박스확인하는 자바스크립트
+function checkAndSubmit() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var checkedOne = Array.from(checkboxes).some(x => x.checked);
+
+    if (!checkedOne) {
+        alert('적어도 하나의 분야를 선택해야 합니다.');
+        event.preventDefault(); // 폼 제출을 막음
+
+    } else {
+        // 폼 제출
+       document.getElementById('checkedcheckbox').submit();
+     	 }
+    }

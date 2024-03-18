@@ -6,7 +6,14 @@ public class Mentee {
 	private String memberId;
 	private String interest;
 	private String introduction;
+	private String menteeprofileaddress; 
 	private float starRate;
+	public String getMenteeprofileaddress() {
+		return menteeprofileaddress;
+	}
+	public void setMenteeprofileaddress(String menteeprofileaddress) {
+		this.menteeprofileaddress = menteeprofileaddress;
+	}
 	private int starCount;
 	
 	public String getMenteeId() {

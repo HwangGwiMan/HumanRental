@@ -16,6 +16,7 @@ joinDate datetime not null,
 profileImage varchar(50),
 reportCount int
 );
+select * from member;
 
 -- 멘토 테이블
 CREATE TABLE mentor(
@@ -74,6 +75,7 @@ interest varchar(50),
 introduction varchar(1000),
 starRate float ,
 starCount int,
+MenteeProfileaddress varchar(100),
 foreign key(memberId) references Member(memberId)
 );
 

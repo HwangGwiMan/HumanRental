@@ -29,7 +29,7 @@
 							<h2 style="font-size: 3vh">${selling.title}</h2>
 							<h5 style="font-size: 1.5vh">${selling.regist_day}</h5>
 							<br>
-							<h4 style="font-size: 2vh">${selling.nickname} 
+							<h4 style="font-size: 2vh"><a href="<c:url value='/mentorprofilepage?nickname=${selling.nickname}'/>">${selling.nickname}</a>
 							<span>
 								<c:choose>
 								    <c:when test="${selling.starRate==0}"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>

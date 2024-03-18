@@ -381,10 +381,10 @@ public class MentorRepositroyImpl implements MentorRepository {
 	@Override
 	public void UpdateMentorProfile(MentorProfile mentorprofile, String memberId) {
 		
-		String SQL = "UPDATE mentorProfile SET introduction = ?, certification = ?, category = ?, filename1 = ?, filename2 = ?, filename3 = ? WHERE mentorId = ? AND memberId = ?";
+		String SQL = "UPDATE mentorProfile SET introduction = ?, certification = ?, category = ?, mentorprofileaddress = ?, filename1 = ?, filename2 = ?, filename3 = ? WHERE mentorId = ? AND memberId = ?";
 
 		try {
-			template.update(SQL, mentorprofile.getIntroduction(),mentorprofile.getCertification(),mentorprofile.getCategory(),mentorprofile.getFilename1(),mentorprofile.getFilename2(),mentorprofile.getFilename3(),mentorprofile.getMentorId(),memberId);
+			template.update(SQL, mentorprofile.getIntroduction(),mentorprofile.getCertification(),mentorprofile.getCategory(),mentorprofile.getMentorprofileaddress() ,mentorprofile.getFilename1(),mentorprofile.getFilename2(),mentorprofile.getFilename3(),mentorprofile.getMentorId(),memberId);
 
 		}catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
 			e.printStackTrace();
