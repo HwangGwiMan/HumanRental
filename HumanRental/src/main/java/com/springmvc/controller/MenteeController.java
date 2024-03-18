@@ -50,6 +50,7 @@ public class MenteeController {
 			model.addAttribute("mode", mode);
 			model.addAttribute("mentee",mentee);
 			model.addAttribute("member",member);
+			
 			return "MyPage";
 		}
 		
@@ -63,7 +64,7 @@ public class MenteeController {
 			Menteeservice.registerMentee(mentee, memberId);
 			 mode = "mentorProfile";
 		     model.addAttribute("mode", mode);
-		     
+		      
 	         return "redirect:/mentee";
 		
 		  }
@@ -90,7 +91,7 @@ public class MenteeController {
 		  mode = "menteeInformation";
 		  model.addAttribute("mode",mode);
 		  
-		  return "MyPage"; 
+		  return "redirect:/mentee";
 	  }
 
 	  

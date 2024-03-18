@@ -73,8 +73,8 @@ public class MenteeRepositoryImpl implements MenteeRepository{
 
 		  Mentee.setMemberId(memberId);
 		  System.out.println(memberId);
-		  String SQL = "UPDATE MenteeProfile SET interest = ?, introduction = ? WHERE memberId = ? ";
-		  template.update(SQL,Mentee.getInterest(),Mentee.getIntroduction(),Mentee.getMemberId());
+		  String SQL = "UPDATE MenteeProfile SET interest = ?, introduction = ? ,menteeprofileaddress = ?  WHERE memberId = ? ";
+		  template.update(SQL,Mentee.getInterest(),Mentee.getIntroduction(),Mentee.getMenteeprofileaddress(),Mentee.getMemberId());
 		return Mentee;
 	}
 

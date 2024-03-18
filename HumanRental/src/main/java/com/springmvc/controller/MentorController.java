@@ -169,7 +169,6 @@ public class MentorController {
 			@RequestParam("file2") MultipartFile file2 ,
 			@RequestParam("file3") MultipartFile file3 ,
 			Model model,HttpServletRequest request ,@RequestParam("mode") String mode) {
-		   System.out.println("멘토프로필 등록 하는 컨트롤러입니다 ");
 
 		   //세션에서 멤버id , 멤버 id를 통해서 멘토 객체 획득 , 멘토 객채에서 멘토아이디 획득 , 멘토프로필에 멘토아이디넣어줌
 		    HttpSession session = request.getSession();
@@ -247,8 +246,6 @@ public class MentorController {
 			@RequestParam("file2") MultipartFile file2 ,
 			@RequestParam("file3") MultipartFile file3 , Model model , HttpServletRequest request ,@RequestParam("mode") String mode) {
 
-		   System.out.println("멘토프로필 업데이트하는 하는 컨트롤러입니다 ");
-
 		    HttpSession session = request.getSession();
 		    String memberId = (String) session.getAttribute("user");
 		    Mentor mentor = mentorService.getMentor(memberId);
@@ -299,14 +296,13 @@ public class MentorController {
 	    mode = "mentorInformation";
 		model.addAttribute("mode", mode);
 		model.addAttribute("mentorprofile",mentorProfile);
-		   System.out.println("여기 지금 오고 있니??");
 
-	    return "MyPage";
+	    return "redirect:/mentor";
 
 	}
 	
 	//닉네임 검색으로 매핑 
-	@GetMapping("mentorprofilepage")
+	@GetMapping("/mentorprofilepage")
 	public String callMentorProfilepage(@RequestParam("nickname") String nickname, Model model) {
 	   Member member = memberService.getMemberFromNickName(nickname);
 	   System.out.println("member 이미지 : " + member.getProfileImage());

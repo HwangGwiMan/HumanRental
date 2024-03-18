@@ -7,9 +7,12 @@
 <head>
     <meta charset="utf-8">
     <title>Insert title here</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 		<script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="<c:url value="/resources/css/style_mentorlist.css"/>">
+		<script src="<c:url value="/resources/js/myPage.js"/>"></script>
+		<script src="<c:url value="/resources/js/buyingList.js"/>"></script>
+		<script src="<c:url value="/resources/js/sellingList.js"/>"></script>
+		 <link rel="stylesheet" href="<c:url value="/resources/css/style_buyingList.css"/>">		
 </head>
 
 <body>
@@ -132,34 +135,38 @@
             <div style="padding:10px;"></div>
 			 <div class="p-2 mb-2">
 				 <div class="qq1 row">
-			        <c:forEach items="${listselling}" var="listselling">
-			            <div class="qq2 col-3">
-			                <div class="wrapper border" onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" style="height: 18vh;">
-			                    <div class="image-wrapper h-100 d-flex flex-column justify-content-between">
-			                    	<!-- <img src="/HumanRental/resources/image/duke.png"/> -->
-			                    	<div>
-				                    	<c:choose>
-					                    	<c:when test="${listselling.category eq 'music'}">
-					                        	<i class="fa-solid fa-guitar fs-1"></i>
-					                        </c:when>
-					                        <c:when test="${listselling.category eq 'sports'}">
-					                        	<i class="fa-solid fa-person-running fs-1"></i>
-					                        </c:when>
-					                        <c:when test="${listselling.category eq 'game'}">
-					                        	<i class="fa-solid fa-gamepad fs-1"></i>
-					                        </c:when>
-				                        </c:choose>
-			                        </div>
-			                        <div>
-			                        	<h1 class="name fs-5">${listselling.title}</h1>
-			                        </div>
-			                        <div>
-										<a href="<c:url value='/mentorprofilepage?nickname=${listselling.nickname}'/>" class="text-decoration-none">${listselling.nickname}</a>
+			   		<c:forEach var="listselling" items="${listselling}" varStatus="status">
+						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- 컬럼 설정 -->
+							<div class="mentor">
+				                <div class="wrapper border" onclick="menteeCheck(this)" data-selling-id="${listselling.sellingId}" style="height: 18vh;">
+									<div class="image-wrapper h-100 d-flex flex-column">
+										<div style="margin-top: 2vh;">
+											<i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+										</div>
+										<div class="d-flex flex-column justify-content-evenly" style="height: 100%;">
+											<div>
+												<h1 class="title">${listselling.title}</h1>
+											</div> 
+											<div class="d-flex justify-content-between">
+												<div class="text-start">
+													<p class="description" style="font-size: 1.1em">${listselling.nickname}</p>
+													<p class="description" style="color: black;">${listselling.category}</p>
+												<%-- 	<p type="hidden" style="color: black;">${selling.content}</p> --%>
+												</div>
+													<div class="text-end">
+											<span>
+<!--  												    <i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i>
+ --> 											</span> 
+											(0)
+	                                            <p class="description" style="color: black; font-size: 2.5vh;"> ${listselling.price}원</p>
+											</div>
+											</div>
+										</div>       
 									</div>
-			                    </div>
-			                </div>
-			            </div>
-			         </c:forEach>
+								</div>
+							</div>
+						</div> 	
+					</c:forEach>   
 		        </div>
 			</div>
             </div>

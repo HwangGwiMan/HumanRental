@@ -181,7 +181,7 @@
 											<div class="card card-body shadow p-4 mb-4">
 												<!-- Education START -->
 												<!-- Title -->
-											<form action="<c:url value='/mentorProfileRegister?mode=111'/>" method="post" enctype="multipart/form-data">
+											<form id="checkedcheckbox"  action="<c:url value='/mentorProfileRegister?mode=111'/>" method="post" enctype="multipart/form-data">
 												<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
 														<h3>기본정보</h3>
 													</div>
@@ -259,7 +259,7 @@
 															<div class="ms-3">
 																<h6 class="mb-0">주요 활동지</h6>
 																<p class="mb-0 small">
-																<textarea name="menteeprofileaddress" cols="70" rows="1" class="form-control" required></textarea>
+																<textarea name="mentorprofileaddress" cols="70" rows="1" class="form-control" required></textarea>
 																</p>
 															</div>
 														</div>
@@ -288,19 +288,19 @@
 											<h4 class="fileuploder">자격증 파일 등록</h4>
 											<div class="file-upload-field">
 												<label for="file1">파일 1:</label>
-												<input type="file" id="file1" name="file1" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail11(event);"  multiple onclick="openImagePopup(this.src)" style="cursor:pointer;">
+												<input type="file" id="file1" name="file1" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail11(event);"  multiple  style="cursor:pointer;">
 												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/No_image.png" id="imageSample11">
 											</div>
 											<br>
 											<div class="file-upload-field">
 												<label for="file2">파일 2:</label>
-												<input type="file" id="file2" name="file2" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail22(event);"  multiple onclick="openImagePopup(this.src)" style="cursor:pointer;">
+												<input type="file" id="file2" name="file2" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail22(event);"  multiple style="cursor:pointer;">
 												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/No_image.png" id="imageSample22">
 											</div>
 											<br>
 											<div class="file-upload-field">
 												<label for="file3">파일 3:</label>
-												<input type="file" id="file3" name="file3" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail33(event);"  multiple onclick="openImagePopup(this.src)" style="cursor:pointer;">
+												<input type="file" id="file3" name="file3" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail33(event);"  multiple  style="cursor:pointer;">
 												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/No_image.png" id="imageSample33">
 											</div>
 										</div>
@@ -323,7 +323,7 @@
 								</div>
 									<br>
 									<div style="text-align: center;">
-		    							<input type="submit" class="btn btn-primary" value="등록">
+		    							<input type="submit" class="btn btn-primary"  onclick="checkAndSubmit()" value="등록">
 									</div>
 								</form>
 							</div>
@@ -475,7 +475,7 @@
 										</div>
 										<div class="col-lg-12">
 											<div class="card card-body shadow p-4 mb-4">
-											<form action="<c:url value='/mentorProfileUpdate?mode=updatementorprofile"'/>" method="post" enctype="multipart/form-data">
+											<form  id="checkedcheckbox" action="<c:url value='/mentorProfileUpdate?mode=updatementorprofile"'/>" method="post" enctype="multipart/form-data">
 												<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
 														<h3>기본정보</h3>
 													</div>
@@ -495,37 +495,37 @@
 															<span class="icon-md text-dark mb-0 bg-light rounded-3"><i class="bi bi-building fs-5 text-primary"></i></span>
 															<div class="ms-3">
 																<h6 class="mb-0">분야</h6>
-																<div>
+															<div>
 																    <div style="margin-right: 20px; display: inline-block;">
 																        <label for="checkbox-1">운동</label>
-																        <input type="checkbox" id="checkbox-1" name="category" value="운동"
-																        <c:if test="${mentorprofile.category.trim().toLowerCase().contains('운동')}">checked</c:if>>
+																        <input type="checkbox" id="checkbox-1" name="category" value="운동" 
+																        ${mentorprofile.category.trim().toLowerCase().contains('운동') ? 'checked' : ''}>
 																    </div>
-															
+																
 																    <div style="margin-right: 20px; display: inline-block;">
 																        <label for="checkbox-2">음악</label>
-																        <input type="checkbox" id="checkbox-2" name="category" value="음악"
-																        <c:if test="${mentorprofile.category.trim().toLowerCase().contains('음악')}">checked</c:if>>																        
+																        <input type="checkbox" id="checkbox-2" name="category" value="음악" 
+																        ${mentorprofile.category.trim().toLowerCase().contains('음악') ? 'checked' : ''}>
 																    </div>
-																    
+																
 																    <div style="margin-right: 20px; display: inline-block;">
 																        <label for="checkbox-3">게임</label>
-																        <input type="checkbox" id="checkbox-3" name="category" value="게임"
-																        <c:if test="${mentorprofile.category.trim().toLowerCase().contains('게임')}">checked</c:if>>																        
+																        <input type="checkbox" id="checkbox-3" name="category" value="게임" 
+																        ${mentorprofile.category.trim().toLowerCase().contains('게임') ? 'checked' : ''}>
 																    </div>
-																    
+																
 																    <div style="margin-right: 20px; display: inline-block;">
 																        <label for="checkbox-4">공부</label>
-																        <input type="checkbox" id="checkbox-4" name="category" value="공부"
-																       	<c:if test="${mentorprofile.category.trim().toLowerCase().contains('공부')}">checked</c:if>>																        
+																        <input type="checkbox" id="checkbox-4" name="category" value="공부" 
+																        ${mentorprofile.category.trim().toLowerCase().contains('공부') ? 'checked' : ''}>
 																    </div>
-																    
+																
 																    <div style="display: inline-block;">
 																        <label for="checkbox-5">기타</label>
-																        <input type="checkbox" id="checkbox-5" name="category" value="기타"
-																       	<c:if test="${mentorprofile.category.trim().toLowerCase().contains('기타')}">checked</c:if>>
-																    </div>
-																</div>
+																        <input type="checkbox" id="checkbox-5" name="category" value="기타" 
+																        ${mentorprofile.category.trim().toLowerCase().contains('기타') ? 'checked' : ''}>
+																  	</div>
+															</div>
 															</div>
 														</div>
 														<div class="d-flex align-items-center col-lg-6 mb-4">
@@ -586,19 +586,19 @@
 											<div class="file-upload-field">
 												<label for="file1">파일 1:</label>
 												<input type="file" id="file1" name="file1" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail11(event);"  multiple>
-												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/${mentorprofile.filename1}" id="imageSample11" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
+												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/No_image.png" id="imageSample11"  onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'"  onclick="openImagePopup(this.src)" style="cursor:pointer;">
 											</div>
 											<br>
 											<div class="file-upload-field">
 												<label for="file2">파일 2:</label>
 												<input type="file" id="file2" name="file2" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail22(event);"  multiple>
-												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/${mentorprofile.filename2}" id="imageSample22" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
+												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/No_image.png" id="imageSample22" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
 											</div>
 											<br>
 											<div class="file-upload-field">
 												<label for="file3">파일 3</label>
 												<input type="file" id="file3" name="file3" accept=".jpg, .png"  class="btn"  onchange="javascript:setThumbnail33(event);"  multiple >
-												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/${mentorprofile.filename3}" id="imageSample33" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
+												<img width="100" height="100" src="/HumanRental/resources/img/ProfilePicture/No_image.png" id="imageSample33" onerror="this.src='/HumanRental/resources/img/ProfilePicture/No_image.png'" onclick="openImagePopup(this.src)" style="cursor:pointer;">
 											</div>
 										</div>
 									</div>
@@ -620,7 +620,7 @@
 								</div>
 									<br>
 									<div style="text-align: center;">
-		    							<input type="submit" class="btn btn-primary" value="등록">
+										<input type="button" id="submitBtn" class="btn btn-primary" value="등록" onclick="checkAndSubmit()">
 									</div>
 								</form>
 							</div>			
@@ -636,7 +636,7 @@
 										</div>
 										<div class="col-lg-12">
 											<div class="card card-body shadow p-4 mb-4">
-											<form  action="<c:url value='/menteeregisterinsert?mode=11'/>" method="post">
+											<form  id="checkedcheckbox" action="<c:url value='/menteeregisterinsert?mode=11'/>" method="post">
 												<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
 														<h3>기본정보</h3>
 													</div>
@@ -741,7 +741,7 @@
 								</div>
 									<br>
 									<div style="text-align: center;">
-		    							<input type="submit" class="btn btn-primary" value="등록">
+		    							<input type="submit" class="btn btn-primary"  onclick="checkAndSubmit()" value="등록">
 									</div>
 								</form>
 							</c:when>	
@@ -849,7 +849,7 @@
 										</div>
 										<div class="col-lg-12">
 											<div class="card card-body shadow p-4 mb-4">
-											<form  action="<c:url value='/menteeProfileUpdate?mode=11'/>" method="post">
+											<form  id="checkedcheckbox" action="<c:url value='/menteeProfileUpdate?mode=11'/>" method="post">
 												<div class="alert alert-primary alert-dismissible fade show mt-2 mb-0 rounded-3 p-3 px-3" role="alert">
 														<h3>기본정보</h3>
 													</div>
@@ -961,7 +961,7 @@
 								</div>
 									<br>
 									<div style="text-align: center;">
-		    							<input type="submit" class="btn btn-primary" value="등록">
+		    							<input type="submit" class="btn btn-primary" value="등록" onclick="checkAndSubmit()">
 									</div>
 								</form>	
 							</c:when>

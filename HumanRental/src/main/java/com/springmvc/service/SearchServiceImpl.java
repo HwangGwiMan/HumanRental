@@ -18,9 +18,9 @@ public class SearchServiceImpl implements  SearchService {
 	SearchRepository searchrepository;
 	
 	//전체로 검색할때 쓰는 함수
-	public List<Buying>getAllBuyingInformation(String search,int pageSize,int totalcount){
+	public List<Buying>getAllBuyingInformation(String search){
 		
-		return searchrepository.getAllBuyingInformation(search,pageSize,totalcount);
+		return searchrepository.getAllBuyingInformation(search);
 	}
 	public List<Selling> getAllSellingInformation(String search){
 		
@@ -35,50 +35,27 @@ public class SearchServiceImpl implements  SearchService {
 
 	
 	
-	
-	//제목으로 검색할때 쓰는 함수 
-	public List<Buying> getTitleBuyingInformation(String search){
+	@Override
+	public List<Buying> getAllBuyingInformationlimit(String search, int page) {
 		
-		return searchrepository.getTitleBuyingInformation(search);
-	};
-
-	public List<Selling>getTitleSellingInformation(String search){
-		
-		return searchrepository.getTitleSellingInformation(search);
-
-	};
-	
-	//내용으로 검색할때 쓰는 함수 
-	public List<Buying>getContentBuyingInformation(String search){
-		
-		return searchrepository.getContentBuyingInformation(search);
+		return searchrepository.getAllBuyingInformationlimit(search,page);
 
 	}
 	
-	public List<Selling>getContentSellingInformation(String search){
-		
-		return searchrepository.getContentSellingInformation(search);
+	@Override
+	public List<Selling> getAllSellingInformationlimit(String search, int page) {
+		// TODO Auto-generated method stub
+		return searchrepository.getAllSellingInformationlimit(search,page);
 	}
 	
-	//닉네임으로 검색할때 쓰는 함수
-	public List<Buying>getNicknameBuyingInformation(String search){
-		
-		return searchrepository.getNicknameBuyingInformation(search);
+	@Override
+	public List<Map<String, Object>> getAllMentorprofileInformationlimit(String search, int page) {
+		// TODO Auto-generated method stub
+		return searchrepository.getAllMentorprofileInformationlimit(search,page);
 
 	}
 
-	public List<Selling>getNicknameSellingInformation(String search){
-		
-		return searchrepository.getNicknameSellingInformation(search);
-
-	}
-
-	public int CountGetAllBuyingInformation(String search) {
-		
-		return searchrepository.CountGetAllBuyingInformation(search);
-
-	}
-
+	
 
 	
 	
