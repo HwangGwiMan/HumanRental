@@ -28,25 +28,24 @@ public class MenteeController {
 	
 	@Autowired
 	MemberService memberService;
-		
+	
 	@GetMapping("/mentee")
 	public String Menteeread(@RequestParam("mode") String mode,Model model, HttpServletRequest request) {
 		System.out.println("Menteeroad함수로는 오니?");
 		HttpSession session = request.getSession();
 		String memberId	= (String)session.getAttribute("user");
 		boolean a =  Menteeservice.getMentee(memberId);
-			  System.out.println("a값은 뭐냐"+a);
+			  System.out.println("a값="+a);
 		System.out.println(a);
 		if(a==false) {
-			System.out.println("false 값으로 나온다는 증거임 ㅋ");
 			mode ="menteeProfileRegister";
 			model.addAttribute("mode",mode);
 			return "redirect:/myInfo";
 			
 		}else{
-			System.out.println("else 로 오니?");
 			mode="menteeInformation";
 			Mentee mentee =Menteeservice.getInformation(memberId);
+			System.out.println(mentee.getMenteeprofileaddress());
 			model.addAttribute("mode", mode);
 			model.addAttribute("mentee",mentee);
 			
@@ -68,16 +67,16 @@ public class MenteeController {
 			HttpSession session = request.getSession();
 			String memberId	= (String)session.getAttribute("user");
 			Menteeservice.registerMentee(mentee, memberId);
-			System.out.println("인설트 구문 들어갔지?");	
 			 mode = "mentorProfile";
 		     model.addAttribute("mode", mode);
-		     
+		      
 	         return "redirect:/mentee";
 		
 		  }
 	  
 	 @GetMapping("/callmenteeupdateform")
 	 public  String MenteeProfileUpdateform(@RequestParam("mode") String mode,Model model ,HttpServletRequest request) {
+		 
 		HttpSession session = request.getSession();
 		String memberId	= (String)session.getAttribute("user");
 		Mentee mentee = Menteeservice.getInformation(memberId);
@@ -105,7 +104,7 @@ public class MenteeController {
 		  mode = "menteeInformation";
 		  model.addAttribute("mode",mode);
 		  
-		  return "MyPage"; 
+		  return "redirect:/mentee";
 	  }
 
 	  

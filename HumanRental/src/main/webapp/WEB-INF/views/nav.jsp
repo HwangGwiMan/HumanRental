@@ -43,14 +43,14 @@
 				</div>
 				<div class="cen">
 					<div style="width: 100%; height: 38px">
-    					<form id="searchForm" class="form-inline d-flex mx-auto align-items-center" action="<c:url value='/Search'/>" method="post">
+    					<form id="searchForm" class="form-inline d-flex mx-auto align-items-center" action="<c:url value='/Search'/>" method="get">
         					<select name="items" class="txt border-end">
 					            <option value="all">전체</option>
 					            <option value="title">제목</option>
 					            <option value="content">내용</option>
 					            <option value="nickname">닉네임</option>
         					</select> 
-        					<input class="form-control mr-2 search" type="text" name="search" placeholder="어떤 멘토,멘티를 찾으세요?" required>
+        					<input class="form-control search" type="text" name="search" placeholder="어떤 멘토,멘티를 찾으세요?" required>
         					<button class="btn btn-primary ms-1" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
     					</form>
 					</div>
