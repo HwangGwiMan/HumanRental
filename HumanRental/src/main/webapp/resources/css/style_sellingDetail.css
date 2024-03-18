@@ -1,3 +1,7 @@
+pre{
+	font-family: "NanumBarunGothic" !important;
+}
+
 .detail{
     box-sizing: border-box;
     /* border: 1px solid red; */
@@ -5,11 +9,10 @@
 }
 
 .detail .top{
-    
 }
 
 .detail .top .left{
-    margin: auto;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
 }
@@ -19,9 +22,8 @@
     background-image: url();
     background-color: black;
     background-size: cover;
-    width: 400px;
-    height: 400px;
-    color: white;
+    width: 39vh;
+    height: 39vh;
 }
 
 .detail .top .info{
@@ -31,31 +33,22 @@
 .detail .top .qq{
     display: flex;
     justify-content: space-between;
+	position: relative;
 }
 
-.detail h4 span{
+.detail h4 span i{
+    font-size: 1.3vh;
     position: relative;
     top: -3px;
 }
 
-.detail .qq{
-	position: relative;
+.detail .qq .box1, .detail .qq .box2{
+    width: 13vh;
+    height: 4.5vh;
+    font-size: 2vh;
+    margin: 0 1vh;
 }
 
-.detail .qq div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-    width: 25%;
-    height: 50px;
-    font-size: 25px;
-}
-
-.detail .qq .box1{
-    position: relative;
-    left: 40px;
-}
 
 .detail .qq .calendarForm{
 	width: auto;
@@ -69,29 +62,33 @@
     padding: 10px;
 }
 
+
+
+/*리뷰*/
+
 .detail .bot{
-    /* border: 1px solid green; */
-/*    height: 200px;*/
     margin-top: 50px;
 }
 
+
 .detail .bot .box1{
-    height: 70px;
-    /* border: 1px solid black; */
-    background-color: lightgray;
-    padding: 10px 20px;
+    height: 8vh;
+    padding-left: 3vh;
+}
+
+.detail .bot .box1 h2{
+	margin: 0 !important;
 }
 
 .detail .bot .box2{
     border: 1px solid black;
-    margin-top: 10px;
-    padding: 0 10px;
+    margin-top: 2vh;
+    padding: 2vh 1.5vh;
 }
 
 .detail .bot .card-info{
     display: flex;
     justify-content: space-between;
-    padding-top: 10px;
     margin: auto;
 }
 
@@ -108,4 +105,8 @@
     height: 1px;
     background-color: black;
     margin: 20px 0;
+}
+
+.detail .another{
+    margin-top: 30px;
 }

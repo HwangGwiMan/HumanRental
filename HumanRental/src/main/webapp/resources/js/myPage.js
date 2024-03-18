@@ -319,8 +319,6 @@ function sendSortRequest(sort, sortTarget) {
 	data.sort = sort;
 	data.sortTarget = sortTarget;
 	
-	console.log(sortTarget);
-	
 	$.ajax({
         type: 'GET',
         url: './myInfo',
@@ -330,6 +328,8 @@ function sendSortRequest(sort, sortTarget) {
         success: function(result) {		
 			oldT = document.getElementById("tbody");
 			newT = $(result)[43].getElementsByTagName("tbody")[0];
+			
+			//console.log($(result)[43]);
 						
 			oldT.innerHTML = newT.innerHTML;
         },

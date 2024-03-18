@@ -20,6 +20,7 @@
 	    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 	    
 		<script src="<c:url value="/resources/js/nav.js"/>"></script>
+		<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 	</head>
 	<body>
 		<nav class="qqnav border-bottom">
@@ -74,7 +75,7 @@
 									</c:if>
 								</i>
 							</a>
-							<div class="z-3 position-absolute top-100 end-0 alert alert-primary col" style="display: none; width: 300px;">
+							<div class="z-3 position-absolute top-100 end-0 alert alert-dark col" style="display: none; width: 300px;">
 								<c:choose>
 									<c:when test="${ empty alarmList }">
 										알람이 없습니다.
@@ -99,12 +100,16 @@
 															<div class="row">${ alarm.content }</div>
 														</c:when>
 														<c:when test="${ fn:contains(alarm.alarmId , 'ReservationApplyAlarm') }">
-															<div class="row">재능 거래 신청 알림</div>
-															<div class="row">${ alarm.content }</div>
+															<a href="<c:url value="/reservationInfo?reservationId=${ alarm.linkId }"/>" class="row btn">
+																<div class="row">재능 거래 신청 알림</div>
+																<div class="row">${ alarm.content }</div>
+															</a>
 														</c:when>
 														<c:when test="${ fn:contains(alarm.alarmId , 'ReservationConfirmAlarm') }">
-															<div class="row">재능 거래 승인 알림</div>
-															<div class="row">${ alarm.content }</div>
+															<a href="<c:url value="/reservationInfo?reservationId=${ alarm.linkId }"/>" class="row btn">
+																<div class="row">재능 거래 승인 알림</div>
+																<div class="row">${ alarm.content }</div>
+															</a>
 														</c:when>
 													</c:choose>
 													

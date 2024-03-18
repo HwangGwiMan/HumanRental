@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans");
+
+::selection {
+	background: #272838;
+}
+
+.qqml {
+	text-decoration: none;
+	text-align: center;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.info {
+	width: 100%;
+	height: 30vh;
+
+	/*    background-image: url(/HumanRental/resources/img/Main/learn1.jpg);*/
+	background-size: cover;
+
+	color: black;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.info>b {
+	display: block;
+	font-size: 6vh;
+}
+
+.info span {
+
+	display: block;
+	font-size: 3vh;
+	/*    text-shadow: -1px 0 #e0dfdc, 0 1px #e0dfdc, 1px 0 #e0dfdc, 0 -1px #e0dfdc;*/
+}
+
+.category {
+	height: 12vh;
+	border-radius: 1vh;
+	background-color: black;
+	color: white;
+	box-shadow: 3px 3px 25px 0px rgba(46, 61, 73, 0.5);
+}
+
+.bar {
+	color: white;
+	text-decoration: none;
+	font-size: 5vh;
+}
+
+.bar a {
+	display: block;
+	width: 10vh;
+	color: inherit;
+	font-size: inherit;
+	text-decoration: inherit;
+	transition: 0.1s;
+}
+
+.bar span {
+	font-size: 2vh;
+}
+
+
+.bar a:link,
+.bar a:visited,
+.bar a:focus,
+.bar a:active {
+	color: white !important;
+	text-decoration: none;
+}
+
+.bar:hover a {
+	color: #007bff !important;
+	font-size: 6vh;
+	text-decoration: none;
+}
+
+.qqml .qq1 {
+	margin-top: 6vh;
+}
+
+.qqml .qq2 {
+	margin-bottom: 5vh;
+}
+
+.qqml .wrapper {
+	position: relative;
+	/* background: linear-gradient(to left, #306bac, #141b41); */
+	/* color: #fff; */
+	height: 25vh;
+	margin: 10px;
+	/*	padding: 30px;*/
+	border-radius: 20px;
+	/* box-shadow: 0px 0px 10px 1px #212129; */
+	box-shadow: 3px 3px 25px 0px rgba(46, 61, 73, 0.5);
+	cursor: pointer;
+}
+
+.qqml .wrapper .image-wrapper {
+	width: 100%;
+}
+
+
+.qqml .wrapper .image-wrapper i {
+	font-size: 6vh;
+	/*	width: 75px;*/
+	/*	height: 75px;*/
+	/*	line-height: 75px;*/
+	/*	border: 1px solid white;*/
+	/*	border-radius: 50%;*/
+	/*	background-color: white;*/
+	color: black;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	padding-bottom: 1vh;
+}
+
+.qqml .wrapper .qq3{
+	padding: 0 2vh;
+}
+
+.qqml .wrapper .title {
+	font-size: 1.5em;
+	word-wrap: break-word;
+	padding: 0 1vh;
+	/*	margin-top: 10px;*/
+}
+
+.qqml .wrapper .description {
+/*	color: #a1a2ad;*/
+	/*	text-transform: uppercase;*/
+	/*	margin-top: 5px;*/
+/*	width: 80%;*/
+	font-size: 1em;
+	margin: auto;
+}
+
+.qqml .wrapper .qq3 span {
+	font-size: 1em !important;
+	text-shadow: -1px 0px orange, 0px 1px orange, 1px 0px orange, 0px -1px orange;
+}
+
+.qqml .wrapper .qq3 span i {
+	font-size: 1em !important;
+	color: yellow;
+}
+
+
+
+/* .wrapper .social-media a i {
+  color: #fff;
+  font-size: 2em;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 15px;
+  transition: 300ms;
+} */
+
+.qqml .wrapper .follow {
+	background: #fff;
+	color: #212129;
+	text-transform: uppercase;
+	font-size: 1.1em;
+	letter-spacing: 0.1em;
+	padding: 10px 25px;
+	border-radius: 30px;
+	transition: 300ms;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin-top: 45px;
+	text-decoration: none;
+}

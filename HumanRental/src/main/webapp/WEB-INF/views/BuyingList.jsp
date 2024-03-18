@@ -8,7 +8,7 @@
 		<script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="<c:url value="/resources/css/style_buyingList.css"/>">
 		<script src="<c:url value="/resources/js/myPage.js"/>"></script>
-		<script src="<c:url value="/resources/js/buyingList.js"/>"></script>
+		<script src="<c:url value="/resources/js/buying.js"/>"></script>
 	</head>
 	
 	<body>

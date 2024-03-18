@@ -6,65 +6,96 @@
 		<title>휴먼렌탈</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 		<script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="<c:url value="/resources/css/style_mentorlist.css"/>">
-		<%-- <script src="<c:url value="/resources/js/myPage.js"/>"></script> --%>
+		<link rel="stylesheet" href="<c:url value="/resources/css/style_sellingList.css"/>">
+		<script src="<c:url value="/resources/js/myPage.js"/>"></script>
 		<script src="<c:url value="/resources/js/sellingList.js"/>"></script>
 	</head>
 	
 	<body>
 		<jsp:include page="nav.jsp" />
+		<div class="info">
+			<b>내가 가진 지식과 경험을 나누어 보세요</b>
+			<span><b>-재능 판매-</b></span>
+		</div>
 		<div class="qqml container">
-	        <div class="text-center fs-1 p-3">
-	            <div class="p-3">멘티 모집</div>
-	        </div>
-	        <div class="category pt-3">
-	            <div class="btn btn-light fs-1"><a href="<c:url value="/SellingList?pageNum=1&category=music"/>"><i class="fa-solid fa-guitar"></i></a></div>
-	            <div class="btn btn-light fs-1"><a href="<c:url value="/SellingList?pageNum=1&category=sports"/>"><i class="fa-solid fa-person-running"></i></a></div>
-	            <div class="btn btn-light fs-1"><a href="<c:url value="/SellingList?pageNum=1&category=game"/>"><i class="fa-solid fa-gamepad"></i></a></div>
-	            <div class="btn btn-light fs-1"><i class="fa-solid fa-comments"></i></div>
-	            <div class="btn btn-light fs-1"><i class="fa-solid fa-car"></i></div>
-	<!--             <div><i class="fa-solid fa-hammer"></i></div> -->
-	            <div class="btn btn-light fs-1"><i class="fa-solid fa-book-open"></i></div>
-	            <div class="btn btn-light"><a href="<c:url value="/SellingList?pageNum=1"/>" class="fs-4 text-decoration-none">전체</a></div>
-	            <div class="btn fs-1"><a onclick="mentorCheck2()" class="fs-4 text-decoration-none">쓰기</a></div>
-	            
-	        </div>
+	        <div class="category col-12 d-flex justify-content-around align-items-center m-auto">
+				<div class="bar">
+					<a href="<c:url value="/SellingList?pageNum=1"/>" class="text-decoration-none"><i class="fa-solid fa-a"></i><br><span>ALL</span></a>
+				</div>
+				<div class="bar">
+					<a href="<c:url value="/SellingList?category=music"/>"><i class="fa-solid fa-music"></i><br><span>Music</span></a>
+				</div>
+				<div class="bar">
+					<a href="<c:url value="/SellingList?category=sports"/>"><i class="fa-solid fa-person-running"></i><br><span>Sprots</span></a>
+				</div>
+				<div class="bar">
+					<a href="<c:url value="/SellingList?category=game"/>"><i class="fa-solid fa-gamepad"></i><br><span>Game</span></a>
+				</div>
+				<div class="bar">
+					<a href="<c:url value="/SellingList?category=study"/>"><i class="fa-solid fa-book-open"></i><br><span>Study</span></a>
+				</div>
+				<div class="bar"><a onclick="mentorCheck2()" class="text-decoration-none" style="cursor: pointer;"><i class="fa-solid fa-pen-to-square"></i><br><span>Write</span></a></div>
+			</div>
 	        <div class="qq1 row">
 		        <c:forEach items="${sellinglist}" var="selling">
 		            <div class="qq2 col-3">
-		                <div class="wrapper border" onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" style="height: 18vh;">
-		                    <div class="image-wrapper h-100 d-flex flex-column justify-content-between">
-		                    	<!-- <img src="/HumanRental/resources/image/duke.png"/> -->
-		                    	<div>
+		                <div class="wrapper border" onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}">
+		                    <div class="image-wrapper h-100 d-flex flex-column">
+		                    	<div style="margin-top: 2vh;">
 			                    	<c:choose>
 				                    	<c:when test="${selling.category eq 'music'}">
-				                        	<i class="fa-solid fa-guitar fs-1"></i>
+				                        	<i class="fa-solid fa-music"></i>
 				                        </c:when>
 				                        <c:when test="${selling.category eq 'sports'}">
-				                        	<i class="fa-solid fa-person-running fs-1"></i>
+				                        	<i class="fa-solid fa-person-running"></i>
 				                        </c:when>
 				                        <c:when test="${selling.category eq 'game'}">
-				                        	<i class="fa-solid fa-gamepad fs-1"></i>
+				                        	<i class="fa-solid fa-gamepad"></i>
 				                        </c:when>
-			                        </c:choose>
-		                        </div>
-		                        <div>
-		                        	<h1 class="name fs-5">${selling.title}</h1>
-		                        </div>
-		                        <div>
-									<a href="<c:url value='/mentorprofilepage?nickname=${selling.nickname}'/>" class="text-decoration-none">${selling.nickname}</a>
-								</div>
-								<!-- <div>
-		                        	<p class="information">간단한 내용(한줄)</p>
-		                        </div> -->
-		                        <%-- <div>
-									<a href='<c:url value="/selling/detail?sellingId=${selling.sellingId}"/>' class="follow">신청하기</a>
-		                        	<a onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" class="follow btn btn-secondary">신청하기</a>
-		                        </div> --%>
-		                    </div>
-		                </div>
-		            </div>
-		         </c:forEach>
+				                        <c:when test="${selling.category eq 'study'}">
+				                        	<i class="fa-solid fa-book-open"></i>
+				                        </c:when>
+										</c:choose>
+				                        </div>
+				                        <div class="d-flex flex-column justify-content-evenly" style="height: 100%;">
+					                        <div>
+					                        	<h1 class="title">${selling.title}</h1>
+					                        </div> 
+					                        <div class="d-flex justify-content-between qq3">
+						                        <div class="text-start">
+													<p class="description" style="font-size: 1.1em">${selling.nickname}</p>
+													<p class="description" style="color: black;">${selling.location}</p>
+												</div>
+												<div class="text-end">
+													<span>
+														<c:choose>
+														    <c:when test="${selling.starRate==0}"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+														    <c:when test="${selling.starRate==1}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+														    <c:when test="${selling.starRate==2}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+														    <c:when test="${selling.starRate==3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+														    <c:when test="${selling.starRate==4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+														    <c:when test="${selling.starRate==5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></c:when>
+														    <c:when test="${selling.starRate > 0 && selling.starRate < 1}"><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+														    <c:when test="${selling.starRate > 1 && selling.starRate < 2}"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+														    <c:when test="${selling.starRate > 2 && selling.starRate < 3}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
+														    <c:when test="${selling.starRate > 3 && selling.starRate < 4}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i><i class="fa-regular fa-star"></i></c:when>
+														    <c:when test="${selling.starRate > 4 && selling.starRate < 5}"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></c:when>
+															<c:otherwise>
+															<i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+															</c:otherwise>
+														</c:choose>
+													</span> 
+													(${selling.starCount})
+			                                            <p class="description" style="color: black; font-size: 2.5vh;">${selling.price}원</p>
+												</div>
+											</div>
+										</div>
+										<%-- <a href='<c:url value="/buying/detail?buyingId=${buying.buyingId}"/>' class="follow">신청하기</a> --%>
+				                        <%-- <a onclick="mentorCheck(this)" data-buying-id="${buying.buyingId}" class="follow">신청하기</a> --%>
+				                    </div>
+				                </div>
+				            </div>
+				         </c:forEach>
 		         <div class="row justify-content-center pt-5" id="pageMove">
 		         	<%-- <div class="col-1">
 		         		<a href="/HumanRental/SellingList?pageNum=<%= Integer.parseInt(request.getParameter("pageNum")) - 10 %>">

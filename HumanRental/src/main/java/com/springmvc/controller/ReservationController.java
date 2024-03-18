@@ -1,8 +1,5 @@
 package com.springmvc.controller;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springmvc.domain.Member;
 import com.springmvc.domain.Reservation;
 import com.springmvc.service.AlarmService;
+import com.springmvc.service.MemberService;
 import com.springmvc.service.ReservationService;
 
 @Controller
@@ -26,6 +25,9 @@ public class ReservationController {
 	
 	@Autowired
 	AlarmService alarmService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	//멘티게시글 리스트 페이지
 	@PostMapping("/reservation/buying")
@@ -64,6 +66,13 @@ public class ReservationController {
 		String memberId = (String)session.getAttribute("user");
 		reservationservice.getReservationListById(memberId, model);
 		model.addAttribute("mode", "reservationListManagement");
+		
+		Member member = memberService.getMember(memberId);
+		if(member.getProfileImage() == null) {
+			member.setProfileImage("default.png");
+		}
+
+		model.addAttribute("member", member);
 		return "MyPage";
 	}
 	
@@ -74,6 +83,13 @@ public class ReservationController {
 		String memberId = (String)session.getAttribute("user");
 		reservationservice.getReservationApprovalListById(memberId, model);
 		model.addAttribute("mode", "reservationApprovalManagement");
+		
+		Member member = memberService.getMember(memberId);
+		if(member.getProfileImage() == null) {
+			member.setProfileImage("default.png");
+		}
+
+		model.addAttribute("member", member);
 		return "MyPage";
 	}
 	
@@ -85,9 +101,19 @@ public class ReservationController {
 	}
 
 	@GetMapping("/reservationApproval")
-	public String ReservationApproval(@RequestParam String reservationId, @RequestParam String approval, Model model) {
+	public String ReservationApproval(@RequestParam String reservationId, @RequestParam String approval, Model model, HttpServletRequest request) {
 		reservationservice.ReservationApproval(reservationId, approval);
 		model.addAttribute("mode", "reservationApprovalManagement");
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		Member member = memberService.getMember(memberId);
+		if(member.getProfileImage() == null) {
+			member.setProfileImage("default.png");
+		}
+
+		model.addAttribute("member", member);
+		
 		
 		alarmService.createReservationConfirmAlarm(reservationId, approval);
 		
@@ -95,9 +121,18 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/reservationInfo")
-	public String ReservationInfo(@RequestParam String reservationId, Model model) {
+	public String ReservationInfo(@RequestParam String reservationId, Model model, HttpServletRequest request) {
 		reservationservice.GetReservationInfo(reservationId, model);
 		model.addAttribute("mode", "reservationInfo");
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("user");
+		Member member = memberService.getMember(memberId);
+		if(member.getProfileImage() == null) {
+			member.setProfileImage("default.png");
+		}
+
+		model.addAttribute("member", member);
 		return "MyPage";
 	}
 }

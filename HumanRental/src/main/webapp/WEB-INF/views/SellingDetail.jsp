@@ -8,18 +8,8 @@
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/c5a6a42a0b.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="<c:url value="/resources/css/style_menteeDetail.css"/>">
-
-<script>
-	function showCalendar() {
-	    var calendarForm = document.getElementById("calendarForm");
-	    if (calendarForm.style.display === "none") {
-	        calendarForm.style.display = "block";
-	    } else {
-	        calendarForm.style.display = "none";
-	    }
-	}
-</script>
+<link rel="stylesheet" href="<c:url value="/resources/css/style_sellingDetail.css"/>">
+<script src="<c:url value="/resources/js/buying.js"/>"></script>
 <script src="<c:url value="/resources/js/save.js"/>"></script>
 </head>
 <body>
@@ -29,15 +19,17 @@
 			<div class="top d-flex">
 			<c:set var="selling" value="${selling}" />
 				<div class="left col-6">
-					<div class="img">이미지</div>
+					<div class="img">
+						<img alt="" src="">
+					</div>
 				</div>
 				<div class="col-6">
 					<div class="info">
 						<div>
-							<h2>${selling.title}</h2>
-							<h5>${selling.regist_day}</h5>
+							<h2 style="font-size: 3vh">${selling.title}</h2>
+							<h5 style="font-size: 1.5vh">${selling.regist_day}</h5>
 							<br>
-							<h4><a href="<c:url value='/mentorprofilepage?nickname=${selling.nickname}'/>">${selling.nickname}</a>
+							<h4 style="font-size: 2vh"><a href="<c:url value='/mentorprofilepage?nickname=${selling.nickname}'/>">${selling.nickname}</a>
 							<span>
 								<c:choose>
 								    <c:when test="${selling.starRate==0}"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></c:when>
@@ -58,21 +50,25 @@
 							</span>
 							</h4>
 							<br>
-							<p>${selling.content}</p>
+							<pre style="font-size: 1.8vh; white-space: break-spaces">${buying.content}</pre>
 							<br>
 						</div>
 						<div class="qq">
-							<h4>시간당 ${selling.price}원</h4>
+							<div>
+								<h2 style="font-size: 1.5vh">활동 지역 : ${selling.location}</h2>
+								<h4 style="font-size: 2vh">시간당 ${selling.price}원</h4>
+							</div>
 							<c:set var="sessionId" value="${sessionScope.user}" />
 							<c:choose>
-								<c:when test="${sessionId==selling.memberId}">
-									<div class="box1"><a href="<c:url value="/selling/delete?sellingId=${selling.sellingId}"/>">삭제</a></div>
-									<div class="box2"><a href="<c:url value="/selling/update?sellingId=${selling.sellingId}"/>">수정</a></div>
-								</c:when>
-								<c:otherwise>
-									<div class="box1">
-									    <a href="javascript:void(0)" onclick="showCalendar()">신청하기</a>
-									</div>
+							<c:when test="${sessionId==selling.memberId}">
+							<div class="d-flex">
+								<div class="box2 btn btn-dark" onclick="updateBuying(this)" boradId="${selling.sellingId}">수정</div>
+								<div class="box1 btn btn-dark" onclick="deleteBuying(this)" boradId="${selling.sellingId}">삭제</div>
+							</div>
+							</c:when>
+							<c:otherwise>
+								<div class="d-flex">
+									<div class="box1 btn btn-dark btn-lg" onclick="showCalendar()">신청하기</div>
 									<div id="calendarForm" class="calendarForm" style="display: none;">
 										<form:form action="../reservation/selling?${_csrf.parameterName}=${_csrf.token}" class="form-horizontal">
 											<input name="sellingId" type="hidden" value="${selling.sellingId}">
@@ -82,17 +78,16 @@
 									    	<input type="submit" value="제출">
 										</form:form>
 									</div>
-									<div class="box2">
-    									<a href="javascript:void(0);" onclick="saveCheck(event, this)" data-id="${selling.sellingId}">찜하기</a>
-									</div>									
-								</c:otherwise>
+							 		<div class="box2 btn btn-dark btn-lg" onclick="saveCheck(event, this)" data-id="${selling.sellingId}">찜하기</div>
+						 		</div>
+							</c:otherwise>
 							</c:choose>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="bot col-12">
-				<div class="box1">
+				<div class="box1 d-flex align-items-center text-white bg-black bg-gradient">
 					<h2>
 						후기 
 						<span>
@@ -113,6 +108,7 @@
 								</c:otherwise>
 							</c:choose>
 						</span>
+						<qwer style="font-size: 2vh;">(${selling.starCount})</qwer>
 					</h2>
 				</div>
 				<c:forEach items="${reviewList}" var="review">
@@ -150,12 +146,9 @@
 					<div>
 						<hr>
 						<div class="content">
-							<p>
-								${review.content}
-							</p>
+							<pre style="white-space: break-spaces;">${review.content}</pre>
 						</div>
 					</div>
-					<div class="line"></div>
 				</div>
 				</c:forEach>
 			</div>
