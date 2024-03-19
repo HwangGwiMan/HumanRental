@@ -42,12 +42,12 @@
 		<div class="search container">
 		<div class="top">재능 판매</div>		
 			<hr>
-			<div class="container-fluid"> <!-- 컨테이너 설정 -->
+			<div class="container"> <!-- 컨테이너 설정 -->
 				<div class="row"> <!-- 로우 설정 -->
 					<c:forEach var="selling" items="${selling}" varStatus="status">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- 컬럼 설정 -->
 							<div class="mentor">
-				                <div class="wrapper border" onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}" style="height: 18vh;">
+				                <div class="wrapper border" onclick="menteeCheck(this)" data-selling-id="${selling.sellingId}">
 									<div class="image-wrapper h-100 d-flex flex-column">
 										<div style="margin-top: 2vh;">
 											<i class="fa-solid fa-gamepad" aria-hidden="true"></i>
@@ -56,7 +56,7 @@
 											<div>
 												<h1 class="title">${selling.title}</h1>
 											</div> 
-											<div class="d-flex justify-content-between">
+											<div class="d-flex justify-content-between qqq">
 												<div class="text-start">
 													<p class="description" style="font-size: 1.1em">${selling.nickname}</p>
 													<p class="description" style="color: black;">${selling.category}</p>
@@ -66,7 +66,7 @@
 											<span>
 <!--  												    <i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i>
  --> 											</span> 
-											(0)
+<!-- 											(0) -->
 	                                            <p class="description" style="color: black; font-size: 2.5vh;"> ${selling.price}원</p>
 											</div>
 											</div>
@@ -90,12 +90,12 @@
 			<br><br>
 			<div class="top">재능 구매</div>
 			<hr>
-			<div class="container-fluid"> <!-- 컨테이너 설정 -->
+			<div class="container"> <!-- 컨테이너 설정 -->
 				<div class="row"> <!-- 로우 설정 -->
 					<c:forEach var="buying" items="${buying}" varStatus="status">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- 컬럼 설정 -->
 							<div class="mentor">
-				                <div class="wrapper border" onclick="mentorCheck(this)" data-buying-id="${buying.buyingId}" style="height: 18vh;">
+				                <div class="wrapper border" onclick="mentorCheck(this)" data-buying-id="${buying.buyingId}">
 									<div class="image-wrapper h-100 d-flex flex-column">
 										<div style="margin-top: 2vh;">
 											<i class="fa-solid fa-gamepad" aria-hidden="true"></i>
@@ -104,7 +104,7 @@
 											<div>
 												<h1 class="title">${buying.title}</h1>
 											</div> 
-											<div class="d-flex justify-content-between">
+											<div class="d-flex justify-content-between qqq">
 												<div class="text-start">
 													<p class="description" style="font-size: 1.1em">${buying.nickname}</p>
 													<p class="description" style="color: black;">${buying.category}</p>
@@ -113,7 +113,7 @@
 											<span>
 <!--  												    <i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i>
  --> 											</span> 
-											(0)
+<!-- 											(0) -->
 	                                            <p class="description" style="color: black; font-size: 2.5vh;"> ${buying.price}원</p>
 											</div>
 											</div>
