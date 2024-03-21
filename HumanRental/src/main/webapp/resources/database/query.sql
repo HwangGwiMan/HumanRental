@@ -342,13 +342,13 @@ insert into mentor values('mentor_006' , '5678', '2024-01-01 00:00:00');
 
 
 -- menteeprofile 추가
-insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0, 0);
-insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0, 0);
-insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0, 0);
+insert into menteeprofile values('mentee_001', 'qwer', 'TEST1', 'TEST_INTRO1', 0, 0, null);
+insert into menteeprofile values('mentee_002', 'admin', 'TEST2', 'TEST_INTRO2', 0, 0, null);
+insert into menteeprofile values('mentee_003', 'asdf', 'TEST3', 'TEST_INTRO3', 0, 0, null);
 
-insert into menteeprofile values('mentee_004', 'zxcv', 'TEST4', 'TEST_INTRO4', 0, 0);
-insert into menteeprofile values('mentee_005', '1234', 'TEST5', 'TEST_INTRO5', 0, 0);
-insert into menteeprofile values('mentee_006', '5678', 'TEST6', 'TEST_INTRO6', 0, 0);
+insert into menteeprofile values('mentee_004', 'zxcv', 'TEST4', 'TEST_INTRO4', null, 0, 0);
+insert into menteeprofile values('mentee_005', '1234', 'TEST5', 'TEST_INTRO5', null, 0, 0);
+insert into menteeprofile values('mentee_006', '5678', 'TEST6', 'TEST_INTRO6', null, 0, 0);
 
 -- mentorprofile 추가
 insert into mentorprofile values('mentor_001' , 'qwer', 'TEST_INTRO1', 'TEST', 'certification_cate', 'TEST', 'TEST', 'TEST', '서울',0, 0);
