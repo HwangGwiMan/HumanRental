@@ -12,15 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.springmvc.domain.Member;
 import com.springmvc.domain.Reservation;
 import com.springmvc.domain.Review;
-import com.springmvc.repository.ReservationRepository;
-import com.springmvc.domain.Buying;
-import com.springmvc.service.MemberService;
 import com.springmvc.service.ReservationService;
 import com.springmvc.service.ReviewService;
-import com.springmvc.service.BuyingService;
 
 @Controller
 public class ReviewController {
